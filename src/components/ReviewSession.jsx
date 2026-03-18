@@ -21,6 +21,11 @@ export default function ReviewSession() {
       }
       const wordIds = dueReviews.map(r => r.wordId);
       const words = await db.words.where('id').anyOf(wordIds).toArray();
+      if (words.length === 0) {
+        setDone(true);
+        setLoading(false);
+        return;
+      }
       setQueue(words.sort(() => Math.random() - 0.5));
       setLoading(false);
     });

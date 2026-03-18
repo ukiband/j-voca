@@ -9,7 +9,12 @@
 
 html {
   -webkit-tap-highlight-color: transparent;
+  font-size: 16px;
 }
+
+html.font-small { font-size: 14px; }
+html.font-medium { font-size: 17px; }
+html.font-large { font-size: 20px; }
 
 body {
   @apply bg-slate-50 text-slate-900 min-h-screen;

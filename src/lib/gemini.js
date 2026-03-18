@@ -1,4 +1,10 @@
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
+
+export const MODELS = [
+  { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (권장)' },
+  { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
+  { id: 'gemini-2.0-flash-lite', label: 'Gemini 2.0 Flash Lite' },
+];
 
 export function getApiKey() {
   return localStorage.getItem('gemini-api-key') || '';
@@ -8,9 +14,20 @@ export function setApiKey(key) {
   localStorage.setItem('gemini-api-key', key);
 }
 
+export function getModel() {
+  return localStorage.getItem('gemini-model') || MODELS[0].id;
+}
+
+export function setModel(model) {
+  localStorage.setItem('gemini-model', model);
+}
+
 export async function extractWordsFromImage(base64Image, mimeType, chapter, textbook) {
   const apiKey = getApiKey();
-  if (!apiKey) throw new Error('Gemini API 키를 설정해주세요.');
+  if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
+
+  const model = getModel();
+  const url = `${API_BASE}/${model}:generateContent?key=${apiKey}`;
 
   const prompt = `이 일본어 교재 사진에서 단어를 추출해주세요.
 각 단어에 대해 다음 정보를 JSON 배열로 반환해주세요:
@@ -22,7 +39,7 @@ export async function extractWordsFromImage(base64Image, mimeType, chapter, text
 JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.
 예시: [{"word":"時計","reading":"とけい","meaning":"시계","pos":"명사"}]`;
 
-  const response = await fetch(`${API_URL}?key=${apiKey}`, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -46,7 +63,20 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
-    throw new Error(err.error?.message || `API 요청 실패 (${response.status})`);
+    const msg = err.error?.message || '';
+    if (response.status === 429 || msg.includes('quota') || msg.includes('rate')) {
+      const retry = msg.match(/retry in ([\d.]+)s/i);
+      const wait = retry ? Math.ceil(Number(retry[1])) : null;
+      throw new Error(
+        `쿼터 초과: 현재 모델(${model})의 무료 사용량을 초과했습니다.` +
+        (wait ? ` ${wait}초 후 재시도하거나,` : '') +
+        ' 설정에서 다른 모델로 변경해보세요.'
+      );
+    }
+    if (response.status === 400) {
+      throw new Error('요청 오류: API 키가 올바른지 확인해주세요.');
+    }
+    throw new Error(msg || `API 요청 실패 (${response.status})`);
   }
 
   const data = await response.json();

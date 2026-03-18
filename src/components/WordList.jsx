@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db, updateWord, deleteWord } from '../lib/db';
+import { db, syncWordsFromData, deleteReview } from '../lib/db';
+import { hasGithubToken, updateWordInRepo, deleteWordFromRepo } from '../lib/github';
 
 export default function WordList() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [saving, setSaving] = useState(false);
 
   const chapters = [...new Set(words.map(w => w.chapter))].sort((a, b) => a - b);
   const filtered = selectedChapter !== null
     ? words.filter(w => w.chapter === selectedChapter)
     : words;
+
+  const canEdit = hasGithubToken();
 
   function startEdit(word) {
     setEditingId(word.id);
@@ -19,13 +23,28 @@ export default function WordList() {
   }
 
   async function saveEdit(id) {
-    await updateWord(id, editForm);
-    setEditingId(null);
+    setSaving(true);
+    try {
+      const data = await updateWordInRepo(id, editForm);
+      await syncWordsFromData(data.words);
+      setEditingId(null);
+    } catch (err) {
+      alert(err.message);
+    }
+    setSaving(false);
   }
 
   async function handleDelete(id) {
     if (!confirm('삭제하시겠습니까?')) return;
-    await deleteWord(id);
+    setSaving(true);
+    try {
+      const data = await deleteWordFromRepo(id);
+      await syncWordsFromData(data.words);
+      await deleteReview(id);
+    } catch (err) {
+      alert(err.message);
+    }
+    setSaving(false);
   }
 
   return (
@@ -50,7 +69,7 @@ export default function WordList() {
                 selectedChapter === ch ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
               }`}
             >
-              제{ch}과 ({words.filter(w => w.chapter === ch).length})
+              Lesson {ch} ({words.filter(w => w.chapter === ch).length})
             </button>
           ))}
         </div>
@@ -80,8 +99,10 @@ export default function WordList() {
                     className="w-full px-2 py-1 border border-slate-200 rounded-lg text-sm"
                   />
                   <div className="flex gap-2">
-                    <button onClick={() => setEditingId(null)} className="text-xs text-slate-400">취소</button>
-                    <button onClick={() => saveEdit(w.id)} className="text-xs text-indigo-600 font-medium">저장</button>
+                    <button onClick={() => setEditingId(null)} className="text-xs text-slate-400" disabled={saving}>취소</button>
+                    <button onClick={() => saveEdit(w.id)} className="text-xs text-indigo-600 font-medium" disabled={saving}>
+                      {saving ? '저장 중...' : '저장'}
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -91,10 +112,12 @@ export default function WordList() {
                     <span className="text-slate-400 text-sm ml-2">{w.reading}</span>
                     <p className="text-sm text-slate-500">{w.meaning}</p>
                   </div>
-                  <div className="flex gap-2 text-xs">
-                    <button onClick={() => startEdit(w)} className="text-slate-400">수정</button>
-                    <button onClick={() => handleDelete(w.id)} className="text-red-400">삭제</button>
-                  </div>
+                  {canEdit && (
+                    <div className="flex gap-2 text-xs">
+                      <button onClick={() => startEdit(w)} className="text-slate-400">수정</button>
+                      <button onClick={() => handleDelete(w.id)} className="text-red-400">삭제</button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

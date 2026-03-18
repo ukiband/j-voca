@@ -7,7 +7,8 @@ export default function Dashboard() {
   const reviews = useLiveQuery(() => db.reviews.toArray(), [], []);
 
   const today = new Date().toISOString().split('T')[0];
-  const dueCount = reviews.filter(r => r.nextReview <= today).length;
+  const wordIds = new Set(words.map(w => w.id));
+  const dueCount = reviews.filter(r => wordIds.has(r.wordId) && r.nextReview <= today).length;
 
   const chapters = [];
   const chapterMap = {};
@@ -45,14 +46,14 @@ export default function Dashboard() {
 
       {chapters.length > 0 && (
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
-          <h2 className="text-sm font-medium text-slate-500 mb-3">챕터별 진행률</h2>
+          <h2 className="text-sm font-medium text-slate-500 mb-3">레슨별 진행률</h2>
           <div className="space-y-3">
             {chapters.map(ch => {
               const pct = ch.total > 0 ? Math.round((ch.reviewed / ch.total) * 100) : 0;
               return (
                 <div key={ch.chapter}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-700">제{ch.chapter}과</span>
+                    <span className="text-slate-700">Lesson {ch.chapter}</span>
                     <span className="text-slate-400">{ch.reviewed}/{ch.total}</span>
                   </div>
                   <div className="h-2 bg-slate-100 rounded-full overflow-hidden">

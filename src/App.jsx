@@ -1,5 +1,7 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import { fetchWordsData } from './lib/github';
+import { syncWordsFromData } from './lib/db';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
 const WordInput = lazy(() => import('./components/WordInput'));
@@ -24,6 +26,12 @@ function PageLoader() {
 }
 
 export default function App() {
+  useEffect(() => {
+    fetchWordsData()
+      .then(data => syncWordsFromData(data.words))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen max-w-lg mx-auto">
       <main className="flex-1 pb-20 px-4 pt-4">

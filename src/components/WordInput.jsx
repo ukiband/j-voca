@@ -1,14 +1,27 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { extractWordsFromImage, getApiKey } from '../lib/gemini';
-import { addWords, db } from '../lib/db';
+import { hasGithubToken, addWordsToRepo } from '../lib/github';
+import { syncWordsFromData, db } from '../lib/db';
 import { createInitialReview } from '../lib/sm2';
 
 export default function WordInput() {
-  const [step, setStep] = useState('upload'); // upload | loading | preview | done
+  const [step, setStep] = useState('upload'); // upload | loading | preview | saving | done
+  const words_ = useLiveQuery(() => db.words.toArray(), [], []);
+  const latestChapter = words_.length > 0 ? Math.max(...words_.map(w => w.chapter)) : '';
   const [chapter, setChapter] = useState('');
-  const [textbook, setTextbook] = useState('');
+  const [textbook, setTextbook] = useState('일본어수업');
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!initialized && latestChapter !== '') {
+      setChapter(String(latestChapter));
+      setInitialized(true);
+    }
+  }, [latestChapter, initialized]);
   const [words, setWords] = useState([]);
   const [error, setError] = useState('');
+  const [savedCount, setSavedCount] = useState(0);
   const fileRef = useRef();
 
   async function handleFile(e) {
@@ -49,13 +62,27 @@ export default function WordInput() {
 
   async function saveWords() {
     if (words.length === 0) return;
+
+    if (!hasGithubToken()) {
+      setError('설정에서 GitHub PAT를 먼저 입력해주세요.');
+      return;
+    }
+
+    setStep('saving');
+    setError('');
+
     try {
-      const ids = await addWords(words);
-      const reviews = ids.map(id => createInitialReview(id));
-      await db.reviews.bulkAdd(reviews);
+      const { data, wordsWithIds } = await addWordsToRepo(words);
+      await syncWordsFromData(data.words);
+
+      const reviews = wordsWithIds.map(w => createInitialReview(w.id));
+      await db.reviews.bulkPut(reviews);
+
+      setSavedCount(wordsWithIds.length);
       setStep('done');
     } catch (err) {
       setError(err.message);
+      setStep('preview');
     }
   }
 
@@ -74,7 +101,7 @@ export default function WordInput() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-sm text-slate-500">챕터 (과)</label>
+              <label className="text-sm text-slate-500">레슨</label>
               <input
                 type="number"
                 value={chapter}
@@ -102,11 +129,16 @@ export default function WordInput() {
               ref={fileRef}
               type="file"
               accept="image/*"
-              capture="environment"
               onChange={handleFile}
               className="hidden"
             />
           </label>
+
+          {!hasGithubToken() && (
+            <p className="text-xs text-amber-600 bg-amber-50 p-3 rounded-xl">
+              설정에서 GitHub PAT를 입력해야 단어를 저장할 수 있습니다.
+            </p>
+          )}
 
           {error && <p className="text-sm text-red-500">{error}</p>}
         </div>
@@ -169,10 +201,18 @@ export default function WordInput() {
         </div>
       )}
 
+      {step === 'saving' && (
+        <div className="text-center py-16">
+          <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+          <p className="mt-4 text-sm text-slate-500">GitHub에 저장하는 중...</p>
+        </div>
+      )}
+
       {step === 'done' && (
         <div className="text-center py-16">
           <p className="text-4xl mb-4">&#x2705;</p>
-          <p className="text-lg font-medium text-slate-800">{words.length}개 단어가 저장되었습니다</p>
+          <p className="text-lg font-medium text-slate-800">{savedCount}개 단어가 저장되었습니다</p>
+          <p className="text-xs text-slate-400 mt-2">GitHub에 커밋되었습니다</p>
           <button onClick={reset} className="mt-4 text-indigo-600 font-medium text-sm">
             더 추가하기
           </button>

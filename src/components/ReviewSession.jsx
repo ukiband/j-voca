@@ -10,6 +10,7 @@ export default function ReviewSession() {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState({ again: 0, hard: 0, good: 0, easy: 0 });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0];
@@ -27,6 +28,10 @@ export default function ReviewSession() {
         return;
       }
       setQueue(words.sort(() => Math.random() - 0.5));
+      setLoading(false);
+    }).catch((err) => {
+      console.error('ReviewSession load error:', err);
+      setError(err.message || '데이터를 불러올 수 없습니다');
       setLoading(false);
     });
   }, []);
@@ -53,6 +58,22 @@ export default function ReviewSession() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-16">
+        <p className="text-4xl mb-4">&#x26A0;&#xFE0F;</p>
+        <p className="text-lg font-medium text-slate-800">데이터 로드 실패</p>
+        <p className="text-sm text-slate-400 mt-2">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm"
+        >
+          새로고침
+        </button>
       </div>
     );
   }

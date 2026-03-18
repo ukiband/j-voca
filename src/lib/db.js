@@ -1,12 +1,32 @@
 import Dexie from 'dexie';
 import { createInitialReview } from './sm2';
 
-export const db = new Dexie('j-voca');
+export let db = createDb();
 
-db.version(2).stores({
-  words: 'id, chapter, textbook, createdAt',
-  reviews: 'wordId, nextReview, lastReview',
-});
+function createDb() {
+  const d = new Dexie('j-voca');
+  d.version(2).stores({
+    words: 'id, chapter, textbook, createdAt',
+    reviews: 'wordId, nextReview, lastReview',
+  });
+  return d;
+}
+
+const SCHEMA_ERRORS = ['VersionError', 'UpgradeError'];
+
+export async function openDb() {
+  try {
+    await db.open();
+  } catch (err) {
+    if (SCHEMA_ERRORS.includes(err.name)) {
+      await Dexie.delete('j-voca');
+      db = createDb();
+      await db.open();
+    } else {
+      throw err;
+    }
+  }
+}
 
 export async function syncWordsFromData(words) {
   await db.transaction('rw', db.words, async () => {

@@ -1,7 +1,7 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy, useEffect, useState, useCallback } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { fetchWordsData } from './lib/github';
-import { syncWordsFromData, ensureReviewsExist } from './lib/db';
+import { openDb, syncWordsFromData, ensureReviewsExist } from './lib/db';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
 const WordInput = lazy(() => import('./components/WordInput'));
@@ -26,18 +26,49 @@ function PageLoader() {
 }
 
 export default function App() {
-  useEffect(() => {
-    fetchWordsData()
-      .then(async (data) => {
-        await syncWordsFromData(data.words);
-        await ensureReviewsExist();
-      })
-      .catch(() => {});
+  const [ready, setReady] = useState(false);
+  const [syncError, setSyncError] = useState(null);
+
+  const loadData = useCallback(async () => {
+    setSyncError(null);
+    try {
+      await openDb();
+      setReady(true);
+      const data = await fetchWordsData();
+      await syncWordsFromData(data.words);
+      await ensureReviewsExist();
+    } catch (err) {
+      console.error('Data sync error:', err);
+      setSyncError(err.message || '데이터 동기화 실패');
+    }
   }, []);
+
+  useEffect(() => { loadData(); }, [loadData]);
+
+  if (!ready) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        {syncError ? (
+          <div className="text-center px-4">
+            <p className="text-sm text-red-600 mb-3">{syncError}</p>
+            <button onClick={loadData} className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm">재시도</button>
+          </div>
+        ) : (
+          <PageLoader />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen max-w-lg mx-auto">
       <main className="flex-1 pb-20 px-4 pt-4">
+        {syncError && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between">
+            <p className="text-sm text-red-600">{syncError}</p>
+            <button onClick={loadData} className="text-xs text-red-600 font-medium ml-2 whitespace-nowrap">재시도</button>
+          </div>
+        )}
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Dashboard />} />

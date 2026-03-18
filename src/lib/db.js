@@ -1,4 +1,5 @@
 import Dexie from 'dexie';
+import { createInitialReview } from './sm2';
 
 export const db = new Dexie('j-voca');
 
@@ -33,6 +34,17 @@ export async function importReviews(reviews) {
     await db.reviews.clear();
     if (reviews?.length) await db.reviews.bulkPut(reviews);
   });
+}
+
+export async function ensureReviewsExist() {
+  const allWords = await db.words.toArray();
+  const existingReviews = await db.reviews.toArray();
+  const reviewedIds = new Set(existingReviews.map(r => r.wordId));
+
+  const missing = allWords.filter(w => !reviewedIds.has(w.id));
+  if (missing.length > 0) {
+    await db.reviews.bulkPut(missing.map(w => createInitialReview(w.id)));
+  }
 }
 
 export async function clearAllReviews() {

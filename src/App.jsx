@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { fetchWordsData } from './lib/github';
-import { syncWordsFromData } from './lib/db';
+import { syncWordsFromData, ensureReviewsExist } from './lib/db';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
 const WordInput = lazy(() => import('./components/WordInput'));
@@ -28,7 +28,10 @@ function PageLoader() {
 export default function App() {
   useEffect(() => {
     fetchWordsData()
-      .then(data => syncWordsFromData(data.words))
+      .then(async (data) => {
+        await syncWordsFromData(data.words);
+        await ensureReviewsExist();
+      })
       .catch(() => {});
   }, []);
 

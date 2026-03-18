@@ -1,4 +1,4 @@
-const CACHE_NAME = 'j-voca-v1';
+const CACHE_NAME = 'j-voca-v2';
 
 const PRECACHE_URLS = [
   '/j-voca/',
@@ -25,18 +25,36 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   if (event.request.url.includes('googleapis.com')) return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const fetched = fetch(event.request)
-        .then((response) => {
+  const url = new URL(event.request.url);
+  const isNavigation = event.request.mode === 'navigate';
+  const isAsset = /\.[a-f0-9]{8,}\.(js|css)$/.test(url.pathname);
+
+  if (isAsset) {
+    // Vite hashed assets: immutable, cache-first is safe
+    event.respondWith(
+      caches.match(event.request).then((cached) =>
+        cached || fetch(event.request).then((response) => {
           if (response.ok) {
             const clone = response.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           }
           return response;
         })
-        .catch(() => cached);
-      return cached || fetched;
-    })
+      )
+    );
+    return;
+  }
+
+  // HTML and other resources: network-first
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });

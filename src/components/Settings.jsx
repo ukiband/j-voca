@@ -26,7 +26,7 @@ export default function Settings() {
   const [selectedModel, setSelectedModel] = useState(getModel());
   const [githubToken, setGithubTokenState] = useState(getGithubToken());
   const [fontSize, setFontSize] = useState(localStorage.getItem('font-size') || 'base');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState({ text: '', section: '' });
 
   function handleFontSize(size) {
     setFontSize(size);
@@ -34,20 +34,29 @@ export default function Settings() {
     document.documentElement.className = `font-${size}`;
   }
 
-  function showMessage(msg) {
-    setMessage(msg);
-    setTimeout(() => setMessage(''), 3000);
+  function showMessage(msg, section = '') {
+    setMessage({ text: msg, section });
+    setTimeout(() => setMessage({ text: '', section: '' }), 3000);
+  }
+
+  function MessageBox({ section }) {
+    if (!message.text || message.section !== section) return null;
+    return (
+      <div className={`text-sm p-3 rounded-xl ${
+        message.text.includes('실패') ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'
+      }`}>{message.text}</div>
+    );
   }
 
   function handleSaveGemini() {
     setApiKey(apiKey);
     setModel(selectedModel);
-    showMessage('Gemini 설정이 저장되었습니다.');
+    showMessage('Gemini 설정이 저장되었습니다.', 'gemini');
   }
 
   function handleSaveGithub() {
     setGithubToken(githubToken);
-    showMessage('GitHub PAT가 저장되었습니다.');
+    showMessage('GitHub PAT가 저장되었습니다.', 'github');
   }
 
   async function handleExport() {
@@ -61,9 +70,9 @@ export default function Settings() {
       a.download = `j-voca-backup-${new Date().toISOString().split('T')[0]}.json`;
       a.click();
       URL.revokeObjectURL(url);
-      showMessage('백업 파일이 다운로드되었습니다.');
+      showMessage('백업 파일이 다운로드되었습니다.', 'backup');
     } catch (err) {
-      showMessage('내보내기 실패: ' + err.message);
+      showMessage('내보내기 실패: ' + err.message, 'backup');
     }
   }
 
@@ -76,9 +85,9 @@ export default function Settings() {
       const data = JSON.parse(text);
       if (!data.reviews) throw new Error('올바른 백업 파일이 아닙니다.');
       await importReviews(data.reviews);
-      showMessage(`복원 완료: ${data.reviews.length}개 학습 기록`);
+      showMessage(`복원 완료: ${data.reviews.length}개 학습 기록`, 'backup');
     } catch (err) {
-      showMessage('가져오기 실패: ' + err.message);
+      showMessage('가져오기 실패: ' + err.message, 'backup');
     }
     e.target.value = '';
   }
@@ -115,6 +124,7 @@ export default function Settings() {
         >
           저장
         </button>
+        <MessageBox section="gemini" />
       </div>
 
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
@@ -136,6 +146,7 @@ export default function Settings() {
         >
           저장
         </button>
+        <MessageBox section="github" />
       </div>
 
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
@@ -172,6 +183,7 @@ export default function Settings() {
           학습 기록 가져오기 (JSON)
           <input type="file" accept=".json" onChange={handleImport} className="hidden" />
         </label>
+        <MessageBox section="backup" />
       </div>
 
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-red-100 space-y-3">
@@ -183,7 +195,7 @@ export default function Settings() {
           onClick={async () => {
             if (!confirm('모든 복습 진도를 삭제합니다. 계속할까요?')) return;
             await clearAllReviews();
-            showMessage('학습 기록이 초기화되었습니다.');
+            showMessage('학습 기록이 초기화되었습니다.', 'reset');
           }}
           className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"
         >
@@ -197,9 +209,9 @@ export default function Settings() {
               try {
                 await resetWordsInRepo();
                 await clearAllData();
-                showMessage('모든 데이터가 초기화되었습니다.');
+                showMessage('모든 데이터가 초기화되었습니다.', 'reset');
               } catch (err) {
-                showMessage('초기화 실패: ' + err.message);
+                showMessage('초기화 실패: ' + err.message, 'reset');
               }
             }}
             className="w-full py-2 border border-red-300 bg-red-50 rounded-xl text-sm text-red-600 font-medium"
@@ -207,13 +219,8 @@ export default function Settings() {
             전체 초기화 (단어 + 학습 기록)
           </button>
         )}
+        <MessageBox section="reset" />
       </div>
-
-      {message && (
-        <div className={`text-sm p-3 rounded-xl ${
-          message.includes('실패') ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'
-        }`}>{message}</div>
-      )}
     </div>
   );
 }

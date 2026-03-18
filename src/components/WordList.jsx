@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, syncWordsFromData, deleteReview } from '../lib/db';
-import { hasGithubToken, updateWordInRepo, deleteWordFromRepo } from '../lib/github';
+import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
 
 export default function WordList() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
@@ -47,6 +47,22 @@ export default function WordList() {
     setSaving(false);
   }
 
+  async function handleDeleteChapter() {
+    if (selectedChapter === null) return;
+    const count = filtered.length;
+    if (!confirm(`Lesson ${selectedChapter}의 단어 ${count}개를 모두 삭제하시겠습니까?`)) return;
+    setSaving(true);
+    try {
+      const { data, deletedIds } = await deleteChapterFromRepo(selectedChapter);
+      await syncWordsFromData(data.words);
+      for (const id of deletedIds) await deleteReview(id);
+      setSelectedChapter(null);
+    } catch (err) {
+      alert(err.message);
+    }
+    setSaving(false);
+  }
+
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-bold text-slate-800">단어 목록</h1>
@@ -73,6 +89,16 @@ export default function WordList() {
             </button>
           ))}
         </div>
+      )}
+
+      {canEdit && selectedChapter !== null && filtered.length > 0 && (
+        <button
+          onClick={handleDeleteChapter}
+          disabled={saving}
+          className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"
+        >
+          {saving ? '삭제 중...' : `Lesson ${selectedChapter} 전체 삭제 (${filtered.length}개)`}
+        </button>
       )}
 
       {filtered.length === 0 ? (

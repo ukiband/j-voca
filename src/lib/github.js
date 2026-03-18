@@ -127,6 +127,16 @@ export async function deleteWordFromRepo(id) {
   return data;
 }
 
+export async function deleteChapterFromRepo(chapter) {
+  const { data, sha } = await getFileFromGithub();
+
+  const deletedIds = data.words.filter(w => w.chapter === chapter).map(w => w.id);
+  data.words = data.words.filter(w => w.chapter !== chapter);
+
+  await commitFile(data, sha, `Lesson ${chapter} 단어 ${deletedIds.length}개 삭제`);
+  return { data, deletedIds };
+}
+
 export async function resetWordsInRepo() {
   const { sha } = await getFileFromGithub();
   await commitFile({ lastId: 0, words: [] }, sha, '전체 단어 초기화');

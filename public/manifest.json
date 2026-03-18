@@ -1,0 +1,22 @@
+{
+  "name": "J-VOCA - 일본어 단어장",
+  "short_name": "J-VOCA",
+  "description": "일본어 복습용 웹 단어장",
+  "start_url": "/j-voca/",
+  "scope": "/j-voca/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e293b",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

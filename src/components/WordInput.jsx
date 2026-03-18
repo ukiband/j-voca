@@ -22,6 +22,7 @@ export default function WordInput() {
   const [words, setWords] = useState([]);
   const [error, setError] = useState('');
   const [savedCount, setSavedCount] = useState(0);
+  const [skippedCount, setSkippedCount] = useState(0);
   const fileRef = useRef();
 
   async function handleFile(e) {
@@ -72,13 +73,16 @@ export default function WordInput() {
     setError('');
 
     try {
-      const { data, wordsWithIds } = await addWordsToRepo(words);
+      const { data, wordsWithIds, skipped } = await addWordsToRepo(words);
       await syncWordsFromData(data.words);
 
-      const reviews = wordsWithIds.map(w => createInitialReview(w.id));
-      await db.reviews.bulkPut(reviews);
+      if (wordsWithIds.length > 0) {
+        const reviews = wordsWithIds.map(w => createInitialReview(w.id));
+        await db.reviews.bulkPut(reviews);
+      }
 
       setSavedCount(wordsWithIds.length);
+      setSkippedCount(skipped);
       setStep('done');
     } catch (err) {
       setError(err.message);
@@ -211,8 +215,13 @@ export default function WordInput() {
       {step === 'done' && (
         <div className="text-center py-16">
           <p className="text-4xl mb-4">&#x2705;</p>
-          <p className="text-lg font-medium text-slate-800">{savedCount}개 단어가 저장되었습니다</p>
-          <p className="text-xs text-slate-400 mt-2">GitHub에 커밋되었습니다</p>
+          <p className="text-lg font-medium text-slate-800">
+            {savedCount > 0 ? `${savedCount}개 단어가 저장되었습니다` : '새로 저장할 단어가 없습니다'}
+          </p>
+          {skippedCount > 0 && (
+            <p className="text-xs text-amber-500 mt-1">{skippedCount}개 중복 단어 제외</p>
+          )}
+          {savedCount > 0 && <p className="text-xs text-slate-400 mt-2">GitHub에 커밋되었습니다</p>}
           <button onClick={reset} className="mt-4 text-indigo-600 font-medium text-sm">
             더 추가하기
           </button>

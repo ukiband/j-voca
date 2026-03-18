@@ -30,13 +30,31 @@ export async function extractWordsFromImage(base64Image, mimeType, chapter, text
   const url = `${API_BASE}/${model}:generateContent?key=${apiKey}`;
 
   const prompt = `이 일본어 교재 사진에서 단어를 추출해주세요.
-각 단어에 대해 다음 정보를 JSON 배열로 반환해주세요:
-- word: 일본어 단어 (한자 포함)
+
+## 절대 금지 (NEVER)
+- **절대로** 사진에 보이지 않는 단어를 만들어내지 마세요.
+- **절대로** 반대어, 유의어, 관련어를 추가하지 마세요. 예: "長い"가 보인다고 "短い"를 추가하면 안 됩니다.
+- **절대로** 쌍(pair)을 만들지 마세요. 사진에 "きれいだ"만 있으면 "きたない"를 추가하면 안 됩니다.
+- 사진에 인쇄되어 있지 않은 단어가 하나라도 포함되면 실패입니다.
+
+## 스캔 방법
+- 사진이 회전되어 있을 수 있습니다. 텍스트 방향을 먼저 파악한 후 읽어주세요.
+- 페이지에 여러 섹션(い형용사, な형용사, 명사, 동사 등)이 있을 수 있습니다. **모든 섹션**을 끝까지 스캔하세요.
+- 단어 하나라도 누락하지 마세요. 페이지 전체를 꼼꼼히 확인하세요.
+
+## 구분 기준
+- **인쇄된 일본어 단어**만 추출하세요. 손글씨(필기, 체크, 동그라미)는 무시하세요.
+- 손글씨로 한국어 뜻이 적혀 있다면 meaning에 활용해도 좋습니다.
+- 괄호 안의 한자나 ふりがな를 참고하여 정확한 reading을 작성하세요.
+- 페이지 제목, 문법 설명, 예문은 제외하고 **단어 목록 항목만** 추출하세요.
+
+## 출력 형식
+JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
+- word: 일본어 단어 (한자가 있으면 한자 표기)
 - reading: 히라가나 읽기
 - meaning: 한국어 뜻
-- pos: 품사 (명사, 동사, 형용사, 부사, 조사, 접속사, 감탄사, 기타)
+- pos: 품사 (명사, 동사, い형용사, な형용사, 부사, 조사, 접속사, 감탄사, 기타)
 
-JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.
 예시: [{"word":"時計","reading":"とけい","meaning":"시계","pos":"명사"}]`;
 
   const response = await fetch(url, {
@@ -56,7 +74,7 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.
       }],
       generationConfig: {
         temperature: 0.1,
-        maxOutputTokens: 4096,
+        maxOutputTokens: 8192,
       },
     }),
   });
@@ -73,6 +91,9 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.
         ' 설정에서 다른 모델로 변경해보세요.'
       );
     }
+    if (response.status === 503 || msg.includes('high demand') || msg.includes('overloaded')) {
+      throw new Error('서버 과부하: 잠시 후 다시 시도해주세요.');
+    }
     if (response.status === 400) {
       throw new Error('요청 오류: API 키가 올바른지 확인해주세요.');
     }
@@ -82,8 +103,28 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.
   const data = await response.json();
   const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-  const jsonMatch = text.match(/\[[\s\S]*\]/);
-  if (!jsonMatch) throw new Error('단어를 추출할 수 없습니다.');
+  if (!text) {
+    const reason = data.candidates?.[0]?.finishReason || '응답 없음';
+    throw new Error(`추출 실패: ${reason}`);
+  }
+
+  // Strip markdown code fences (```json ... ```)
+  const stripped = text.replace(/```(?:json)?\s*/gi, '').replace(/```/g, '').trim();
+  let jsonMatch = stripped.match(/\[[\s\S]*\]/);
+
+  // Truncated response: try to recover complete entries
+  if (!jsonMatch) {
+    const arrStart = stripped.indexOf('[');
+    if (arrStart !== -1) {
+      const partial = stripped.slice(arrStart);
+      const lastComplete = partial.lastIndexOf('}');
+      if (lastComplete !== -1) {
+        jsonMatch = [partial.slice(0, lastComplete + 1) + ']'];
+      }
+    }
+  }
+
+  if (!jsonMatch) throw new Error(`JSON 파싱 실패. Gemini 응답: "${text.slice(0, 200)}"`);
 
   const words = JSON.parse(jsonMatch[0]);
   const today = new Date().toISOString().split('T')[0];

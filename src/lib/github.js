@@ -95,14 +95,23 @@ async function commitFile(data, sha, message) {
 export async function addWordsToRepo(newWords) {
   const { data, sha } = await getFileFromGithub();
 
+  // 같은 레슨 내 중복 제거 (word 기준)
+  const existingWords = new Set(
+    data.words.filter(w => w.chapter === newWords[0]?.chapter).map(w => w.word)
+  );
+  const unique = newWords.filter(w => !existingWords.has(w.word));
+  const skipped = newWords.length - unique.length;
+
   let nextId = data.lastId;
-  const wordsWithIds = newWords.map(w => ({ ...w, id: ++nextId }));
+  const wordsWithIds = unique.map(w => ({ ...w, id: ++nextId }));
 
   data.words.push(...wordsWithIds);
   data.lastId = nextId;
 
-  await commitFile(data, sha, `단어 ${wordsWithIds.length}개 추가`);
-  return { data, wordsWithIds };
+  if (wordsWithIds.length > 0) {
+    await commitFile(data, sha, `단어 ${wordsWithIds.length}개 추가`);
+  }
+  return { data, wordsWithIds, skipped };
 }
 
 export async function updateWordInRepo(id, changes) {

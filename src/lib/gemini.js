@@ -45,17 +45,18 @@ export async function extractWordsFromImage(base64Image, mimeType, chapter, text
 ## 구분 기준
 - **인쇄된 일본어 단어**만 추출하세요. 손글씨(필기, 체크, 동그라미)는 무시하세요.
 - 손글씨로 한국어 뜻이 적혀 있다면 meaning에 활용해도 좋습니다.
-- 괄호 안의 한자나 ふりがな를 참고하여 정확한 reading을 작성하세요.
+- 교재에서 가장 크게/중심으로 인쇄된 표기를 word로 추출하세요. 괄호 안 보조 표기나 후리가나(振り仮名)는 word에 넣지 말고, reading 작성 시 참고하세요.
 - 페이지 제목, 문법 설명, 예문은 제외하고 **단어 목록 항목만** 추출하세요.
 
 ## 출력 형식
 JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
-- word: 일본어 단어 (한자가 있으면 한자 표기)
+- word: 일본어 단어 (교재에서 메인으로 인쇄된 표기 그대로. 괄호 안 보조 표기는 제외)
 - reading: 히라가나 읽기
 - meaning: 한국어 뜻
 - pos: 품사 (명사, 동사, い형용사, な형용사, 부사, 조사, 접속사, 감탄사, 기타)
 
-예시: [{"word":"時計","reading":"とけい","meaning":"시계","pos":"명사"}]`;
+예시(초급 교재): [{"word":"とけい","reading":"とけい","meaning":"시계","pos":"명사"}]
+예시(한자 메인 교재): [{"word":"時計","reading":"とけい","meaning":"시계","pos":"명사"}]`;
 
   const response = await fetch(url, {
     method: 'POST',

@@ -1,5 +1,5 @@
 {
-  "lastId": 36,
+  "lastId": 67,
   "words": [
     {
       "word": "おおい",
@@ -360,6 +360,316 @@
       "textbook": "일본어수업",
       "createdAt": "2026-03-18",
       "id": 36
+    },
+    {
+      "word": "わたし",
+      "reading": "わたし",
+      "meaning": "나",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 37
+    },
+    {
+      "word": "かれ",
+      "reading": "かれ",
+      "meaning": "그",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 38
+    },
+    {
+      "word": "かのじょ",
+      "reading": "かのじょ",
+      "meaning": "그녀",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 39
+    },
+    {
+      "word": "かんこくじん",
+      "reading": "かんこくじん",
+      "meaning": "한국인",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 40
+    },
+    {
+      "word": "にほんじん",
+      "reading": "にほんじん",
+      "meaning": "일본인",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 41
+    },
+    {
+      "word": "ちゅうごくじん",
+      "reading": "ちゅうごくじん",
+      "meaning": "중국인",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 42
+    },
+    {
+      "word": "がいこくじん",
+      "reading": "がいこくじん",
+      "meaning": "외국인",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 43
+    },
+    {
+      "word": "アメリカじん",
+      "reading": "アメリカじん",
+      "meaning": "미국인",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 44
+    },
+    {
+      "word": "イギリスじん",
+      "reading": "イギリスじん",
+      "meaning": "영국인",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 45
+    },
+    {
+      "word": "がくせい",
+      "reading": "がくせい",
+      "meaning": "학생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 46
+    },
+    {
+      "word": "しょうがくせい",
+      "reading": "しょうがくせい",
+      "meaning": "초등학생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 47
+    },
+    {
+      "word": "ちゅうがくせい",
+      "reading": "ちゅうがくせい",
+      "meaning": "중학생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 48
+    },
+    {
+      "word": "こうこうせい",
+      "reading": "こうこうせい",
+      "meaning": "고등학생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 49
+    },
+    {
+      "word": "だいがくせい",
+      "reading": "だいがくせい",
+      "meaning": "대학생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 50
+    },
+    {
+      "word": "りゅうがくせい",
+      "reading": "りゅうがくせい",
+      "meaning": "유학생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 51
+    },
+    {
+      "word": "いしゃ",
+      "reading": "いしゃ",
+      "meaning": "의사",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 52
+    },
+    {
+      "word": "かしゅ",
+      "reading": "かしゅ",
+      "meaning": "가수",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 53
+    },
+    {
+      "word": "せんせい",
+      "reading": "せんせい",
+      "meaning": "선생님",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 54
+    },
+    {
+      "word": "かんごし",
+      "reading": "かんごし",
+      "meaning": "간호사",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 55
+    },
+    {
+      "word": "かいしゃいん",
+      "reading": "かいしゃいん",
+      "meaning": "회사원",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 56
+    },
+    {
+      "word": "ぎんこういん",
+      "reading": "ぎんこういん",
+      "meaning": "은행원",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 57
+    },
+    {
+      "word": "やきゅうせんしゅ",
+      "reading": "やきゅうせんしゅ",
+      "meaning": "야구선수",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 58
+    },
+    {
+      "word": "サッカーせんしゅ",
+      "reading": "サッカーせんしゅ",
+      "meaning": "축구선수",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 59
+    },
+    {
+      "word": "モデル",
+      "reading": "モデル",
+      "meaning": "모델",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 60
+    },
+    {
+      "word": "おとこ",
+      "reading": "おとこ",
+      "meaning": "남자",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 61
+    },
+    {
+      "word": "おんな",
+      "reading": "おんな",
+      "meaning": "여자",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 62
+    },
+    {
+      "word": "おとうと",
+      "reading": "おとうと",
+      "meaning": "남동생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 63
+    },
+    {
+      "word": "いもうと",
+      "reading": "いもうと",
+      "meaning": "여동생",
+      "pos": "명사",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 64
+    },
+    {
+      "word": "こんにちは",
+      "reading": "こんにちは",
+      "meaning": "안녕하세요",
+      "pos": "기타",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 65
+    },
+    {
+      "word": "はじめまして",
+      "reading": "はじめまして",
+      "meaning": "처음 뵙겠습니다",
+      "pos": "기타",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 66
+    },
+    {
+      "word": "よろしくおねがいします",
+      "reading": "よろしくおねがいします",
+      "meaning": "잘 부탁드립니다",
+      "pos": "기타",
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-19",
+      "id": 67
     }
   ]
 }

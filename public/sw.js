@@ -1,8 +1,9 @@
-const CACHE_NAME = 'j-voca-v2';
+const CACHE_NAME = 'j-voca-v3';
 
 const PRECACHE_URLS = [
   '/j-voca/',
   '/j-voca/index.html',
+  '/j-voca/data/words.json',
 ];
 
 self.addEventListener('install', (event) => {
@@ -24,9 +25,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   if (event.request.url.includes('googleapis.com')) return;
+  if (event.request.url.includes('raw.githubusercontent.com')) return;
+  if (event.request.url.includes('api.github.com')) return;
 
   const url = new URL(event.request.url);
-  const isNavigation = event.request.mode === 'navigate';
   const isAsset = /\.[a-f0-9]{8,}\.(js|css)$/.test(url.pathname);
 
   if (isAsset) {

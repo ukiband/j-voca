@@ -33,7 +33,7 @@ export async function fetchWordsData() {
   // 2. Fallback: 정적 빌드 파일
   try {
     const url = import.meta.env.BASE_URL + 'data/words.json';
-    const res = await fetch(url, { cache: 'no-cache' });
+    const res = await fetch(url);
     if (res.ok) return res.json();
   } catch {}
 

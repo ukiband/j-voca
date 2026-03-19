@@ -35,7 +35,9 @@ export default function App() {
       await openDb();
       try {
         const data = await fetchWordsData();
-        await syncWordsFromData(data.words);
+        if (data.words.length > 0) {
+          await syncWordsFromData(data.words);
+        }
         await ensureReviewsExist();
       } catch (err) {
         console.error('Data sync error:', err);

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { speak } from '../lib/speech';
 
 function shuffle(arr) {
   const a = [...arr];
@@ -30,23 +29,44 @@ export function useBrowseMode() {
     }
   }, []);
 
-  const startListening = useCallback(async (queue, startIdx) => {
+  // onend 콜백 체인 방식: iOS Safari에서 async/await 루프 + cancel()을 반복하면
+  // 유저 제스처 컨텍스트를 벗어나 speechSynthesis가 차단됨.
+  // cancel()은 최초 1회만 호출하고, onend → setTimeout → 다음 speak() 체인으로 연결.
+  const startListening = useCallback((queue, startIdx) => {
+    speechSynthesis.cancel();
     listeningRef.current = true;
     setListening(true);
+
     try {
       if (navigator.wakeLock) {
-        wakeLockRef.current = await navigator.wakeLock.request('screen');
+        navigator.wakeLock.request('screen').then(lock => {
+          wakeLockRef.current = lock;
+        }).catch(() => {});
       }
     } catch {}
 
-    for (let i = startIdx; i < queue.length; i++) {
-      if (!listeningRef.current) return;
-      setBrowseIndex(i);
-      await speak(queue[i].word);
-      if (!listeningRef.current) return;
-      await new Promise(r => setTimeout(r, 3000));
+    function playWord(index) {
+      if (!listeningRef.current || index >= queue.length) {
+        stopListening();
+        return;
+      }
+
+      setBrowseIndex(index);
+      const u = new SpeechSynthesisUtterance(queue[index].word);
+      u.lang = 'ja-JP';
+      u.rate = 0.8;
+      u.onend = () => {
+        if (!listeningRef.current) return;
+        setTimeout(() => playWord(index + 1), 3000);
+      };
+      u.onerror = () => {
+        if (!listeningRef.current) return;
+        setTimeout(() => playWord(index + 1), 3000);
+      };
+      speechSynthesis.speak(u);
     }
-    stopListening();
+
+    playWord(startIdx);
   }, [stopListening]);
 
   function open(words) {

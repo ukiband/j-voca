@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getApiKey, setApiKey, getModel, setModel, MODELS } from '../lib/gemini';
 import { getGithubToken, setGithubToken, hasGithubToken, resetWordsInRepo } from '../lib/github';
-import { exportData, importReviews, clearAllReviews, clearAllData } from '../lib/db';
+import { exportData, importReviews, clearAllReviews, clearAllData, ensureReviewsExist } from '../lib/db';
 
 const FONT_SIZES = [
   { id: 'base', label: '보통' },
@@ -195,6 +195,7 @@ export default function Settings() {
           onClick={async () => {
             if (!confirm('모든 복습 진도를 삭제합니다. 계속할까요?')) return;
             await clearAllReviews();
+            await ensureReviewsExist();
             showMessage('학습 기록이 초기화되었습니다.', 'reset');
           }}
           className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"

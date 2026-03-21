@@ -8,6 +8,7 @@ const WordInput = lazy(() => import('./components/WordInput'));
 const WordList = lazy(() => import('./components/WordList'));
 const ReviewSession = lazy(() => import('./components/ReviewSession'));
 const Settings = lazy(() => import('./components/Settings'));
+const WeakWords = lazy(() => import('./components/WeakWords'));
 
 const NAV_ITEMS = [
   { to: '/', icon: '\u{1F3E0}', label: '\uD648' },
@@ -83,6 +84,7 @@ export default function App() {
             <Route path="/words" element={<WordList />} />
             <Route path="/review" element={<ReviewSession />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/weak-words" element={<WeakWords />} />
           </Routes>
         </Suspense>
       </main>

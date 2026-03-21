@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
+import { calculateWeakWords } from '../lib/weak-utils';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
@@ -13,7 +14,10 @@ export default function Dashboard() {
   const reviews = useLiveQuery(() => db.reviews.toArray(), [], []);
   const [showInstall, setShowInstall] = useState(() => !isStandalone() && !sessionStorage.getItem('hide-install'));
 
+  const reviewLogs = useLiveQuery(() => db.reviewLogs.toArray(), [], []);
+
   const dueCount = getDueCount(words, reviews);
+  const weakCount = calculateWeakWords(words, reviews, reviewLogs).length;
 
   const chapters = [];
   const chapterMap = {};
@@ -63,6 +67,18 @@ export default function Dashboard() {
           {dueCount > 0 && <p className="text-xs text-indigo-200 mt-1">탭하여 시작</p>}
         </Link>
       </div>
+
+      {weakCount > 0 && (
+        <Link to="/weak-words" className="block bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-sm font-medium text-amber-800">오답노트</p>
+              <p className="text-xs text-amber-600 mt-1">취약 단어를 집중 연습하세요</p>
+            </div>
+            <span className="text-2xl font-bold text-amber-700">{weakCount}</span>
+          </div>
+        </Link>
+      )}
 
       {chapters.length > 0 && (
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">

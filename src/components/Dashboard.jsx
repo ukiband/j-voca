@@ -24,7 +24,7 @@ export default function Dashboard() {
   const wordById = new Map(words.map(w => [w.id, w]));
   for (const r of reviews) {
     const word = wordById.get(r.wordId);
-    if (word && chapterMap[word.chapter] && r.repetitions > 0) {
+    if (word && chapterMap[word.chapter] && r.reps > 0) {
       chapterMap[word.chapter].reviewed++;
     }
   }

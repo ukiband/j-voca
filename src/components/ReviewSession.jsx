@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { db, putReview } from '../lib/db';
-import { sm2, createInitialReview } from '../lib/sm2';
+import { db, putReview, putReviewLog } from '../lib/db';
+import { gradeCard, createInitialReview } from '../lib/fsrs';
 import { getDueWords } from '../lib/review-utils';
 import FlashCard from './FlashCard';
 
@@ -36,7 +36,14 @@ export default function ReviewSession() {
     let review = await db.reviews.get(currentWord.id);
     if (!review) review = createInitialReview(currentWord.id);
 
-    await putReview(sm2(review, grade));
+    const updated = gradeCard(review, grade);
+    await putReview(updated);
+    // 복습 로그 기록 (통계 및 분석용)
+    await putReviewLog({
+      wordId: currentWord.id,
+      review_date: new Date().toISOString(),
+      grade,
+    });
     setResults(prev => ({ ...prev, [grade]: prev[grade] + 1 }));
 
     if (currentIndex + 1 < queue.length) {

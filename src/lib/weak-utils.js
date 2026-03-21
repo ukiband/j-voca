@@ -31,9 +31,9 @@ export function calculateWeakWords(words, reviews, reviewLogs) {
     if (!word) continue; // 단어가 삭제된 경우 무시
 
     const totalReviews = logs.length;
-    // again=1, hard=2 는 ts-fsrs의 Rating 값
-    const againCount = logs.filter(l => l.grade === 1).length;
-    const hardCount = logs.filter(l => l.grade === 2).length;
+    // ReviewSession에서 grade를 문자열로 저장
+    const againCount = logs.filter(l => l.grade === 'again').length;
+    const hardCount = logs.filter(l => l.grade === 'hard').length;
     const failRate = (againCount + hardCount) / totalReviews;
 
     // failRate가 0보다 큰 경우만 취약 단어로 분류

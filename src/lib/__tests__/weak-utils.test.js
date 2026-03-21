@@ -15,7 +15,7 @@ const reviews = [
   { wordId: 'w4', due: '2026-01-01T00:00:00.000Z', lapses: 0, reps: 0, state: 0 },
 ];
 
-// ts-fsrs Rating: Again=1, Hard=2, Good=3, Easy=4
+// ReviewSession에서 grade를 문자열로 저장 ('again', 'hard', 'good', 'easy')
 function log(wordId, grade) {
   return { id: Math.random(), wordId, review_date: '2026-01-01', grade };
 }
@@ -23,8 +23,8 @@ function log(wordId, grade) {
 describe('calculateWeakWords', () => {
   it('모든 응답이 good/easy이면 취약 단어 없음', () => {
     const logs = [
-      log('w1', 3), log('w1', 4), // good, easy
-      log('w2', 3), log('w2', 3), // good, good
+      log('w1', 'good'), log('w1', 'easy'), // good, easy
+      log('w2', 'good'), log('w2', 'good'), // good, good
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(0);
@@ -32,7 +32,7 @@ describe('calculateWeakWords', () => {
 
   it('모든 응답이 again이면 failRate 1.0', () => {
     const logs = [
-      log('w1', 1), log('w1', 1), log('w1', 1), // again 3회
+      log('w1', 'again'), log('w1', 'again'), log('w1', 'again'), // again 3회
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(1);
@@ -45,10 +45,10 @@ describe('calculateWeakWords', () => {
 
   it('again과 hard 혼합 시 올바른 failRate 계산', () => {
     const logs = [
-      log('w1', 1), // again
-      log('w1', 2), // hard
-      log('w1', 3), // good
-      log('w1', 4), // easy
+      log('w1', 'again'), // again
+      log('w1', 'hard'), // hard
+      log('w1', 'good'), // good
+      log('w1', 'easy'), // easy
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(1);
@@ -59,7 +59,7 @@ describe('calculateWeakWords', () => {
 
   it('리뷰 로그가 없는 단어는 제외', () => {
     const logs = [
-      log('w1', 1), // w1만 로그 있음
+      log('w1', 'again'), // w1만 로그 있음
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(1);
@@ -68,9 +68,9 @@ describe('calculateWeakWords', () => {
 
   it('failRate 내림차순 정렬 (가장 취약한 단어가 먼저)', () => {
     const logs = [
-      log('w1', 1), log('w1', 3),         // w1: failRate = 0.5
-      log('w2', 1), log('w2', 1), log('w2', 3), // w2: failRate = 0.667
-      log('w3', 2), log('w3', 3), log('w3', 3), log('w3', 3), // w3: failRate = 0.25
+      log('w1', 'again'), log('w1', 'good'),         // w1: failRate = 0.5
+      log('w2', 'again'), log('w2', 'again'), log('w2', 'good'), // w2: failRate = 0.667
+      log('w3', 'hard'), log('w3', 'good'), log('w3', 'good'), log('w3', 'good'), // w3: failRate = 0.25
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(3);
@@ -81,8 +81,8 @@ describe('calculateWeakWords', () => {
 
   it('동일 failRate이면 총 리뷰 수가 많은 단어가 먼저', () => {
     const logs = [
-      log('w1', 1), log('w1', 3),                         // w1: 1/2 = 0.5
-      log('w2', 1), log('w2', 1), log('w2', 3), log('w2', 3), // w2: 2/4 = 0.5
+      log('w1', 'again'), log('w1', 'good'),                         // w1: 1/2 = 0.5
+      log('w2', 'again'), log('w2', 'again'), log('w2', 'good'), log('w2', 'good'), // w2: 2/4 = 0.5
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(2);
@@ -92,8 +92,8 @@ describe('calculateWeakWords', () => {
 
   it('failRate 0인 단어는 제외', () => {
     const logs = [
-      log('w1', 3), log('w1', 4), // 모두 good/easy
-      log('w2', 1),                // again 1회
+      log('w1', 'good'), log('w1', 'easy'), // 모두 good/easy
+      log('w2', 'again'),                // again 1회
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(1);
@@ -106,7 +106,7 @@ describe('calculateWeakWords', () => {
 
   it('words에 없는 wordId의 로그는 무시', () => {
     const logs = [
-      log('deleted-word', 1), log('deleted-word', 1),
+      log('deleted-word', 'again'), log('deleted-word', 'again'),
     ];
     const result = calculateWeakWords(words, reviews, logs);
     expect(result).toHaveLength(0);
@@ -114,7 +114,7 @@ describe('calculateWeakWords', () => {
 
   it('review가 없는 단어도 포함 (review는 null)', () => {
     const logsOnly = [
-      log('w4', 1), // w4에는 review가 있지만, review가 없는 경우를 테스트
+      log('w4', 'again'), // w4에는 review가 있지만, review가 없는 경우를 테스트
     ];
     // review 목록에서 w4를 제외
     const partialReviews = reviews.filter(r => r.wordId !== 'w4');

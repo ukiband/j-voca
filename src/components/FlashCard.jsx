@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { speak } from '../lib/speech';
+import { getAutoPronounce } from '../lib/settings';
 
 export default function FlashCard({ word, onGrade, onPrev, onNext }) {
   const [flipped, setFlipped] = useState(false);
   const browseMode = !onGrade;
 
   function handleFlip() {
-    if (!flipped) setFlipped(true);
+    if (!flipped) {
+      setFlipped(true);
+      // 카드 뒷면으로 전환 시 자동 발음 재생 (사용자 탭 컨텍스트 내에서 호출)
+      if (getAutoPronounce()) speak(word.word);
+    }
   }
 
   function handleGrade(grade) {

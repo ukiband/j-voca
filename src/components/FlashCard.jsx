@@ -50,12 +50,11 @@ export default function FlashCard({ word, onGrade, onPrev, onNext }) {
       </div>
 
       {flipped && !browseMode && (
-        <div className="grid grid-cols-4 gap-2 w-full">
+        <div className="grid grid-cols-3 gap-2 w-full">
           {[
-            { grade: 'again', label: '다시', color: 'bg-red-500' },
-            { grade: 'hard', label: '어려움', color: 'bg-orange-500' },
-            { grade: 'good', label: '좋음', color: 'bg-green-500' },
-            { grade: 'easy', label: '쉬움', color: 'bg-blue-500' },
+            { grade: 'again', label: '모름', color: 'bg-red-500' },
+            { grade: 'good', label: '애매', color: 'bg-orange-400' },
+            { grade: 'easy', label: '앎', color: 'bg-green-500' },
           ].map(({ grade, label, color }) => (
             <button
               key={grade}

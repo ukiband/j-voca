@@ -10,7 +10,7 @@ export default function ReviewSession() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState({ again: 0, hard: 0, good: 0, easy: 0 });
+  const [results, setResults] = useState({ again: 0, good: 0, easy: 0 });
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -92,27 +92,23 @@ export default function ReviewSession() {
   }
 
   if (done) {
-    const total = results.again + results.hard + results.good + results.easy;
+    const total = results.again + results.good + results.easy;
     return (
       <div className="text-center py-12 space-y-6">
         <p className="text-4xl">&#x2705;</p>
         <p className="text-lg font-medium text-slate-800">복습 완료!</p>
-        <div className="grid grid-cols-4 gap-2 text-sm">
+        <div className="grid grid-cols-3 gap-2 text-sm">
           <div className="bg-red-50 rounded-xl p-3">
             <p className="text-red-500 font-medium">{results.again}</p>
-            <p className="text-slate-400">다시</p>
+            <p className="text-slate-400">모름</p>
           </div>
           <div className="bg-orange-50 rounded-xl p-3">
-            <p className="text-orange-500 font-medium">{results.hard}</p>
-            <p className="text-slate-400">어려움</p>
+            <p className="text-orange-400 font-medium">{results.good}</p>
+            <p className="text-slate-400">애매</p>
           </div>
           <div className="bg-green-50 rounded-xl p-3">
-            <p className="text-green-500 font-medium">{results.good}</p>
-            <p className="text-slate-400">좋음</p>
-          </div>
-          <div className="bg-blue-50 rounded-xl p-3">
-            <p className="text-blue-500 font-medium">{results.easy}</p>
-            <p className="text-slate-400">쉬움</p>
+            <p className="text-green-500 font-medium">{results.easy}</p>
+            <p className="text-slate-400">앎</p>
           </div>
         </div>
         <p className="text-sm text-slate-400">{total}개 단어 복습 완료</p>

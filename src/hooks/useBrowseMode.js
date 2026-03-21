@@ -1,15 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+import { useSearchParams } from 'react-router-dom';
 
 export function useBrowseMode() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [browseIndex, setBrowseIndex] = useState(null);
   const [browseQueue, setBrowseQueue] = useState([]);
   const [listening, setListening] = useState(false);
@@ -52,6 +45,7 @@ export function useBrowseMode() {
       }
 
       setBrowseIndex(index);
+      setSearchParams({ i: String(index) }, { replace: true });
       const u = new SpeechSynthesisUtterance(queue[index].word);
       u.lang = 'ja-JP';
       u.rate = 0.8;
@@ -67,34 +61,49 @@ export function useBrowseMode() {
     }
 
     playWord(startIdx);
-  }, [stopListening]);
+  }, [stopListening, setSearchParams]);
 
-  function open(words) {
-    setBrowseQueue(shuffle(words));
-    setBrowseIndex(0);
+  // URL 쿼리 파라미터 i와 browseIndex를 동기화
+  const updateUrl = useCallback((index) => {
+    if (index === null) {
+      setSearchParams({}, { replace: true });
+    } else {
+      setSearchParams({ i: String(index) }, { replace: true });
+    }
+  }, [setSearchParams]);
+
+  function open(words, startIndex = 0) {
+    setBrowseQueue(words);
+    setBrowseIndex(startIndex);
+    updateUrl(startIndex);
   }
 
-  function openWithListening(words) {
-    const q = shuffle(words);
-    setBrowseQueue(q);
-    setBrowseIndex(0);
-    startListening(q, 0);
+  function openWithListening(words, startIndex = 0) {
+    setBrowseQueue(words);
+    setBrowseIndex(startIndex);
+    updateUrl(startIndex);
+    startListening(words, startIndex);
   }
 
   function close() {
     stopListening();
     setBrowseIndex(null);
     setBrowseQueue([]);
+    updateUrl(null);
   }
 
   function prev() {
     stopListening();
-    setBrowseIndex(browseIndex - 1);
+    const idx = browseIndex - 1;
+    setBrowseIndex(idx);
+    updateUrl(idx);
   }
 
   function next() {
     stopListening();
-    setBrowseIndex(browseIndex + 1);
+    const idx = browseIndex + 1;
+    setBrowseIndex(idx);
+    updateUrl(idx);
   }
 
   useEffect(() => {
@@ -108,12 +117,17 @@ export function useBrowseMode() {
     return () => { stopListening(); };
   }, [stopListening]);
 
+  // URL에서 초기 index를 읽어 반환 (마운트 시 복원용)
+  const urlIndex = searchParams.get('i');
+  const initialIndex = urlIndex !== null ? Number(urlIndex) : null;
+
   return {
     isOpen,
     currentWord,
     browseIndex,
     browseQueue,
     listening,
+    initialIndex,
     open,
     openWithListening,
     close,

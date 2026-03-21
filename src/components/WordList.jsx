@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, syncWordsFromData, deleteReview } from '../lib/db';
 import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
@@ -12,6 +12,17 @@ export default function WordList() {
   const [editForm, setEditForm] = useState({});
   const [saving, setSaving] = useState(false);
   const browse = useBrowseMode();
+
+  // URL의 i 파라미터로 모달 자동 복원 (Safari 앱 전환 복귀 대응)
+  const restored = useRef(false);
+  useEffect(() => {
+    if (restored.current || !words.length || browse.isOpen) return;
+    const i = browse.initialIndex;
+    if (i !== null && i >= 0 && i < words.length) {
+      browse.open(words, i);
+    }
+    restored.current = true;
+  }, [words.length]);
 
   const chapters = [...new Set(words.map(w => w.chapter))].sort((a, b) => a - b);
   const filtered = selectedChapter !== null

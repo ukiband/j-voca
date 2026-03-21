@@ -4,16 +4,7 @@ import { db, putReview, putReviewLog } from '../lib/db';
 import { gradeCard, createInitialReview } from '../lib/fsrs';
 import { getDueWords } from '../lib/review-utils';
 import { checkAnswer } from '../lib/writing-utils';
-
-// Fisher-Yates 셔플
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+import { shuffle } from '../lib/shuffle';
 
 export default function WritingMode() {
   const [mode, setMode] = useState(null); // 'due' | 'all'

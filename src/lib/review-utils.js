@@ -2,8 +2,9 @@ import { db } from './db';
 import { isDue } from './fsrs';
 
 export async function getDueWords() {
-  const allReviews = await db.reviews.toArray();
-  const dueReviews = allReviews.filter(r => isDue(r));
+  // due 인덱스를 활용하여 현재 시각 이전의 리뷰만 조회
+  const now = new Date().toISOString();
+  const dueReviews = await db.reviews.where('due').belowOrEqual(now).toArray();
   if (dueReviews.length === 0) return [];
 
   const wordIds = dueReviews.map(r => r.wordId);

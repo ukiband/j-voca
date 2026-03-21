@@ -1,9 +1,9 @@
 import { db } from './db';
-import { getTodayString } from './dates';
+import { isDue } from './fsrs';
 
 export async function getDueWords() {
-  const today = getTodayString();
-  const dueReviews = await db.reviews.where('nextReview').belowOrEqual(today).toArray();
+  const allReviews = await db.reviews.toArray();
+  const dueReviews = allReviews.filter(r => isDue(r));
   if (dueReviews.length === 0) return [];
 
   const wordIds = dueReviews.map(r => r.wordId);
@@ -11,7 +11,6 @@ export async function getDueWords() {
 }
 
 export function getDueCount(words, reviews) {
-  const today = getTodayString();
   const wordIds = new Set(words.map(w => w.id));
-  return reviews.filter(r => wordIds.has(r.wordId) && r.nextReview <= today).length;
+  return reviews.filter(r => wordIds.has(r.wordId) && isDue(r)).length;
 }

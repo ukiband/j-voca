@@ -94,7 +94,7 @@ export default function Settings() {
       const text = await file.text();
       const data = JSON.parse(text);
       if (!data.reviews) throw new Error('올바른 백업 파일이 아닙니다.');
-      await importReviews(data.reviews);
+      await importReviews(data.reviews, data.reviewLogs);
       showMessage(`복원 완료: ${data.reviews.length}개 학습 기록`, 'backup');
     } catch (err) {
       showMessage('가져오기 실패: ' + err.message, 'backup');

@@ -3,7 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { extractWordsFromImage, getApiKey } from '../lib/gemini';
 import { hasGithubToken, addWordsToRepo } from '../lib/github';
 import { syncWordsFromData, db } from '../lib/db';
-import { createInitialReview } from '../lib/sm2';
+import { createInitialReview } from '../lib/fsrs';
 
 export default function WordInput() {
   const [step, setStep] = useState('upload'); // upload | loading | preview | saving | done

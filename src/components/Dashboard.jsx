@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
+import { calculateStats } from '../lib/stats';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
@@ -11,9 +12,11 @@ function isStandalone() {
 export default function Dashboard() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
   const reviews = useLiveQuery(() => db.reviews.toArray(), [], []);
+  const reviewLogs = useLiveQuery(() => db.reviewLogs.toArray(), [], []);
   const [showInstall, setShowInstall] = useState(() => !isStandalone() && !sessionStorage.getItem('hide-install'));
 
   const dueCount = getDueCount(words, reviews);
+  const { streak, totalReviews, overallAccuracy } = calculateStats(reviewLogs);
 
   const chapters = [];
   const chapterMap = {};
@@ -63,6 +66,27 @@ export default function Dashboard() {
           {dueCount > 0 && <p className="text-xs text-indigo-200 mt-1">탭하여 시작</p>}
         </Link>
       </div>
+
+      {/* 학습 통계 카드 - /stats 페이지로 이동 */}
+      {totalReviews > 0 && (
+        <Link
+          to="/stats"
+          className="block bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-4 shadow-sm text-white"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-blue-200">학습 통계</p>
+              <div className="flex items-baseline gap-3 mt-1">
+                <span className="text-2xl font-bold">{streak}일 연속 🔥</span>
+                <span className="text-sm text-blue-200">
+                  정확도 {Math.round(overallAccuracy * 100)}%
+                </span>
+              </div>
+            </div>
+            <span className="text-2xl text-blue-200">→</span>
+          </div>
+        </Link>
+      )}
 
       {chapters.length > 0 && (
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">

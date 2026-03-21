@@ -10,6 +10,7 @@ export default function ReviewSession() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [results, setResults] = useState({ again: 0, good: 0, easy: 0 });
   const [error, setError] = useState(null);
 
@@ -31,24 +32,27 @@ export default function ReviewSession() {
   const currentWord = queue[currentIndex];
 
   async function handleGrade(grade) {
-    if (!currentWord) return;
+    if (!currentWord || saving) return;
+    setSaving(true);
 
-    // DB 저장을 먼저 완료하여 페이지 이동 시에도 결과가 유실되지 않도록 한다
     try {
       let review = await db.reviews.get(currentWord.id);
       if (!review) review = createInitialReview(currentWord.id);
       const updated = gradeCard(review, grade);
-      await putReview(updated);
-      await putReviewLog({
-        wordId: currentWord.id,
-        review_date: new Date().toISOString(),
-        grade,
+      // 단일 트랜잭션으로 review와 log를 함께 저장
+      await db.transaction('rw', db.reviews, db.reviewLogs, async () => {
+        await db.reviews.put(updated);
+        await db.reviewLogs.add({
+          wordId: currentWord.id,
+          review_date: new Date().toISOString(),
+          grade,
+        });
       });
     } catch (err) {
       console.error('Review save error:', err);
     }
 
-    // DB 저장 성공/실패 무관하게 다음 카드로 진행
+    setSaving(false);
     setResults(prev => ({ ...prev, [grade]: prev[grade] + 1 }));
     if (currentIndex + 1 < queue.length) {
       setCurrentIndex(currentIndex + 1);

@@ -2,12 +2,10 @@ import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { calculateStats } from '../lib/stats';
-import { getTodayString } from '../lib/dates';
-
 /** 최근 14일간의 날짜 배열을 생성한다 (오늘 포함, 오래된 순) */
 function getLast14Days() {
   const days = [];
-  const today = new Date(getTodayString() + 'T00:00:00Z');
+  const today = new Date(new Date().toISOString().split('T')[0] + 'T00:00:00Z');
   for (let i = 13; i >= 0; i--) {
     const d = new Date(today);
     d.setUTCDate(d.getUTCDate() - i);

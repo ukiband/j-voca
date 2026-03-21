@@ -1,4 +1,3 @@
-import { getTodayString } from './dates';
 
 /**
  * 리뷰 로그를 일별로 그룹핑하고 통계를 계산한다.
@@ -44,7 +43,7 @@ export function calculateStats(reviewLogs) {
  * @param {Array} dailyStats - date 필드가 있는 일별 통계 배열 (정렬 불필요)
  * @returns {number} 연속 학습일 수
  */
-export function calculateStreak(dailyStats) {
+function calculateStreak(dailyStats) {
   if (!dailyStats || dailyStats.length === 0) return 0;
 
   // 학습한 날짜를 Set으로 만들어 빠르게 조회
@@ -52,7 +51,7 @@ export function calculateStreak(dailyStats) {
     dailyStats.filter(d => d.total > 0).map(d => d.date),
   );
 
-  const today = getTodayString();
+  const today = new Date().toISOString().split('T')[0];
 
   // 오늘 학습 기록이 없으면 streak = 0
   if (!datesWithReviews.has(today)) return 0;

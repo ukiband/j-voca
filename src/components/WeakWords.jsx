@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { calculateWeakWords } from '../lib/weak-utils';
 import { useBrowseMode } from '../hooks/useBrowseMode';
-import FlashCard from './FlashCard';
+import BrowseModal from './BrowseModal';
 
 export default function WeakWords() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
@@ -33,32 +33,7 @@ export default function WeakWords() {
         </div>
       )}
 
-      {browse.isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-hidden touch-none"
-          onClick={browse.close}
-        >
-          <div className="bg-slate-50 rounded-2xl p-4 w-full max-w-lg space-y-4" onClick={e => e.stopPropagation()}>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-400">{browse.browseIndex + 1} / {browse.browseQueue.length}</span>
-              <div className="flex items-center gap-3">
-                {browse.listening ? (
-                  <button onClick={browse.stopListening} className="text-emerald-500 text-sm font-medium">■ 정지</button>
-                ) : (
-                  <button onClick={() => browse.startListening(browse.browseQueue, browse.browseIndex)} className="text-emerald-500 text-sm font-medium">▶ 듣기</button>
-                )}
-                <button onClick={browse.close} className="text-slate-400 text-lg">&times;</button>
-              </div>
-            </div>
-            <FlashCard
-              key={browse.currentWord.id}
-              word={browse.currentWord}
-              onPrev={browse.prev}
-              onNext={browse.next}
-            />
-          </div>
-        </div>
-      )}
+      <BrowseModal browse={browse} />
 
       {weakWords.length === 0 ? (
         <div className="text-center py-12 text-slate-400">

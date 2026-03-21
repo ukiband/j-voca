@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { calculateStats, calculateStreak } from '../stats';
+import { calculateStats } from '../stats';
 
 afterEach(() => {
   vi.setSystemTime(vi.getRealSystemTime());
@@ -91,55 +91,55 @@ describe('calculateStats', () => {
   });
 });
 
-describe('calculateStreak', () => {
+describe('streak (calculateStats 경유)', () => {
   it('연속 학습일 계산', () => {
     vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
 
-    const dailyStats = [
-      { date: '2026-03-19', total: 5 },
-      { date: '2026-03-20', total: 3 },
-      { date: '2026-03-21', total: 2 },
+    const logs = [
+      makeLog('2026-03-19', 'good'),
+      makeLog('2026-03-20', 'good'),
+      makeLog('2026-03-21', 'good'),
     ];
 
-    expect(calculateStreak(dailyStats)).toBe(3);
+    expect(calculateStats(logs).streak).toBe(3);
   });
 
   it('갭이 있으면 streak 끊김', () => {
     vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
 
-    const dailyStats = [
-      { date: '2026-03-18', total: 5 },
+    const logs = [
+      makeLog('2026-03-18', 'good'),
       // 03-19 빠짐
-      { date: '2026-03-20', total: 3 },
-      { date: '2026-03-21', total: 2 },
+      makeLog('2026-03-20', 'good'),
+      makeLog('2026-03-21', 'good'),
     ];
 
-    expect(calculateStreak(dailyStats)).toBe(2);
+    expect(calculateStats(logs).streak).toBe(2);
   });
 
   it('오늘만 학습한 경우 streak = 1', () => {
     vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
 
-    const dailyStats = [{ date: '2026-03-21', total: 1 }];
-    expect(calculateStreak(dailyStats)).toBe(1);
+    const logs = [makeLog('2026-03-21', 'good')];
+    expect(calculateStats(logs).streak).toBe(1);
   });
 
   it('오늘 학습 기록이 없으면 streak = 0', () => {
     vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
 
-    const dailyStats = [
-      { date: '2026-03-19', total: 5 },
-      { date: '2026-03-20', total: 3 },
+    const logs = [
+      makeLog('2026-03-19', 'good'),
+      makeLog('2026-03-20', 'good'),
     ];
 
-    expect(calculateStreak(dailyStats)).toBe(0);
+    expect(calculateStats(logs).streak).toBe(0);
   });
 
-  it('빈 배열이면 streak = 0', () => {
-    expect(calculateStreak([])).toBe(0);
+  it('빈 로그이면 streak = 0', () => {
+    expect(calculateStats([]).streak).toBe(0);
   });
 
   it('null 입력이면 streak = 0', () => {
-    expect(calculateStreak(null)).toBe(0);
+    expect(calculateStats(null).streak).toBe(0);
   });
 });

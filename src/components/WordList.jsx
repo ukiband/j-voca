@@ -2,21 +2,22 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, syncWordsFromData, deleteReview } from '../lib/db';
 import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
+import { filterWords } from '../lib/word-utils';
 import FlashCard from './FlashCard';
 import { useBrowseMode } from '../hooks/useBrowseMode';
 
 export default function WordList() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
   const [selectedChapter, setSelectedChapter] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [saving, setSaving] = useState(false);
   const browse = useBrowseMode();
 
   const chapters = [...new Set(words.map(w => w.chapter))].sort((a, b) => a - b);
-  const filtered = selectedChapter !== null
-    ? words.filter(w => w.chapter === selectedChapter)
-    : words;
+  // 챕터 필터와 검색어를 조합하여 단어 필터링
+  const filtered = filterWords(words, selectedChapter, searchQuery);
 
   const canEdit = hasGithubToken();
 
@@ -74,6 +75,15 @@ export default function WordList() {
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-bold text-slate-800">단어 목록</h1>
+
+      {/* 검색 입력 */}
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)}
+        placeholder="단어, 읽기, 뜻 검색..."
+        className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300"
+      />
 
       {chapters.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-2">

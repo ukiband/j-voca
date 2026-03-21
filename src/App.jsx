@@ -72,7 +72,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col min-h-screen max-w-lg mx-auto">
-      <main className="flex-1 pb-20 px-4 pt-4">
+      <main className="flex-1 pb-20 px-4 pt-4 safe-top">
         {syncError && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between">
             <p className="text-sm text-red-600">{syncError}</p>

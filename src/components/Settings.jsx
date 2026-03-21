@@ -221,6 +221,13 @@ export default function Settings() {
         )}
         <MessageBox section="reset" />
       </div>
+
+      <p className="text-center text-xs text-slate-300">
+        최근 업데이트: {(() => {
+          const d = new Date(__BUILD_TIME__);
+          return `${d.getMonth() + 1}.${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        })()}
+      </p>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
 import { calculateStats } from '../lib/stats';
+import { calculateWeakWords } from '../lib/weak-utils';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
@@ -17,6 +18,7 @@ export default function Dashboard() {
 
   const dueCount = getDueCount(words, reviews);
   const { streak, totalReviews, overallAccuracy } = calculateStats(reviewLogs);
+  const weakCount = calculateWeakWords(words, reviews, reviewLogs).length;
 
   const chapters = [];
   const chapterMap = {};
@@ -67,7 +69,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      {/* 학습 통계 카드 - /stats 페이지로 이동 */}
+      {/* 학습 통계 카드 */}
       {totalReviews > 0 && (
         <Link
           to="/stats"
@@ -77,13 +79,26 @@ export default function Dashboard() {
             <div>
               <p className="text-sm text-blue-200">학습 통계</p>
               <div className="flex items-baseline gap-3 mt-1">
-                <span className="text-2xl font-bold">{streak}일 연속 🔥</span>
+                <span className="text-2xl font-bold">{streak}일 연속</span>
                 <span className="text-sm text-blue-200">
                   정확도 {Math.round(overallAccuracy * 100)}%
                 </span>
               </div>
             </div>
             <span className="text-2xl text-blue-200">→</span>
+          </div>
+        </Link>
+      )}
+
+      {/* 오답노트 카드 */}
+      {weakCount > 0 && (
+        <Link to="/weak-words" className="block bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-sm font-medium text-amber-800">오답노트</p>
+              <p className="text-xs text-amber-600 mt-1">취약 단어를 집중 연습하세요</p>
+            </div>
+            <span className="text-2xl font-bold text-amber-700">{weakCount}</span>
           </div>
         </Link>
       )}

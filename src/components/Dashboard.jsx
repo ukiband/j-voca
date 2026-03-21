@@ -64,6 +64,16 @@ export default function Dashboard() {
         </Link>
       </div>
 
+      <Link to="/writing" className="block bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">&#x270D;&#xFE0F;</span>
+          <div>
+            <p className="font-medium text-amber-800">쓰기 연습</p>
+            <p className="text-sm text-amber-600">뜻을 보고 일본어 단어를 직접 입력해보세요</p>
+          </div>
+        </div>
+      </Link>
+
       {chapters.length > 0 && (
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
           <h2 className="text-sm font-medium text-slate-500 mb-3">레슨별 진행률</h2>

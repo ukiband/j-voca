@@ -3,6 +3,7 @@ import { getApiKey, setApiKey, getModel, setModel, MODELS } from '../lib/gemini'
 import { getGithubToken, setGithubToken, hasGithubToken, resetWordsInRepo } from '../lib/github';
 import { exportData, importReviews, clearAllReviews, clearAllData } from '../lib/db';
 import { getTodayString } from '../lib/dates';
+import { getAutoPronounce, setAutoPronounce as saveAutoPronounce, getFontSize, setFontSize as saveFontSize } from '../lib/settings';
 
 const FONT_SIZES = [
   { id: 'base', label: '보통' },
@@ -26,13 +27,21 @@ export default function Settings() {
   const [apiKey, setApiKeyState] = useState(getApiKey());
   const [selectedModel, setSelectedModel] = useState(getModel());
   const [githubToken, setGithubTokenState] = useState(getGithubToken());
-  const [fontSize, setFontSize] = useState(localStorage.getItem('font-size') || 'base');
+  const [fontSize, setFontSizeState] = useState(getFontSize());
+  const [autoPronounce, setAutoPronounceState] = useState(getAutoPronounce());
   const [message, setMessage] = useState({ text: '', section: '' });
 
   function handleFontSize(size) {
-    setFontSize(size);
-    localStorage.setItem('font-size', size);
+    setFontSizeState(size);
+    saveFontSize(size);
     document.documentElement.className = `font-${size}`;
+  }
+
+  // 카드 뒤집기 시 자동 발음 재생 토글
+  function handleAutoPronounce() {
+    const next = !autoPronounce;
+    setAutoPronounceState(next);
+    saveAutoPronounce(next);
   }
 
   function showMessage(msg, section = '') {
@@ -167,6 +176,27 @@ export default function Settings() {
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+        <h2 className="font-medium text-slate-700">학습 설정</h2>
+        <label className="flex items-center justify-between cursor-pointer">
+          <span className="text-sm text-slate-600">카드 뒤집기 시 자동 발음 재생</span>
+          <button
+            role="switch"
+            aria-checked={autoPronounce}
+            onClick={handleAutoPronounce}
+            className={`relative w-11 h-6 rounded-full transition-colors ${
+              autoPronounce ? 'bg-indigo-600' : 'bg-slate-300'
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                autoPronounce ? 'translate-x-5' : ''
+              }`}
+            />
+          </button>
+        </label>
       </div>
 
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">

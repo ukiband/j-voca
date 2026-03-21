@@ -90,6 +90,16 @@ export default function Dashboard() {
         </Link>
       )}
 
+      {/* 쓰기 연습 카드 */}
+      <Link to="/writing" className="block bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div>
+            <p className="font-medium text-amber-800">쓰기 연습</p>
+            <p className="text-sm text-amber-600">뜻을 보고 일본어 단어를 직접 입력해보세요</p>
+          </div>
+        </div>
+      </Link>
+
       {/* 오답노트 카드 */}
       {weakCount > 0 && (
         <Link to="/weak-words" className="block bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">

@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
 import { calculateStats } from '../lib/stats';
@@ -11,9 +10,24 @@ function isStandalone() {
 }
 
 export default function Dashboard() {
-  const words = useLiveQuery(() => db.words.toArray(), [], []);
-  const reviews = useLiveQuery(() => db.reviews.toArray(), [], []);
-  const reviewLogs = useLiveQuery(() => db.reviewLogs.toArray(), [], []);
+  // useLiveQuery 대신 직접 쿼리 — Safari에서 liveQuery 구독이 갱신 안 되는 문제 우회
+  const [words, setWords] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [reviewLogs, setReviewLogs] = useState([]);
+
+  const loadData = useCallback(async () => {
+    const [w, r, l] = await Promise.all([
+      db.words.toArray(),
+      db.reviews.toArray(),
+      db.reviewLogs.toArray(),
+    ]);
+    setWords(w);
+    setReviews(r);
+    setReviewLogs(l);
+  }, []);
+
+  // 마운트 시마다 DB에서 최신 데이터를 직접 읽음
+  useEffect(() => { loadData(); }, [loadData]);
   const [showInstall, setShowInstall] = useState(() => !isStandalone() && !sessionStorage.getItem('hide-install'));
 
   const dueCount = getDueCount(words, reviews);

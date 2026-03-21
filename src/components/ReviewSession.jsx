@@ -13,6 +13,7 @@ export default function ReviewSession() {
   const [saving, setSaving] = useState(false);
   const [results, setResults] = useState({ again: 0, good: 0, easy: 0 });
   const [error, setError] = useState(null);
+  const [saveError, setSaveError] = useState(null);
 
   useEffect(() => {
     getDueWords().then(words => {
@@ -50,6 +51,7 @@ export default function ReviewSession() {
       });
     } catch (err) {
       console.error('Review save error:', err);
+      setSaveError(err.message || '저장 실패');
     }
 
     setSaving(false);
@@ -128,6 +130,10 @@ export default function ReviewSession() {
         <h1 className="text-xl font-bold text-slate-800">복습</h1>
         <span className="text-sm text-slate-400">{currentIndex + 1} / {queue.length}</span>
       </div>
+
+      {saveError && (
+        <p className="text-xs text-red-500 bg-red-50 p-2 rounded-lg">저장 오류: {saveError}</p>
+      )}
 
       <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
         <div

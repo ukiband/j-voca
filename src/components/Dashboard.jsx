@@ -63,7 +63,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-800">J-VOCA v2/h1>
+      <h1 className="text-2xl font-bold text-slate-800">J-VOCA v2
 
       {hasUpdate && (
         <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">

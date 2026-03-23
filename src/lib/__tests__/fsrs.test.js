@@ -102,6 +102,39 @@ describe('isDue', () => {
     review.due = laterToday.toISOString();
     expect(isDue(review)).toBe(true);
   });
+
+  it('Learning 상태: due가 미래 시각이면 false', () => {
+    const review = createInitialReview(1);
+    review.state = 1; // Learning
+    const tenMinLater = new Date(FIXED_DATE.getTime() + 10 * 60 * 1000);
+    review.due = tenMinLater.toISOString();
+    expect(isDue(review)).toBe(false);
+  });
+
+  it('Learning 상태: due가 과거 시각이면 true', () => {
+    const review = createInitialReview(1);
+    review.state = 1; // Learning
+    const oneMinAgo = new Date(FIXED_DATE.getTime() - 60 * 1000);
+    review.due = oneMinAgo.toISOString();
+    expect(isDue(review)).toBe(true);
+  });
+
+  it('Relearning 상태: due가 미래 시각이면 false', () => {
+    const review = createInitialReview(1);
+    review.state = 3; // Relearning
+    const fiveMinLater = new Date(FIXED_DATE.getTime() + 5 * 60 * 1000);
+    review.due = fiveMinLater.toISOString();
+    expect(isDue(review)).toBe(false);
+  });
+
+  it('Review 상태: due가 오늘 늦은 시각이어도 true (날짜 기준)', () => {
+    const review = createInitialReview(1);
+    review.state = 2; // Review
+    const laterToday = new Date(FIXED_DATE);
+    laterToday.setHours(23, 59, 59, 0);
+    review.due = laterToday.toISOString();
+    expect(isDue(review)).toBe(true);
+  });
 });
 
 describe('gradeCard', () => {

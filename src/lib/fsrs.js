@@ -87,6 +87,13 @@ export function createInitialReview(wordId) {
 export function isDue(review) {
   const d = new Date(review.due);
   const now = new Date();
+
+  // Learning/Relearning: 시각 단위 비교 (FSRS가 분 단위로 스케줄링)
+  if (review.state === 1 || review.state === 3) {
+    return d <= now;
+  }
+
+  // Review/New: 날짜 단위 비교 (밤늦게 학습해도 다음날 아침에 복습 가능)
   const dueDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   return dueDay <= today;

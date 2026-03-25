@@ -7,6 +7,7 @@ const words = [
   { id: 3, chapter: 2, word: '走る', reading: 'はしる', meaning: '달리다' },
   { id: 4, chapter: 2, word: '歩く', reading: 'あるく', meaning: '걷다' },
   { id: 5, chapter: 3, word: 'Apple', reading: 'アップル', meaning: '사과' },
+  { id: 6, chapter: 3, word: 'とけい', reading: 'とけい', meaning: '시계', kanji: '時計' },
 ];
 
 describe('filterWords', () => {
@@ -67,6 +68,12 @@ describe('filterWords', () => {
 
   it('빈 배열 입력 시 빈 배열 반환', () => {
     expect(filterWords([], 1, '검색어')).toEqual([]);
+  });
+
+  it('검색어 필터 - kanji 필드 매칭', () => {
+    const result = filterWords(words, null, '時計');
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe(6);
   });
 
   it('필드가 null/undefined인 단어도 에러 없이 처리', () => {

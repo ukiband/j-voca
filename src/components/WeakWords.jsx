@@ -42,7 +42,7 @@ export default function WeakWords() {
         </div>
       ) : (
         <div className="space-y-2">
-          {weakWords.map(({ word, review, failRate, totalReviews, againCount, hardCount }) => (
+          {weakWords.map(({ word, failRate, totalReviews, againCount, hardCount }) => (
             <div key={word.id} className="bg-white rounded-xl p-3 shadow-sm border border-slate-100">
               <div className="flex justify-between items-start">
                 <div>
@@ -61,11 +61,8 @@ export default function WeakWords() {
               </div>
               <div className="flex gap-3 mt-2 text-xs text-slate-400">
                 <span>전체 {totalReviews}회</span>
-                <span className="text-red-400">again {againCount}</span>
-                <span className="text-amber-400">hard {hardCount}</span>
-                {review && review.lapses > 0 && (
-                  <span className="text-orange-400">lapses {review.lapses}</span>
-                )}
+                <span className="text-red-400">모름 {againCount}</span>
+                <span className="text-amber-400">애매 {hardCount}</span>
               </div>
             </div>
           ))}

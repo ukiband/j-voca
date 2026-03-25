@@ -2,7 +2,7 @@
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 // Gemini가 한자 표기(形容詞)로 응답할 경우 히라가나+한글 형태로 정규화
-function normalizePos(pos) {
+export function normalizePos(pos) {
   const posMap = {
     'い形容詞': 'い형용사',
     'な形容詞': 'な형용사',
@@ -66,11 +66,10 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
 - word: 일본어 단어 (교재에서 메인으로 인쇄된 표기 그대로. 괄호 안 보조 표기는 제외)
 - reading: 히라가나 읽기
 - meaning: 한국어 뜻
-- kanji: 한자 표기 (word가 히라가나/카타카나인 경우 대응하는 한자를 기입. word에 이미 한자가 포함되어 있거나 한자가 존재하지 않는 단어는 빈 문자열 "")
 - pos: 품사 (명사, 동사, い형용사, な형용사, 부사, 조사, 접속사, 감탄사, 기타). **반드시 이 목록의 표기를 그대로 사용하세요. 한자(形容詞 등)를 사용하지 마세요.**
 
-예시(초급 교재): [{"word":"とけい","reading":"とけい","meaning":"시계","kanji":"時計","pos":"명사"}]
-예시(한자 메인 교재): [{"word":"時計","reading":"とけい","meaning":"시계","kanji":"","pos":"명사"}]`;
+예시(초급 교재): [{"word":"とけい","reading":"とけい","meaning":"시계","pos":"명사"}]
+예시(한자 메인 교재): [{"word":"時計","reading":"とけい","meaning":"시계","pos":"명사"}]`;
 
   const response = await fetch(url, {
     method: 'POST',
@@ -148,7 +147,6 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
     word: w.word,
     reading: w.reading,
     meaning: w.meaning,
-    kanji: w.kanji || '',
     pos: normalizePos(w.pos),
     chapter: chapter || 0,
     textbook: textbook || '',

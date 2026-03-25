@@ -23,8 +23,7 @@ export function filterWords(words, chapter, query) {
     result = result.filter(w =>
       (w.word ?? '').toLowerCase().includes(trimmed) ||
       (w.reading ?? '').toLowerCase().includes(trimmed) ||
-      (w.meaning ?? '').toLowerCase().includes(trimmed) ||
-      (w.kanji ?? '').toLowerCase().includes(trimmed)
+      (w.meaning ?? '').toLowerCase().includes(trimmed)
     );
   }
 

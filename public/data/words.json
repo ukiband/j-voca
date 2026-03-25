@@ -1,5 +1,5 @@
 {
-  "lastId": 144,
+  "lastId": 164,
   "words": [
     {
       "word": "おおい",
@@ -1440,6 +1440,206 @@
       "textbook": "일본어수업",
       "createdAt": "2026-03-25",
       "id": 144
+    },
+    {
+      "word": "母",
+      "reading": "はは",
+      "meaning": "엄마",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 145
+    },
+    {
+      "word": "秋葉原",
+      "reading": "あきはばら",
+      "meaning": "아키하바라(일본의 지명)",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 146
+    },
+    {
+      "word": "楽しかった",
+      "reading": "たのしかった",
+      "meaning": "즐거웠다",
+      "pos": "い형용사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 147
+    },
+    {
+      "word": "とても",
+      "reading": "とても",
+      "meaning": "매우",
+      "pos": "부사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 148
+    },
+    {
+      "word": "おもしろかった",
+      "reading": "おもしろかった",
+      "meaning": "재미있었다",
+      "pos": "い형용사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 149
+    },
+    {
+      "word": "何",
+      "reading": "なに",
+      "meaning": "무엇",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 150
+    },
+    {
+      "word": "服",
+      "reading": "ふく",
+      "meaning": "옷",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 151
+    },
+    {
+      "word": "女の人",
+      "reading": "おんなのひと",
+      "meaning": "여자",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 152
+    },
+    {
+      "word": "多い",
+      "reading": "おおい",
+      "meaning": "많다",
+      "pos": "い형용사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 153
+    },
+    {
+      "word": "母さん",
+      "reading": "かあさん",
+      "meaning": "엄마",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 154
+    },
+    {
+      "word": "すごく",
+      "reading": "すごく",
+      "meaning": "굉장히",
+      "pos": "부사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 155
+    },
+    {
+      "word": "春",
+      "reading": "はる",
+      "meaning": "봄",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 156
+    },
+    {
+      "word": "夏",
+      "reading": "なつ",
+      "meaning": "여름",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 157
+    },
+    {
+      "word": "秋",
+      "reading": "あき",
+      "meaning": "가을",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 158
+    },
+    {
+      "word": "冬",
+      "reading": "ふゆ",
+      "meaning": "겨울",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 159
+    },
+    {
+      "word": "休み",
+      "reading": "やすみ",
+      "meaning": "방학",
+      "pos": "명사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 160
+    },
+    {
+      "word": "これから",
+      "reading": "これから",
+      "meaning": "지금부터",
+      "pos": "부사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 161
+    },
+    {
+      "word": "それから",
+      "reading": "それから",
+      "meaning": "그리고, 그 다음에",
+      "pos": "접속사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 162
+    },
+    {
+      "word": "あれから",
+      "reading": "あれから",
+      "meaning": "그때부터",
+      "pos": "부사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 163
+    },
+    {
+      "word": "暑かった",
+      "reading": "あつかった",
+      "meaning": "더웠다",
+      "pos": "い형용사",
+      "chapter": 4,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-25",
+      "id": 164
     }
   ]
 }

@@ -107,7 +107,7 @@ export default function ListeningReview() {
   if (phase === 'setup') {
     return (
       <div className="space-y-6">
-        <h1 className="text-xl font-bold text-slate-800">듣기 복습</h1>
+        <h1 className="text-xl font-bold text-slate-800">자전거 복습</h1>
 
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
           <p className="text-sm text-slate-500 mb-1">오늘 단어</p>

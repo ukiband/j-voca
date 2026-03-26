@@ -1,13 +1,29 @@
-import { useLiveQuery } from 'dexie-react-hooks';
+import { useState, useEffect, useCallback } from 'react';
 import { db } from '../lib/db';
 import { calculateWeakWords } from '../lib/weak-utils';
 import { useBrowseMode } from '../hooks/useBrowseMode';
 import BrowseModal from './BrowseModal';
 
 export default function WeakWords() {
-  const words = useLiveQuery(() => db.words.toArray(), [], []);
-  const reviews = useLiveQuery(() => db.reviews.toArray(), [], []);
-  const reviewLogs = useLiveQuery(() => db.reviewLogs.toArray(), [], []);
+  // useLiveQuery 대신 직접 쿼리 — iOS Safari/PWA에서 liveQuery 구독이 갱신 안 되는 문제 우회
+  const [words, setWords] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [reviewLogs, setReviewLogs] = useState([]);
+
+  const loadData = useCallback(async () => {
+    const [w, r, l] = await Promise.all([
+      db.words.toArray(),
+      db.reviews.toArray(),
+      db.reviewLogs.toArray(),
+    ]);
+    setWords(w);
+    setReviews(r);
+    setReviewLogs(l);
+  }, []);
+
+  // 마운트 시마다 DB에서 최신 데이터를 직접 읽음
+  useEffect(() => { loadData(); }, [loadData]);
+
   const browse = useBrowseMode();
 
   const weakWords = calculateWeakWords(words, reviews, reviewLogs);

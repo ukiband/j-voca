@@ -14,16 +14,19 @@ export default function Dashboard() {
   const [words, setWords] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [reviewLogs, setReviewLogs] = useState([]);
+  const [todayWordCount, setTodayWordCount] = useState(0);
 
   const loadData = useCallback(async () => {
-    const [w, r, l] = await Promise.all([
+    const [w, r, l, todayWords] = await Promise.all([
       db.words.toArray(),
       db.reviews.toArray(),
       db.reviewLogs.toArray(),
+      db.words.where('createdAt').equals(new Date().toISOString().split('T')[0]).count(),
     ]);
     setWords(w);
     setReviews(r);
     setReviewLogs(l);
+    setTodayWordCount(todayWords);
   }, []);
 
   // 마운트 시마다 DB에서 최신 데이터를 직접 읽음
@@ -140,6 +143,19 @@ export default function Dashboard() {
               <p className="text-xs text-amber-600 mt-1">취약 단어를 집중 연습하세요</p>
             </div>
             <span className="text-2xl font-bold text-amber-700">{weakCount}</span>
+          </div>
+        </Link>
+      )}
+
+      {/* 듣기 복습 카드 — 오늘 추가된 단어가 있을 때만 표시 */}
+      {todayWordCount > 0 && (
+        <Link to="/listening" className="block bg-teal-50 border border-teal-200 rounded-2xl p-4 shadow-sm">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-sm font-medium text-teal-800">듣기 복습</p>
+              <p className="text-xs text-teal-600 mt-1">오늘 단어를 들으며 복습하세요</p>
+            </div>
+            <span className="text-2xl font-bold text-teal-700">{todayWordCount}</span>
           </div>
         </Link>
       )}

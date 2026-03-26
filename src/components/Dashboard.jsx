@@ -152,7 +152,7 @@ export default function Dashboard() {
         <Link to="/listening" className="block bg-teal-50 border border-teal-200 rounded-2xl p-4 shadow-sm">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-sm font-medium text-teal-800">듣기 복습</p>
+              <p className="text-sm font-medium text-teal-800">자전거 복습</p>
               <p className="text-xs text-teal-600 mt-1">오늘 단어를 들으며 복습하세요</p>
             </div>
             <span className="text-2xl font-bold text-teal-700">{todayWordCount}</span>

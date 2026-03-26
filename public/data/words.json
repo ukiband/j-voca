@@ -1,5 +1,5 @@
 {
-  "lastId": 186,
+  "lastId": 190,
   "words": [
     {
       "word": "おおい",
@@ -1840,6 +1840,46 @@
       "textbook": "일본어수업",
       "createdAt": "2026-03-25",
       "id": 186
+    },
+    {
+      "word": "しょう",
+      "reading": "しょう",
+      "meaning": "소 (작은 사이즈)",
+      "pos": "명사",
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-26",
+      "id": 187
+    },
+    {
+      "word": "なみ",
+      "reading": "なみ",
+      "meaning": "중 (보통 사이즈)",
+      "pos": "명사",
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-26",
+      "id": 188
+    },
+    {
+      "word": "多もり",
+      "reading": "おおもり",
+      "meaning": "대 (곱빼기, 큰 사이즈)",
+      "pos": "명사",
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-26",
+      "id": 189
+    },
+    {
+      "word": "とくもり",
+      "reading": "とくもり",
+      "meaning": "특대 (특곱빼기, 특대 사이즈)",
+      "pos": "명사",
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-26",
+      "id": 190
     }
   ]
 }

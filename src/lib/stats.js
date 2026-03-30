@@ -1,3 +1,4 @@
+import { getLocalDateString } from './date-utils';
 
 /**
  * 리뷰 로그를 일별로 그룹핑하고 통계를 계산한다.
@@ -12,8 +13,8 @@ export function calculateStats(reviewLogs) {
   // 날짜별 그룹핑
   const byDate = {};
   for (const log of reviewLogs) {
-    // review_date는 ISO 문자열이므로 YYYY-MM-DD 부분만 추출
-    const date = log.review_date.split('T')[0];
+    // review_date는 ISO 문자열이므로 로컬 타임존 기준 날짜로 변환
+    const date = getLocalDateString(new Date(log.review_date));
     if (!byDate[date]) {
       byDate[date] = { date, total: 0, again: 0, hard: 0, good: 0 };
     }
@@ -51,20 +52,22 @@ function calculateStreak(dailyStats) {
     dailyStats.filter(d => d.total > 0).map(d => d.date),
   );
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = getLocalDateString();
 
   // 오늘 학습 기록이 없으면 streak = 0
   if (!datesWithReviews.has(today)) return 0;
 
   let streak = 0;
-  let current = new Date(today + 'T00:00:00Z');
+  // 로컬 자정 기준 Date 객체로 날짜를 순회
+  const [y, m, d] = today.split('-').map(Number);
+  let current = new Date(y, m - 1, d);
 
   while (true) {
-    const dateStr = current.toISOString().split('T')[0];
+    const dateStr = getLocalDateString(current);
     if (!datesWithReviews.has(dateStr)) break;
     streak++;
-    // 하루 전으로 이동
-    current.setUTCDate(current.getUTCDate() - 1);
+    // 하루 전으로 이동 (로컬 기준)
+    current.setDate(current.getDate() - 1);
   }
 
   return streak;

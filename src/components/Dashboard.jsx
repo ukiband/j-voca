@@ -4,6 +4,7 @@ import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
 import { calculateStats } from '../lib/stats';
 import { calculateWeakWords } from '../lib/weak-utils';
+import { getLocalDateString } from '../lib/date-utils';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
@@ -21,7 +22,7 @@ export default function Dashboard() {
       db.words.toArray(),
       db.reviews.toArray(),
       db.reviewLogs.toArray(),
-      db.words.where('createdAt').equals(new Date().toISOString().split('T')[0]).count(),
+      db.words.where('createdAt').equals(getLocalDateString()).count(),
     ]);
     setWords(w);
     setReviews(r);

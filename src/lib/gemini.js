@@ -1,3 +1,4 @@
+import { getLocalDateString } from './date-utils';
 
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
@@ -141,7 +142,8 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
   if (!jsonMatch) throw new Error(`JSON 파싱 실패. Gemini 응답: "${text.slice(0, 200)}"`);
 
   const words = JSON.parse(jsonMatch[0]);
-  const today = new Date().toISOString().split('T')[0];
+  // 로컬 타임존 기준 날짜를 사용하여 KST 자정~오전 9시에 전날로 처리되는 버그 방지
+  const today = getLocalDateString();
 
   return words.map(w => ({
     word: w.word,

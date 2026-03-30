@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../lib/db';
 import { createListeningSession } from '../lib/listening';
+import { getLocalDateString } from '../lib/date-utils';
 
 const TIMER_OPTIONS = [10, 15, 20, 30, 45, 60]; // 분 단위 선택지
 
@@ -21,7 +22,7 @@ export default function ListeningReview() {
 
   // 오늘 생성된 단어 조회
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getLocalDateString();
     db.words.where('createdAt').equals(today).toArray().then(words => {
       setTodayWords(words);
       setLoading(false);

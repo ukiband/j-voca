@@ -2,14 +2,17 @@ import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { calculateStats } from '../lib/stats';
+import { getLocalDateString } from '../lib/date-utils';
 /** 최근 14일간의 날짜 배열을 생성한다 (오늘 포함, 오래된 순) */
 function getLast14Days() {
   const days = [];
-  const today = new Date(new Date().toISOString().split('T')[0] + 'T00:00:00Z');
+  // 로컬 자정 기준으로 14일간 날짜를 생성
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   for (let i = 13; i >= 0; i--) {
     const d = new Date(today);
-    d.setUTCDate(d.getUTCDate() - i);
-    days.push(d.toISOString().split('T')[0]);
+    d.setDate(d.getDate() - i);
+    days.push(getLocalDateString(d));
   }
   return days;
 }

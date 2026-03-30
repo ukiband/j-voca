@@ -5,8 +5,20 @@ afterEach(() => {
   vi.setSystemTime(vi.getRealSystemTime());
 });
 
+/**
+ * 로컬 타임존 정오를 ISO 문자열로 생성한다.
+ * getLocalDateString(new Date(review_date))가 항상 기대 날짜를 반환하도록 보장.
+ */
 function makeLog(date, grade) {
-  return { wordId: 1, review_date: `${date}T12:00:00.000Z`, grade };
+  const [y, m, d] = date.split('-').map(Number);
+  const localNoon = new Date(y, m - 1, d, 12, 0, 0);
+  return { wordId: 1, review_date: localNoon.toISOString(), grade };
+}
+
+/** vi.setSystemTime에 로컬 정오를 설정하는 헬퍼 */
+function setLocalDate(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  vi.setSystemTime(new Date(y, m - 1, d, 12, 0, 0));
 }
 
 describe('calculateStats', () => {
@@ -26,7 +38,7 @@ describe('calculateStats', () => {
   });
 
   it('일별 그룹핑 정상 동작', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-21', 'good'),
@@ -46,7 +58,7 @@ describe('calculateStats', () => {
   });
 
   it('정확도 계산', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-21', 'good'),
@@ -62,7 +74,7 @@ describe('calculateStats', () => {
   });
 
   it('전체 리뷰 수 계산', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-21', 'good'),
@@ -75,7 +87,7 @@ describe('calculateStats', () => {
   });
 
   it('일별 통계가 날짜순으로 정렬됨', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-21', 'good'),
@@ -92,7 +104,7 @@ describe('calculateStats', () => {
 
 describe('streak (calculateStats 경유)', () => {
   it('연속 학습일 계산', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-19', 'good'),
@@ -104,7 +116,7 @@ describe('streak (calculateStats 경유)', () => {
   });
 
   it('갭이 있으면 streak 끊김', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-18', 'good'),
@@ -117,14 +129,14 @@ describe('streak (calculateStats 경유)', () => {
   });
 
   it('오늘만 학습한 경우 streak = 1', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [makeLog('2026-03-21', 'good')];
     expect(calculateStats(logs).streak).toBe(1);
   });
 
   it('오늘 학습 기록이 없으면 streak = 0', () => {
-    vi.setSystemTime(new Date('2026-03-21T10:00:00Z'));
+    setLocalDate('2026-03-21');
 
     const logs = [
       makeLog('2026-03-19', 'good'),

@@ -1,5 +1,5 @@
 {
-  "lastId": 190,
+  "lastId": 193,
   "words": [
     {
       "word": "おおい",
@@ -1880,6 +1880,36 @@
       "textbook": "일본어수업",
       "createdAt": "2026-03-26",
       "id": 190
+    },
+    {
+      "word": "果物",
+      "reading": "くだもの",
+      "meaning": "과일",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-31",
+      "id": 191
+    },
+    {
+      "word": "好きだ",
+      "reading": "すきだ",
+      "meaning": "좋아하다",
+      "pos": "な형용사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-31",
+      "id": 192
+    },
+    {
+      "word": "暖かい",
+      "reading": "あたたかい",
+      "meaning": "따뜻하다",
+      "pos": "い형용사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-03-31",
+      "id": 193
     }
   ]
 }

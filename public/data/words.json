@@ -1,5 +1,5 @@
 {
-  "lastId": 205,
+  "lastId": 259,
   "words": [
     {
       "word": "おおい",
@@ -2030,6 +2030,546 @@
       "textbook": "일본어수업",
       "createdAt": "2026-03-31",
       "id": 205
+    },
+    {
+      "word": "一",
+      "reading": "いち",
+      "meaning": "하나",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 206
+    },
+    {
+      "word": "二",
+      "reading": "に",
+      "meaning": "둘",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 207
+    },
+    {
+      "word": "三",
+      "reading": "さん",
+      "meaning": "셋",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 208
+    },
+    {
+      "word": "四",
+      "reading": "よん",
+      "meaning": "넷",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 209
+    },
+    {
+      "word": "四",
+      "reading": "し",
+      "meaning": "넷",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 210
+    },
+    {
+      "word": "五",
+      "reading": "ご",
+      "meaning": "다섯",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 211
+    },
+    {
+      "word": "六",
+      "reading": "ろく",
+      "meaning": "여섯",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 212
+    },
+    {
+      "word": "七",
+      "reading": "なな",
+      "meaning": "일곱",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 213
+    },
+    {
+      "word": "七",
+      "reading": "しち",
+      "meaning": "일곱",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 214
+    },
+    {
+      "word": "八",
+      "reading": "はち",
+      "meaning": "여덟",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 215
+    },
+    {
+      "word": "九",
+      "reading": "きゅう",
+      "meaning": "아홉",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 216
+    },
+    {
+      "word": "九",
+      "reading": "く",
+      "meaning": "아홉",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 217
+    },
+    {
+      "word": "十",
+      "reading": "じゅう",
+      "meaning": "열",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 218
+    },
+    {
+      "word": "一つ",
+      "reading": "ひとつ",
+      "meaning": "한 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 219
+    },
+    {
+      "word": "二つ",
+      "reading": "ふたつ",
+      "meaning": "두 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 220
+    },
+    {
+      "word": "三つ",
+      "reading": "みっつ",
+      "meaning": "세 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 221
+    },
+    {
+      "word": "四つ",
+      "reading": "よっつ",
+      "meaning": "네 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 222
+    },
+    {
+      "word": "五つ",
+      "reading": "いつつ",
+      "meaning": "다섯 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 223
+    },
+    {
+      "word": "六つ",
+      "reading": "むっつ",
+      "meaning": "여섯 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 224
+    },
+    {
+      "word": "七つ",
+      "reading": "ななつ",
+      "meaning": "일곱 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 225
+    },
+    {
+      "word": "八つ",
+      "reading": "やっつ",
+      "meaning": "여덟 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 226
+    },
+    {
+      "word": "九つ",
+      "reading": "ここのつ",
+      "meaning": "아홉 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 227
+    },
+    {
+      "word": "十",
+      "reading": "とお",
+      "meaning": "열 개",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 228
+    },
+    {
+      "word": "100 円",
+      "reading": "ひゃくえん",
+      "meaning": "100엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 229
+    },
+    {
+      "word": "200 円",
+      "reading": "にひゃくえん",
+      "meaning": "200엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 230
+    },
+    {
+      "word": "300 円",
+      "reading": "さんびゃくえん",
+      "meaning": "300엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 231
+    },
+    {
+      "word": "400 円",
+      "reading": "よんひゃくえん",
+      "meaning": "400엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 232
+    },
+    {
+      "word": "500 円",
+      "reading": "ごひゃくえん",
+      "meaning": "500엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 233
+    },
+    {
+      "word": "600 円",
+      "reading": "ろっぴゃくえん",
+      "meaning": "600엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 234
+    },
+    {
+      "word": "700 円",
+      "reading": "ななひゃくえん",
+      "meaning": "700엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 235
+    },
+    {
+      "word": "800 円",
+      "reading": "はっぴゃくえん",
+      "meaning": "800엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 236
+    },
+    {
+      "word": "900 円",
+      "reading": "きゅうひゃくえん",
+      "meaning": "900엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 237
+    },
+    {
+      "word": "1000 円",
+      "reading": "せんえん",
+      "meaning": "1000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 238
+    },
+    {
+      "word": "2000 円",
+      "reading": "にせんえん",
+      "meaning": "2000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 239
+    },
+    {
+      "word": "3000 円",
+      "reading": "さんぜんえん",
+      "meaning": "3000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 240
+    },
+    {
+      "word": "4000 円",
+      "reading": "よんせんえん",
+      "meaning": "4000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 241
+    },
+    {
+      "word": "5000 円",
+      "reading": "ごせんえん",
+      "meaning": "5000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 242
+    },
+    {
+      "word": "6000 円",
+      "reading": "ろくせんえん",
+      "meaning": "6000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 243
+    },
+    {
+      "word": "7000 円",
+      "reading": "ななせんえん",
+      "meaning": "7000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 244
+    },
+    {
+      "word": "8000 円",
+      "reading": "はっせんえん",
+      "meaning": "8000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 245
+    },
+    {
+      "word": "9000 円",
+      "reading": "きゅうせんえん",
+      "meaning": "9000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 246
+    },
+    {
+      "word": "10000 円",
+      "reading": "いちまんえん",
+      "meaning": "10000엔",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 247
+    },
+    {
+      "word": "1 月",
+      "reading": "いちがつ",
+      "meaning": "1월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 248
+    },
+    {
+      "word": "2 月",
+      "reading": "にがつ",
+      "meaning": "2월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 249
+    },
+    {
+      "word": "3 月",
+      "reading": "さんがつ",
+      "meaning": "3월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 250
+    },
+    {
+      "word": "4 月",
+      "reading": "しがつ",
+      "meaning": "4월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 251
+    },
+    {
+      "word": "5 月",
+      "reading": "ごがつ",
+      "meaning": "5월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 252
+    },
+    {
+      "word": "6 月",
+      "reading": "ろくがつ",
+      "meaning": "6월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 253
+    },
+    {
+      "word": "7 月",
+      "reading": "しちがつ",
+      "meaning": "7월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 254
+    },
+    {
+      "word": "8 月",
+      "reading": "はちがつ",
+      "meaning": "8월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 255
+    },
+    {
+      "word": "9 月",
+      "reading": "くがつ",
+      "meaning": "9월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 256
+    },
+    {
+      "word": "10 月",
+      "reading": "じゅうがつ",
+      "meaning": "10월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 257
+    },
+    {
+      "word": "11 月",
+      "reading": "じゅういちがつ",
+      "meaning": "11월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 258
+    },
+    {
+      "word": "12 月",
+      "reading": "じゅうにがつ",
+      "meaning": "12월",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-01",
+      "id": 259
     }
   ]
 }

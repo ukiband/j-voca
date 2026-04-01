@@ -6,7 +6,7 @@ import { getDueCount, getDueCountByLesson, getDueCountByTag, getAllTags } from '
 export default function LessonSelect() {
   const [words, setWords] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [reverse, setReverse] = useState(false);
+  const [reverse, setReverse] = useState(() => localStorage.getItem('review-reverse') === 'true');
 
   const loadData = useCallback(async () => {
     const [w, r] = await Promise.all([
@@ -47,7 +47,7 @@ export default function LessonSelect() {
         <h1 className="text-xl font-bold text-slate-800">복습</h1>
         {/* 역방향 토글: 한→일 */}
         <button
-          onClick={() => setReverse(v => !v)}
+          onClick={() => setReverse(v => { const next = !v; localStorage.setItem('review-reverse', String(next)); return next; })}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
             reverse
               ? 'bg-indigo-600 text-white'

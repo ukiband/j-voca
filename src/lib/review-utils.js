@@ -3,9 +3,9 @@ import { isDue } from './fsrs';
 
 /**
  * 복습 대상 단어를 반환한다.
- * chapter를 지정하면 해당 lesson만, 생략하면 전체를 반환한다.
+ * chapter와 tag는 상호 배타적이다. chapter를 지정하면 해당 lesson만, tag를 지정하면 해당 태그만 필터링한다.
  */
-export async function getDueWords(chapter) {
+export async function getDueWords(chapter, tag) {
   const allReviews = await db.reviews.toArray();
   const dueReviews = allReviews.filter(r => isDue(r));
   if (dueReviews.length === 0) return [];
@@ -13,8 +13,8 @@ export async function getDueWords(chapter) {
   const wordIds = dueReviews.map(r => r.wordId);
   const words = await db.words.where('id').anyOf(wordIds).toArray();
 
-  // lesson 필터링: chapter가 지정되면 해당 lesson만 반환
   if (chapter != null) return words.filter(w => w.chapter === chapter);
+  if (tag != null) return words.filter(w => w.tags && w.tags.includes(tag));
   return words;
 }
 
@@ -44,4 +44,38 @@ export function getDueCountByLesson(words, reviews) {
   }
 
   return result;
+}
+
+/**
+ * 태그별 due 카운트를 반환한다.
+ * { [tag]: { total, reconfirm } } 형태.
+ */
+export function getDueCountByTag(words, reviews) {
+  const reviewByWordId = new Map(reviews.map(r => [r.wordId, r]));
+  const result = {};
+
+  for (const w of words) {
+    if (!w.tags) continue;
+    const r = reviewByWordId.get(w.id);
+    if (!r || !isDue(r)) continue;
+
+    for (const tag of w.tags) {
+      if (!result[tag]) result[tag] = { total: 0, reconfirm: 0 };
+      result[tag].total++;
+      if (r.state === 1 || r.state === 3) result[tag].reconfirm++;
+    }
+  }
+
+  return result;
+}
+
+/**
+ * words에서 사용 중인 모든 태그를 추출한다.
+ */
+export function getAllTags(words) {
+  const tags = new Set();
+  for (const w of words) {
+    if (w.tags) w.tags.forEach(t => tags.add(t));
+  }
+  return [...tags];
 }

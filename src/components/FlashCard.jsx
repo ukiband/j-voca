@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { speak } from '../lib/speech';
 
-export default function FlashCard({ word, onGrade, onPrev, onNext }) {
+export default function FlashCard({ word, onGrade, onPrev, onNext, reverse }) {
   const [flipped, setFlipped] = useState(false);
   const browseMode = !onGrade;
 
@@ -23,13 +23,22 @@ export default function FlashCard({ word, onGrade, onPrev, onNext }) {
     <div className="flex flex-col items-center gap-6">
       <div className="card-flip w-full" style={{ minHeight: '240px' }} onClick={handleFlip}>
         <div className={`card-flip-inner relative w-full ${flipped ? 'flipped' : ''}`} style={{ minHeight: '240px' }}>
-          {/* Front */}
+          {/* Front — reverse 모드에서는 한국어 뜻을 표시 */}
           <div className="card-front absolute inset-0 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center p-6">
-            <p className="text-4xl font-bold text-slate-800 mb-2">{word.word}</p>
-            <p className="text-sm text-slate-400">탭하여 뒤집기</p>
+            {reverse ? (
+              <>
+                <p className="text-3xl font-bold text-slate-800 mb-2">{word.meaning}</p>
+                <p className="text-sm text-slate-400">탭하여 뒤집기</p>
+              </>
+            ) : (
+              <>
+                <p className="text-4xl font-bold text-slate-800 mb-2">{word.word}</p>
+                <p className="text-sm text-slate-400">탭하여 뒤집기</p>
+              </>
+            )}
           </div>
 
-          {/* Back */}
+          {/* Back — reverse 모드에서는 일본어 단어+읽기를 표시 */}
           <div className="card-back absolute inset-0 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center p-6">
             <p className="text-2xl font-bold text-slate-800 mb-1">{word.word}</p>
             <p className="text-xl text-indigo-600 mb-2">{word.reading}</p>

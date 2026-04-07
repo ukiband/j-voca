@@ -1,21 +1,9 @@
-import { useState, useEffect } from 'react';
-import { speak, pickBestVoice, waitForVoices } from '../lib/speech';
+import { useState } from 'react';
+import { speak } from '../lib/speech';
 
 export default function FlashCard({ word, onGrade, onPrev, onNext, reverse }) {
   const [flipped, setFlipped] = useState(false);
   const browseMode = !onGrade;
-
-  // [DEBUG] 현재 선택된 일본어 보이스 + 사용 가능한 일본어 보이스 전체 목록 표시 (확인 후 제거)
-  const [voiceDebug, setVoiceDebug] = useState('loading...');
-  useEffect(() => {
-    waitForVoices().then(() => {
-      const picked = pickBestVoice('ja');
-      const all = speechSynthesis.getVoices()
-        .filter(v => v.lang && v.lang.toLowerCase().startsWith('ja'))
-        .map(v => v.name);
-      setVoiceDebug(`picked: ${picked ? picked.name : 'NONE'} | all: ${all.join(', ') || 'EMPTY'}`);
-    });
-  }, []);
 
   function handleFlip() {
     if (!flipped) setFlipped(true);
@@ -33,10 +21,6 @@ export default function FlashCard({ word, onGrade, onPrev, onNext, reverse }) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      {/* [DEBUG] 보이스 진단 — 확인 후 제거 */}
-      <div className="w-full text-[10px] text-slate-500 break-all bg-yellow-50 p-2 rounded border border-yellow-200">
-        {voiceDebug}
-      </div>
       <div className="card-flip w-full" style={{ minHeight: '240px' }} onClick={handleFlip}>
         <div className={`card-flip-inner relative w-full ${flipped ? 'flipped' : ''}`} style={{ minHeight: '240px' }}>
           {/* Front — reverse 모드에서는 한국어 뜻을 표시 */}

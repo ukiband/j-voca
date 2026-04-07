@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { shuffle } from '../lib/shuffle';
+import { pickBestVoice } from '../lib/speech';
 
 export function useBrowseMode() {
   const [browseIndex, setBrowseIndex] = useState(null);
@@ -46,7 +47,9 @@ export function useBrowseMode() {
       setBrowseIndex(index);
       const u = new SpeechSynthesisUtterance(queue[index].word);
       u.lang = 'ja-JP';
-      u.rate = 0.8;
+      const voice = pickBestVoice('ja');
+      if (voice) u.voice = voice;
+      u.rate = 0.95;
       u.onend = () => {
         if (!listeningRef.current) return;
         setTimeout(() => playWord(index + 1), 3000);

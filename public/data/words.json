@@ -1,5 +1,5 @@
 {
-  "lastId": 316,
+  "lastId": 323,
   "words": [
     {
       "word": "おおい",
@@ -3410,6 +3410,76 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-07",
       "id": 316
+    },
+    {
+      "word": "仕事",
+      "reading": "しごと",
+      "meaning": "일, 업무",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 317
+    },
+    {
+      "word": "東京",
+      "reading": "とうきょう",
+      "meaning": "도쿄(도시명)",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 318
+    },
+    {
+      "word": "バス",
+      "reading": "バス",
+      "meaning": "버스",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 319
+    },
+    {
+      "word": "新宿",
+      "reading": "しんじゅく",
+      "meaning": "신주쿠(지명)",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 320
+    },
+    {
+      "word": "渋谷",
+      "reading": "しぶや",
+      "meaning": "시부야(지명)",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 321
+    },
+    {
+      "word": "試合",
+      "reading": "しあい",
+      "meaning": "시합",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 322
+    },
+    {
+      "word": "授業",
+      "reading": "じゅぎょう",
+      "meaning": "수업",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 323
     }
   ]
 }

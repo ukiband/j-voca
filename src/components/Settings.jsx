@@ -230,6 +230,9 @@ export default function Settings() {
           return `${d.getMonth() + 1}.${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
         })()}
       </p>
+      <p className="text-center text-xs text-slate-300">
+        음성 합성: VOICEVOX Nemo
+      </p>
     </div>
   );
 }

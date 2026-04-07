@@ -1,5 +1,5 @@
 {
-  "lastId": 308,
+  "lastId": 313,
   "words": [
     {
       "word": "おおい",
@@ -3330,6 +3330,56 @@
       "tags": [
         "시간"
       ]
+    },
+    {
+      "word": "牛乳",
+      "reading": "ぎゅうにゅう",
+      "meaning": "우유",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 309
+    },
+    {
+      "word": "たまご",
+      "reading": "たまご",
+      "meaning": "달걀",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 310
+    },
+    {
+      "word": "コップ",
+      "reading": "コップ",
+      "meaning": "컵",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 311
+    },
+    {
+      "word": "りんご",
+      "reading": "りんご",
+      "meaning": "사과",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 312
+    },
+    {
+      "word": "牛乳",
+      "reading": "ぎゅうにゅう",
+      "meaning": "우유",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 313
     }
   ]
 }

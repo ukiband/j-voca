@@ -1,5 +1,5 @@
 {
-  "lastId": 323,
+  "lastId": 328,
   "words": [
     {
       "word": "おおい",
@@ -3480,6 +3480,56 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-07",
       "id": 323
+    },
+    {
+      "word": "サンドイッチ",
+      "reading": "サンドイッチ",
+      "meaning": "샌드위치",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 324
+    },
+    {
+      "word": "うどん",
+      "reading": "うどん",
+      "meaning": "우동",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 325
+    },
+    {
+      "word": "カメラ",
+      "reading": "カメラ",
+      "meaning": "카메라",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 326
+    },
+    {
+      "word": "とんかつ",
+      "reading": "とんかつ",
+      "meaning": "돈가스",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 327
+    },
+    {
+      "word": "店",
+      "reading": "みせ",
+      "meaning": "가게",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 328
     }
   ]
 }

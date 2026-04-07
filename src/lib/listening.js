@@ -1,5 +1,4 @@
 import { shuffle } from './shuffle';
-import { pickBestVoice } from './speech';
 
 const DELAY_MS = 5000; // 일본어 발음 후 한국어 뜻까지 대기 시간
 const NEXT_WORD_DELAY_MS = 2000; // 한국어 뜻 발음 후 다음 단어까지 대기
@@ -12,10 +11,7 @@ function speakJapanese(text) {
   return new Promise(resolve => {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ja-JP';
-    // 다운로드된 Premium/Enhanced 일본어 보이스를 우선 사용
-    const voice = pickBestVoice('ja');
-    if (voice) u.voice = voice;
-    u.rate = 0.95;
+    u.rate = 0.8;
     u.onend = resolve;
     u.onerror = resolve;
     speechSynthesis.speak(u);
@@ -26,9 +22,7 @@ function speakKorean(text) {
   return new Promise(resolve => {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ko-KR';
-    const voice = pickBestVoice('ko');
-    if (voice) u.voice = voice;
-    u.rate = 0.95;
+    u.rate = 0.9;
     u.onend = resolve;
     u.onerror = resolve;
     speechSynthesis.speak(u);

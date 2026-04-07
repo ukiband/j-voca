@@ -1,5 +1,5 @@
 {
-  "lastId": 328,
+  "lastId": 336,
   "words": [
     {
       "word": "おおい",
@@ -3530,6 +3530,86 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-07",
       "id": 328
+    },
+    {
+      "word": "姉",
+      "reading": "あね",
+      "meaning": "언니, 누나",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 329
+    },
+    {
+      "word": "野菜",
+      "reading": "やさい",
+      "meaning": "채소",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 330
+    },
+    {
+      "word": "嫌いだ",
+      "reading": "きらいだ",
+      "meaning": "싫어하다",
+      "pos": "な형용사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 331
+    },
+    {
+      "word": "すいか",
+      "reading": "すいか",
+      "meaning": "수박",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 332
+    },
+    {
+      "word": "サッカー",
+      "reading": "サッカー",
+      "meaning": "축구",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 333
+    },
+    {
+      "word": "上手だ",
+      "reading": "じょうずだ",
+      "meaning": "능숙하다, 잘하다",
+      "pos": "な형용사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 334
+    },
+    {
+      "word": "下手だ",
+      "reading": "へただ",
+      "meaning": "서툴다, 잘 못하다",
+      "pos": "な형용사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 335
+    },
+    {
+      "word": "兄",
+      "reading": "あに",
+      "meaning": "형, 오빠",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-07",
+      "id": 336
     }
   ]
 }

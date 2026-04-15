@@ -1,5 +1,5 @@
 {
-  "lastId": 360,
+  "lastId": 374,
   "words": [
     {
       "word": "おおい",
@@ -3850,6 +3850,146 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-15",
       "id": 360
+    },
+    {
+      "word": "いっぷん",
+      "reading": "いっぷん",
+      "meaning": "1분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 361
+    },
+    {
+      "word": "にふん",
+      "reading": "にふん",
+      "meaning": "2분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 362
+    },
+    {
+      "word": "さんぷん",
+      "reading": "さんぷん",
+      "meaning": "3분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 363
+    },
+    {
+      "word": "よんぷん",
+      "reading": "よんぷん",
+      "meaning": "4분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 364
+    },
+    {
+      "word": "ごふん",
+      "reading": "ごふん",
+      "meaning": "5분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 365
+    },
+    {
+      "word": "ろっぷん",
+      "reading": "ろっぷん",
+      "meaning": "6분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 366
+    },
+    {
+      "word": "ななふん",
+      "reading": "ななふん",
+      "meaning": "7분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 367
+    },
+    {
+      "word": "はっぷん",
+      "reading": "はっぷん",
+      "meaning": "8분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 368
+    },
+    {
+      "word": "きゅうふん",
+      "reading": "きゅうふん",
+      "meaning": "9분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 369
+    },
+    {
+      "word": "じゅっぷん・じっぷん",
+      "reading": "じゅっぷん・じっぷん",
+      "meaning": "10분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 370
+    },
+    {
+      "word": "じゅういっぷん",
+      "reading": "じゅういっぷん",
+      "meaning": "11분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 371
+    },
+    {
+      "word": "じゅうにふん",
+      "reading": "じゅうにふん",
+      "meaning": "12분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 372
+    },
+    {
+      "word": "じゅうさんぷん",
+      "reading": "じゅうさんぷん",
+      "meaning": "13분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 373
+    },
+    {
+      "word": "じゅうよんぷん",
+      "reading": "じゅうよんぷん",
+      "meaning": "14분",
+      "pos": "명사",
+      "chapter": 5,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-15",
+      "id": 374
     }
   ]
 }

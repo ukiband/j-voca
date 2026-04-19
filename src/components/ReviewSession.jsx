@@ -10,6 +10,7 @@ export default function ReviewSession() {
   const lessonParam = params.get('lesson');
   const tagParam = params.get('tag');
   const reverse = params.get('reverse') === 'true';
+  const order = params.get('order');
   // lesson 파라미터가 있으면 해당 lesson만, 없으면 전체 복습
   const chapter = lessonParam != null ? Number(lessonParam) : undefined;
   // 네비게이션마다 고유한 key가 바뀌므로, 같은 경로 재진입 시에도 데이터를 새로 읽음
@@ -30,9 +31,12 @@ export default function ReviewSession() {
       if (words.length === 0) {
         setNoWords(true);
       } else {
-        const shuffled = words.sort(() => Math.random() - 0.5);
-        setQueue(shuffled);
-        setWordCount(shuffled.length);
+        // 순차 모드: words.json 입력 순서대로 복습 (id 오름차순), 그 외: 랜덤 셔플
+        const ordered = order === 'sequential'
+          ? [...words].sort((a, b) => a.id - b.id)
+          : [...words].sort(() => Math.random() - 0.5);
+        setQueue(ordered);
+        setWordCount(ordered.length);
       }
       setLoading(false);
     }).catch((err) => {
@@ -40,7 +44,7 @@ export default function ReviewSession() {
       setError(err.message || '데이터를 불러올 수 없습니다');
       setLoading(false);
     });
-  }, [chapter, tagParam, locationKey]);
+  }, [chapter, tagParam, order, locationKey]);
 
   const currentWord = queue[currentIndex];
   const done = !loading && queue.length > 0 && currentIndex >= queue.length;

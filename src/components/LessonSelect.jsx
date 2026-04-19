@@ -7,6 +7,8 @@ export default function LessonSelect() {
   const [words, setWords] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [reverse, setReverse] = useState(() => localStorage.getItem('review-reverse') === 'true');
+  // 복습 순서 모드: 랜덤/순차 선호 저장
+  const [order, setOrder] = useState(() => localStorage.getItem('review-order') === 'sequential' ? 'sequential' : 'random');
 
   const loadData = useCallback(async () => {
     const [w, r] = await Promise.all([
@@ -27,8 +29,17 @@ export default function LessonSelect() {
   // 전체 lesson 목록 (due 없는 lesson도 포함)
   const chapters = [...new Set(words.map(w => w.chapter))].sort((a, b) => a - b);
 
-  // 쿼리 파라미터에 reverse 추가하는 헬퍼
-  const reviewPath = (base) => reverse ? `${base}${base.includes('?') ? '&' : '?'}reverse=true` : base;
+  // 쿼리 파라미터에 reverse/order 추가하는 헬퍼
+  const reviewPath = (base) => {
+    let path = base;
+    if (reverse) {
+      path += `${path.includes('?') ? '&' : '?'}reverse=true`;
+    }
+    if (order === 'sequential') {
+      path += `${path.includes('?') ? '&' : '?'}order=sequential`;
+    }
+    return path;
+  };
 
   if (words.length === 0) {
     return (
@@ -45,17 +56,34 @@ export default function LessonSelect() {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-slate-800">복습</h1>
-        {/* 역방향 토글: 한→일 */}
-        <button
-          onClick={() => setReverse(v => { const next = !v; localStorage.setItem('review-reverse', String(next)); return next; })}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-            reverse
-              ? 'bg-indigo-600 text-white'
-              : 'bg-slate-100 text-slate-600'
-          }`}
-        >
-          {reverse ? '한→일' : '일→한'}
-        </button>
+        <div className="flex items-center gap-2">
+          {/* 복습 순서 토글: 랜덤/순차 */}
+          <button
+            onClick={() => setOrder(v => {
+              const next = v === 'sequential' ? 'random' : 'sequential';
+              localStorage.setItem('review-order', next);
+              return next;
+            })}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              order === 'sequential'
+                ? 'bg-indigo-600 text-white'
+                : 'bg-slate-100 text-slate-600'
+            }`}
+          >
+            {order === 'sequential' ? '순차' : '랜덤'}
+          </button>
+          {/* 역방향 토글: 한→일 */}
+          <button
+            onClick={() => setReverse(v => { const next = !v; localStorage.setItem('review-reverse', String(next)); return next; })}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              reverse
+                ? 'bg-indigo-600 text-white'
+                : 'bg-slate-100 text-slate-600'
+            }`}
+          >
+            {reverse ? '한→일' : '일→한'}
+          </button>
+        </div>
       </div>
 
       {/* 전체 복습 */}

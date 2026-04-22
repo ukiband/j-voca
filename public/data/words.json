@@ -1,5 +1,5 @@
 {
-  "lastId": 389,
+  "lastId": 399,
   "words": [
     {
       "word": "おおい",
@@ -4182,6 +4182,106 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-22",
       "id": 389
+    },
+    {
+      "word": "どんな",
+      "reading": "どんな",
+      "meaning": "어떤",
+      "pos": "기타",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 390
+    },
+    {
+      "word": "こんな",
+      "reading": "こんな",
+      "meaning": "이런",
+      "pos": "기타",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 391
+    },
+    {
+      "word": "そんな",
+      "reading": "そんな",
+      "meaning": "그런",
+      "pos": "기타",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 392
+    },
+    {
+      "word": "あんな",
+      "reading": "あんな",
+      "meaning": "저런",
+      "pos": "기타",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 393
+    },
+    {
+      "word": "そうですか",
+      "reading": "そうですか",
+      "meaning": "글쎄요",
+      "pos": "감탄사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 394
+    },
+    {
+      "word": "やっぱり",
+      "reading": "やっぱり",
+      "meaning": "역시 (やはり의 구어체)",
+      "pos": "부사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 395
+    },
+    {
+      "word": "美人",
+      "reading": "びじん",
+      "meaning": "미인",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 396
+    },
+    {
+      "word": "顔",
+      "reading": "かお",
+      "meaning": "얼굴",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 397
+    },
+    {
+      "word": "小さい",
+      "reading": "ちいさい",
+      "meaning": "작다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 398
+    },
+    {
+      "word": "ピアノ",
+      "reading": "ピアノ",
+      "meaning": "피아노",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 399
     }
   ]
 }

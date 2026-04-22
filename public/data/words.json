@@ -1,5 +1,5 @@
 {
-  "lastId": 374,
+  "lastId": 389,
   "words": [
     {
       "word": "おおい",
@@ -4032,6 +4032,156 @@
       "tags": [
         "분"
       ]
+    },
+    {
+      "word": "いってきます",
+      "reading": "いってきます",
+      "meaning": "다녀오겠습니다",
+      "pos": "동사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 375
+    },
+    {
+      "word": "いってらっしゃい",
+      "reading": "いってらっしゃい",
+      "meaning": "다녀오세요",
+      "pos": "동사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 376
+    },
+    {
+      "word": "早い",
+      "reading": "はやい",
+      "meaning": "빠르다, 이르다(시간)",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 377
+    },
+    {
+      "word": "朝",
+      "reading": "あさ",
+      "meaning": "아침",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 378
+    },
+    {
+      "word": "だから",
+      "reading": "だから",
+      "meaning": "그래서",
+      "pos": "접속사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 379
+    },
+    {
+      "word": "同じだ",
+      "reading": "おなじだ",
+      "meaning": "같다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 380
+    },
+    {
+      "word": "遅い",
+      "reading": "おそい",
+      "meaning": "느리다, 그르치다, 늦다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 381
+    },
+    {
+      "word": "早い",
+      "reading": "はやい",
+      "meaning": "이르다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 382
+    },
+    {
+      "word": "速い",
+      "reading": "はやい",
+      "meaning": "빠르다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 383
+    },
+    {
+      "word": "遠い",
+      "reading": "とおい",
+      "meaning": "멀다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 384
+    },
+    {
+      "word": "近い",
+      "reading": "ちかい",
+      "meaning": "가깝다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 385
+    },
+    {
+      "word": "ほう",
+      "reading": "ほう",
+      "meaning": "~쪽이, ~편이",
+      "pos": "조사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 386
+    },
+    {
+      "word": "一番",
+      "reading": "いちばん",
+      "meaning": "가장, 제일",
+      "pos": "부사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 387
+    },
+    {
+      "word": "便利",
+      "reading": "べんり",
+      "meaning": "편리하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 388
+    },
+    {
+      "word": "同じ",
+      "reading": "おなじ",
+      "meaning": "똑같은, 같은",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-22",
+      "id": 389
     }
   ]
 }

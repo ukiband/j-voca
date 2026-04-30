@@ -1,5 +1,5 @@
 {
-  "lastId": 425,
+  "lastId": 440,
   "words": [
     {
       "word": "おおい",
@@ -4542,6 +4542,156 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-30",
       "id": 425
+    },
+    {
+      "word": "ひがし",
+      "reading": "ひがし",
+      "meaning": "동쪽",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 426
+    },
+    {
+      "word": "にし",
+      "reading": "にし",
+      "meaning": "서쪽",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 427
+    },
+    {
+      "word": "みなみ",
+      "reading": "みなみ",
+      "meaning": "남쪽",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 428
+    },
+    {
+      "word": "きた",
+      "reading": "きた",
+      "meaning": "북쪽",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 429
+    },
+    {
+      "word": "すいか",
+      "reading": "すいか",
+      "meaning": "수박",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 430
+    },
+    {
+      "word": "大きい",
+      "reading": "おおきい",
+      "meaning": "크다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 431
+    },
+    {
+      "word": "細い",
+      "reading": "ほそい",
+      "meaning": "가늘다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 432
+    },
+    {
+      "word": "長い",
+      "reading": "ながい",
+      "meaning": "길다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 433
+    },
+    {
+      "word": "便利だ",
+      "reading": "べんりだ",
+      "meaning": "편리하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 434
+    },
+    {
+      "word": "ぞう",
+      "reading": "ぞう",
+      "meaning": "코끼리",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 435
+    },
+    {
+      "word": "鼻",
+      "reading": "はな",
+      "meaning": "코",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 436
+    },
+    {
+      "word": "太い",
+      "reading": "ふとい",
+      "meaning": "굵다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 437
+    },
+    {
+      "word": "つまらない",
+      "reading": "つまらない",
+      "meaning": "지루하다,재미없다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 438
+    },
+    {
+      "word": "丸い",
+      "reading": "まるい",
+      "meaning": "둥글다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 439
+    },
+    {
+      "word": "指",
+      "reading": "ゆび",
+      "meaning": "손가락",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-04-30",
+      "id": 440
     }
   ]
 }

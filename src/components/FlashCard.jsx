@@ -21,8 +21,8 @@ export default function FlashCard({ word, onGrade, onPrev, onNext, reverse }) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="card-flip w-full" style={{ minHeight: '240px' }} onClick={handleFlip}>
-        <div className={`card-flip-inner relative w-full ${flipped ? 'flipped' : ''}`} style={{ minHeight: '240px' }}>
+      <div className="card-flip w-full" style={{ minHeight: '480px' }} onClick={handleFlip}>
+        <div className={`card-flip-inner relative w-full ${flipped ? 'flipped' : ''}`} style={{ minHeight: '480px' }}>
           {/* Front — reverse 모드에서는 한국어 뜻을 표시 */}
           <div className="card-front absolute inset-0 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center p-6">
             {reverse ? (

@@ -1,5 +1,5 @@
 {
-  "lastId": 457,
+  "lastId": 469,
   "words": [
     {
       "word": "おおい",
@@ -4862,6 +4862,126 @@
       "textbook": "일본어수업",
       "createdAt": "2026-05-06",
       "id": 457
+    },
+    {
+      "word": "いいです",
+      "reading": "いいです",
+      "meaning": "괜찮습니다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 458
+    },
+    {
+      "word": "大丈夫です",
+      "reading": "だいじょうぶです",
+      "meaning": "괜찮습니다, 문제없습니다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 459
+    },
+    {
+      "word": "かばん",
+      "reading": "かばん",
+      "meaning": "가방",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 460
+    },
+    {
+      "word": "丈夫だ",
+      "reading": "じょうぶだ",
+      "meaning": "튼튼하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 461
+    },
+    {
+      "word": "にぎやかだ",
+      "reading": "にぎやかだ",
+      "meaning": "번화하다, 활기차다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 462
+    },
+    {
+      "word": "人",
+      "reading": "ひと",
+      "meaning": "사람",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 463
+    },
+    {
+      "word": "サッカー",
+      "reading": "サッカー",
+      "meaning": "축구",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 464
+    },
+    {
+      "word": "上手",
+      "reading": "じょうず",
+      "meaning": "능숙하다, 잘하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 465
+    },
+    {
+      "word": "明るい",
+      "reading": "あかるい",
+      "meaning": "밝다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 466
+    },
+    {
+      "word": "優しい",
+      "reading": "やさしい",
+      "meaning": "상냥하다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 467
+    },
+    {
+      "word": "友達",
+      "reading": "ともだち",
+      "meaning": "친구",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 468
+    },
+    {
+      "word": "がんじょうだ",
+      "reading": "がんじょうだ",
+      "meaning": "튼튼하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 469
     }
   ]
 }

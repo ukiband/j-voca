@@ -1,5 +1,5 @@
 {
-  "lastId": 456,
+  "lastId": 457,
   "words": [
     {
       "word": "おおい",
@@ -4852,6 +4852,16 @@
       "textbook": "일본어수업",
       "createdAt": "2026-05-06",
       "id": 456
+    },
+    {
+      "word": "みな",
+      "reading": "みな",
+      "meaning": "여러분, 모두",
+      "pos": "대명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 457
     }
   ]
 }

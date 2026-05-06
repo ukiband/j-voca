@@ -1,5 +1,5 @@
 {
-  "lastId": 440,
+  "lastId": 456,
   "words": [
     {
       "word": "おおい",
@@ -4692,6 +4692,166 @@
       "textbook": "일본어수업",
       "createdAt": "2026-04-30",
       "id": 440
+    },
+    {
+      "word": "どっち",
+      "reading": "どっち",
+      "meaning": "양자택일 / 둘 중에 하나 선택 / 명확한 것들 중에 하나",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 441
+    },
+    {
+      "word": "みんな",
+      "reading": "みんな",
+      "meaning": "여러분, 여럿이",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 442
+    },
+    {
+      "word": "いっしょに",
+      "reading": "いっしょに",
+      "meaning": "함께",
+      "pos": "부사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 443
+    },
+    {
+      "word": "コーヒー",
+      "reading": "コーヒー",
+      "meaning": "커피",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 444
+    },
+    {
+      "word": "お茶",
+      "reading": "おちゃ",
+      "meaning": "차",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 445
+    },
+    {
+      "word": "好きだ",
+      "reading": "すきだ",
+      "meaning": "좋아하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 446
+    },
+    {
+      "word": "土曜日",
+      "reading": "どようび",
+      "meaning": "토요일",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 447
+    },
+    {
+      "word": "日曜日",
+      "reading": "にちようび",
+      "meaning": "일요일",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 448
+    },
+    {
+      "word": "暇だ",
+      "reading": "ひまだ",
+      "meaning": "한가하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 449
+    },
+    {
+      "word": "図書館",
+      "reading": "としょかん",
+      "meaning": "도서관",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 450
+    },
+    {
+      "word": "広い",
+      "reading": "ひろい",
+      "meaning": "넓다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 451
+    },
+    {
+      "word": "スキー",
+      "reading": "スキー",
+      "meaning": "스키",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 452
+    },
+    {
+      "word": "テニス",
+      "reading": "テニス",
+      "meaning": "테니스",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 453
+    },
+    {
+      "word": "コーヒー",
+      "reading": "コーヒー",
+      "meaning": "커피",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 454
+    },
+    {
+      "word": "お茶",
+      "reading": "おちゃ",
+      "meaning": "차",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 455
+    },
+    {
+      "word": "図書館",
+      "reading": "としょかん",
+      "meaning": "도서관",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-06",
+      "id": 456
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { shuffle } from '../lib/shuffle';
+import { getPrerenderedAudioUrl } from '../lib/speech';
 
 export function useBrowseMode() {
   const [browseIndex, setBrowseIndex] = useState(null);
@@ -37,24 +38,35 @@ export function useBrowseMode() {
       }
     } catch {}
 
-    function playWord(index) {
+    async function playWord(index) {
       if (!listeningRef.current || index >= queue.length) {
         stopListening();
         return;
       }
 
       setBrowseIndex(index);
-      const u = new SpeechSynthesisUtterance(queue[index].word);
+      const word = queue[index].word;
+      const next = () => {
+        if (!listeningRef.current) return;
+        setTimeout(() => playWord(index + 1), 3000);
+      };
+
+      // 사전 생성된 VOICEVOX Nemo wav 우선 재생
+      const url = await getPrerenderedAudioUrl(word);
+      if (url) {
+        const audio = new Audio(url);
+        audio.onended = next;
+        audio.onerror = next;
+        audio.play().catch(next);
+        return;
+      }
+
+      // 폴백: Web Speech API
+      const u = new SpeechSynthesisUtterance(word);
       u.lang = 'ja-JP';
       u.rate = 0.8;
-      u.onend = () => {
-        if (!listeningRef.current) return;
-        setTimeout(() => playWord(index + 1), 3000);
-      };
-      u.onerror = () => {
-        if (!listeningRef.current) return;
-        setTimeout(() => playWord(index + 1), 3000);
-      };
+      u.onend = next;
+      u.onerror = next;
       speechSynthesis.speak(u);
     }
 

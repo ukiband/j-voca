@@ -1,5 +1,5 @@
 {
-  "lastId": 469,
+  "lastId": 498,
   "words": [
     {
       "word": "おおい",
@@ -4982,6 +4982,296 @@
       "textbook": "일본어수업",
       "createdAt": "2026-05-06",
       "id": 469
+    },
+    {
+      "word": "さんぽ",
+      "reading": "さんぽ",
+      "meaning": "꽁치",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 470
+    },
+    {
+      "word": "果物",
+      "reading": "くだもの",
+      "meaning": "과일",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 471
+    },
+    {
+      "word": "私",
+      "reading": "わたし",
+      "meaning": "나",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 472
+    },
+    {
+      "word": "中",
+      "reading": "なか",
+      "meaning": "안/가운데",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 473
+    },
+    {
+      "word": "好き",
+      "reading": "すき",
+      "meaning": "좋아함",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 474
+    },
+    {
+      "word": "りんご",
+      "reading": "りんご",
+      "meaning": "사과",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 475
+    },
+    {
+      "word": "スポーツ",
+      "reading": "スポーツ",
+      "meaning": "스포츠",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 476
+    },
+    {
+      "word": "映画",
+      "reading": "えいが",
+      "meaning": "영화",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 477
+    },
+    {
+      "word": "食べ物",
+      "reading": "たべもの",
+      "meaning": "음식",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 478
+    },
+    {
+      "word": "一週間",
+      "reading": "いっしゅうかん",
+      "meaning": "일주일",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 479
+    },
+    {
+      "word": "理想",
+      "reading": "りそう",
+      "meaning": "이상",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 480
+    },
+    {
+      "word": "タイプ",
+      "reading": "タイプ",
+      "meaning": "타입/유형",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 481
+    },
+    {
+      "word": "話",
+      "reading": "はなし",
+      "meaning": "이야기",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 482
+    },
+    {
+      "word": "面白い",
+      "reading": "おもしろい",
+      "meaning": "재미있다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 483
+    },
+    {
+      "word": "絵",
+      "reading": "え",
+      "meaning": "그림",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 484
+    },
+    {
+      "word": "かっこいい",
+      "reading": "かっこいい",
+      "meaning": "멋있다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 485
+    },
+    {
+      "word": "高い",
+      "reading": "たかい",
+      "meaning": "높다/비싸다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 486
+    },
+    {
+      "word": "低い",
+      "reading": "ひくい",
+      "meaning": "낮다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 487
+    },
+    {
+      "word": "親切だ",
+      "reading": "しんせつだ",
+      "meaning": "친절하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 488
+    },
+    {
+      "word": "きれいだ",
+      "reading": "きれいだ",
+      "meaning": "예쁘다/깨끗하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 489
+    },
+    {
+      "word": "上手だ",
+      "reading": "じょうずだ",
+      "meaning": "능숙하다/잘하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 490
+    },
+    {
+      "word": "下手だ",
+      "reading": "へただ",
+      "meaning": "서투르다/못하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 491
+    },
+    {
+      "word": "素敵だ",
+      "reading": "すてきだ",
+      "meaning": "멋지다/근사하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 492
+    },
+    {
+      "word": "短い",
+      "reading": "みじかい",
+      "meaning": "짧다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 493
+    },
+    {
+      "word": "いい",
+      "reading": "いい",
+      "meaning": "좋다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 494
+    },
+    {
+      "word": "楽しい",
+      "reading": "たのしい",
+      "meaning": "즐겁다",
+      "pos": "い형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 495
+    },
+    {
+      "word": "静かだ",
+      "reading": "しずかだ",
+      "meaning": "조용하다",
+      "pos": "な형용사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 496
+    },
+    {
+      "word": "好み",
+      "reading": "このみ",
+      "meaning": "취향",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 497
+    },
+    {
+      "word": "お好み焼き",
+      "reading": "おこのみやき",
+      "meaning": "오코노미야키",
+      "pos": "명사",
+      "chapter": 6,
+      "textbook": "일본어수업",
+      "createdAt": "2026-05-28",
+      "id": 498
     }
   ]
 }

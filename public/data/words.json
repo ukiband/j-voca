@@ -1,5 +1,5 @@
 {
-  "lastId": 580,
+  "lastId": 585,
   "words": [
     {
       "word": "おおい",
@@ -6092,6 +6092,56 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
       "id": 580
+    },
+    {
+      "word": "する",
+      "reading": "する",
+      "meaning": "하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 581
+    },
+    {
+      "word": "来る",
+      "reading": "くる",
+      "meaning": "오다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 582
+    },
+    {
+      "word": "散歩する",
+      "reading": "さんぽする",
+      "meaning": "산책하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 583
+    },
+    {
+      "word": "運動する",
+      "reading": "うんどうする",
+      "meaning": "운동하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 584
+    },
+    {
+      "word": "友達",
+      "reading": "ともだち",
+      "meaning": "친구",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 585
     }
   ]
 }

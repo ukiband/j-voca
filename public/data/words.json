@@ -1,5 +1,5 @@
 {
-  "lastId": 528,
+  "lastId": 544,
   "words": [
     {
       "word": "おおい",
@@ -5572,6 +5572,166 @@
       "textbook": "일본어수업",
       "createdAt": "2026-05-28",
       "id": 528
+    },
+    {
+      "word": "おれ",
+      "reading": "おれ",
+      "meaning": "나",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 529
+    },
+    {
+      "word": "ぼく",
+      "reading": "ぼく",
+      "meaning": "나",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 530
+    },
+    {
+      "word": "わたし",
+      "reading": "わたし",
+      "meaning": "나",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 531
+    },
+    {
+      "word": "おきる",
+      "reading": "おきる",
+      "meaning": "일어나다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 532
+    },
+    {
+      "word": "それから",
+      "reading": "それから",
+      "meaning": "그리고, 그러고 나서",
+      "pos": "접속사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 533
+    },
+    {
+      "word": "あまり",
+      "reading": "あまり",
+      "meaning": "그다지, 별로",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 534
+    },
+    {
+      "word": "いつも",
+      "reading": "いつも",
+      "meaning": "항상, 언제나",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 535
+    },
+    {
+      "word": "こうして",
+      "reading": "こうして",
+      "meaning": "이리하여",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 536
+    },
+    {
+      "word": "そうして",
+      "reading": "そうして",
+      "meaning": "그리하여",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 537
+    },
+    {
+      "word": "ああして",
+      "reading": "ああして",
+      "meaning": "저렇게",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 538
+    },
+    {
+      "word": "どうして",
+      "reading": "どうして",
+      "meaning": "어째서, 왜",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 539
+    },
+    {
+      "word": "毎朝",
+      "reading": "まいあさ",
+      "meaning": "매일 아침",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 540
+    },
+    {
+      "word": "でも",
+      "reading": "でも",
+      "meaning": "하지만",
+      "pos": "접속사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 541
+    },
+    {
+      "word": "早く",
+      "reading": "はやく",
+      "meaning": "빨리",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 542
+    },
+    {
+      "word": "いつも",
+      "reading": "いつも",
+      "meaning": "항상, 언제나",
+      "pos": "부사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 543
+    },
+    {
+      "word": "けさ",
+      "reading": "けさ",
+      "meaning": "오늘 아침",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 544
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 574,
+  "lastId": 580,
   "words": [
     {
       "word": "おおい",
@@ -6032,6 +6032,66 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
       "id": 574
+    },
+    {
+      "word": "見る",
+      "reading": "みる",
+      "meaning": "보다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 575
+    },
+    {
+      "word": "食べる",
+      "reading": "たべる",
+      "meaning": "먹다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 576
+    },
+    {
+      "word": "寝る",
+      "reading": "ねる",
+      "meaning": "자다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 577
+    },
+    {
+      "word": "出る",
+      "reading": "でる",
+      "meaning": "나가다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 578
+    },
+    {
+      "word": "着る",
+      "reading": "きる",
+      "meaning": "입다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 579
+    },
+    {
+      "word": "借りる",
+      "reading": "かりる",
+      "meaning": "빌리다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 580
     }
   ]
 }

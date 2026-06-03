@@ -1,5 +1,5 @@
 {
-  "lastId": 563,
+  "lastId": 574,
   "words": [
     {
       "word": "おおい",
@@ -5922,6 +5922,116 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
       "id": 563
+    },
+    {
+      "word": "行く",
+      "reading": "いく",
+      "meaning": "가다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 564
+    },
+    {
+      "word": "飲む",
+      "reading": "のむ",
+      "meaning": "마시다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 565
+    },
+    {
+      "word": "走る",
+      "reading": "はしる",
+      "meaning": "달리다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 566
+    },
+    {
+      "word": "行きます",
+      "reading": "いきます",
+      "meaning": "갑니다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 567
+    },
+    {
+      "word": "飲みます",
+      "reading": "のみます",
+      "meaning": "마십니다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 568
+    },
+    {
+      "word": "走ります",
+      "reading": "はしります",
+      "meaning": "달립니다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 569
+    },
+    {
+      "word": "ようこそ",
+      "reading": "ようこそ",
+      "meaning": "어서오세요, 환영합니다.",
+      "pos": "감탄사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 570
+    },
+    {
+      "word": "笑う",
+      "reading": "わらう",
+      "meaning": "웃다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 571
+    },
+    {
+      "word": "笑います",
+      "reading": "わらいます",
+      "meaning": "웃습니다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 572
+    },
+    {
+      "word": "読む",
+      "reading": "よむ",
+      "meaning": "읽다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 573
+    },
+    {
+      "word": "働く",
+      "reading": "はたらく",
+      "meaning": "일하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-03",
+      "id": 574
     }
   ]
 }

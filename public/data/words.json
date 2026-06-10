@@ -1,5 +1,5 @@
 {
-  "lastId": 614,
+  "lastId": 620,
   "words": [
     {
       "word": "おおい",
@@ -6432,6 +6432,66 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
       "id": 614
+    },
+    {
+      "word": "いじょう",
+      "reading": "いじょう",
+      "meaning": "이상",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 615
+    },
+    {
+      "word": "いか",
+      "reading": "いか",
+      "meaning": "이하",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 616
+    },
+    {
+      "word": "毎週",
+      "reading": "まいしゅう",
+      "meaning": "매주",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 617
+    },
+    {
+      "word": "階段",
+      "reading": "かいだん",
+      "meaning": "계단",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 618
+    },
+    {
+      "word": "健康",
+      "reading": "けんこう",
+      "meaning": "건강",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 619
+    },
+    {
+      "word": "注意",
+      "reading": "ちゅうい",
+      "meaning": "주의(조심이라는 뜻에서)",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 620
     }
   ]
 }

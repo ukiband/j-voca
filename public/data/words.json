@@ -1,5 +1,5 @@
 {
-  "lastId": 625,
+  "lastId": 655,
   "words": [
     {
       "word": "おおい",
@@ -6542,6 +6542,306 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
       "id": 625
+    },
+    {
+      "word": "いく",
+      "reading": "いく",
+      "meaning": "가다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 626
+    },
+    {
+      "word": "かう",
+      "reading": "かう",
+      "meaning": "사다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 627
+    },
+    {
+      "word": "すう",
+      "reading": "すう",
+      "meaning": "피다, 들이키다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 628
+    },
+    {
+      "word": "とる",
+      "reading": "とる",
+      "meaning": "찍다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 629
+    },
+    {
+      "word": "のむ",
+      "reading": "のむ",
+      "meaning": "마시다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 630
+    },
+    {
+      "word": "よむ",
+      "reading": "よむ",
+      "meaning": "읽다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 631
+    },
+    {
+      "word": "かえる",
+      "reading": "かえる",
+      "meaning": "돌아가다 (하루가 끝나는 느낌으로, 원래 있어야 할 곳으로 (집, 귀가))",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 632
+    },
+    {
+      "word": "つかう",
+      "reading": "つかう",
+      "meaning": "사용하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 633
+    },
+    {
+      "word": "はしる",
+      "reading": "はしる",
+      "meaning": "달리다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 634
+    },
+    {
+      "word": "わらう",
+      "reading": "わらう",
+      "meaning": "웃다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 635
+    },
+    {
+      "word": "はたらく",
+      "reading": "はたらく",
+      "meaning": "일하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 636
+    },
+    {
+      "word": "きる",
+      "reading": "きる",
+      "meaning": "입다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 637
+    },
+    {
+      "word": "でる",
+      "reading": "でる",
+      "meaning": "나가다, 나오다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 638
+    },
+    {
+      "word": "ねる",
+      "reading": "ねる",
+      "meaning": "자다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 639
+    },
+    {
+      "word": "みる",
+      "reading": "みる",
+      "meaning": "보다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 640
+    },
+    {
+      "word": "かりる",
+      "reading": "かりる",
+      "meaning": "빌리다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 641
+    },
+    {
+      "word": "たべる",
+      "reading": "たべる",
+      "meaning": "먹다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 642
+    },
+    {
+      "word": "くる",
+      "reading": "くる",
+      "meaning": "오다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 643
+    },
+    {
+      "word": "うんどうする",
+      "reading": "うんどうする",
+      "meaning": "운동하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 644
+    },
+    {
+      "word": "さんぽする",
+      "reading": "さんぽする",
+      "meaning": "산책하다",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 645
+    },
+    {
+      "word": "〜だい",
+      "reading": "〜だい",
+      "meaning": "~대, ~식대",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 646
+    },
+    {
+      "word": "あした",
+      "reading": "あした",
+      "meaning": "내일",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 647
+    },
+    {
+      "word": "かいだん",
+      "reading": "かいだん",
+      "meaning": "계단",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 648
+    },
+    {
+      "word": "けんこう",
+      "reading": "けんこう",
+      "meaning": "건강",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 649
+    },
+    {
+      "word": "しんぶん",
+      "reading": "しんぶん",
+      "meaning": "신문",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 650
+    },
+    {
+      "word": "ちゅうい",
+      "reading": "ちゅうい",
+      "meaning": "주의",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 651
+    },
+    {
+      "word": "まいしゅう",
+      "reading": "まいしゅう",
+      "meaning": "매주",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 652
+    },
+    {
+      "word": "よるごはん",
+      "reading": "よるごはん",
+      "meaning": "저녁밥",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 653
+    },
+    {
+      "word": "もどる",
+      "reading": "もどる",
+      "meaning": "돌아가다 (원래 있던 곳으로 돌아오는 느낌으로, 직전에 있었던 곳으로)",
+      "pos": "동사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 654
+    },
+    {
+      "word": "あいさつ",
+      "reading": "あいさつ",
+      "meaning": "인사말",
+      "pos": "명사",
+      "chapter": 7,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-10",
+      "id": 655
     }
   ]
 }

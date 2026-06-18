@@ -1,5 +1,5 @@
 {
-  "lastId": 668,
+  "lastId": 675,
   "words": [
     {
       "word": "おおい",
@@ -6942,6 +6942,76 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
       "id": 668
+    },
+    {
+      "word": "読む",
+      "reading": "よむ",
+      "meaning": "읽다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 669
+    },
+    {
+      "word": "旅行",
+      "reading": "りょこう",
+      "meaning": "여행",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 670
+    },
+    {
+      "word": "遊園地",
+      "reading": "ゆうえんち",
+      "meaning": "유원지",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 671
+    },
+    {
+      "word": "遊ぶ",
+      "reading": "あそぶ",
+      "meaning": "놀다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 672
+    },
+    {
+      "word": "コンサート",
+      "reading": "コンサート",
+      "meaning": "콘서트",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 673
+    },
+    {
+      "word": "遊園地",
+      "reading": "ゆうえんち",
+      "meaning": "유원지",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 674
+    },
+    {
+      "word": "遊ぶ",
+      "reading": "あそぶ",
+      "meaning": "놀다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 675
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 658,
+  "lastId": 661,
   "words": [
     {
       "word": "おおい",
@@ -6842,6 +6842,36 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
       "id": 658
+    },
+    {
+      "word": "全然",
+      "reading": "ぜんぜん",
+      "meaning": "전혀, 하나도",
+      "pos": "부사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 659
+    },
+    {
+      "word": "本当",
+      "reading": "ほんとう",
+      "meaning": "정말",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 660
+    },
+    {
+      "word": "マジ",
+      "reading": "マジ",
+      "meaning": "정말",
+      "pos": "부사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 661
     }
   ]
 }

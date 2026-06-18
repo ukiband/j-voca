@@ -1,5 +1,5 @@
 {
-  "lastId": 661,
+  "lastId": 666,
   "words": [
     {
       "word": "おおい",
@@ -6872,6 +6872,56 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
       "id": 661
+    },
+    {
+      "word": "すごく",
+      "reading": "すごく",
+      "meaning": "굉장히",
+      "pos": "부사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 662
+    },
+    {
+      "word": "遠い",
+      "reading": "とおい",
+      "meaning": "멀다",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 663
+    },
+    {
+      "word": "大丈夫だ",
+      "reading": "だいじょうぶだ",
+      "meaning": "괜찮다",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 664
+    },
+    {
+      "word": "すごい",
+      "reading": "すごい",
+      "meaning": "대단한, 굉장한",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 665
+    },
+    {
+      "word": "大変",
+      "reading": "たいへん",
+      "meaning": "힘들다",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-18",
+      "id": 666
     }
   ]
 }

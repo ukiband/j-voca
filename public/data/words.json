@@ -1,5 +1,5 @@
 {
-  "lastId": 686,
+  "lastId": 693,
   "words": [
     {
       "word": "おおい",
@@ -7112,6 +7112,76 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
       "id": 686
+    },
+    {
+      "word": "つまらない",
+      "reading": "つまらない",
+      "meaning": "재미없다. (시시하다)",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 687
+    },
+    {
+      "word": "おちつく",
+      "reading": "おちつく",
+      "meaning": "침착하다, 진정하다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 688
+    },
+    {
+      "word": "問題",
+      "reading": "もんだい",
+      "meaning": "문제",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 689
+    },
+    {
+      "word": "分かる",
+      "reading": "わかる",
+      "meaning": "알다, 이해하다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 690
+    },
+    {
+      "word": "宿題",
+      "reading": "しゅくだい",
+      "meaning": "숙제",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 691
+    },
+    {
+      "word": "大変だ",
+      "reading": "たいへんだ",
+      "meaning": "힘들다",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 692
+    },
+    {
+      "word": "忙しい",
+      "reading": "いそがしい",
+      "meaning": "바쁘다",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 693
     }
   ]
 }

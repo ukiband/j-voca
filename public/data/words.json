@@ -1,5 +1,5 @@
 {
-  "lastId": 675,
+  "lastId": 686,
   "words": [
     {
       "word": "おおい",
@@ -7002,6 +7002,116 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
       "id": 675
+    },
+    {
+      "word": "安い",
+      "reading": "やすい",
+      "meaning": "싸다",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 676
+    },
+    {
+      "word": "買う",
+      "reading": "かう",
+      "meaning": "사다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 677
+    },
+    {
+      "word": "辞書",
+      "reading": "じしょ",
+      "meaning": "사전",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 678
+    },
+    {
+      "word": "便利だ",
+      "reading": "べんりだ",
+      "meaning": "편리하다",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 679
+    },
+    {
+      "word": "よく",
+      "reading": "よく",
+      "meaning": "자주/잘",
+      "pos": "부사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 680
+    },
+    {
+      "word": "使う",
+      "reading": "つかう",
+      "meaning": "사용하다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 681
+    },
+    {
+      "word": "牛乳",
+      "reading": "ぎゅうにゅう",
+      "meaning": "우유",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 682
+    },
+    {
+      "word": "体",
+      "reading": "からだ",
+      "meaning": "몸",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 683
+    },
+    {
+      "word": "いい",
+      "reading": "いい",
+      "meaning": "좋다",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 684
+    },
+    {
+      "word": "毎日",
+      "reading": "まいにち",
+      "meaning": "매일",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 685
+    },
+    {
+      "word": "遅れる",
+      "reading": "おくれる",
+      "meaning": "늦다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-06-24",
+      "id": 686
     }
   ]
 }

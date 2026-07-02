@@ -1,5 +1,5 @@
 {
-  "lastId": 703,
+  "lastId": 714,
   "words": [
     {
       "word": "おおい",
@@ -7282,6 +7282,116 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
       "id": 703
+    },
+    {
+      "word": "映画",
+      "reading": "えいが",
+      "meaning": "영화",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 704
+    },
+    {
+      "word": "場所",
+      "reading": "ばしょ",
+      "meaning": "장소",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 705
+    },
+    {
+      "word": "時間",
+      "reading": "じかん",
+      "meaning": "시간",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 706
+    },
+    {
+      "word": "明日",
+      "reading": "あした",
+      "meaning": "내일",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 707
+    },
+    {
+      "word": "暇",
+      "reading": "ひま",
+      "meaning": "한가함",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 708
+    },
+    {
+      "word": "どうして",
+      "reading": "どうして",
+      "meaning": "왜, 어째서",
+      "pos": "부사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 709
+    },
+    {
+      "word": "一緒",
+      "reading": "いっしょ",
+      "meaning": "함께",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 710
+    },
+    {
+      "word": "行きませんか",
+      "reading": "いきませんか",
+      "meaning": "가지 않을래요?",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 711
+    },
+    {
+      "word": "いいですね",
+      "reading": "いいですね",
+      "meaning": "좋네요",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 712
+    },
+    {
+      "word": "どこ",
+      "reading": "どこ",
+      "meaning": "어디",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 713
+    },
+    {
+      "word": "サッカーの試合",
+      "reading": "サッカーのしあい",
+      "meaning": "축구 시합",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 714
     }
   ]
 }

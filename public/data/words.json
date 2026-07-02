@@ -1,5 +1,5 @@
 {
-  "lastId": 693,
+  "lastId": 697,
   "words": [
     {
       "word": "おおい",
@@ -7182,6 +7182,46 @@
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
       "id": 693
+    },
+    {
+      "word": "図書館",
+      "reading": "としょかん",
+      "meaning": "도서관",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 694
+    },
+    {
+      "word": "読み",
+      "reading": "よみ",
+      "meaning": "읽기",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 695
+    },
+    {
+      "word": "借り",
+      "reading": "かり",
+      "meaning": "빌리기",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 696
+    },
+    {
+      "word": "勉強",
+      "reading": "べんきょう",
+      "meaning": "공부",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-02",
+      "id": 697
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 719,
+  "lastId": 724,
   "words": [
     {
       "word": "おおい",
@@ -7442,6 +7442,56 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
       "id": 719
+    },
+    {
+      "word": "泳ぐ",
+      "reading": "およぐ",
+      "meaning": "헤엄치다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 720
+    },
+    {
+      "word": "友達",
+      "reading": "ともだち",
+      "meaning": "친구",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 721
+    },
+    {
+      "word": "食事",
+      "reading": "しょくじ",
+      "meaning": "식사",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 722
+    },
+    {
+      "word": "アイスクリーム",
+      "reading": "アイスクリーム",
+      "meaning": "아이스크림",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 723
+    },
+    {
+      "word": "買い物",
+      "reading": "かいもの",
+      "meaning": "장보기, 쇼핑",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 724
     }
   ]
 }

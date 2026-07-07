@@ -1,5 +1,5 @@
 {
-  "lastId": 714,
+  "lastId": 719,
   "words": [
     {
       "word": "おおい",
@@ -7392,6 +7392,56 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
       "id": 714
+    },
+    {
+      "word": "写真",
+      "reading": "しゃしん",
+      "meaning": "사진",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 715
+    },
+    {
+      "word": "撮る",
+      "reading": "とる",
+      "meaning": "찍다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 716
+    },
+    {
+      "word": "会う",
+      "reading": "あう",
+      "meaning": "만나다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 717
+    },
+    {
+      "word": "持つ",
+      "reading": "もつ",
+      "meaning": "들다, 가지다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 718
+    },
+    {
+      "word": "あう",
+      "reading": "あう",
+      "meaning": "만나다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-07",
+      "id": 719
     }
   ]
 }

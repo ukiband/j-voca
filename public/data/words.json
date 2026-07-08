@@ -1,5 +1,5 @@
 {
-  "lastId": 775,
+  "lastId": 778,
   "words": [
     {
       "word": "おおい",
@@ -8002,6 +8002,36 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
       "id": 775
+    },
+    {
+      "word": "作る",
+      "reading": "つくる",
+      "meaning": "만들다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 776
+    },
+    {
+      "word": "聞く",
+      "reading": "きく",
+      "meaning": "듣다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 777
+    },
+    {
+      "word": "運転",
+      "reading": "うんてん",
+      "meaning": "운전",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 778
     }
   ]
 }

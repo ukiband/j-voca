@@ -1,5 +1,5 @@
 {
-  "lastId": 759,
+  "lastId": 766,
   "words": [
     {
       "word": "おおい",
@@ -7842,6 +7842,76 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
       "id": 759
+    },
+    {
+      "word": "できない",
+      "reading": "できない",
+      "meaning": "불가능하다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 760
+    },
+    {
+      "word": "できる",
+      "reading": "できる",
+      "meaning": "가능하다, 할 수 있다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 761
+    },
+    {
+      "word": "いろいろ",
+      "reading": "いろいろ",
+      "meaning": "여러가지 (부사로)",
+      "pos": "부사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 762
+    },
+    {
+      "word": "いろいろな",
+      "reading": "いろいろな",
+      "meaning": "다양한, 여러가지 (형용사로)",
+      "pos": "な형용사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 763
+    },
+    {
+      "word": "お寺",
+      "reading": "おてら",
+      "meaning": "절",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 764
+    },
+    {
+      "word": "観光",
+      "reading": "かんこう",
+      "meaning": "관광",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 765
+    },
+    {
+      "word": "おそば",
+      "reading": "おそば",
+      "meaning": "메밀국수",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 766
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 724,
+  "lastId": 759,
   "words": [
     {
       "word": "おおい",
@@ -7492,6 +7492,356 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
       "id": 724
+    },
+    {
+      "word": "もつ",
+      "reading": "もつ",
+      "meaning": "들다, 가지고 있다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 725
+    },
+    {
+      "word": "およぐ",
+      "reading": "およぐ",
+      "meaning": "헤엄치다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 726
+    },
+    {
+      "word": "あそぶ",
+      "reading": "あそぶ",
+      "meaning": "놀다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 727
+    },
+    {
+      "word": "わかる",
+      "reading": "わかる",
+      "meaning": "알다, 이해하다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 728
+    },
+    {
+      "word": "てつだう",
+      "reading": "てつだう",
+      "meaning": "돕다, 도와주다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 729
+    },
+    {
+      "word": "おくれる",
+      "reading": "おくれる",
+      "meaning": "늦다",
+      "pos": "동사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 730
+    },
+    {
+      "word": "とおい",
+      "reading": "とおい",
+      "meaning": "멀다",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 731
+    },
+    {
+      "word": "いそがしい",
+      "reading": "いそがしい",
+      "meaning": "바쁘다",
+      "pos": "い형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 732
+    },
+    {
+      "word": "たいへんだ",
+      "reading": "たいへんだ",
+      "meaning": "힘들다, 큰일이다",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 733
+    },
+    {
+      "word": "だいじょうぶだ",
+      "reading": "だいじょうぶだ",
+      "meaning": "괜찮다",
+      "pos": "な형용사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 734
+    },
+    {
+      "word": "ごご",
+      "reading": "ごご",
+      "meaning": "오후",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 735
+    },
+    {
+      "word": "からだ",
+      "reading": "からだ",
+      "meaning": "몸",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 736
+    },
+    {
+      "word": "ばしょ",
+      "reading": "ばしょ",
+      "meaning": "장소",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 737
+    },
+    {
+      "word": "かいもの",
+      "reading": "かいもの",
+      "meaning": "쇼핑, 살 것",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 738
+    },
+    {
+      "word": "しょくじ",
+      "reading": "しょくじ",
+      "meaning": "식사",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 739
+    },
+    {
+      "word": "ほんとう",
+      "reading": "ほんとう",
+      "meaning": "정말",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 740
+    },
+    {
+      "word": "もんだい",
+      "reading": "もんだい",
+      "meaning": "문제",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 741
+    },
+    {
+      "word": "しゅくだい",
+      "reading": "しゅくだい",
+      "meaning": "숙제",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 742
+    },
+    {
+      "word": "ゆうえんち",
+      "reading": "ゆうえんち",
+      "meaning": "유원지",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 743
+    },
+    {
+      "word": "はなびたいかい",
+      "reading": "はなびたいかい",
+      "meaning": "불꽃놀이 대회",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 744
+    },
+    {
+      "word": "ドラマ",
+      "reading": "ドラマ",
+      "meaning": "드라마",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 745
+    },
+    {
+      "word": "ひとり",
+      "reading": "ひとり",
+      "meaning": "한 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 746
+    },
+    {
+      "word": "ふたり",
+      "reading": "ふたり",
+      "meaning": "두 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 747
+    },
+    {
+      "word": "さんにん",
+      "reading": "さんにん",
+      "meaning": "세 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 748
+    },
+    {
+      "word": "よにん",
+      "reading": "よにん",
+      "meaning": "네 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 749
+    },
+    {
+      "word": "ごにん",
+      "reading": "ごにん",
+      "meaning": "다섯 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 750
+    },
+    {
+      "word": "ろくにん",
+      "reading": "ろくにん",
+      "meaning": "여섯 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 751
+    },
+    {
+      "word": "しちにん",
+      "reading": "しちにん",
+      "meaning": "일곱 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 752
+    },
+    {
+      "word": "ななにん",
+      "reading": "ななにん",
+      "meaning": "일곱 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 753
+    },
+    {
+      "word": "はちにん",
+      "reading": "はちにん",
+      "meaning": "여덟 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 754
+    },
+    {
+      "word": "くにん",
+      "reading": "くにん",
+      "meaning": "아홉 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 755
+    },
+    {
+      "word": "きゅうにん",
+      "reading": "きゅうにん",
+      "meaning": "아홉 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 756
+    },
+    {
+      "word": "じゅうにん",
+      "reading": "じゅうにん",
+      "meaning": "열 명",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 757
+    },
+    {
+      "word": "なんめい さまですか",
+      "reading": "なんめい さまですか",
+      "meaning": "몇 분이십니까?",
+      "pos": "기타",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 758
+    },
+    {
+      "word": "いちにんまえ",
+      "reading": "いちにんまえ",
+      "meaning": "1인분, 제 역할",
+      "pos": "명사",
+      "chapter": 8,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 759
     }
   ]
 }

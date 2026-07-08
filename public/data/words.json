@@ -1,5 +1,5 @@
 {
-  "lastId": 769,
+  "lastId": 775,
   "words": [
     {
       "word": "おおい",
@@ -7942,6 +7942,66 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
       "id": 769
+    },
+    {
+      "word": "手紙",
+      "reading": "てがみ",
+      "meaning": "편지",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 770
+    },
+    {
+      "word": "出す",
+      "reading": "だす",
+      "meaning": "부치다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 771
+    },
+    {
+      "word": "週末",
+      "reading": "しゅうまつ",
+      "meaning": "주말",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 772
+    },
+    {
+      "word": "教える",
+      "reading": "おしえる",
+      "meaning": "가르치다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 773
+    },
+    {
+      "word": "今朝",
+      "reading": "けさ",
+      "meaning": "오늘 아침",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 774
+    },
+    {
+      "word": "降る",
+      "reading": "ふる",
+      "meaning": "내리다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-08",
+      "id": 775
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { shuffle } from './shuffle';
+import { getPrerenderedAudioUrl } from './speech';
 
 const DELAY_MS = 5000; // 일본어 발음 후 한국어 뜻까지 대기 시간
 const NEXT_WORD_DELAY_MS = 2000; // 한국어 뜻 발음 후 다음 단어까지 대기
@@ -7,7 +8,19 @@ const NEXT_WORD_DELAY_MS = 2000; // 한국어 뜻 발음 후 다음 단어까지
 // speechSynthesis가 차단되는 문제가 있다. cancel()은 세션 시작 시 최초 1회만 호출하고,
 // 이후에는 onend 콜백 체인으로 다음 발화를 연결한다.
 
-function speakJapanese(text) {
+async function speakJapanese(text) {
+  // 사전 생성된 VOICEVOX Nemo wav가 있으면 우선 재생 (품질↑)
+  const url = await getPrerenderedAudioUrl(text);
+  if (url) {
+    const ok = await new Promise(resolve => {
+      const audio = new Audio(url);
+      audio.onended = () => resolve(true);
+      audio.onerror = () => resolve(false);
+      audio.play().catch(() => resolve(false));
+    });
+    if (ok) return;
+  }
+  // 폴백: Web Speech API
   return new Promise(resolve => {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ja-JP';

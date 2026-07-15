@@ -1,4 +1,4 @@
-const CACHE_NAME = 'j-voca-v4';
+const CACHE_NAME = 'j-voca-v5';
 
 const PRECACHE_URLS = [
   '/j-voca/',
@@ -31,8 +31,10 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
   const isAsset = /\.[a-f0-9]{8,}\.(js|css)$/.test(url.pathname);
+  // 사전 생성된 VOICEVOX Nemo wav 파일 — 해시 파일명이라 불변, cache-first가 안전
+  const isAudio = url.pathname.includes('/audio/') && url.pathname.endsWith('.wav');
 
-  if (isAsset) {
+  if (isAsset || isAudio) {
     // Vite hashed assets: immutable, cache-first is safe
     event.respondWith(
       caches.match(event.request).then((cached) =>

@@ -1,5 +1,5 @@
 {
-  "lastId": 779,
+  "lastId": 798,
   "words": [
     {
       "word": "おおい",
@@ -8042,6 +8042,196 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
       "id": 779
+    },
+    {
+      "word": "夏休み",
+      "reading": "なつやすみ",
+      "meaning": "여름방학, 여름휴가",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 780
+    },
+    {
+      "word": "帰る",
+      "reading": "かえる",
+      "meaning": "돌아가다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 781
+    },
+    {
+      "word": "英語",
+      "reading": "えいご",
+      "meaning": "영어",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 782
+    },
+    {
+      "word": "テスト",
+      "reading": "テスト",
+      "meaning": "시험",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 783
+    },
+    {
+      "word": "受ける",
+      "reading": "うける",
+      "meaning": "(시험을) 치다, 받다, 받아들이다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 784
+    },
+    {
+      "word": "昨日",
+      "reading": "きのう",
+      "meaning": "어제",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 785
+    },
+    {
+      "word": "会議",
+      "reading": "かいぎ",
+      "meaning": "회의",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 786
+    },
+    {
+      "word": "する",
+      "reading": "する",
+      "meaning": "하다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 787
+    },
+    {
+      "word": "うける",
+      "reading": "うける",
+      "meaning": "(시험을) 치다, 받다, 받아들이다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 788
+    },
+    {
+      "word": "夜",
+      "reading": "よる",
+      "meaning": "밤",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 789
+    },
+    {
+      "word": "薬",
+      "reading": "くすり",
+      "meaning": "약",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 790
+    },
+    {
+      "word": "飲む",
+      "reading": "のむ",
+      "meaning": "마시다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 791
+    },
+    {
+      "word": "先月",
+      "reading": "せんげつ",
+      "meaning": "지난달",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 792
+    },
+    {
+      "word": "友達",
+      "reading": "ともだち",
+      "meaning": "친구",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 793
+    },
+    {
+      "word": "会う",
+      "reading": "あう",
+      "meaning": "만나다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 794
+    },
+    {
+      "word": "今日",
+      "reading": "きょう",
+      "meaning": "오늘",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 795
+    },
+    {
+      "word": "洗濯",
+      "reading": "せんたく",
+      "meaning": "세탁, 빨래",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 796
+    },
+    {
+      "word": "テストを受ける",
+      "reading": "テストをうける",
+      "meaning": "시험을 보다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 797
+    },
+    {
+      "word": "薬を飲む",
+      "reading": "くすりをのむ",
+      "meaning": "약을 먹다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 798
     }
   ]
 }

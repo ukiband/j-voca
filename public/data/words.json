@@ -1,5 +1,5 @@
 {
-  "lastId": 778,
+  "lastId": 779,
   "words": [
     {
       "word": "おおい",
@@ -8032,6 +8032,16 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
       "id": 778
+    },
+    {
+      "word": "よく",
+      "reading": "よく",
+      "meaning": "자주, 잘 제대로",
+      "pos": "부사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-22",
+      "id": 779
     }
   ]
 }

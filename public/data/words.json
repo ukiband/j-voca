@@ -1,5 +1,5 @@
 {
-  "lastId": 809,
+  "lastId": 816,
   "words": [
     {
       "word": "おおい",
@@ -8342,6 +8342,76 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
       "id": 809
+    },
+    {
+      "word": "できる人",
+      "reading": "できるひと",
+      "meaning": "할 수 있는 사람",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 810
+    },
+    {
+      "word": "バスケットボール",
+      "reading": "バスケットボール",
+      "meaning": "농구",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 811
+    },
+    {
+      "word": "水泳",
+      "reading": "すいえい",
+      "meaning": "수영",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 812
+    },
+    {
+      "word": "仕事",
+      "reading": "しごと",
+      "meaning": "일",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 813
+    },
+    {
+      "word": "パソコン",
+      "reading": "パソコン",
+      "meaning": "컴퓨터",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 814
+    },
+    {
+      "word": "修理",
+      "reading": "しゅうり",
+      "meaning": "수리",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 815
+    },
+    {
+      "word": "バスケ",
+      "reading": "バスケ",
+      "meaning": "농구",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 816
     }
   ]
 }

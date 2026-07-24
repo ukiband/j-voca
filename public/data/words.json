@@ -1,5 +1,5 @@
 {
-  "lastId": 816,
+  "lastId": 819,
   "words": [
     {
       "word": "おおい",
@@ -8412,6 +8412,36 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
       "id": 816
+    },
+    {
+      "word": "まる と ばつ",
+      "reading": "まる と ばつ",
+      "meaning": "동그라미와 엑스",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 817
+    },
+    {
+      "word": "三角",
+      "reading": "さんかく",
+      "meaning": "삼각",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 818
+    },
+    {
+      "word": "パソコンの修理",
+      "reading": "パソコンのしゅうり",
+      "meaning": "컴퓨터 수리",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-07-24",
+      "id": 819
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 819,
+  "lastId": 843,
   "words": [
     {
       "word": "おおい",
@@ -8442,6 +8442,246 @@
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
       "id": 819
+    },
+    {
+      "word": "話す",
+      "reading": "はなす",
+      "meaning": "말하다, 이야기하다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 820
+    },
+    {
+      "word": "ご飯",
+      "reading": "ごはん",
+      "meaning": "밥",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 821
+    },
+    {
+      "word": "食べます",
+      "reading": "たべます",
+      "meaning": "먹습니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 822
+    },
+    {
+      "word": "話",
+      "reading": "はなし",
+      "meaning": "이야기",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 823
+    },
+    {
+      "word": "します",
+      "reading": "します",
+      "meaning": "합니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 824
+    },
+    {
+      "word": "お酒",
+      "reading": "おさけ",
+      "meaning": "술",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 825
+    },
+    {
+      "word": "飲みます",
+      "reading": "のみます",
+      "meaning": "마십니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 826
+    },
+    {
+      "word": "テレビ",
+      "reading": "テレビ",
+      "meaning": "텔레비전",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 827
+    },
+    {
+      "word": "見ます",
+      "reading": "みます",
+      "meaning": "봅니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 828
+    },
+    {
+      "word": "待ちます",
+      "reading": "まちます",
+      "meaning": "기다립니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 829
+    },
+    {
+      "word": "まつ",
+      "reading": "まつ",
+      "meaning": "기다리다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 830
+    },
+    {
+      "word": "本",
+      "reading": "ほん",
+      "meaning": "책",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 831
+    },
+    {
+      "word": "読みます",
+      "reading": "よみます",
+      "meaning": "읽습니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 832
+    },
+    {
+      "word": "携帯電話",
+      "reading": "けいたいでんわ",
+      "meaning": "휴대전화",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 833
+    },
+    {
+      "word": "散歩",
+      "reading": "さんぽ",
+      "meaning": "산책",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 834
+    },
+    {
+      "word": "写真を撮ります",
+      "reading": "しゃしんをとります",
+      "meaning": "사진을 찍습니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 835
+    },
+    {
+      "word": "景色",
+      "reading": "けしき",
+      "meaning": "경치",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 836
+    },
+    {
+      "word": "音楽",
+      "reading": "おんがく",
+      "meaning": "음악",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 837
+    },
+    {
+      "word": "聞きます",
+      "reading": "ききます",
+      "meaning": "듣습니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 838
+    },
+    {
+      "word": "ばけものがたり",
+      "reading": "ばけものがたり",
+      "meaning": "괴물 이야기",
+      "pos": "명사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 839
+    },
+    {
+      "word": "おいしい",
+      "reading": "おいしい",
+      "meaning": "맛있다",
+      "pos": "い형용사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 840
+    },
+    {
+      "word": "おいしくない",
+      "reading": "おいしくない",
+      "meaning": "맛없다",
+      "pos": "い형용사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 841
+    },
+    {
+      "word": "わかりません",
+      "reading": "わかりません",
+      "meaning": "모르겠습니다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 842
+    },
+    {
+      "word": "ばける",
+      "reading": "ばける",
+      "meaning": "변하다, 변신하다",
+      "pos": "동사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-07",
+      "id": 843
     }
   ]
 }

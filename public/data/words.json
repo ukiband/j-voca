@@ -1,5 +1,5 @@
 {
-  "lastId": 886,
+  "lastId": 888,
   "words": [
     {
       "word": "おおい",
@@ -9112,6 +9112,26 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-12",
       "id": 886
+    },
+    {
+      "word": "自転車",
+      "reading": "じてんしゃ",
+      "meaning": "자전거",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 887
+    },
+    {
+      "word": "チャリ",
+      "reading": "ちゃり",
+      "meaning": "자전거",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 888
     }
   ]
 }

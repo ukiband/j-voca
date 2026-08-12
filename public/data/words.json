@@ -1,5 +1,5 @@
 {
-  "lastId": 881,
+  "lastId": 884,
   "words": [
     {
       "word": "おおい",
@@ -9062,6 +9062,36 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-12",
       "id": 881
+    },
+    {
+      "word": "机",
+      "reading": "つくえ",
+      "meaning": "책상",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 882
+    },
+    {
+      "word": "猫",
+      "reading": "ねこ",
+      "meaning": "고양이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 883
+    },
+    {
+      "word": "箱",
+      "reading": "はこ",
+      "meaning": "상자",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 884
     }
   ]
 }

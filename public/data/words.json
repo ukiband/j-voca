@@ -1,5 +1,5 @@
 {
-  "lastId": 879,
+  "lastId": 881,
   "words": [
     {
       "word": "おおい",
@@ -9042,6 +9042,26 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
       "id": 879
+    },
+    {
+      "word": "いつか",
+      "reading": "いつか",
+      "meaning": "언젠가",
+      "pos": "부사",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 880
+    },
+    {
+      "word": "~に のる",
+      "reading": "~に のる",
+      "meaning": "~에 타다",
+      "pos": "기타",
+      "chapter": 9,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 881
     }
   ]
 }

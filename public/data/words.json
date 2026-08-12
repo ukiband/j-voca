@@ -1,5 +1,5 @@
 {
-  "lastId": 884,
+  "lastId": 886,
   "words": [
     {
       "word": "おおい",
@@ -9092,6 +9092,26 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-12",
       "id": 884
+    },
+    {
+      "word": "すみません",
+      "reading": "すみません",
+      "meaning": "여기요~(점원을 부를 때)",
+      "pos": "감탄사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 885
+    },
+    {
+      "word": "棚",
+      "reading": "たな",
+      "meaning": "선반",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-12",
+      "id": 886
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 937,
+  "lastId": 945,
   "words": [
     {
       "word": "おおい",
@@ -9622,6 +9622,86 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
       "id": 937
+    },
+    {
+      "word": "ある",
+      "reading": "ある",
+      "meaning": "있다",
+      "pos": "동사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 938
+    },
+    {
+      "word": "ない",
+      "reading": "ない",
+      "meaning": "없다",
+      "pos": "い형용사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 939
+    },
+    {
+      "word": "いる",
+      "reading": "いる",
+      "meaning": "있다",
+      "pos": "동사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 940
+    },
+    {
+      "word": "いない",
+      "reading": "いない",
+      "meaning": "없다",
+      "pos": "い형용사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 941
+    },
+    {
+      "word": "公園",
+      "reading": "こうえん",
+      "meaning": "공원",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 942
+    },
+    {
+      "word": "男の子",
+      "reading": "おとこのこ",
+      "meaning": "남자아이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 943
+    },
+    {
+      "word": "女の子",
+      "reading": "おんなのこ",
+      "meaning": "여자아이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 944
+    },
+    {
+      "word": "冷蔵庫",
+      "reading": "れいぞうこ",
+      "meaning": "냉장고",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 945
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 945,
+  "lastId": 950,
   "words": [
     {
       "word": "おおい",
@@ -9702,6 +9702,56 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
       "id": 945
+    },
+    {
+      "word": "ひとめぼれ",
+      "reading": "ひとめぼれ",
+      "meaning": "첫눈에 반함",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 946
+    },
+    {
+      "word": "ひとめぼれする",
+      "reading": "ひとめぼれする",
+      "meaning": "첫눈에 반하다",
+      "pos": "동사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 947
+    },
+    {
+      "word": "する",
+      "reading": "する",
+      "meaning": "하다",
+      "pos": "동사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 948
+    },
+    {
+      "word": "飲み物",
+      "reading": "のみもの",
+      "meaning": "음료수",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 949
+    },
+    {
+      "word": "一人で",
+      "reading": "ひとりで",
+      "meaning": "혼자서",
+      "pos": "부사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 950
     }
   ]
 }

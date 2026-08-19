@@ -1,5 +1,5 @@
 {
-  "lastId": 888,
+  "lastId": 924,
   "words": [
     {
       "word": "おおい",
@@ -9132,6 +9132,366 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-12",
       "id": 888
+    },
+    {
+      "word": "うえ",
+      "reading": "うえ",
+      "meaning": "위",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 889
+    },
+    {
+      "word": "した",
+      "reading": "した",
+      "meaning": "아래",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 890
+    },
+    {
+      "word": "なか",
+      "reading": "なか",
+      "meaning": "안, 중간, 가운데",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 891
+    },
+    {
+      "word": "いぬ",
+      "reading": "いぬ",
+      "meaning": "개",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 892
+    },
+    {
+      "word": "ねこ",
+      "reading": "ねこ",
+      "meaning": "고양이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 893
+    },
+    {
+      "word": "さかな",
+      "reading": "さかな",
+      "meaning": "생선",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 894
+    },
+    {
+      "word": "ペット",
+      "reading": "ペット",
+      "meaning": "애완동물",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 895
+    },
+    {
+      "word": "こども",
+      "reading": "こども",
+      "meaning": "아이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 896
+    },
+    {
+      "word": "きょうだい",
+      "reading": "きょうだい",
+      "meaning": "형제",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 897
+    },
+    {
+      "word": "こいびと",
+      "reading": "こいびと",
+      "meaning": "애인, 연인",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 898
+    },
+    {
+      "word": "おとこのこ",
+      "reading": "おとこのこ",
+      "meaning": "남자아이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 899
+    },
+    {
+      "word": "おんなのこ",
+      "reading": "おんなのこ",
+      "meaning": "여자아이",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 900
+    },
+    {
+      "word": "のる",
+      "reading": "のる",
+      "meaning": "타다",
+      "pos": "동사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 901
+    },
+    {
+      "word": "つくえ",
+      "reading": "つくえ",
+      "meaning": "책상",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 902
+    },
+    {
+      "word": "れいぞうこ",
+      "reading": "れいぞうこ",
+      "meaning": "냉장고",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 903
+    },
+    {
+      "word": "ほんだな",
+      "reading": "ほんだな",
+      "meaning": "책장",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 904
+    },
+    {
+      "word": "いす",
+      "reading": "いす",
+      "meaning": "의자",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 905
+    },
+    {
+      "word": "ソファー",
+      "reading": "ソファー",
+      "meaning": "소파",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 906
+    },
+    {
+      "word": "テーブル",
+      "reading": "テーブル",
+      "meaning": "테이블",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 907
+    },
+    {
+      "word": "ベッド",
+      "reading": "ベッド",
+      "meaning": "침대",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 908
+    },
+    {
+      "word": "タンス",
+      "reading": "タンス",
+      "meaning": "옷장",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 909
+    },
+    {
+      "word": "たな",
+      "reading": "たな",
+      "meaning": "선반",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 910
+    },
+    {
+      "word": "はこ",
+      "reading": "はこ",
+      "meaning": "상자",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 911
+    },
+    {
+      "word": "まど",
+      "reading": "まど",
+      "meaning": "창문",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 912
+    },
+    {
+      "word": "にく",
+      "reading": "にく",
+      "meaning": "고기",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 913
+    },
+    {
+      "word": "ひこうき",
+      "reading": "ひこうき",
+      "meaning": "비행기",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 914
+    },
+    {
+      "word": "こんばん",
+      "reading": "こんばん",
+      "meaning": "오늘 밤",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 915
+    },
+    {
+      "word": "のみもの",
+      "reading": "のみもの",
+      "meaning": "음료수",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 916
+    },
+    {
+      "word": "だいどころ",
+      "reading": "だいどころ",
+      "meaning": "부엌",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 917
+    },
+    {
+      "word": "こうえん",
+      "reading": "こうえん",
+      "meaning": "공원",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 918
+    },
+    {
+      "word": "はな",
+      "reading": "はな",
+      "meaning": "꽃",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 919
+    },
+    {
+      "word": "コンビニ",
+      "reading": "コンビニ",
+      "meaning": "편의점",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 920
+    },
+    {
+      "word": "ジュース",
+      "reading": "ジュース",
+      "meaning": "주스",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 921
+    },
+    {
+      "word": "デート",
+      "reading": "デート",
+      "meaning": "데이트",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 922
+    },
+    {
+      "word": "ドア",
+      "reading": "ドア",
+      "meaning": "문",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 923
+    },
+    {
+      "word": "とびら",
+      "reading": "とびら",
+      "meaning": "문",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 924
     }
   ]
 }

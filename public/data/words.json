@@ -1,5 +1,5 @@
 {
-  "lastId": 924,
+  "lastId": 937,
   "words": [
     {
       "word": "おおい",
@@ -9492,6 +9492,136 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
       "id": 924
+    },
+    {
+      "word": "上",
+      "reading": "うえ",
+      "meaning": "위",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 925
+    },
+    {
+      "word": "下",
+      "reading": "した",
+      "meaning": "아래",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 926
+    },
+    {
+      "word": "中",
+      "reading": "なか",
+      "meaning": "안, 속",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 927
+    },
+    {
+      "word": "外",
+      "reading": "そと",
+      "meaning": "밖",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 928
+    },
+    {
+      "word": "前",
+      "reading": "まえ",
+      "meaning": "앞",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 929
+    },
+    {
+      "word": "後ろ",
+      "reading": "うしろ",
+      "meaning": "뒤",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 930
+    },
+    {
+      "word": "横",
+      "reading": "よこ",
+      "meaning": "옆",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 931
+    },
+    {
+      "word": "かばん",
+      "reading": "かばん",
+      "meaning": "가방",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 932
+    },
+    {
+      "word": "財布",
+      "reading": "さいふ",
+      "meaning": "지갑",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 933
+    },
+    {
+      "word": "銀行",
+      "reading": "ぎんこう",
+      "meaning": "은행",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 934
+    },
+    {
+      "word": "レストラン",
+      "reading": "レストラン",
+      "meaning": "레스토랑",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 935
+    },
+    {
+      "word": "犬",
+      "reading": "いぬ",
+      "meaning": "개",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 936
+    },
+    {
+      "word": "花",
+      "reading": "はな",
+      "meaning": "꽃",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 937
     }
   ]
 }

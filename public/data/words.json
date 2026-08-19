@@ -1,5 +1,5 @@
 {
-  "lastId": 950,
+  "lastId": 952,
   "words": [
     {
       "word": "おおい",
@@ -9752,6 +9752,26 @@
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
       "id": 950
+    },
+    {
+      "word": "イートインスペース",
+      "reading": "イートインスペース",
+      "meaning": "매장 내 식사 공간",
+      "pos": "명사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 951
+    },
+    {
+      "word": "あっためますか",
+      "reading": "あっためますか",
+      "meaning": "데워드릴까요?",
+      "pos": "동사",
+      "chapter": 10,
+      "textbook": "일본어수업",
+      "createdAt": "2026-08-19",
+      "id": 952
     }
   ]
 }

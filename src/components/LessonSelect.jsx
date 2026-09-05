@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../lib/db';
 import { getDueCount, getDueCountByLesson, getDueCountByTag, getAllTags } from '../lib/review-utils';
+import { getSteps, getChapters, lessonKey, formatLesson } from '../lib/lesson-utils';
 
 export default function LessonSelect() {
   const [words, setWords] = useState([]);
@@ -26,8 +27,8 @@ export default function LessonSelect() {
   const byTag = getDueCountByTag(words, reviews);
   const allTags = getAllTags(words);
 
-  // 전체 lesson 목록 (due 없는 lesson도 포함)
-  const chapters = [...new Set(words.map(w => w.chapter))].sort((a, b) => a - b);
+  // step 목록을 내림차순으로 — 지금 공부 중인 최신 step 섹션이 화면 위에 오도록
+  const steps = getSteps(words).reverse();
 
   // 쿼리 파라미터에 reverse/order 추가하는 헬퍼
   const reviewPath = (base) => {
@@ -107,38 +108,45 @@ export default function LessonSelect() {
         </div>
       </Link>
 
-      {/* lesson별 복습 */}
-      <div className="space-y-2">
-        {chapters.map(ch => {
-          const counts = byLesson[ch] || { total: 0, reconfirm: 0 };
-          const hasDue = counts.total > 0;
-          return (
-            <Link
-              key={ch}
-              to={hasDue ? reviewPath(`/review?lesson=${ch}`) : '#'}
-              className={`block rounded-xl p-4 border ${
-                hasDue
-                  ? 'bg-white border-slate-200 shadow-sm'
-                  : 'bg-slate-50 border-slate-100 pointer-events-none'
-              }`}
-            >
-              <div className="flex justify-between items-center">
-                <span className={`font-medium ${hasDue ? 'text-slate-800' : 'text-slate-400'}`}>
-                  Lesson {ch}
-                </span>
-                <div className="text-right">
-                  <span className={`font-bold ${hasDue ? 'text-indigo-600' : 'text-slate-300'}`}>
-                    {counts.total}개
-                  </span>
-                  {counts.reconfirm > 0 && (
-                    <p className="text-xs text-slate-400">재확인 {counts.reconfirm}</p>
-                  )}
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      {/* step별 섹션 안에 lesson 카드. step 2부터 chapter 번호가 1부터 다시 시작하므로
+          step 헤더로 구분하고, 카드에는 "Lesson N"만 표시한다 (due 없는 lesson도 포함) */}
+      {steps.map(step => {
+        const chapters = getChapters(words, step);
+        return (
+          <div key={step} className="space-y-2">
+            <h2 className="text-sm font-semibold text-slate-500">Step {step}</h2>
+            {chapters.map(ch => {
+              const counts = byLesson[lessonKey(step, ch)] || { total: 0, reconfirm: 0 };
+              const hasDue = counts.total > 0;
+              return (
+                <Link
+                  key={ch}
+                  to={hasDue ? reviewPath(`/review?step=${step}&lesson=${ch}`) : '#'}
+                  className={`block rounded-xl p-4 border ${
+                    hasDue
+                      ? 'bg-white border-slate-200 shadow-sm'
+                      : 'bg-slate-50 border-slate-100 pointer-events-none'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <span className={`font-medium ${hasDue ? 'text-slate-800' : 'text-slate-400'}`}>
+                      {formatLesson(step, ch, { withStep: false })}
+                    </span>
+                    <div className="text-right">
+                      <span className={`font-bold ${hasDue ? 'text-indigo-600' : 'text-slate-300'}`}>
+                        {counts.total}개
+                      </span>
+                      {counts.reconfirm > 0 && (
+                        <p className="text-xs text-slate-400">재확인 {counts.reconfirm}</p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        );
+      })}
 
       {/* 카테고리별 복습 */}
       {allTags.length > 0 && (

@@ -3,16 +3,20 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { db } from '../lib/db';
 import { gradeCard, createInitialReview } from '../lib/fsrs';
 import { getDueWords } from '../lib/review-utils';
+import { formatLesson } from '../lib/lesson-utils';
 import FlashCard from './FlashCard';
 
 export default function ReviewSession() {
   const [params] = useSearchParams();
   const lessonParam = params.get('lesson');
+  const stepParam = params.get('step');
   const tagParam = params.get('tag');
   const reverse = params.get('reverse') === 'true';
   const order = params.get('order');
   // lesson 파라미터가 있으면 해당 lesson만, 없으면 전체 복습
   const chapter = lessonParam != null ? Number(lessonParam) : undefined;
+  // step 파라미터가 없는 기존 URL(?lesson=N)은 step 1로 간주한다. lesson이 없으면 step도 의미 없음
+  const step = chapter != null ? (stepParam != null ? Number(stepParam) : 1) : undefined;
   // 네비게이션마다 고유한 key가 바뀌므로, 같은 경로 재진입 시에도 데이터를 새로 읽음
   const locationKey = useLocation().key;
 
@@ -27,7 +31,7 @@ export default function ReviewSession() {
   const [saveError, setSaveError] = useState(null);
 
   useEffect(() => {
-    getDueWords(chapter, tagParam).then(words => {
+    getDueWords(step, chapter, tagParam).then(words => {
       if (words.length === 0) {
         setNoWords(true);
       } else {
@@ -44,7 +48,7 @@ export default function ReviewSession() {
       setError(err.message || '데이터를 불러올 수 없습니다');
       setLoading(false);
     });
-  }, [chapter, tagParam, order, locationKey]);
+  }, [step, chapter, tagParam, order, locationKey]);
 
   const currentWord = queue[currentIndex];
   const done = !loading && queue.length > 0 && currentIndex >= queue.length;
@@ -137,7 +141,7 @@ export default function ReviewSession() {
           </div>
         </div>
         <p className="text-sm text-slate-400">
-          {chapter != null ? `Lesson ${chapter} · ` : tagParam ? `${tagParam} · ` : ''}{wordCount}개 단어 복습 완료
+          {chapter != null ? `${formatLesson(step, chapter)} · ` : tagParam ? `${tagParam} · ` : ''}{wordCount}개 단어 복습 완료
         </p>
         <Link to="/lesson-select" className="text-indigo-600 font-medium text-sm inline-block">돌아가기</Link>
       </div>
@@ -154,7 +158,7 @@ export default function ReviewSession() {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-slate-800">
-          {chapter != null ? `Lesson ${chapter} 복습` : tagParam ? `${tagParam} 복습` : '복습'}
+          {chapter != null ? `${formatLesson(step, chapter)} 복습` : tagParam ? `${tagParam} 복습` : '복습'}
           {reverse && <span className="text-sm font-normal text-indigo-500 ml-2">한→일</span>}
         </h1>
         <span className="text-sm text-slate-400">

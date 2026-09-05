@@ -3,11 +3,15 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db, syncWordsFromData, deleteReview } from '../lib/db';
 import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
 import { filterWords } from '../lib/word-utils';
+import { getSteps, getChapters, getLatestStep, formatLesson } from '../lib/lesson-utils';
 import BrowseModal from './BrowseModal';
 import { useBrowseMode } from '../hooks/useBrowseMode';
 
 export default function WordList() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
+  // selectedStep이 null이면 "아직 사용자가 고르지 않음" → 최신 step을 기본으로 쓴다.
+  // 단어 로딩이 비동기라 마운트 시점엔 words가 비어 있으므로, 고정값 대신 렌더 시점에 계산한다.
+  const [selectedStep, setSelectedStep] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [editingId, setEditingId] = useState(null);
@@ -15,9 +19,13 @@ export default function WordList() {
   const [saving, setSaving] = useState(false);
   const browse = useBrowseMode();
 
-  const chapters = [...new Set(words.map(w => w.chapter))].sort((a, b) => a - b);
-  // 챕터 필터와 검색어를 조합하여 단어 필터링
-  const filtered = filterWords(words, selectedChapter, searchQuery);
+  const steps = getSteps(words);
+  // 선택한 step이 삭제 등으로 사라졌으면 최신 step으로 되돌린다
+  const currentStep = steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
+  const chapters = getChapters(words, currentStep);
+  const stepWordCount = filterWords(words, currentStep, null, '').length;
+  // step/챕터 필터와 검색어를 조합하여 단어 필터링
+  const filtered = filterWords(words, currentStep, selectedChapter, searchQuery);
 
   const canEdit = hasGithubToken();
 
@@ -52,12 +60,14 @@ export default function WordList() {
   }
 
   async function handleDeleteChapter() {
+    // step 2부터 chapter 번호가 겹치므로 (step, chapter) 둘 다 정해진 상태에서만 삭제한다
     if (selectedChapter === null) return;
     const count = filtered.length;
-    if (!confirm(`Lesson ${selectedChapter}의 단어 ${count}개를 모두 삭제하시겠습니까?`)) return;
+    const label = formatLesson(currentStep, selectedChapter);
+    if (!confirm(`${label}의 단어 ${count}개를 모두 삭제하시겠습니까?`)) return;
     setSaving(true);
     try {
-      const { data, deletedIds } = await deleteChapterFromRepo(selectedChapter);
+      const { data, deletedIds } = await deleteChapterFromRepo(currentStep, selectedChapter);
       await syncWordsFromData(data.words);
       for (const id of deletedIds) await deleteReview(id);
       setSelectedChapter(null);
@@ -69,6 +79,13 @@ export default function WordList() {
 
   function selectChapter(ch) {
     setSelectedChapter(ch);
+    browse.close();
+  }
+
+  // step을 바꾸면 chapter 번호 체계가 달라지므로 chapter 선택은 "전체"로 되돌린다
+  function selectStep(step) {
+    setSelectedStep(step);
+    setSelectedChapter(null);
     browse.close();
   }
 
@@ -85,6 +102,24 @@ export default function WordList() {
         className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300"
       />
 
+      {/* step 칩: step이 하나뿐이면 고를 게 없으므로 숨긴다 */}
+      {steps.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-1">
+          {steps.map(step => (
+            <button
+              key={step}
+              onClick={() => selectStep(step)}
+              className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
+                currentStep === step ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600'
+              }`}
+            >
+              Step {step}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* 현재 step 안의 chapter 칩. "전체"는 해당 step의 전체 단어 */}
       {chapters.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
           <button
@@ -93,7 +128,7 @@ export default function WordList() {
               selectedChapter === null ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
             }`}
           >
-            전체 ({words.length})
+            전체 ({stepWordCount})
           </button>
           {chapters.map(ch => (
             <button
@@ -103,7 +138,7 @@ export default function WordList() {
                 selectedChapter === ch ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
               }`}
             >
-              Lesson {ch} ({words.filter(w => w.chapter === ch).length})
+              {formatLesson(currentStep, ch, { withStep: false })} ({filterWords(words, currentStep, ch, '').length})
             </button>
           ))}
         </div>
@@ -134,7 +169,7 @@ export default function WordList() {
           disabled={saving}
           className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"
         >
-          {saving ? '삭제 중...' : `Lesson ${selectedChapter} 전체 삭제 (${filtered.length}개)`}
+          {saving ? '삭제 중...' : `${formatLesson(currentStep, selectedChapter)} 전체 삭제 (${filtered.length}개)`}
         </button>
       )}
 

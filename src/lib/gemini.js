@@ -2,15 +2,31 @@ import { getLocalDateString } from './date-utils';
 
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
-// Gemini가 한자 표기(形容詞)로 응답할 경우 히라가나+한글 형태로 정규화
+// Gemini 가 품사를 한자 표기(動詞, な形容詞)나 한글 음차(나형용사)로 돌려주는 경우가 실제로 관찰되어,
+// words.json 에서 쓰는 표기(명사, 동사, い형용사, な형용사 ...)로 정규화한다. 매핑에 없는 값은 그대로 둔다.
+const POS_MAP = {
+  'い形容詞': 'い형용사',
+  'な形容詞': 'な형용사',
+  'イ形容詞': 'い형용사',
+  'ナ形容詞': 'な형용사',
+  '形容詞': 'い형용사',
+  '形容動詞': 'な형용사',
+  '動詞': '동사',
+  '名詞': '명사',
+  '代名詞': '대명사',
+  '副詞': '부사',
+  '助詞': '조사',
+  '接続詞': '접속사',
+  '感動詞': '감탄사',
+  '나형용사': 'な형용사',
+  '이형용사': 'い형용사',
+  '나-형용사': 'な형용사',
+  '이-형용사': 'い형용사',
+};
+
 export function normalizePos(pos) {
-  const posMap = {
-    'い形容詞': 'い형용사',
-    'な形容詞': 'な형용사',
-    'イ形容詞': 'い형용사',
-    'ナ形容詞': 'な형용사',
-  };
-  return posMap[pos] || pos || '기타';
+  const trimmed = typeof pos === 'string' ? pos.trim() : '';
+  return POS_MAP[trimmed] || trimmed || '기타';
 }
 
 // 무료 등급에서 쓸 수 있는 모델만 나열한다. gemini-2.0-flash 계열은 2026-06-01에 서비스가 종료되어
@@ -133,6 +149,13 @@ export function parseGeminiResponse(text) {
   return words.filter(w => w && typeof w === 'object' && typeof w.word === 'string');
 }
 
+const OVERLOAD_MESSAGE = '서버 과부하: 잠시 후 다시 시도해주세요.';
+
+// 503 이거나 메시지가 과부하를 뜻하면 true. 재시도 판단과 오류 메시지 생성이 같은 기준을 쓰도록 분리했다
+export function isOverloaded(status, msg) {
+  return status === 503 || /high demand|overloaded/i.test(msg);
+}
+
 export function buildApiErrorMessage(status, msg, model) {
   // 상태 코드를 먼저 본다. 메시지 문자열 검사만으로 분기하면 종료 모델 404 메시지
   // ("... is not supported for generateContent") 안의 "rate" 가 쿼터 초과로 오인되는 문제가 있었다.
@@ -148,8 +171,8 @@ export function buildApiErrorMessage(status, msg, model) {
       ' 설정에서 다른 모델로 변경해보세요.'
     );
   }
-  if (status === 503 || /high demand|overloaded/i.test(msg)) {
-    return '서버 과부하: 잠시 후 다시 시도해주세요.';
+  if (isOverloaded(status, msg)) {
+    return OVERLOAD_MESSAGE;
   }
   if (status === 400) {
     // 400 은 키 문제일 수도, 요청 본문(thinkingLevel 등 파라미터) 문제일 수도 있다.
@@ -160,7 +183,28 @@ export function buildApiErrorMessage(status, msg, model) {
   return msg || `API 요청 실패 (${status})`;
 }
 
-export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook) {
+// 과부하(503) 재시도 대기 시간. 실측에서 3.8-flash 가 순간적으로 503 을 자주 돌려줬는데 대부분 곧 풀렸다
+const RETRY_DELAY_MS = 2000;
+
+function defaultDelay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// 응답 상태와 JSON 본문을 함께 돌려준다. 오류 본문도 JSON 이므로 한 번에 읽어 두면 호출부 분기가 단순해진다
+async function requestGemini(url, body, apiKey) {
+  const response = await fetch(url, {
+    method: 'POST',
+    // API 키는 URL 쿼리(?key=)보다 헤더로 보내는 편이 로그나 히스토리에 남지 않아 안전하다
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+    body: JSON.stringify(body),
+  });
+  const data = await response.json().catch(() => ({}));
+  return { ok: response.ok, status: response.status, data };
+}
+
+// options.delay 는 테스트에서 실제 대기 없이 재시도 흐름을 검증하기 위한 주입 지점
+export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook, options = {}) {
+  const delay = options.delay || defaultDelay;
   const apiKey = getApiKey();
   if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
 
@@ -192,7 +236,7 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
 - word: 일본어 단어. 교재에서 메인으로 인쇄된 표기 그대로 (한자 메인이면 한자, 괄호 안 보조 표기와 후리가나는 제외)
 - reading: 히라가나 읽기
 - meaning: 한국어 뜻. 뜻이 여러 개면 "높다, 비싸다" 처럼 쉼표로 구분
-- pos: 품사. 반드시 다음 목록 중 하나를 그대로 사용: 명사, 대명사, 동사, い형용사, な형용사, 부사, 조사, 접속사, 감탄사, 기타. 한자 표기(形容詞 등)를 쓰지 마세요.
+- pos: 품사. 반드시 다음 목록 중 하나를 그대로 사용: 명사, 대명사, 동사, い형용사, な형용사, 부사, 조사, 접속사, 감탄사, 기타. 한자 표기(形容詞 등)나 한글 음차(나형용사, 이형용사)도 쓰지 마세요.
 
 ## 예시
 - 초급 히라가나 교재에 "とけい 시계" → {"word":"とけい","reading":"とけい","meaning":"시계","pos":"명사"}
@@ -200,32 +244,35 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
 - 인쇄된 "高い" 옆에 손글씨로 "비싸다도 됨" 메모 → 메모는 별도 단어로 만들지 않고 인쇄 단어 1개만: {"word":"高い","reading":"たかい","meaning":"높다, 비싸다","pos":"い형용사"}
 - な형용사 "きれいだ" → {"word":"きれいだ","reading":"きれいだ","meaning":"예쁘다, 깨끗하다","pos":"な형용사"}`;
 
-  const response = await fetch(url, {
-    method: 'POST',
-    // API 키는 URL 쿼리(?key=)보다 헤더로 보내는 편이 로그나 히스토리에 남지 않아 안전하다
-    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-    body: JSON.stringify({
-      contents: [{
-        parts: [
-          { text: prompt },
-          {
-            inline_data: {
-              mime_type: mimeType,
-              data: base64Image,
-            },
+  const body = {
+    contents: [{
+      parts: [
+        { text: prompt },
+        {
+          inline_data: {
+            mime_type: mimeType,
+            data: base64Image,
           },
-        ],
-      }],
-      generationConfig: buildGenerationConfig(model),
-    }),
-  });
+        },
+      ],
+    }],
+    generationConfig: buildGenerationConfig(model),
+  };
 
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({}));
-    throw new Error(buildApiErrorMessage(response.status, err.error?.message || '', model));
+  let result = await requestGemini(url, body, apiKey);
+
+  // 과부하는 보통 몇 초 안에 풀리므로 잠시 기다렸다가 한 번만 다시 보낸다.
+  // 더 반복하지 않는 이유: 무료 등급의 분당 요청 수를 소모하고, 사용자가 화면에서 기다리는 시간도 길어진다.
+  if (!result.ok && isOverloaded(result.status, result.data.error?.message || '')) {
+    await delay(RETRY_DELAY_MS);
+    result = await requestGemini(url, body, apiKey);
   }
 
-  const data = await response.json();
+  if (!result.ok) {
+    throw new Error(buildApiErrorMessage(result.status, result.data.error?.message || '', model));
+  }
+
+  const data = result.data;
   // 사고 과정(thought) 파트가 함께 올 수 있으므로, 사고 파트가 아닌 첫 텍스트 파트를 단어 목록으로 본다
   const parts = data.candidates?.[0]?.content?.parts || [];
   const text = parts.find(p => typeof p.text === 'string' && !p.thought)?.text || '';

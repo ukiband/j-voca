@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import {
   normalizePos,
   MODELS,
@@ -6,6 +6,8 @@ import {
   buildGenerationConfig,
   parseGeminiResponse,
   buildApiErrorMessage,
+  isOverloaded,
+  extractWordsFromImage,
 } from '../gemini';
 
 // vitest 기본 환경(node)에는 localStorage가 없어서 Map 기반의 최소 구현을 주입한다
@@ -47,6 +49,31 @@ describe('normalizePos', () => {
 
   it('매핑에 없는 값은 그대로 반환한다', () => {
     expect(normalizePos('연체사')).toBe('연체사');
+  });
+
+  it('한자 품사 표기를 한글 표기로 변환한다', () => {
+    expect(normalizePos('動詞')).toBe('동사');
+    expect(normalizePos('名詞')).toBe('명사');
+    expect(normalizePos('代名詞')).toBe('대명사');
+    expect(normalizePos('副詞')).toBe('부사');
+    expect(normalizePos('助詞')).toBe('조사');
+    expect(normalizePos('接続詞')).toBe('접속사');
+    expect(normalizePos('感動詞')).toBe('감탄사');
+    expect(normalizePos('形容動詞')).toBe('な형용사');
+    expect(normalizePos('形容詞')).toBe('い형용사');
+  });
+
+  it('한글 음차 표기(나형용사, 이형용사)를 변환한다', () => {
+    expect(normalizePos('나형용사')).toBe('な형용사');
+    expect(normalizePos('이형용사')).toBe('い형용사');
+    expect(normalizePos('나-형용사')).toBe('な형용사');
+    expect(normalizePos('이-형용사')).toBe('い형용사');
+  });
+
+  it('앞뒤 공백을 제거한 뒤 매핑한다', () => {
+    expect(normalizePos(' 動詞 ')).toBe('동사');
+    expect(normalizePos(' 명사 ')).toBe('명사');
+    expect(normalizePos('   ')).toBe('기타');
   });
 });
 
@@ -188,5 +215,95 @@ describe('buildApiErrorMessage', () => {
   it('그 외 상태 코드는 서버 메시지 또는 상태 코드를 반환한다', () => {
     expect(buildApiErrorMessage(500, 'Internal error', model)).toBe('Internal error');
     expect(buildApiErrorMessage(500, '', model)).toBe('API 요청 실패 (500)');
+  });
+});
+
+describe('isOverloaded', () => {
+  it('503 이거나 과부하 메시지면 true', () => {
+    expect(isOverloaded(503, '')).toBe(true);
+    expect(isOverloaded(429, 'This model is currently experiencing high demand.')).toBe(true);
+    expect(isOverloaded(500, 'The model is overloaded.')).toBe(true);
+  });
+
+  it('그 외에는 false', () => {
+    expect(isOverloaded(404, 'This model models/gemini-2.0-flash is no longer available.')).toBe(false);
+    expect(isOverloaded(200, '')).toBe(false);
+  });
+});
+
+describe('extractWordsFromImage 과부하 재시도', () => {
+  const entry = { word: '時計', reading: 'とけい', meaning: '시계', pos: '名詞' };
+  const overloaded = {
+    ok: false,
+    status: 503,
+    json: async () => ({ error: { message: 'This model is currently experiencing high demand. Please try again later.' } }),
+  };
+  const success = {
+    ok: true,
+    status: 200,
+    json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify([entry]) }] } }] }),
+  };
+  // 테스트가 실제로 2초를 기다리지 않도록 대기를 즉시 끝내고 호출 횟수만 기록한다
+  let delay;
+
+  beforeEach(() => {
+    globalThis.localStorage = createLocalStorageStub();
+    localStorage.setItem('gemini-api-key', 'test-key');
+    delay = vi.fn(() => Promise.resolve());
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    delete globalThis.localStorage;
+  });
+
+  it('첫 호출이 503 이면 대기 후 1회 재시도하고 성공 결과를 반환한다', async () => {
+    const fetchMock = vi.fn().mockResolvedValueOnce(overloaded).mockResolvedValueOnce(success);
+    vi.stubGlobal('fetch', fetchMock);
+
+    const words = await extractWordsFromImage('base64', 'image/jpeg', 1, 2, '교재', { delay });
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(delay).toHaveBeenCalledTimes(1);
+    expect(words).toHaveLength(1);
+    expect(words[0]).toMatchObject({ word: '時計', pos: '명사', step: 1, chapter: 2, textbook: '교재' });
+  });
+
+  it('재시도도 503 이면 과부하 메시지로 throw 하고 더 재시도하지 않는다', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(overloaded);
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay }))
+      .rejects.toThrow('서버 과부하');
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it('503 이 아닌 오류는 재시도하지 않는다', async () => {
+    const notFound = {
+      ok: false,
+      status: 404,
+      json: async () => ({ error: { message: 'This model models/gemini-2.0-flash is no longer available.' } }),
+    };
+    const fetchMock = vi.fn().mockResolvedValue(notFound);
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay }))
+      .rejects.toThrow('더 이상 사용할 수 없습니다');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(delay).not.toHaveBeenCalled();
+  });
+
+  it('요청은 x-goog-api-key 헤더와 구조화 출력 설정을 포함한다', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(success);
+    vi.stubGlobal('fetch', fetchMock);
+
+    await extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay });
+
+    const [url, init] = fetchMock.mock.calls[0];
+    expect(url).not.toContain('key=');
+    expect(init.headers['x-goog-api-key']).toBe('test-key');
+    const body = JSON.parse(init.body);
+    expect(body.generationConfig.responseMimeType).toBe('application/json');
+    expect(body.contents[0].parts[1].inline_data).toEqual({ mime_type: 'image/jpeg', data: 'base64' });
   });
 });

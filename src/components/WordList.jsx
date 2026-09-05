@@ -36,7 +36,6 @@ export default function WordList() {
   const stepWordCount = Object.values(countByChapter).reduce((sum, n) => sum + n, 0);
   // 레슨 삭제는 검색어와 무관하게 레슨 전체를 지우므로, 확인 문구/버튼의 개수도 검색어를 뺀 값을 써야 한다
   const lessonWordCount = selectedChapter !== null ? (countByChapter[selectedChapter] || 0) : 0;
-  // step/챕터 필터와 검색어를 조합하여 단어 필터링
   const filtered = filterWords(words, currentStep, selectedChapter, searchQuery);
 
   const canEdit = hasGithubToken();
@@ -72,7 +71,6 @@ export default function WordList() {
   }
 
   async function handleDeleteChapter() {
-    // step 2부터 chapter 번호가 겹치므로 (step, chapter) 둘 다 정해진 상태에서만 삭제한다
     if (selectedChapter === null) return;
     const label = formatLesson(currentStep, selectedChapter);
     if (!confirm(`${label}의 단어 ${lessonWordCount}개를 모두 삭제하시겠습니까?`)) return;
@@ -93,7 +91,6 @@ export default function WordList() {
     browse.close();
   }
 
-  // step을 바꾸면 chapter 번호 체계가 달라지므로 chapter 선택은 "전체"로 되돌린다
   function selectStep(step) {
     setSelectedStep(step);
     setSelectedChapter(null);
@@ -130,7 +127,6 @@ export default function WordList() {
         </div>
       )}
 
-      {/* 현재 step 안의 chapter 칩. "전체"는 해당 step의 전체 단어 */}
       {chapters.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
           <button

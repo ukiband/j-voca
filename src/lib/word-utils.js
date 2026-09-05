@@ -16,13 +16,12 @@ import { getStep } from './lesson-utils';
  * - 둘 다 null → 전체
  * - step만 있음 → 해당 step의 전체 단어
  * - 둘 다 있음 → 해당 (step, chapter) 레슨의 단어
- * chapter만 있고 step이 null인 경우는 step 2부터 chapter 번호가 겹치므로
- * 의미가 모호하다. 호출 측이 이 조합을 만들지 않도록 하고, 여기서는 chapter만 비교한다.
+ * chapter만 있고 step이 null인 조합은 모호하므로 호출 측에서 만들지 않는다.
  */
 export function filterWords(words, step, chapter, query) {
   let result = words;
 
-  // step 필터: step 필드가 없는 구버전 데이터는 getStep이 1로 간주한다
+  // step 필터 적용
   if (step !== null && step !== undefined) {
     result = result.filter(w => getStep(w) === step);
   }

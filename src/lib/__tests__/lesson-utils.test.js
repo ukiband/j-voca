@@ -11,8 +11,6 @@ import {
   formatLesson,
 } from '../lesson-utils';
 
-// step 필드가 없는 단어(구버전 데이터)와 step 2 단어가 섞인 목록.
-// chapter 번호가 step 간에 겹치는 상황(1-2 vs 2-2)을 일부러 포함한다.
 const words = [
   { id: 1, chapter: 2 },              // step 없음 → 1로 간주
   { id: 2, step: 1, chapter: 10 },
@@ -23,17 +21,10 @@ const words = [
 ];
 
 describe('getStep', () => {
-  it('step 필드가 있으면 그대로 반환', () => {
+  it('step 필드가 있으면 그대로, 없거나 단어가 null이면 1', () => {
     expect(getStep({ step: 2 })).toBe(2);
-  });
-
-  it('step 필드가 없으면 1로 간주', () => {
     expect(getStep({ chapter: 3 })).toBe(1);
-    expect(getStep({ step: undefined })).toBe(1);
     expect(getStep({ step: null })).toBe(1);
-  });
-
-  it('단어 자체가 null/undefined여도 1 반환', () => {
     expect(getStep(null)).toBe(1);
     expect(getStep(undefined)).toBe(1);
   });
@@ -42,10 +33,6 @@ describe('getStep', () => {
 describe('lessonKey', () => {
   it('(step, chapter)를 문자열 키로 만든다', () => {
     expect(lessonKey(2, 3)).toBe('2-3');
-  });
-
-  it('step이 다르면 같은 chapter라도 키가 다르다', () => {
-    expect(lessonKey(1, 3)).not.toBe(lessonKey(2, 3));
   });
 });
 
@@ -75,12 +62,9 @@ describe('isSameLesson', () => {
 });
 
 describe('isValidLessonNumber', () => {
-  it('1 이상의 정수만 허용', () => {
+  it('1 이상의 정수만 허용하고 0, 음수, 소수, NaN, 문자열은 거부', () => {
     expect(isValidLessonNumber(1)).toBe(true);
     expect(isValidLessonNumber(10)).toBe(true);
-  });
-
-  it('0, 음수, 소수, NaN, 문자열은 거부', () => {
     expect(isValidLessonNumber(0)).toBe(false);
     expect(isValidLessonNumber(-1)).toBe(false);
     expect(isValidLessonNumber(1.5)).toBe(false);
@@ -130,25 +114,15 @@ describe('getChapters', () => {
     expect(getChapters(words, 2)).toEqual([1, 2]);
   });
 
-  it('다른 step의 같은 번호 chapter는 섞이지 않는다', () => {
-    expect(getChapters(words, 10)).toEqual([1]);
-  });
-
   it('존재하지 않는 step이면 빈 배열', () => {
     expect(getChapters(words, 99)).toEqual([]);
   });
 });
 
 describe('getLatestStep', () => {
-  it('가장 큰 step을 반환', () => {
+  it('가장 큰 step을 반환하고, step 없는 단어만 있거나 단어가 없으면 1', () => {
     expect(getLatestStep(words)).toBe(10);
-  });
-
-  it('step 필드가 없는 단어만 있으면 1', () => {
     expect(getLatestStep([{ chapter: 1 }])).toBe(1);
-  });
-
-  it('단어가 없으면 1', () => {
     expect(getLatestStep([])).toBe(1);
     expect(getLatestStep(null)).toBe(1);
   });

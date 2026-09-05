@@ -50,8 +50,6 @@ export default function Dashboard() {
   const { streak, totalReviews, overallAccuracy } = calculateStats(reviewLogs);
   const weakCount = calculateWeakWords(words, reviews, reviewLogs).length;
 
-  // 레슨별 진행률은 (step, chapter) 복합 키로 집계한다.
-  // chapter만으로 묶으면 step 2 Lesson 1과 step 1 Lesson 1이 합산되기 때문이다.
   const lessonMap = {};
   for (const w of words) {
     const key = lessonKey(getStep(w), w.chapter);

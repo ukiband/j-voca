@@ -14,8 +14,9 @@ export default function WordInput() {
   const latestStep = words_.length > 0 ? getLatestStep(words_) : '';
   const latestChapters = latestStep !== '' ? getChapters(words_, latestStep) : [];
   const latestChapter = latestChapters.length > 0 ? latestChapters[latestChapters.length - 1] : 1;
-  const [step, setStep] = useState('');
-  const [chapter, setChapter] = useState('');
+  // 단어가 하나도 없는 첫 사용자는 기본값을 채울 근거가 없으므로 Step 1, Lesson 1로 시작한다
+  const [step, setStep] = useState('1');
+  const [chapter, setChapter] = useState('1');
   const [textbook, setTextbook] = useState('일본어수업');
   const [initialized, setInitialized] = useState(false);
 

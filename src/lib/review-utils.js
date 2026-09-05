@@ -1,6 +1,6 @@
 import { db } from './db';
 import { isDue } from './fsrs';
-import { getStep, lessonKey } from './lesson-utils';
+import { getStep, lessonKey, isSameLesson } from './lesson-utils';
 
 /**
  * 복습 대상 단어를 반환한다.
@@ -18,7 +18,8 @@ export async function getDueWords(step, chapter, tag) {
 
   if (chapter != null) {
     const targetStep = step ?? 1;
-    return words.filter(w => getStep(w) === targetStep && w.chapter === chapter);
+    // 레슨 일치 판정은 isSameLesson 한 곳에 모아 두어, 규칙이 바뀌어도 여기와 github.js가 어긋나지 않게 한다
+    return words.filter(w => isSameLesson(w, targetStep, chapter));
   }
   if (tag != null) return words.filter(w => w.tags && w.tags.includes(tag));
   return words;

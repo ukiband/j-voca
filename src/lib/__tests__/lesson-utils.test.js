@@ -2,7 +2,9 @@ import { describe, it, expect } from 'vitest';
 import {
   getStep,
   lessonKey,
-  parseLessonKey,
+  isSameLesson,
+  isValidLessonNumber,
+  parseLessonNumber,
   getSteps,
   getChapters,
   getLatestStep,
@@ -37,18 +39,72 @@ describe('getStep', () => {
   });
 });
 
-describe('lessonKey / parseLessonKey', () => {
+describe('lessonKey', () => {
   it('(step, chapter)를 문자열 키로 만든다', () => {
     expect(lessonKey(2, 3)).toBe('2-3');
   });
 
-  it('키를 다시 숫자 step/chapter로 복원한다 (왕복 변환)', () => {
-    expect(parseLessonKey(lessonKey(2, 3))).toEqual({ step: 2, chapter: 3 });
-    expect(parseLessonKey(lessonKey(10, 12))).toEqual({ step: 10, chapter: 12 });
-  });
-
   it('step이 다르면 같은 chapter라도 키가 다르다', () => {
     expect(lessonKey(1, 3)).not.toBe(lessonKey(2, 3));
+  });
+});
+
+describe('isSameLesson', () => {
+  it('step 1 Lesson 3 매칭 시 step 2 Lesson 3은 매칭 안 됨', () => {
+    expect(isSameLesson({ step: 1, chapter: 3 }, 1, 3)).toBe(true);
+    expect(isSameLesson({ step: 2, chapter: 3 }, 1, 3)).toBe(false);
+    expect(isSameLesson({ step: 1, chapter: 3 }, 2, 3)).toBe(false);
+  });
+
+  it('chapter가 다르면 매칭 안 됨', () => {
+    expect(isSameLesson({ step: 1, chapter: 4 }, 1, 3)).toBe(false);
+  });
+
+  it('step 누락 단어는 step 1로 매칭', () => {
+    expect(isSameLesson({ chapter: 3 }, 1, 3)).toBe(true);
+    expect(isSameLesson({ chapter: 3 }, 2, 3)).toBe(false);
+  });
+
+  it('step이나 chapter 인자가 undefined/null이면 아무것도 매칭 안 됨', () => {
+    // 호출 측에서 인자가 빠졌을 때 전체 삭제 사고를 막는 안전장치
+    expect(isSameLesson({ step: 1, chapter: 3 }, undefined, 3)).toBe(false);
+    expect(isSameLesson({ chapter: 3 }, undefined, 3)).toBe(false);
+    expect(isSameLesson({ step: 1, chapter: 3 }, 1, undefined)).toBe(false);
+    expect(isSameLesson({ step: 1, chapter: 3 }, null, null)).toBe(false);
+  });
+});
+
+describe('isValidLessonNumber', () => {
+  it('1 이상의 정수만 허용', () => {
+    expect(isValidLessonNumber(1)).toBe(true);
+    expect(isValidLessonNumber(10)).toBe(true);
+  });
+
+  it('0, 음수, 소수, NaN, 문자열은 거부', () => {
+    expect(isValidLessonNumber(0)).toBe(false);
+    expect(isValidLessonNumber(-1)).toBe(false);
+    expect(isValidLessonNumber(1.5)).toBe(false);
+    expect(isValidLessonNumber(NaN)).toBe(false);
+    expect(isValidLessonNumber('1')).toBe(false);
+    expect(isValidLessonNumber(undefined)).toBe(false);
+  });
+});
+
+describe('parseLessonNumber', () => {
+  it('양의 정수 문자열을 숫자로 변환', () => {
+    expect(parseLessonNumber('2')).toBe(2);
+    expect(parseLessonNumber(' 10 ')).toBe(10);
+    expect(parseLessonNumber(3)).toBe(3);
+  });
+
+  it('비정상 값은 null', () => {
+    expect(parseLessonNumber('abc')).toBeNull();
+    expect(parseLessonNumber('1.5')).toBeNull();
+    expect(parseLessonNumber('-1')).toBeNull();
+    expect(parseLessonNumber('0')).toBeNull();
+    expect(parseLessonNumber('')).toBeNull();
+    expect(parseLessonNumber(null)).toBeNull();
+    expect(parseLessonNumber(undefined)).toBeNull();
   });
 });
 

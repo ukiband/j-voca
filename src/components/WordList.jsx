@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, syncWordsFromData, deleteReview } from '../lib/db';
 import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
 import { filterWords } from '../lib/word-utils';
-import { getSteps, getChapters, getLatestStep, formatLesson } from '../lib/lesson-utils';
+import { getStep, getSteps, getChapters, getLatestStep, formatLesson } from '../lib/lesson-utils';
 import BrowseModal from './BrowseModal';
 import { useBrowseMode } from '../hooks/useBrowseMode';
 
@@ -23,7 +23,19 @@ export default function WordList() {
   // 선택한 step이 삭제 등으로 사라졌으면 최신 step으로 되돌린다
   const currentStep = steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
   const chapters = getChapters(words, currentStep);
-  const stepWordCount = filterWords(words, currentStep, null, '').length;
+  // 현재 step의 chapter별 단어 수 { [chapter]: count }. 칩 라벨과 레슨 삭제 개수에 쓴다.
+  // 칩마다 filterWords를 돌리면 칩 수 × 단어 수 순회가 되므로 한 번만 순회해 맵으로 만든다.
+  const countByChapter = useMemo(() => {
+    const map = {};
+    for (const w of words) {
+      if (getStep(w) !== currentStep) continue;
+      map[w.chapter] = (map[w.chapter] || 0) + 1;
+    }
+    return map;
+  }, [words, currentStep]);
+  const stepWordCount = Object.values(countByChapter).reduce((sum, n) => sum + n, 0);
+  // 레슨 삭제는 검색어와 무관하게 레슨 전체를 지우므로, 확인 문구/버튼의 개수도 검색어를 뺀 값을 써야 한다
+  const lessonWordCount = selectedChapter !== null ? (countByChapter[selectedChapter] || 0) : 0;
   // step/챕터 필터와 검색어를 조합하여 단어 필터링
   const filtered = filterWords(words, currentStep, selectedChapter, searchQuery);
 
@@ -62,9 +74,8 @@ export default function WordList() {
   async function handleDeleteChapter() {
     // step 2부터 chapter 번호가 겹치므로 (step, chapter) 둘 다 정해진 상태에서만 삭제한다
     if (selectedChapter === null) return;
-    const count = filtered.length;
     const label = formatLesson(currentStep, selectedChapter);
-    if (!confirm(`${label}의 단어 ${count}개를 모두 삭제하시겠습니까?`)) return;
+    if (!confirm(`${label}의 단어 ${lessonWordCount}개를 모두 삭제하시겠습니까?`)) return;
     setSaving(true);
     try {
       const { data, deletedIds } = await deleteChapterFromRepo(currentStep, selectedChapter);
@@ -138,7 +149,7 @@ export default function WordList() {
                 selectedChapter === ch ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
               }`}
             >
-              {formatLesson(currentStep, ch, { withStep: false })} ({filterWords(words, currentStep, ch, '').length})
+              {formatLesson(currentStep, ch, { withStep: false })} ({countByChapter[ch] || 0})
             </button>
           ))}
         </div>
@@ -163,13 +174,13 @@ export default function WordList() {
 
       <BrowseModal browse={browse} />
 
-      {canEdit && selectedChapter !== null && filtered.length > 0 && (
+      {canEdit && selectedChapter !== null && lessonWordCount > 0 && (
         <button
           onClick={handleDeleteChapter}
           disabled={saving}
           className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"
         >
-          {saving ? '삭제 중...' : `${formatLesson(currentStep, selectedChapter)} 전체 삭제 (${filtered.length}개)`}
+          {saving ? '삭제 중...' : `${formatLesson(currentStep, selectedChapter)} 전체 삭제 (${lessonWordCount}개)`}
         </button>
       )}
 

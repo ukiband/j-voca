@@ -3,7 +3,7 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { db } from '../lib/db';
 import { gradeCard, createInitialReview } from '../lib/fsrs';
 import { getDueWords } from '../lib/review-utils';
-import { formatLesson } from '../lib/lesson-utils';
+import { formatLesson, parseLessonNumber } from '../lib/lesson-utils';
 import FlashCard from './FlashCard';
 
 export default function ReviewSession() {
@@ -13,10 +13,10 @@ export default function ReviewSession() {
   const tagParam = params.get('tag');
   const reverse = params.get('reverse') === 'true';
   const order = params.get('order');
-  // lesson 파라미터가 있으면 해당 lesson만, 없으면 전체 복습
-  const chapter = lessonParam != null ? Number(lessonParam) : undefined;
-  // step 파라미터가 없는 기존 URL(?lesson=N)은 step 1로 간주한다. lesson이 없으면 step도 의미 없음
-  const step = chapter != null ? (stepParam != null ? Number(stepParam) : 1) : undefined;
+  // lesson 파라미터가 양의 정수면 해당 lesson만, 없거나 비정상 값(?lesson=abc)이면 전체 복습
+  const chapter = parseLessonNumber(lessonParam) ?? undefined;
+  // step 파라미터가 없거나 비정상이면 step 1로 간주한다 (step 도입 전 URL ?lesson=N 호환). lesson이 없으면 step도 의미 없음
+  const step = chapter != null ? (parseLessonNumber(stepParam) ?? 1) : undefined;
   // 네비게이션마다 고유한 key가 바뀌므로, 같은 경로 재진입 시에도 데이터를 새로 읽음
   const locationKey = useLocation().key;
 

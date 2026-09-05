@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { filterWords } from '../word-utils';
 
-// id 1~2는 step 필드가 없는 구버전 데이터(step 1로 간주), id 6~7은 step 2.
-// step 2의 chapter 1은 step 1의 chapter 1과 번호가 같아 step 없이 필터하면 섞인다.
 const words = [
   { id: 1, chapter: 1, word: '食べる', reading: 'たべる', meaning: '먹다' },
   { id: 2, chapter: 1, word: '飲む', reading: 'のむ', meaning: '마시다' },

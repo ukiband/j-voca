@@ -15,10 +15,7 @@ export function getStep(word) {
   return word?.step ?? 1;
 }
 
-/**
- * (step, chapter)를 하나의 문자열 키로 합친다. 객체 키나 Map 키로 쓰기 위한 용도.
- * 예: lessonKey(2, 3) → "2-3"
- */
+/** (step, chapter)를 객체/Map 키용 문자열로 합친다. 예: "2-3" */
 export function lessonKey(step, chapter) {
   return `${step}-${chapter}`;
 }
@@ -61,9 +58,6 @@ export function getSteps(words) {
   return [...new Set(words.map(getStep))].sort((a, b) => a - b);
 }
 
-/**
- * 특정 step에 속한 chapter 목록을 중복 없이 숫자 오름차순으로 반환한다.
- */
 export function getChapters(words, step) {
   return [...new Set(words.filter(w => getStep(w) === step).map(w => w.chapter))]
     .sort((a, b) => a - b);

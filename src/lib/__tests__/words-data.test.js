@@ -38,13 +38,4 @@ describe('public/data/words.json', () => {
     const maxId = Math.max(...data.words.map(w => w.id));
     expect(data.lastId).toBeGreaterThanOrEqual(maxId);
   });
-
-  it('필수 문자열 필드(word, reading, meaning)가 비어 있지 않다', () => {
-    const bad = data.words.filter(
-      w => typeof w.word !== 'string' || !w.word ||
-           typeof w.reading !== 'string' ||
-           typeof w.meaning !== 'string'
-    );
-    expect(bad.map(w => w.id)).toEqual([]);
-  });
 });

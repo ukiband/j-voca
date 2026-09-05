@@ -102,8 +102,7 @@ export async function addWordsToRepo(newWords) {
 
   const { data, sha } = await getFileFromGithub();
 
-  // 같은 레슨 내 중복 제거 (word 기준).
-  // step 2부터 chapter 번호가 겹치므로 step까지 같은 단어만 "같은 레슨"으로 본다.
+  // 같은 레슨 내 중복 제거 (word 기준)
   const targetStep = getStep(newWords[0]);
   const targetChapter = newWords[0]?.chapter;
   const existingWords = new Set(
@@ -150,7 +149,6 @@ export async function deleteWordFromRepo(id) {
 export async function deleteChapterFromRepo(step, chapter) {
   const { data, sha } = await getFileFromGithub();
 
-  // (step, chapter)가 모두 일치하는 단어만 삭제한다. chapter만 비교하면 다른 step의 같은 번호 레슨까지 지워진다.
   const isTarget = w => isSameLesson(w, step, chapter);
   const deletedIds = data.words.filter(isTarget).map(w => w.id);
   data.words = data.words.filter(w => !isTarget(w));

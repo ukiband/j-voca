@@ -108,8 +108,7 @@ export default function LessonSelect() {
         </div>
       </Link>
 
-      {/* step별 섹션 안에 lesson 카드. step 2부터 chapter 번호가 1부터 다시 시작하므로
-          step 헤더로 구분하고, 카드에는 "Lesson N"만 표시한다 (due 없는 lesson도 포함) */}
+      {/* step별 섹션 안의 lesson 카드 (due 없는 lesson도 포함) */}
       {steps.map(step => {
         const chapters = getChapters(words, step);
         return (

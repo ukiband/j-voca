@@ -11,7 +11,6 @@ const Settings = lazy(() => import('./components/Settings'));
 const Statistics = lazy(() => import('./components/Statistics'));
 const WeakWords = lazy(() => import('./components/WeakWords'));
 const LessonSelect = lazy(() => import('./components/LessonSelect'));
-const ListeningReview = lazy(() => import('./components/ListeningReview'));
 
 const NAV_ITEMS = [
   { to: '/', icon: '\u{1F3E0}', label: '\uD648' },
@@ -90,7 +89,6 @@ export default function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/stats" element={<Statistics />} />
             <Route path="/weak-words" element={<WeakWords />} />
-            <Route path="/listening" element={<ListeningReview />} />
           </Routes>
         </Suspense>
       </main>

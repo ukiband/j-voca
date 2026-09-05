@@ -29,13 +29,13 @@ export function normalizePos(pos) {
   return POS_MAP[trimmed] || trimmed || '기타';
 }
 
-// 무료 등급에서 쓸 수 있는 모델만 나열한다. gemini-2.0-flash 계열은 2026-06-01에 서비스가 종료되어
-// 호출하면 404가 나므로 목록에서 제거했다. Pro 계열은 무료가 아니어서 넣지 않는다.
-export const MODELS = [
-  { id: 'gemini-3.8-flash', label: 'Gemini 3.8 Flash (권장)' },
-  { id: 'gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash Lite (빠름)' },
-  { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (이전 세대)' },
-];
+// 사용자가 모델을 고르지 않고, 이 순서대로 시도하다가 과부하(503)나 사용 불가(404)가 나면 다음 모델로 넘어간다.
+// 순서 근거 (교재 사진 7장 실측):
+// - 3.5-flash-lite: 2~4초로 가장 빠르고 503 이 없었으며, 추출 정확도도 가장 높았다
+// - 3.8-flash: 결과는 정확하지만 무료 등급에서 절반 이상 503 이 나서 두 번째로 둔다
+// - 2.5-flash: 15~28초로 느리고 예문 속 단어까지 대량으로 추출해서 최후 수단이다
+// gemini-2.0 계열은 2026-06-01 서비스 종료(404)라 넣지 않는다. Pro 계열은 무료가 아니다.
+export const MODEL_CHAIN = ['gemini-3.5-flash-lite', 'gemini-3.8-flash', 'gemini-2.5-flash'];
 
 export function getApiKey() {
   return localStorage.getItem('gemini-api-key') || '';
@@ -43,28 +43,6 @@ export function getApiKey() {
 
 export function setApiKey(key) {
   localStorage.setItem('gemini-api-key', key);
-}
-
-export function getModel() {
-  const saved = localStorage.getItem('gemini-model');
-  if (MODELS.some(m => m.id === saved)) return saved;
-
-  // 예전에 저장해 둔 모델(gemini-2.0-flash 등)이 서비스 종료로 목록에서 빠졌을 수 있다.
-  // 그대로 쓰면 매번 404가 나므로 기본 모델로 대체하고, 저장값도 같이 바꿔 둔다.
-  // (저장값이 남아 있으면 설정 화면에서 "저장"을 누르기 전까지 매번 폴백을 타게 된다)
-  const fallback = MODELS[0].id;
-  if (saved !== null) {
-    try {
-      setModel(fallback);
-    } catch {
-      // 저장 공간 접근이 막힌 환경(프라이빗 모드 등)에서는 저장을 건너뛰고 기본값만 돌려준다
-    }
-  }
-  return fallback;
-}
-
-export function setModel(model) {
-  localStorage.setItem('gemini-model', model);
 }
 
 // 응답을 JSON 배열로 강제하기 위한 표준 JSON Schema. 필드 순서(propertyOrdering)를 고정해 두면
@@ -160,15 +138,16 @@ export function buildApiErrorMessage(status, msg, model) {
   // 상태 코드를 먼저 본다. 메시지 문자열 검사만으로 분기하면 종료 모델 404 메시지
   // ("... is not supported for generateContent") 안의 "rate" 가 쿼터 초과로 오인되는 문제가 있었다.
   if (status === 404) {
-    return `선택한 모델(${model})을 더 이상 사용할 수 없습니다. 설정에서 다른 모델을 선택해주세요.`;
+    // 모델은 코드(MODEL_CHAIN)에 고정되어 있어 사용자가 바꿀 수 없으므로 앱 업데이트를 안내한다
+    return `모델(${model})을 더 이상 사용할 수 없습니다. 앱 업데이트가 필요합니다.`;
   }
   if (status === 429 || /quota|rate limit/i.test(msg)) {
     const retry = msg.match(/retry in ([\d.]+)s/i);
     const wait = retry ? Math.ceil(Number(retry[1])) : null;
     return (
       `쿼터 초과: 현재 모델(${model})의 무료 사용량을 초과했습니다.` +
-      (wait ? ` ${wait}초 후 재시도하거나,` : '') +
-      ' 설정에서 다른 모델로 변경해보세요.'
+      (wait ? ` ${wait}초 후` : ' 잠시 후') +
+      ' 다시 시도해주세요.'
     );
   }
   if (isOverloaded(status, msg)) {
@@ -202,16 +181,23 @@ async function requestGemini(url, body, apiKey) {
   return { ok: response.ok, status: response.status, data };
 }
 
-// options.delay 는 테스트에서 실제 대기 없이 재시도 흐름을 검증하기 위한 주입 지점
-export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook, options = {}) {
-  const delay = options.delay || defaultDelay;
-  const apiKey = getApiKey();
-  if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
+function errorMessageOf(result) {
+  return result.data?.error?.message || '';
+}
 
-  const model = getModel();
-  const url = `${API_BASE}/${model}:generateContent`;
+// 한 모델에 요청을 보내고, 과부하면 잠시 기다렸다가 한 번만 다시 보낸다.
+// 더 반복하지 않는 이유: 무료 등급의 분당 요청 수를 소모하고, 사용자가 화면에서 기다리는 시간도 길어진다.
+// 그 이상은 다음 모델로 넘기는 편이 빠르다.
+async function requestWithRetry(url, body, apiKey, delay) {
+  let result = await requestGemini(url, body, apiKey);
+  if (!result.ok && isOverloaded(result.status, errorMessageOf(result))) {
+    await delay(RETRY_DELAY_MS);
+    result = await requestGemini(url, body, apiKey);
+  }
+  return result;
+}
 
-  const prompt = `이 일본어 교재 사진에서 단어를 추출해주세요.
+const PROMPT = `이 일본어 교재 사진에서 단어를 추출해주세요.
 
 ## 절대 금지 (NEVER)
 - **절대로** 사진에 보이지 않는 단어를 만들어내지 마세요.
@@ -244,35 +230,8 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
 - 인쇄된 "高い" 옆에 손글씨로 "비싸다도 됨" 메모 → 메모는 별도 단어로 만들지 않고 인쇄 단어 1개만: {"word":"高い","reading":"たかい","meaning":"높다, 비싸다","pos":"い형용사"}
 - な형용사 "きれいだ" → {"word":"きれいだ","reading":"きれいだ","meaning":"예쁘다, 깨끗하다","pos":"な형용사"}`;
 
-  const body = {
-    contents: [{
-      parts: [
-        { text: prompt },
-        {
-          inline_data: {
-            mime_type: mimeType,
-            data: base64Image,
-          },
-        },
-      ],
-    }],
-    generationConfig: buildGenerationConfig(model),
-  };
-
-  let result = await requestGemini(url, body, apiKey);
-
-  // 과부하는 보통 몇 초 안에 풀리므로 잠시 기다렸다가 한 번만 다시 보낸다.
-  // 더 반복하지 않는 이유: 무료 등급의 분당 요청 수를 소모하고, 사용자가 화면에서 기다리는 시간도 길어진다.
-  if (!result.ok && isOverloaded(result.status, result.data.error?.message || '')) {
-    await delay(RETRY_DELAY_MS);
-    result = await requestGemini(url, body, apiKey);
-  }
-
-  if (!result.ok) {
-    throw new Error(buildApiErrorMessage(result.status, result.data.error?.message || '', model));
-  }
-
-  const data = result.data;
+// 성공 응답에서 단어 목록을 꺼내 앱에서 쓰는 형태로 바꾼다
+function toWordEntries(data, step, chapter, textbook) {
   // 사고 과정(thought) 파트가 함께 올 수 있으므로, 사고 파트가 아닌 첫 텍스트 파트를 단어 목록으로 본다
   const parts = data.candidates?.[0]?.content?.parts || [];
   const text = parts.find(p => typeof p.text === 'string' && !p.thought)?.text || '';
@@ -297,4 +256,42 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
     textbook: textbook || '',
     createdAt: today,
   }));
+}
+
+// options.delay 는 테스트에서 실제 대기 없이 재시도 흐름을 검증하기 위한 주입 지점
+export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook, options = {}) {
+  const delay = options.delay || defaultDelay;
+  const apiKey = getApiKey();
+  if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
+
+  const parts = [
+    { text: PROMPT },
+    { inline_data: { mime_type: mimeType, data: base64Image } },
+  ];
+
+  // 체인을 다 돌았을 때 어떤 이유로 실패했는지 알려 주기 위해 마지막 실패를 기억한다
+  let lastFailure = null;
+
+  for (const model of MODEL_CHAIN) {
+    const url = `${API_BASE}/${model}:generateContent`;
+    const body = { contents: [{ parts }], generationConfig: buildGenerationConfig(model) };
+
+    const result = await requestWithRetry(url, body, apiKey, delay);
+    if (result.ok) return toWordEntries(result.data, step, chapter, textbook);
+
+    const msg = errorMessageOf(result);
+    // 과부하(재시도까지 실패)나 모델 사용 불가(404)는 모델을 바꾸면 해결될 수 있으니 다음 모델로 넘어간다
+    if (isOverloaded(result.status, msg) || result.status === 404) {
+      lastFailure = { status: result.status, msg, model };
+      continue;
+    }
+    // 그 외(400 요청 오류, 429 쿼터, 401 인증 등)는 키나 요청 자체의 문제라 모델을 바꿔도 같으므로 바로 알린다
+    throw new Error(buildApiErrorMessage(result.status, msg, model));
+  }
+
+  // 체인을 모두 소진한 경우. 과부하가 한 번이라도 있었으면 과부하 안내, 전부 404 였다면 모델 종료 안내
+  if (lastFailure && lastFailure.status === 404 && !isOverloaded(lastFailure.status, lastFailure.msg)) {
+    throw new Error(buildApiErrorMessage(404, lastFailure.msg, lastFailure.model));
+  }
+  throw new Error(OVERLOAD_MESSAGE);
 }

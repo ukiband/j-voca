@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getApiKey, setApiKey, getModel, setModel, MODELS } from '../lib/gemini';
+import { getApiKey, setApiKey } from '../lib/gemini';
 import { getLocalDateString } from '../lib/date-utils';
 import { getGithubToken, setGithubToken, hasGithubToken, resetWordsInRepo } from '../lib/github';
 import { exportData, importReviews, clearAllReviews, clearAllData, ensureReviewsExist } from '../lib/db';
@@ -24,7 +24,6 @@ function ExtLink({ href, children }) {
 
 export default function Settings() {
   const [apiKey, setApiKeyState] = useState(getApiKey());
-  const [selectedModel, setSelectedModel] = useState(getModel());
   const [githubToken, setGithubTokenState] = useState(getGithubToken());
   const [fontSize, setFontSizeState] = useState(localStorage.getItem('font-size') || 'base');
   const [message, setMessage] = useState({ text: '', section: '' });
@@ -51,7 +50,6 @@ export default function Settings() {
 
   function handleSaveGemini() {
     setApiKey(apiKey);
-    setModel(selectedModel);
     showMessage('Gemini 설정이 저장되었습니다.', 'gemini');
   }
 
@@ -109,16 +107,6 @@ export default function Settings() {
           className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm"
           placeholder="API 키를 입력하세요"
         />
-        <label className="text-sm text-slate-500">모델</label>
-        <select
-          value={selectedModel}
-          onChange={e => setSelectedModel(e.target.value)}
-          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white"
-        >
-          {MODELS.map(m => (
-            <option key={m.id} value={m.id}>{m.label}</option>
-          ))}
-        </select>
         <button
           onClick={handleSaveGemini}
           className="w-full py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium"

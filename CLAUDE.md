@@ -49,5 +49,6 @@ npm run test       # Vitest 테스트
 - words.json은 public/ 정적 파일 → 빌드 없이 네트워크 우선 전략으로 최신 데이터 제공
 - 단어는 step(교재 단계) > chapter(레슨) 2단계 구조. step 2부터 chapter가 1부터 다시 시작하므로 레슨 식별은 (step, chapter) 복합 키. step 누락 시 1로 간주 (`getStep()`)
 - words.json 정합성은 `src/lib/__tests__/words-data.test.js`가 검증 (모든 단어에 step/chapter 양의 정수, id 유일). 데이터만 바꿔도 `npm run test`로 확인
+- Gemini 모델은 사용자가 고르지 않고 `gemini.js`의 MODEL_CHAIN 순서(3.5-flash-lite → 3.8-flash → 2.5-flash)로 503/404/429 시 자동 대체. 프롬프트는 교재 하단 '단어' 칸 항목과 손글씨(단어·문장, 손글씨 뜻이 붙은 인쇄 표현)만 추출하도록 설계. 예문·회화문의 인쇄 단어는 제외
 - version.json 폴링으로 앱 업데이트 감지
 - base path: `/j-voca/`

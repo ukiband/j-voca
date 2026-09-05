@@ -1,5 +1,16 @@
-import { describe, it, expect } from 'vitest';
-import { normalizePos } from '../gemini';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { normalizePos, MODELS, getModel } from '../gemini';
+
+// vitest 기본 환경(node)에는 localStorage가 없어서 Map 기반의 최소 구현을 주입한다
+function createLocalStorageStub() {
+  const store = new Map();
+  return {
+    getItem: key => (store.has(key) ? store.get(key) : null),
+    setItem: (key, value) => store.set(key, String(value)),
+    removeItem: key => store.delete(key),
+    clear: () => store.clear(),
+  };
+}
 
 describe('normalizePos', () => {
   it('한자 표기를 한글로 변환한다', () => {
@@ -29,5 +40,25 @@ describe('normalizePos', () => {
 
   it('매핑에 없는 값은 그대로 반환한다', () => {
     expect(normalizePos('연체사')).toBe('연체사');
+  });
+});
+
+describe('getModel', () => {
+  beforeEach(() => {
+    globalThis.localStorage = createLocalStorageStub();
+  });
+
+  it('저장된 값이 없으면 기본 모델을 반환한다', () => {
+    expect(getModel()).toBe(MODELS[0].id);
+  });
+
+  it('유효한 모델이 저장되어 있으면 그대로 반환한다', () => {
+    localStorage.setItem('gemini-model', 'gemini-2.5-flash');
+    expect(getModel()).toBe('gemini-2.5-flash');
+  });
+
+  it('서비스 종료된 모델(gemini-2.0-flash)이 저장되어 있으면 기본 모델로 대체한다', () => {
+    localStorage.setItem('gemini-model', 'gemini-2.0-flash');
+    expect(getModel()).toBe(MODELS[0].id);
   });
 });

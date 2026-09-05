@@ -13,10 +13,12 @@ export function normalizePos(pos) {
   return posMap[pos] || pos || '기타';
 }
 
+// 무료 등급에서 쓸 수 있는 모델만 나열한다. gemini-2.0-flash 계열은 2026-06-01에 서비스가 종료되어
+// 호출하면 404가 나므로 목록에서 제거했다. Pro 계열은 무료가 아니어서 넣지 않는다.
 export const MODELS = [
-  { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (권장)' },
-  { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
-  { id: 'gemini-2.0-flash-lite', label: 'Gemini 2.0 Flash Lite' },
+  { id: 'gemini-3.8-flash', label: 'Gemini 3.8 Flash (권장)' },
+  { id: 'gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash Lite (빠름)' },
+  { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (이전 세대)' },
 ];
 
 export function getApiKey() {
@@ -28,7 +30,10 @@ export function setApiKey(key) {
 }
 
 export function getModel() {
-  return localStorage.getItem('gemini-model') || MODELS[0].id;
+  const saved = localStorage.getItem('gemini-model');
+  // 예전에 저장해 둔 모델(gemini-2.0-flash 등)이 서비스 종료로 목록에서 빠졌을 수 있다.
+  // 그대로 쓰면 매번 404가 나므로, 목록에 없는 값은 기본 모델로 대체한다.
+  return MODELS.some(m => m.id === saved) ? saved : MODELS[0].id;
 }
 
 export function setModel(model) {
@@ -40,7 +45,7 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
   if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
 
   const model = getModel();
-  const url = `${API_BASE}/${model}:generateContent?key=${apiKey}`;
+  const url = `${API_BASE}/${model}:generateContent`;
 
   const prompt = `이 일본어 교재 사진에서 단어를 추출해주세요.
 
@@ -74,7 +79,8 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
 
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    // API 키는 URL 쿼리(?key=)보다 헤더로 보내는 편이 로그나 히스토리에 남지 않아 안전하다
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
     body: JSON.stringify({
       contents: [{
         parts: [
@@ -108,6 +114,11 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
     }
     if (response.status === 503 || msg.includes('high demand') || msg.includes('overloaded')) {
       throw new Error('서버 과부하: 잠시 후 다시 시도해주세요.');
+    }
+    // 서비스가 종료된 모델을 호출하면 404 또는 "not found"/"is not supported" 메시지가 온다.
+    // 다른 모델로 바꾸면 해결되는 문제라서 설정 화면으로 안내한다.
+    if (response.status === 404 || msg.includes('not found') || msg.includes('is not supported')) {
+      throw new Error(`선택한 모델(${model})을 더 이상 사용할 수 없습니다. 설정에서 다른 모델을 선택해주세요.`);
     }
     if (response.status === 400) {
       throw new Error('요청 오류: API 키가 올바른지 확인해주세요.');

@@ -63,7 +63,7 @@ describe('getDueCount', () => {
 });
 
 describe('getDueCountByLesson', () => {
-  it('lesson별로 due 카운트를 분리', () => {
+  it('lesson별로 due 카운트를 분리 (step 없는 단어는 step 1로 키잉)', () => {
     vi.setSystemTime(new Date('2026-03-19T12:00:00Z'));
     const words = [
       { id: 1, chapter: 1 },
@@ -78,9 +78,26 @@ describe('getDueCountByLesson', () => {
       { wordId: 4, due: '2026-03-20T00:00:00.000Z', state: 2 },  // 내일 → not due
     ];
     const result = getDueCountByLesson(words, reviews);
-    expect(result[1]).toEqual({ total: 2, reconfirm: 1 });
-    expect(result[2]).toEqual({ total: 1, reconfirm: 0 });
-    expect(result[3]).toBeUndefined();  // due가 아닌 lesson은 포함되지 않음
+    expect(result['1-1']).toEqual({ step: 1, chapter: 1, total: 2, reconfirm: 1 });
+    expect(result['1-2']).toEqual({ step: 1, chapter: 2, total: 1, reconfirm: 0 });
+    expect(result['1-3']).toBeUndefined();  // due가 아닌 lesson은 포함되지 않음
+  });
+
+  it('step이 다르면 같은 chapter 번호라도 별도 키로 집계', () => {
+    vi.setSystemTime(new Date('2026-03-19T12:00:00Z'));
+    const words = [
+      { id: 1, step: 1, chapter: 1 },
+      { id: 2, step: 2, chapter: 1 },
+      { id: 3, step: 2, chapter: 1 },
+    ];
+    const reviews = [
+      { wordId: 1, due: '2026-03-19T00:00:00.000Z', state: 2 },
+      { wordId: 2, due: '2026-03-19T00:00:00.000Z', state: 2 },
+      { wordId: 3, due: '2026-03-19T00:00:00.000Z', state: 3 },  // Relearning
+    ];
+    const result = getDueCountByLesson(words, reviews);
+    expect(result['1-1']).toEqual({ step: 1, chapter: 1, total: 1, reconfirm: 0 });
+    expect(result['2-1']).toEqual({ step: 2, chapter: 1, total: 2, reconfirm: 1 });
   });
 
   it('due인 리뷰가 없으면 빈 객체 반환', () => {

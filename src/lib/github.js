@@ -1,3 +1,5 @@
+import { getStep } from './lesson-utils';
+
 const REPO_OWNER = 'ukiband';
 const REPO_NAME = 'j-voca';
 const FILE_PATH = 'public/data/words.json';
@@ -95,15 +97,21 @@ async function commitFile(data, sha, message) {
 export async function addWordsToRepo(newWords) {
   const { data, sha } = await getFileFromGithub();
 
-  // 같은 레슨 내 중복 제거 (word 기준)
+  // 같은 레슨 내 중복 제거 (word 기준).
+  // step 2부터 chapter 번호가 겹치므로 step까지 같은 단어만 "같은 레슨"으로 본다.
+  const targetStep = getStep(newWords[0]);
+  const targetChapter = newWords[0]?.chapter;
   const existingWords = new Set(
-    data.words.filter(w => w.chapter === newWords[0]?.chapter).map(w => w.word)
+    data.words
+      .filter(w => getStep(w) === targetStep && w.chapter === targetChapter)
+      .map(w => w.word)
   );
   const unique = newWords.filter(w => !existingWords.has(w.word));
   const skipped = newWords.length - unique.length;
 
   let nextId = data.lastId;
-  const wordsWithIds = unique.map(w => ({ ...w, id: ++nextId }));
+  // 저장되는 단어에는 step이 반드시 들어가도록 보장한다 (호출 측이 빠뜨려도 1로 채움)
+  const wordsWithIds = unique.map(w => ({ ...w, step: getStep(w), id: ++nextId }));
 
   data.words.push(...wordsWithIds);
   data.lastId = nextId;
@@ -136,13 +144,15 @@ export async function deleteWordFromRepo(id) {
   return data;
 }
 
-export async function deleteChapterFromRepo(chapter) {
+export async function deleteChapterFromRepo(step, chapter) {
   const { data, sha } = await getFileFromGithub();
 
-  const deletedIds = data.words.filter(w => w.chapter === chapter).map(w => w.id);
-  data.words = data.words.filter(w => w.chapter !== chapter);
+  // (step, chapter)가 모두 일치하는 단어만 삭제한다. chapter만 비교하면 다른 step의 같은 번호 레슨까지 지워진다.
+  const isTarget = w => getStep(w) === step && w.chapter === chapter;
+  const deletedIds = data.words.filter(isTarget).map(w => w.id);
+  data.words = data.words.filter(w => !isTarget(w));
 
-  await commitFile(data, sha, `Lesson ${chapter} 단어 ${deletedIds.length}개 삭제`);
+  await commitFile(data, sha, `Step ${step} Lesson ${chapter} 단어 ${deletedIds.length}개 삭제`);
   return { data, deletedIds };
 }
 

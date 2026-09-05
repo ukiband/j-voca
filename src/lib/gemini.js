@@ -35,7 +35,7 @@ export function setModel(model) {
   localStorage.setItem('gemini-model', model);
 }
 
-export async function extractWordsFromImage(base64Image, mimeType, chapter, textbook) {
+export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook) {
   const apiKey = getApiKey();
   if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
 
@@ -150,6 +150,8 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
     reading: w.reading,
     meaning: w.meaning,
     pos: normalizePos(w.pos),
+    // step은 교재 단계. 입력이 비어 있으면 1로 저장한다 (step 누락 = step 1 규칙과 일치)
+    step: step || 1,
     chapter: chapter || 0,
     textbook: textbook || '',
     createdAt: today,

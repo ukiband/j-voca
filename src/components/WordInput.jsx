@@ -4,21 +4,29 @@ import { extractWordsFromImage, getApiKey } from '../lib/gemini';
 import { hasGithubToken, addWordsToRepo } from '../lib/github';
 import { syncWordsFromData, db } from '../lib/db';
 import { createInitialReview } from '../lib/fsrs';
+import { getLatestStep, getChapters } from '../lib/lesson-utils';
 
 export default function WordInput() {
-  const [step, setStep] = useState('upload'); // upload | loading | preview | saving | done
+  // 화면 진행 단계. 교재 step과 이름이 겹치지 않도록 stage로 부른다
+  const [stage, setStage] = useState('upload'); // upload | loading | preview | saving | done
   const words_ = useLiveQuery(() => db.words.toArray(), [], []);
-  const latestChapter = words_.length > 0 ? Math.max(...words_.map(w => w.chapter)) : '';
+  // 기본값: 가장 최근 step과, 그 step 안에서 가장 큰 chapter (보통 지금 공부 중인 레슨)
+  const latestStep = words_.length > 0 ? getLatestStep(words_) : '';
+  const latestChapters = latestStep !== '' ? getChapters(words_, latestStep) : [];
+  const latestChapter = latestChapters.length > 0 ? latestChapters[latestChapters.length - 1] : 1;
+  const [step, setStep] = useState('');
   const [chapter, setChapter] = useState('');
   const [textbook, setTextbook] = useState('일본어수업');
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    if (!initialized && latestChapter !== '') {
+    // 단어 로딩이 끝난 첫 시점에만 기본값을 채운다. 이후엔 사용자가 입력한 값을 덮어쓰지 않는다
+    if (!initialized && latestStep !== '') {
+      setStep(String(latestStep));
       setChapter(String(latestChapter));
       setInitialized(true);
     }
-  }, [latestChapter, initialized]);
+  }, [latestStep, latestChapter, initialized]);
   const [words, setWords] = useState([]);
   const [error, setError] = useState('');
   const [savedCount, setSavedCount] = useState(0);
@@ -35,21 +43,22 @@ export default function WordInput() {
     }
 
     setError('');
-    setStep('loading');
+    setStage('loading');
 
     try {
       const base64 = await fileToBase64(file);
       const extracted = await extractWordsFromImage(
         base64,
         file.type,
+        Number(step) || 1,
         Number(chapter) || 0,
         textbook
       );
       setWords(extracted);
-      setStep('preview');
+      setStage('preview');
     } catch (err) {
       setError(err.message);
-      setStep('upload');
+      setStage('upload');
     }
   }
 
@@ -69,7 +78,7 @@ export default function WordInput() {
       return;
     }
 
-    setStep('saving');
+    setStage('saving');
     setError('');
 
     try {
@@ -83,16 +92,16 @@ export default function WordInput() {
 
       setSavedCount(wordsWithIds.length);
       setSkippedCount(skipped);
-      setStep('done');
+      setStage('done');
     } catch (err) {
       setError(err.message);
-      setStep('preview');
+      setStage('preview');
     }
   }
 
   function reset() {
     setWords([]);
-    setStep('upload');
+    setStage('upload');
     setError('');
     if (fileRef.current) fileRef.current.value = '';
   }
@@ -101,9 +110,20 @@ export default function WordInput() {
     <div className="space-y-4">
       <h1 className="text-xl font-bold text-slate-800">단어 입력</h1>
 
-      {step === 'upload' && (
+      {stage === 'upload' && (
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-3">
+            <div>
+              <label className="text-sm text-slate-500">Step</label>
+              <input
+                type="number"
+                min="1"
+                value={step}
+                onChange={e => setStep(e.target.value)}
+                className="w-full mt-1 px-3 py-2 border border-slate-200 rounded-xl text-sm"
+                placeholder="예: 2"
+              />
+            </div>
             <div>
               <label className="text-sm text-slate-500">레슨</label>
               <input
@@ -148,14 +168,14 @@ export default function WordInput() {
         </div>
       )}
 
-      {step === 'loading' && (
+      {stage === 'loading' && (
         <div className="text-center py-16">
           <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
           <p className="mt-4 text-sm text-slate-500">단어를 추출하는 중...</p>
         </div>
       )}
 
-      {step === 'preview' && (
+      {stage === 'preview' && (
         <div className="space-y-3">
           <p className="text-sm text-slate-500">{words.length}개 단어를 찾았습니다. 수정 후 저장하세요.</p>
 
@@ -205,14 +225,14 @@ export default function WordInput() {
         </div>
       )}
 
-      {step === 'saving' && (
+      {stage === 'saving' && (
         <div className="text-center py-16">
           <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
           <p className="mt-4 text-sm text-slate-500">GitHub에 저장하는 중...</p>
         </div>
       )}
 
-      {step === 'done' && (
+      {stage === 'done' && (
         <div className="text-center py-16">
           <p className="text-4xl mb-4">&#x2705;</p>
           <p className="text-lg font-medium text-slate-800">

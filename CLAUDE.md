@@ -42,5 +42,6 @@ npm run test       # Vitest 테스트
 - Safari dexie-react-hooks 버그로 useLiveQuery 대신 직접 async/await 쿼리 사용
 - FSRS 날짜 단위 스케줄링 (밤 12시 기준)
 - words.json은 public/ 정적 파일 → 빌드 없이 네트워크 우선 전략으로 최신 데이터 제공
+- 단어는 step(교재 단계) > chapter(레슨) 2단계 구조. step 2부터 chapter가 1부터 다시 시작하므로 레슨 식별은 (step, chapter) 복합 키. step 누락 시 1로 간주 (`getStep()`)
 - version.json 폴링으로 앱 업데이트 감지
 - base path: `/j-voca/`

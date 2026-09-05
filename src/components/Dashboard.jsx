@@ -5,6 +5,7 @@ import { getDueCount } from '../lib/review-utils';
 import { calculateStats } from '../lib/stats';
 import { calculateWeakWords } from '../lib/weak-utils';
 import { getLocalDateString } from '../lib/date-utils';
+import { getStep, getSteps, getLatestStep, lessonKey, formatLesson } from '../lib/lesson-utils';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
@@ -16,6 +17,8 @@ export default function Dashboard() {
   const [reviews, setReviews] = useState([]);
   const [reviewLogs, setReviewLogs] = useState([]);
   const [todayWordCount, setTodayWordCount] = useState(0);
+  // 레슨별 진행률에서 보여줄 step. null이면 "아직 고르지 않음" → 최신 step을 기본으로 쓴다
+  const [selectedStep, setSelectedStep] = useState(null);
 
   const loadData = useCallback(async () => {
     const [w, r, l, todayWords] = await Promise.all([
@@ -47,23 +50,28 @@ export default function Dashboard() {
   const { streak, totalReviews, overallAccuracy } = calculateStats(reviewLogs);
   const weakCount = calculateWeakWords(words, reviews, reviewLogs).length;
 
-  const chapters = [];
-  const chapterMap = {};
+  // 레슨별 진행률은 (step, chapter) 복합 키로 집계한다.
+  // chapter만으로 묶으면 step 2 Lesson 1과 step 1 Lesson 1이 합산되기 때문이다.
+  const lessonMap = {};
   for (const w of words) {
-    if (!chapterMap[w.chapter]) chapterMap[w.chapter] = { total: 0, reviewed: 0 };
-    chapterMap[w.chapter].total++;
+    const key = lessonKey(getStep(w), w.chapter);
+    if (!lessonMap[key]) lessonMap[key] = { step: getStep(w), chapter: w.chapter, total: 0, reviewed: 0 };
+    lessonMap[key].total++;
   }
   const wordById = new Map(words.map(w => [w.id, w]));
   for (const r of reviews) {
     const word = wordById.get(r.wordId);
-    if (word && chapterMap[word.chapter] && r.reps > 0) {
-      chapterMap[word.chapter].reviewed++;
-    }
+    if (!word || !(r.reps > 0)) continue;
+    const entry = lessonMap[lessonKey(getStep(word), word.chapter)];
+    if (entry) entry.reviewed++;
   }
-  for (const [ch, data] of Object.entries(chapterMap)) {
-    chapters.push({ chapter: Number(ch), ...data });
-  }
-  chapters.sort((a, b) => a.chapter - b.chapter);
+
+  // 기본은 지금 공부 중인 최신 step만 보여주고, step이 여럿이면 칩으로 전환한다
+  const steps = getSteps(words);
+  const currentStep = steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
+  const lessons = Object.values(lessonMap)
+    .filter(l => l.step === currentStep)
+    .sort((a, b) => a.chapter - b.chapter);
 
   return (
     <div className="space-y-6">
@@ -161,17 +169,34 @@ export default function Dashboard() {
         </Link>
       )}
 
-      {chapters.length > 0 && (
+      {words.length > 0 && (
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
-          <h2 className="text-sm font-medium text-slate-500 mb-3">레슨별 진행률</h2>
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-sm font-medium text-slate-500">레슨별 진행률</h2>
+            {steps.length > 1 && (
+              <div className="flex gap-1">
+                {steps.map(step => (
+                  <button
+                    key={step}
+                    onClick={() => setSelectedStep(step)}
+                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                      currentStep === step ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-500'
+                    }`}
+                  >
+                    Step {step}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="space-y-3">
-            {chapters.map(ch => {
-              const pct = ch.total > 0 ? Math.round((ch.reviewed / ch.total) * 100) : 0;
+            {lessons.map(ls => {
+              const pct = ls.total > 0 ? Math.round((ls.reviewed / ls.total) * 100) : 0;
               return (
-                <div key={ch.chapter}>
+                <div key={lessonKey(ls.step, ls.chapter)}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-700">Lesson {ch.chapter}</span>
-                    <span className="text-slate-400">{ch.reviewed}/{ch.total}</span>
+                    <span className="text-slate-700">{formatLesson(ls.step, ls.chapter, { withStep: false })}</span>
+                    <span className="text-slate-400">{ls.reviewed}/{ls.total}</span>
                   </div>
                   <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                     <div

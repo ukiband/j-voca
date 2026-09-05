@@ -26,10 +26,12 @@ const POS_MAP = {
 
 export function normalizePos(pos) {
   const trimmed = typeof pos === 'string' ? pos.trim() : '';
-  return POS_MAP[trimmed] || trimmed || '기타';
+  // 'constructor' 같은 값이 Object 프로토타입 속성에 걸리지 않도록 자기 키만 본다
+  const mapped = Object.hasOwn(POS_MAP, trimmed) ? POS_MAP[trimmed] : trimmed;
+  return mapped || '기타';
 }
 
-// 사용자가 모델을 고르지 않고, 이 순서대로 시도하다가 과부하(503)나 사용 불가(404)가 나면 다음 모델로 넘어간다.
+// 사용자가 모델을 고르지 않고, 이 순서대로 시도하다가 503/404/429(또는 그 외 5xx)가 나면 다음 모델로 넘어간다.
 // 순서 근거 (교재 사진 7장 실측):
 // - 3.5-flash-lite: 2~4초로 가장 빠르고 503 이 없었으며, 추출 정확도도 가장 높았다
 // - 3.8-flash: 결과는 정확하지만 무료 등급에서 절반 이상 503 이 나서 두 번째로 둔다
@@ -131,9 +133,11 @@ export function parseGeminiResponse(text) {
 
 const OVERLOAD_MESSAGE = '서버 과부하: 잠시 후 다시 시도해주세요.';
 
-// 503 이거나 메시지가 과부하를 뜻하면 true. 재시도 판단과 오류 메시지 생성이 같은 기준을 쓰도록 분리했다
+// 503 이거나 메시지가 과부하를 뜻하면 true. 재시도 판단과 오류 메시지 생성이 같은 기준을 쓰도록 분리했다.
+// 429 는 메시지에 "high demand" 가 섞여 있어도 쿼터 초과로만 본다. 과부하로 보면 재시도까지 하게 되는데,
+// 쿼터는 기다려도 바로 풀리지 않으므로 재시도 없이 다음 모델로 넘기는 편이 맞다.
 export function isOverloaded(status, msg) {
-  return status === 503 || /high demand|overloaded/i.test(msg);
+  return status === 503 || (status !== 429 && /high demand|overloaded/i.test(msg));
 }
 
 // 429 이거나 메시지가 쿼터 초과를 뜻하면 true. 무료 등급 쿼터는 모델별로 따로 걸리므로 체인에서 다음 모델로 넘기는 기준이 된다
@@ -178,12 +182,18 @@ function defaultDelay(ms) {
 
 // 응답 상태와 JSON 본문을 함께 돌려준다. 오류 본문도 JSON 이므로 한 번에 읽어 두면 호출부 분기가 단순해진다
 async function requestGemini(url, body, apiKey) {
-  const response = await fetch(url, {
-    method: 'POST',
-    // API 키는 URL 쿼리(?key=)보다 헤더로 보내는 편이 로그나 히스토리에 남지 않아 안전하다
-    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-    body: JSON.stringify(body),
-  });
+  let response;
+  try {
+    response = await fetch(url, {
+      method: 'POST',
+      // API 키는 URL 쿼리(?key=)보다 헤더로 보내는 편이 로그나 히스토리에 남지 않아 안전하다
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    // fetch 자체가 실패한 것은 오프라인·DNS·CORS 같은 단말 쪽 문제라 모델을 바꿔도 같다. 바로 알린다
+    throw new Error('네트워크 연결을 확인해주세요.');
+  }
   const data = await response.json().catch(() => ({}));
   return { ok: response.ok, status: response.status, data };
 }
@@ -226,7 +236,7 @@ const PROMPT = `이 일본어 교재 사진에서 단어를 추출해주세요.
 - 회화문·예문·연습문제 영역의 인쇄 단어는 손글씨 뜻이 1:1로 붙어 있는지 확인한 뒤, 붙어 있지 않으면 건너뛰세요.
 
 ## 구분 기준
-- **인쇄된 일본어 단어**와 **손글씨로 적힌 일본어 단어** 모두 추출하세요. 단, 체크 표시(✓)나 동그라미(○) 등의 기호는 무시하세요. 손글씨가 인쇄된 단어의 보충 설명이나 메모인 경우에는 별도 단어로 추출하지 말고, 독립적으로 적힌 단어만 추출하세요.
+- 추출 범위에 해당하는 항목만 다룹니다. 체크 표시(✓)나 동그라미(○) 등의 기호는 무시하세요. 손글씨가 인쇄된 단어의 뜻·보충 메모인 경우에는 별도 단어로 만들지 말고 3번 규칙에 따라 그 인쇄 단어 1개로 추출하세요.
 - 손글씨로 한국어 뜻이 적혀 있다면 meaning에 활용해도 좋습니다.
 - 교재에 한국어 뜻이 없는 경우, 일본어 단어의 뜻을 한국어로 직접 작성하세요. meaning을 빈 문자열로 두지 마세요.
 - 교재에서 가장 크게/중심으로 인쇄된 표기를 word로 추출하세요. 괄호 안 보조 표기나 후리가나(振り仮名)는 word에 넣지 말고, reading 작성 시 참고하세요.
@@ -299,7 +309,13 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
     // 모델을 바꾸면 해결될 수 있는 실패는 다음 모델로 넘어간다:
     // - 과부하(재시도까지 실패), 모델 사용 불가(404)
     // - 쿼터 초과(429): 무료 등급 쿼터가 모델별로 따로 걸려서(실측: 3.8-flash 만 429, lite 는 정상) 다른 모델은 쓸 수 있다
-    if (isOverloaded(result.status, msg) || isQuotaExceeded(result.status, msg) || result.status === 404) {
+    // - 그 외 5xx(500/502/504 등): 서버 쪽 일시 장애라 다른 모델 엔드포인트는 정상일 수 있다
+    if (
+      isOverloaded(result.status, msg) ||
+      isQuotaExceeded(result.status, msg) ||
+      result.status === 404 ||
+      result.status >= 500
+    ) {
       lastFailure = { status: result.status, msg, model };
       continue;
     }
@@ -312,5 +328,6 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
   if (lastFailure) {
     throw new Error(buildApiErrorMessage(lastFailure.status, lastFailure.msg, lastFailure.model));
   }
-  throw new Error(OVERLOAD_MESSAGE);
+  // MODEL_CHAIN 이 비어 있어 한 번도 요청하지 못한 경우 (현재 구성에서는 도달하지 않는다)
+  throw new Error('사용 가능한 모델이 없습니다.');
 }

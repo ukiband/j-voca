@@ -70,6 +70,11 @@ describe('normalizePos', () => {
     expect(normalizePos('이-형용사')).toBe('い형용사');
   });
 
+  it('Object 프로토타입 속성 이름은 매핑으로 오인하지 않고 그대로 반환한다', () => {
+    expect(normalizePos('constructor')).toBe('constructor');
+    expect(normalizePos('toString')).toBe('toString');
+  });
+
   it('앞뒤 공백을 제거한 뒤 매핑한다', () => {
     expect(normalizePos(' 動詞 ')).toBe('동사');
     expect(normalizePos(' 명사 ')).toBe('명사');
@@ -162,8 +167,11 @@ describe('parseGeminiResponse', () => {
 describe('isOverloaded', () => {
   it('503 이거나 과부하 메시지면 true', () => {
     expect(isOverloaded(503, '')).toBe(true);
-    expect(isOverloaded(429, 'This model is currently experiencing high demand.')).toBe(true);
     expect(isOverloaded(500, 'The model is overloaded.')).toBe(true);
+  });
+
+  it('429 는 메시지에 high demand 가 있어도 과부하로 보지 않는다 (쿼터로만 판정)', () => {
+    expect(isOverloaded(429, 'This model is currently experiencing high demand.')).toBe(false);
   });
 
   it('그 외에는 false', () => {
@@ -254,6 +262,11 @@ describe('extractWordsFromImage 모델 체인', () => {
     ok: false,
     status: 429,
     json: async () => ({ error: { message: 'You exceeded your current quota. Please retry in 30s.' } }),
+  };
+  const serverError = {
+    ok: false,
+    status: 500,
+    json: async () => ({ error: { message: 'Internal error encountered.' } }),
   };
   const success = {
     ok: true,
@@ -352,6 +365,35 @@ describe('extractWordsFromImage 모델 체인', () => {
     expect(calledModels(fetchMock)).toEqual(['gemini-3.5-flash-lite', 'gemini-3.8-flash']);
     expect(delay).not.toHaveBeenCalled();
     expect(words).toHaveLength(1);
+  });
+
+  it('첫 모델이 500 등 그 외 5xx 면 재시도 없이 다음 모델로 넘어간다', async () => {
+    const fetchMock = vi.fn().mockResolvedValueOnce(serverError).mockResolvedValueOnce(success);
+    vi.stubGlobal('fetch', fetchMock);
+
+    const words = await extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay });
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(calledModels(fetchMock)).toEqual(['gemini-3.5-flash-lite', 'gemini-3.8-flash']);
+    expect(delay).not.toHaveBeenCalled();
+    expect(words).toHaveLength(1);
+  });
+
+  it('세 모델이 모두 500 이면 서버 메시지로 throw 한다', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(serverError));
+
+    await expect(extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay }))
+      .rejects.toThrow('Internal error encountered.');
+  });
+
+  it('fetch 자체가 실패하면 모델을 바꾸지 않고 네트워크 안내로 즉시 throw 한다', async () => {
+    const fetchMock = vi.fn().mockRejectedValue(new TypeError('Failed to fetch'));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay }))
+      .rejects.toThrow('네트워크 연결을 확인해주세요.');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(delay).not.toHaveBeenCalled();
   });
 
   it('세 모델이 모두 429 면 쿼터 문구로 throw 한다', async () => {

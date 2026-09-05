@@ -119,6 +119,9 @@ export default function Settings() {
             <option key={m.id} value={m.id}>{m.label}</option>
           ))}
         </select>
+        <p className="text-xs text-slate-400">
+          이전에 선택한 모델이 서비스 종료된 경우 기본 모델로 자동 전환됩니다.
+        </p>
         <button
           onClick={handleSaveGemini}
           className="w-full py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium"

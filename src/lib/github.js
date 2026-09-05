@@ -1,4 +1,4 @@
-import { getStep } from './lesson-utils';
+import { getStep, isSameLesson, isValidLessonNumber } from './lesson-utils';
 
 const REPO_OWNER = 'ukiband';
 const REPO_NAME = 'j-voca';
@@ -95,6 +95,11 @@ async function commitFile(data, sha, message) {
 }
 
 export async function addWordsToRepo(newWords) {
+  // 잘못된 step/chapter(0, 음수, 소수)가 저장소로 나가면 데이터 검증 테스트가 깨지고 화면에 "Lesson 0"이 생기므로
+  // GitHub API를 호출하기 전에 먼저 막는다.
+  const invalid = newWords.find(w => !isValidLessonNumber(getStep(w)) || !isValidLessonNumber(w.chapter));
+  if (invalid) throw new Error('Step과 레슨은 1 이상의 정수여야 합니다.');
+
   const { data, sha } = await getFileFromGithub();
 
   // 같은 레슨 내 중복 제거 (word 기준).
@@ -102,9 +107,7 @@ export async function addWordsToRepo(newWords) {
   const targetStep = getStep(newWords[0]);
   const targetChapter = newWords[0]?.chapter;
   const existingWords = new Set(
-    data.words
-      .filter(w => getStep(w) === targetStep && w.chapter === targetChapter)
-      .map(w => w.word)
+    data.words.filter(w => isSameLesson(w, targetStep, targetChapter)).map(w => w.word)
   );
   const unique = newWords.filter(w => !existingWords.has(w.word));
   const skipped = newWords.length - unique.length;
@@ -148,7 +151,7 @@ export async function deleteChapterFromRepo(step, chapter) {
   const { data, sha } = await getFileFromGithub();
 
   // (step, chapter)가 모두 일치하는 단어만 삭제한다. chapter만 비교하면 다른 step의 같은 번호 레슨까지 지워진다.
-  const isTarget = w => getStep(w) === step && w.chapter === chapter;
+  const isTarget = w => isSameLesson(w, step, chapter);
   const deletedIds = data.words.filter(isTarget).map(w => w.id);
   data.words = data.words.filter(w => !isTarget(w));
 

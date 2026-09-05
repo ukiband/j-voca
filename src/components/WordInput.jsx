@@ -4,7 +4,7 @@ import { extractWordsFromImage, getApiKey } from '../lib/gemini';
 import { hasGithubToken, addWordsToRepo } from '../lib/github';
 import { syncWordsFromData, db } from '../lib/db';
 import { createInitialReview } from '../lib/fsrs';
-import { getLatestStep, getChapters } from '../lib/lesson-utils';
+import { getLatestStep, getChapters, parseLessonNumber } from '../lib/lesson-utils';
 
 export default function WordInput() {
   // 화면 진행 단계. 교재 step과 이름이 겹치지 않도록 stage로 부른다
@@ -42,6 +42,15 @@ export default function WordInput() {
       return;
     }
 
+    // step/레슨은 1 이상의 정수만 허용. 빈 값이나 -1, 1.5 같은 값이 그대로 저장되면 데이터가 깨진다
+    const stepNo = parseLessonNumber(step);
+    const chapterNo = parseLessonNumber(chapter);
+    if (stepNo === null || chapterNo === null) {
+      setError('Step과 레슨을 1 이상의 정수로 입력해주세요.');
+      e.target.value = '';
+      return;
+    }
+
     setError('');
     setStage('loading');
 
@@ -50,8 +59,8 @@ export default function WordInput() {
       const extracted = await extractWordsFromImage(
         base64,
         file.type,
-        Number(step) || 1,
-        Number(chapter) || 0,
+        stepNo,
+        chapterNo,
         textbook
       );
       setWords(extracted);

@@ -24,12 +24,33 @@ export function lessonKey(step, chapter) {
 }
 
 /**
- * lessonKey로 만든 문자열을 다시 숫자 { step, chapter }로 복원한다.
- * 객체 키는 항상 문자열이 되므로, 정렬이나 비교 전에 숫자로 되돌릴 때 쓴다.
+ * 단어가 (step, chapter) 레슨에 속하는지 판단한다.
+ * 중복 제거·레슨 삭제처럼 데이터 손실과 직결되는 비교에 공통으로 쓴다.
+ * - 단어의 step이 없으면 1로 간주한다 (getStep 규칙과 동일)
+ * - step이나 chapter 인자가 비어 있으면(undefined/null) 어떤 단어도 매칭하지 않는다.
+ *   호출 측 실수로 인자가 빠졌을 때 전체 단어가 삭제되는 사고를 막기 위한 안전장치다.
  */
-export function parseLessonKey(key) {
-  const [step, chapter] = String(key).split('-');
-  return { step: Number(step), chapter: Number(chapter) };
+export function isSameLesson(word, step, chapter) {
+  if (step == null || chapter == null) return false;
+  return getStep(word) === step && word?.chapter === chapter;
+}
+
+/**
+ * step/chapter로 쓸 수 있는 값인지 검사한다. 1 이상의 정수만 허용한다.
+ * 0, 음수, 소수, NaN이 words.json에 저장되면 "Lesson 0" 칩이 생기는 등 화면이 깨진다.
+ */
+export function isValidLessonNumber(value) {
+  return Number.isInteger(value) && value >= 1;
+}
+
+/**
+ * URL 쿼리나 입력 필드의 문자열을 step/chapter 숫자로 바꾼다.
+ * 양의 정수로 해석되지 않으면(빈 값, "abc", "1.5", "-1") null을 반환한다.
+ */
+export function parseLessonNumber(value) {
+  if (value == null || String(value).trim() === '') return null;
+  const n = Number(value);
+  return isValidLessonNumber(n) ? n : null;
 }
 
 /**

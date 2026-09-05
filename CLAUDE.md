@@ -37,6 +37,11 @@ npm run build      # 프로덕션 빌드
 npm run test       # Vitest 테스트
 ```
 
+## 개발 워크플로우
+
+- 기능 개발은 `feature/{기능요약}` 브랜치에서 진행하고, 빌드/테스트/리뷰 통과 후 **PR 없이 main에 직접 머지**한다 (개인 앱이므로 리뷰어 승인 절차 불필요)
+- main push 시 GitHub Pages 배포가 자동 실행된다
+
 ## 주요 패턴
 
 - Safari dexie-react-hooks 버그로 useLiveQuery 대신 직접 async/await 쿼리 사용

@@ -31,26 +31,38 @@ export function setApiKey(key) {
 
 export function getModel() {
   const saved = localStorage.getItem('gemini-model');
+  if (MODELS.some(m => m.id === saved)) return saved;
+
   // 예전에 저장해 둔 모델(gemini-2.0-flash 등)이 서비스 종료로 목록에서 빠졌을 수 있다.
-  // 그대로 쓰면 매번 404가 나므로, 목록에 없는 값은 기본 모델로 대체한다.
-  return MODELS.some(m => m.id === saved) ? saved : MODELS[0].id;
+  // 그대로 쓰면 매번 404가 나므로 기본 모델로 대체하고, 저장값도 같이 바꿔 둔다.
+  // (저장값이 남아 있으면 설정 화면에서 "저장"을 누르기 전까지 매번 폴백을 타게 된다)
+  const fallback = MODELS[0].id;
+  if (saved !== null) {
+    try {
+      setModel(fallback);
+    } catch {
+      // 저장 공간 접근이 막힌 환경(프라이빗 모드 등)에서는 저장을 건너뛰고 기본값만 돌려준다
+    }
+  }
+  return fallback;
 }
 
 export function setModel(model) {
   localStorage.setItem('gemini-model', model);
 }
 
-// 응답을 JSON 배열로 강제하기 위한 스키마. 필드 순서(propertyOrdering)를 고정해 두면
+// 응답을 JSON 배열로 강제하기 위한 표준 JSON Schema. 필드 순서(propertyOrdering)를 고정해 두면
 // 응답이 중간에 잘려도 word/reading 이 먼저 나와 있어 복구 시 건질 수 있는 항목이 많아진다.
-const RESPONSE_SCHEMA = {
-  type: 'ARRAY',
+// 예전 responseSchema(OpenAPI 서브셋, 대문자 타입)는 deprecated 라서 responseJsonSchema 를 쓴다.
+const RESPONSE_JSON_SCHEMA = {
+  type: 'array',
   items: {
-    type: 'OBJECT',
+    type: 'object',
     properties: {
-      word: { type: 'STRING' },
-      reading: { type: 'STRING' },
-      meaning: { type: 'STRING' },
-      pos: { type: 'STRING' },
+      word: { type: 'string' },
+      reading: { type: 'string' },
+      meaning: { type: 'string' },
+      pos: { type: 'string' },
     },
     required: ['word', 'reading', 'meaning', 'pos'],
     propertyOrdering: ['word', 'reading', 'meaning', 'pos'],
@@ -60,16 +72,16 @@ const RESPONSE_SCHEMA = {
 export function buildGenerationConfig(model) {
   const config = {
     responseMimeType: 'application/json',
-    responseSchema: RESPONSE_SCHEMA,
+    responseJsonSchema: RESPONSE_JSON_SCHEMA,
     maxOutputTokens: 8192,
   };
 
   if (model.startsWith('gemini-3')) {
     // Gemini 3 계열은 temperature 를 기본값(1.0)에서 낮추면 오히려 반복 출력이나 성능 저하가 생긴다고
-    // 공식 문서가 안내하므로 temperature 를 넣지 않는다. 대신 사고(thinking) 토큰 양을 thinkingLevel 로 조절한다.
-    // 단어 추출은 단순 작업이라 'low' 로 두어 응답 속도를 확보하고, 사고 토큰도 maxOutputTokens 한도에
-    // 포함되므로 실제 단어 목록에 쓸 토큰이 줄어드는 것을 막는다.
-    config.thinkingConfig = { thinkingLevel: 'low' };
+    // 공식 문서가 안내하므로 temperature 를 넣지 않는다. 대신 사고(thinking) 양을 thinkingLevel 로 조절한다.
+    // LOW 는 3.8-flash 기본값(MEDIUM)보다 낮춰 응답 속도를 확보하는 값이다. 3.5-flash-lite 는 기본이
+    // MINIMAL 이라 오히려 약간 높은 값이지만, 두 모델 모두 허용 범위이고 단어 추출에는 이 정도로 충분하다.
+    config.thinkingConfig = { thinkingLevel: 'LOW' };
   } else {
     // Gemini 2.5 계열은 thinkingLevel 을 지원하지 않고, 낮은 temperature 로 일관된 출력을 얻는 기존 방식이 유효하다
     config.temperature = 0.1;
@@ -78,47 +90,74 @@ export function buildGenerationConfig(model) {
   return config;
 }
 
-export function parseGeminiResponse(text) {
-  let words = null;
-
-  // 구조화 출력(responseMimeType: application/json)이면 순수 JSON 이 오므로 그대로 파싱을 먼저 시도한다
+function tryParseArray(text) {
   try {
-    words = JSON.parse(text);
+    const parsed = JSON.parse(text);
+    return Array.isArray(parsed) ? parsed : null;
   } catch {
-    words = null;
+    return null;
   }
+}
 
-  if (!Array.isArray(words)) {
-    // 스키마를 강제해도 maxOutputTokens 에 걸려 잘리면 JSON 이 불완전해진다. 코드 펜스 제거 → 배열 매칭 →
-    // 마지막으로 완성된 항목까지만 잘라 닫는 순서로 복구를 시도한다.
+export function parseGeminiResponse(text) {
+  // 구조화 출력(responseMimeType: application/json)이면 순수 JSON 이 오므로 그대로 파싱을 먼저 시도한다
+  let words = tryParseArray(text);
+
+  if (!words) {
+    // 스키마를 강제해도 maxOutputTokens 에 걸려 잘리면 JSON 이 불완전해진다.
+    // 코드 펜스 제거 → 배열 매칭 순으로 시도하고, 그래도 안 되면 잘린 응답 복구로 넘어간다.
     const stripped = text.replace(/```(?:json)?\s*/gi, '').replace(/```/g, '').trim();
-    let candidate = stripped.match(/\[[\s\S]*\]/)?.[0] ?? null;
+    const matched = stripped.match(/\[[\s\S]*\]/)?.[0];
+    if (matched) words = tryParseArray(matched);
 
-    if (!candidate) {
+    if (!words) {
+      // 마지막 '}' 가 문자열 값 안에서 잘렸을 수도 있으니, 뒤에서부터 '}' 위치를 하나씩 당기며
+      // 그 지점까지 잘라 ']' 로 닫아 파싱이 되는 첫 지점을 찾는다 (완성된 항목까지만 살린다)
       const arrStart = stripped.indexOf('[');
       if (arrStart !== -1) {
         const partial = stripped.slice(arrStart);
-        const lastComplete = partial.lastIndexOf('}');
-        if (lastComplete !== -1) {
-          candidate = partial.slice(0, lastComplete + 1) + ']';
+        let cut = partial.lastIndexOf('}');
+        while (cut !== -1 && !words) {
+          words = tryParseArray(partial.slice(0, cut + 1) + ']');
+          cut = partial.lastIndexOf('}', cut - 1);
         }
       }
     }
-
-    if (candidate) {
-      try {
-        words = JSON.parse(candidate);
-      } catch {
-        words = null;
-      }
-    }
   }
 
-  if (!Array.isArray(words)) {
+  if (!words) {
     throw new Error(`JSON 파싱 실패. Gemini 응답: "${text.slice(0, 200)}"`);
   }
 
-  return words;
+  // 스키마상 나올 수 없지만, 복구 과정에서 문자열이나 null 같은 항목이 섞이면 이후 w.word 접근이 깨지므로 걸러낸다
+  return words.filter(w => w && typeof w === 'object' && typeof w.word === 'string');
+}
+
+export function buildApiErrorMessage(status, msg, model) {
+  // 상태 코드를 먼저 본다. 메시지 문자열 검사만으로 분기하면 종료 모델 404 메시지
+  // ("... is not supported for generateContent") 안의 "rate" 가 쿼터 초과로 오인되는 문제가 있었다.
+  if (status === 404) {
+    return `선택한 모델(${model})을 더 이상 사용할 수 없습니다. 설정에서 다른 모델을 선택해주세요.`;
+  }
+  if (status === 429 || /quota|rate limit/i.test(msg)) {
+    const retry = msg.match(/retry in ([\d.]+)s/i);
+    const wait = retry ? Math.ceil(Number(retry[1])) : null;
+    return (
+      `쿼터 초과: 현재 모델(${model})의 무료 사용량을 초과했습니다.` +
+      (wait ? ` ${wait}초 후 재시도하거나,` : '') +
+      ' 설정에서 다른 모델로 변경해보세요.'
+    );
+  }
+  if (status === 503 || /high demand|overloaded/i.test(msg)) {
+    return '서버 과부하: 잠시 후 다시 시도해주세요.';
+  }
+  if (status === 400) {
+    // 400 은 키 문제일 수도, 요청 본문(thinkingLevel 등 파라미터) 문제일 수도 있다.
+    // 키 관련 메시지가 아니면 서버 메시지를 그대로 보여 줘야 원인을 알 수 있다.
+    if (/api[ _]?key/i.test(msg)) return '요청 오류: API 키가 올바른지 확인해주세요.';
+    return `요청 오류: ${msg || '요청 형식이 잘못되었습니다.'}`;
+  }
+  return msg || `API 요청 실패 (${status})`;
 }
 
 export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook) {
@@ -183,28 +222,7 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
-    const msg = err.error?.message || '';
-    if (response.status === 429 || msg.includes('quota') || msg.includes('rate')) {
-      const retry = msg.match(/retry in ([\d.]+)s/i);
-      const wait = retry ? Math.ceil(Number(retry[1])) : null;
-      throw new Error(
-        `쿼터 초과: 현재 모델(${model})의 무료 사용량을 초과했습니다.` +
-        (wait ? ` ${wait}초 후 재시도하거나,` : '') +
-        ' 설정에서 다른 모델로 변경해보세요.'
-      );
-    }
-    if (response.status === 503 || msg.includes('high demand') || msg.includes('overloaded')) {
-      throw new Error('서버 과부하: 잠시 후 다시 시도해주세요.');
-    }
-    // 서비스가 종료된 모델을 호출하면 404 또는 "not found"/"is not supported" 메시지가 온다.
-    // 다른 모델로 바꾸면 해결되는 문제라서 설정 화면으로 안내한다.
-    if (response.status === 404 || msg.includes('not found') || msg.includes('is not supported')) {
-      throw new Error(`선택한 모델(${model})을 더 이상 사용할 수 없습니다. 설정에서 다른 모델을 선택해주세요.`);
-    }
-    if (response.status === 400) {
-      throw new Error('요청 오류: API 키가 올바른지 확인해주세요.');
-    }
-    throw new Error(msg || `API 요청 실패 (${response.status})`);
+    throw new Error(buildApiErrorMessage(response.status, err.error?.message || '', model));
   }
 
   const data = await response.json();

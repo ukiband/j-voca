@@ -6,6 +6,7 @@ import {
   parseGeminiResponse,
   buildApiErrorMessage,
   isOverloaded,
+  isQuotaExceeded,
   extractWordsFromImage,
 } from '../gemini';
 
@@ -83,12 +84,16 @@ describe('MODEL_CHAIN', () => {
 });
 
 describe('buildGenerationConfig', () => {
-  it('Gemini 3 계열은 thinkingLevel LOW 를 넣고 temperature 는 넣지 않는다', () => {
-    for (const model of ['gemini-3.8-flash', 'gemini-3.5-flash-lite']) {
-      const config = buildGenerationConfig(model);
-      expect(config.thinkingConfig).toEqual({ thinkingLevel: 'LOW' });
-      expect(config).not.toHaveProperty('temperature');
-    }
+  it('3.5-flash-lite 는 thinkingLevel MEDIUM (LOW 에서는 규칙 준수가 불안정했음)', () => {
+    const config = buildGenerationConfig('gemini-3.5-flash-lite');
+    expect(config.thinkingConfig).toEqual({ thinkingLevel: 'MEDIUM' });
+    expect(config).not.toHaveProperty('temperature');
+  });
+
+  it('그 외 Gemini 3 계열은 thinkingLevel LOW 이고 temperature 는 넣지 않는다', () => {
+    const config = buildGenerationConfig('gemini-3.8-flash');
+    expect(config.thinkingConfig).toEqual({ thinkingLevel: 'LOW' });
+    expect(config).not.toHaveProperty('temperature');
   });
 
   it('Gemini 2.5 계열은 temperature 0.1 이고 thinkingConfig 가 없다', () => {
@@ -167,6 +172,19 @@ describe('isOverloaded', () => {
   });
 });
 
+describe('isQuotaExceeded', () => {
+  it('429 이거나 쿼터/rate limit 메시지면 true', () => {
+    expect(isQuotaExceeded(429, '')).toBe(true);
+    expect(isQuotaExceeded(403, 'Quota exceeded for this project.')).toBe(true);
+    expect(isQuotaExceeded(400, 'Rate limit reached.')).toBe(true);
+  });
+
+  it('404 메시지의 generateContent 는 rate limit 으로 보지 않는다', () => {
+    expect(isQuotaExceeded(404, 'models/x is not supported for generateContent.')).toBe(false);
+    expect(isQuotaExceeded(200, '')).toBe(false);
+  });
+});
+
 describe('buildApiErrorMessage', () => {
   const model = 'gemini-2.0-flash';
 
@@ -231,6 +249,11 @@ describe('extractWordsFromImage 모델 체인', () => {
     ok: false,
     status: 400,
     json: async () => ({ error: { message: 'API key not valid. Please pass a valid API key.' } }),
+  };
+  const quota = {
+    ok: false,
+    status: 429,
+    json: async () => ({ error: { message: 'You exceeded your current quota. Please retry in 30s.' } }),
   };
   const success = {
     ok: true,
@@ -318,6 +341,28 @@ describe('extractWordsFromImage 모델 체인', () => {
     expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 
+  it('첫 모델이 429(쿼터) 면 재시도 없이 다음 모델로 넘어가 성공 결과를 반환한다', async () => {
+    // 무료 등급 쿼터는 모델별로 따로 걸리므로 다른 모델은 정상일 수 있다
+    const fetchMock = vi.fn().mockResolvedValueOnce(quota).mockResolvedValueOnce(success);
+    vi.stubGlobal('fetch', fetchMock);
+
+    const words = await extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay });
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(calledModels(fetchMock)).toEqual(['gemini-3.5-flash-lite', 'gemini-3.8-flash']);
+    expect(delay).not.toHaveBeenCalled();
+    expect(words).toHaveLength(1);
+  });
+
+  it('세 모델이 모두 429 면 쿼터 문구로 throw 한다', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(quota);
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay }))
+      .rejects.toThrow('쿼터 초과');
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
+
   it('세 모델이 모두 404 면 과부하가 아니라 모델 종료 안내로 throw 한다', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(notFound));
 
@@ -337,7 +382,21 @@ describe('extractWordsFromImage 모델 체인', () => {
     expect(init.headers['x-goog-api-key']).toBe('test-key');
     const body = JSON.parse(init.body);
     expect(body.generationConfig.responseMimeType).toBe('application/json');
-    expect(body.generationConfig.thinkingConfig).toEqual({ thinkingLevel: 'LOW' });
+    // 첫 시도는 lite 이므로 MEDIUM 이어야 한다
+    expect(body.generationConfig.thinkingConfig).toEqual({ thinkingLevel: 'MEDIUM' });
     expect(body.contents[0].parts[1].inline_data).toEqual({ mime_type: 'image/jpeg', data: 'base64' });
+  });
+
+  it('프롬프트에 추출 범위 규칙(단어 칸 + 손글씨)이 들어 있다', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(success);
+    vi.stubGlobal('fetch', fetchMock);
+
+    await extractWordsFromImage('base64', 'image/jpeg', 1, 1, '', { delay });
+
+    const promptText = JSON.parse(fetchMock.mock.calls[0][1].body).contents[0].parts[0].text;
+    expect(promptText).toContain('## 추출 범위 (가장 중요)');
+    expect(promptText).toContain('새 단어 정리 칸');
+    expect(promptText).toContain('손글씨로 적은 일본어 단어나 문장');
+    expect(promptText).toContain('ます형 제시어');
   });
 });

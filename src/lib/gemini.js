@@ -73,9 +73,11 @@ export function buildGenerationConfig(model) {
   if (model.startsWith('gemini-3')) {
     // Gemini 3 계열은 temperature 를 기본값(1.0)에서 낮추면 오히려 반복 출력이나 성능 저하가 생긴다고
     // 공식 문서가 안내하므로 temperature 를 넣지 않는다. 대신 사고(thinking) 양을 thinkingLevel 로 조절한다.
-    // LOW 는 3.8-flash 기본값(MEDIUM)보다 낮춰 응답 속도를 확보하는 값이다. 3.5-flash-lite 는 기본이
-    // MINIMAL 이라 오히려 약간 높은 값이지만, 두 모델 모두 허용 범위이고 단어 추출에는 이 정도로 충분하다.
-    config.thinkingConfig = { thinkingLevel: 'LOW' };
+    // - 3.5-flash-lite: LOW 에서는 회차마다 결과가 달라 예문 단어를 초과 추출하거나 단어 칸 항목을 누락했고,
+    //   MEDIUM 에서는 사진 7장 모두(4회 반복 포함) 누락·초과 0 이었다. 7~14초로 느려지지만 정확도가 우선이다.
+    // - 그 외 3 계열(3.8-flash): LOW 로도 정확했고 기본값(MEDIUM)보다 빨라서 LOW 를 유지한다.
+    const thinkingLevel = model === 'gemini-3.5-flash-lite' ? 'MEDIUM' : 'LOW';
+    config.thinkingConfig = { thinkingLevel };
   } else {
     // Gemini 2.5 계열은 thinkingLevel 을 지원하지 않고, 낮은 temperature 로 일관된 출력을 얻는 기존 방식이 유효하다
     config.temperature = 0.1;
@@ -134,6 +136,11 @@ export function isOverloaded(status, msg) {
   return status === 503 || /high demand|overloaded/i.test(msg);
 }
 
+// 429 이거나 메시지가 쿼터 초과를 뜻하면 true. 무료 등급 쿼터는 모델별로 따로 걸리므로 체인에서 다음 모델로 넘기는 기준이 된다
+export function isQuotaExceeded(status, msg) {
+  return status === 429 || /quota|rate limit/i.test(msg);
+}
+
 export function buildApiErrorMessage(status, msg, model) {
   // 상태 코드를 먼저 본다. 메시지 문자열 검사만으로 분기하면 종료 모델 404 메시지
   // ("... is not supported for generateContent") 안의 "rate" 가 쿼터 초과로 오인되는 문제가 있었다.
@@ -141,7 +148,7 @@ export function buildApiErrorMessage(status, msg, model) {
     // 모델은 코드(MODEL_CHAIN)에 고정되어 있어 사용자가 바꿀 수 없으므로 앱 업데이트를 안내한다
     return `모델(${model})을 더 이상 사용할 수 없습니다. 앱 업데이트가 필요합니다.`;
   }
-  if (status === 429 || /quota|rate limit/i.test(msg)) {
+  if (isQuotaExceeded(status, msg)) {
     const retry = msg.match(/retry in ([\d.]+)s/i);
     const wait = retry ? Math.ceil(Number(retry[1])) : null;
     return (
@@ -197,6 +204,7 @@ async function requestWithRetry(url, body, apiKey, delay) {
   return result;
 }
 
+// 실측(교재 사진 7장)에서 하단 "단어" 칸 + 손글씨만 정확히 뽑아낸 문안. 문구를 바꾸면 결과가 달라질 수 있으니 실측 후 수정한다
 const PROMPT = `이 일본어 교재 사진에서 단어를 추출해주세요.
 
 ## 절대 금지 (NEVER)
@@ -205,17 +213,23 @@ const PROMPT = `이 일본어 교재 사진에서 단어를 추출해주세요.
 - **절대로** 쌍(pair)을 만들지 마세요. 사진에 "きれいだ"만 있으면 "きたない"를 추가하면 안 됩니다.
 - 사진에 보이지 않는 단어(직접 만들어낸 단어)가 하나라도 포함되면 실패입니다.
 
+## 추출 범위 (가장 중요)
+이 페이지에서 추출할 것은 다음 세 가지**만**입니다.
+1. 페이지 가장자리(하단 또는 옆)에 "단어" 라벨이 붙은 **새 단어 정리 칸**의 항목 전부. "일본어 단어 + 한국어 뜻" 형태로 나열되어 있으며, 칸이 두 줄 이상이거나 세로로 배치될 수 있습니다. 한 항목도 빠뜨리지 마세요.
+2. 학습자가 **손글씨로 적은 일본어 단어나 문장**. 여백이나 빈칸에 손으로 쓴 것이면 단어든 문장이든 각각 하나의 항목으로 추출하세요. 문장이면 word에 문장 전체, reading에 히라가나 읽기, meaning에 한국어 뜻을 넣습니다.
+3. 인쇄된 단어·표현 **바로 아래나 옆에 1:1로** 학습자가 **손글씨로 한국어 뜻**을 적어 둔 경우, 그 인쇄 표현. meaning에는 손글씨 뜻을 반영하세요. 문장 전체에 대한 손글씨 해석(예: "가끔 예전의 그를 떠올린다")은 그 문장 속 개별 단어를 추출할 근거가 **아닙니다**.
+그 외 인쇄된 텍스트는 추출하지 마세요: 회화문·예문·문법 설명·연습문제에 인쇄된 단어(이미 배운 단어입니다), 인명(山下, 金さん 등), 페이지·섹션 제목, 한국어 설명문. 밑줄·동그라미·체크 표시만 되어 있고 손글씨 뜻이 없는 인쇄 단어도 추출하지 않습니다. 연습문제의 인쇄된 문제 항목(예: "降ります", "借ります" 같은 ます형 제시어)도 추출하지 않고, 학습자가 손글씨로 쓴 **답**만 2번 규칙에 따라 추출합니다.
+
 ## 스캔 방법
 - 사진이 회전되어 있을 수 있습니다. 텍스트 방향을 먼저 파악한 후 읽어주세요.
-- 페이지에 여러 섹션(い형용사, な형용사, 명사, 동사 등)이 있을 수 있습니다. **모든 섹션**을 끝까지 스캔하세요.
-- 단어 하나라도 누락하지 마세요. 페이지 전체를 꼼꼼히 확인하세요.
+- "단어" 정리 칸을 먼저 찾아 항목 수를 세고, 그 수만큼 빠짐없이 출력하세요. 그다음 페이지 전체에서 손글씨를 찾으세요.
+- 회화문·예문·연습문제 영역의 인쇄 단어는 손글씨 뜻이 1:1로 붙어 있는지 확인한 뒤, 붙어 있지 않으면 건너뛰세요.
 
 ## 구분 기준
 - **인쇄된 일본어 단어**와 **손글씨로 적힌 일본어 단어** 모두 추출하세요. 단, 체크 표시(✓)나 동그라미(○) 등의 기호는 무시하세요. 손글씨가 인쇄된 단어의 보충 설명이나 메모인 경우에는 별도 단어로 추출하지 말고, 독립적으로 적힌 단어만 추출하세요.
 - 손글씨로 한국어 뜻이 적혀 있다면 meaning에 활용해도 좋습니다.
 - 교재에 한국어 뜻이 없는 경우, 일본어 단어의 뜻을 한국어로 직접 작성하세요. meaning을 빈 문자열로 두지 마세요.
 - 교재에서 가장 크게/중심으로 인쇄된 표기를 word로 추출하세요. 괄호 안 보조 표기나 후리가나(振り仮名)는 word에 넣지 말고, reading 작성 시 참고하세요.
-- 페이지 제목, 문법 설명, 예문은 제외하고 **단어 목록 항목만** 추출하세요.
 
 ## 출력 형식
 각 항목의 필드 의미는 다음과 같습니다 (형식은 스키마로 지정되어 있으니 내용에 집중하세요):
@@ -228,7 +242,9 @@ const PROMPT = `이 일본어 교재 사진에서 단어를 추출해주세요.
 - 초급 히라가나 교재에 "とけい 시계" → {"word":"とけい","reading":"とけい","meaning":"시계","pos":"명사"}
 - 한자 메인 + 후리가나 "時計(とけい)" → {"word":"時計","reading":"とけい","meaning":"시계","pos":"명사"}
 - 인쇄된 "高い" 옆에 손글씨로 "비싸다도 됨" 메모 → 메모는 별도 단어로 만들지 않고 인쇄 단어 1개만: {"word":"高い","reading":"たかい","meaning":"높다, 비싸다","pos":"い형용사"}
-- な형용사 "きれいだ" → {"word":"きれいだ","reading":"きれいだ","meaning":"예쁘다, 깨끗하다","pos":"な형용사"}`;
+- な형용사 "きれいだ" → {"word":"きれいだ","reading":"きれいだ","meaning":"예쁘다, 깨끗하다","pos":"な형용사"}
+- 연습문제 빈칸에 손글씨로 쓴 문장 "にもつを はこぶ くるま" → {"word":"にもつを はこぶ くるま","reading":"にもつを はこぶ くるま","meaning":"짐을 나르는 차","pos":"기타"}
+- 예문에 인쇄된 "毎日 乗る 電車"의 단어들은 손글씨 뜻이 없으면 추출하지 않습니다.`;
 
 // 성공 응답에서 단어 목록을 꺼내 앱에서 쓰는 형태로 바꾼다
 function toWordEntries(data, step, chapter, textbook) {
@@ -280,18 +296,21 @@ export async function extractWordsFromImage(base64Image, mimeType, step, chapter
     if (result.ok) return toWordEntries(result.data, step, chapter, textbook);
 
     const msg = errorMessageOf(result);
-    // 과부하(재시도까지 실패)나 모델 사용 불가(404)는 모델을 바꾸면 해결될 수 있으니 다음 모델로 넘어간다
-    if (isOverloaded(result.status, msg) || result.status === 404) {
+    // 모델을 바꾸면 해결될 수 있는 실패는 다음 모델로 넘어간다:
+    // - 과부하(재시도까지 실패), 모델 사용 불가(404)
+    // - 쿼터 초과(429): 무료 등급 쿼터가 모델별로 따로 걸려서(실측: 3.8-flash 만 429, lite 는 정상) 다른 모델은 쓸 수 있다
+    if (isOverloaded(result.status, msg) || isQuotaExceeded(result.status, msg) || result.status === 404) {
       lastFailure = { status: result.status, msg, model };
       continue;
     }
-    // 그 외(400 요청 오류, 429 쿼터, 401 인증 등)는 키나 요청 자체의 문제라 모델을 바꿔도 같으므로 바로 알린다
+    // 그 외(400 요청 오류, 401/403 키 문제 등)는 모델을 바꿔도 같으므로 바로 알린다
     throw new Error(buildApiErrorMessage(result.status, msg, model));
   }
 
-  // 체인을 모두 소진한 경우. 과부하가 한 번이라도 있었으면 과부하 안내, 전부 404 였다면 모델 종료 안내
-  if (lastFailure && lastFailure.status === 404 && !isOverloaded(lastFailure.status, lastFailure.msg)) {
-    throw new Error(buildApiErrorMessage(404, lastFailure.msg, lastFailure.model));
+  // 체인을 모두 소진한 경우 마지막 실패를 그대로 안내한다
+  // (503 이면 과부하, 429 면 쿼터, 404 면 앱 업데이트 문구가 buildApiErrorMessage 에서 자연히 나온다)
+  if (lastFailure) {
+    throw new Error(buildApiErrorMessage(lastFailure.status, lastFailure.msg, lastFailure.model));
   }
   throw new Error(OVERLOAD_MESSAGE);
 }

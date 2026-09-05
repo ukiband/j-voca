@@ -40,6 +40,87 @@ export function setModel(model) {
   localStorage.setItem('gemini-model', model);
 }
 
+// 응답을 JSON 배열로 강제하기 위한 스키마. 필드 순서(propertyOrdering)를 고정해 두면
+// 응답이 중간에 잘려도 word/reading 이 먼저 나와 있어 복구 시 건질 수 있는 항목이 많아진다.
+const RESPONSE_SCHEMA = {
+  type: 'ARRAY',
+  items: {
+    type: 'OBJECT',
+    properties: {
+      word: { type: 'STRING' },
+      reading: { type: 'STRING' },
+      meaning: { type: 'STRING' },
+      pos: { type: 'STRING' },
+    },
+    required: ['word', 'reading', 'meaning', 'pos'],
+    propertyOrdering: ['word', 'reading', 'meaning', 'pos'],
+  },
+};
+
+export function buildGenerationConfig(model) {
+  const config = {
+    responseMimeType: 'application/json',
+    responseSchema: RESPONSE_SCHEMA,
+    maxOutputTokens: 8192,
+  };
+
+  if (model.startsWith('gemini-3')) {
+    // Gemini 3 계열은 temperature 를 기본값(1.0)에서 낮추면 오히려 반복 출력이나 성능 저하가 생긴다고
+    // 공식 문서가 안내하므로 temperature 를 넣지 않는다. 대신 사고(thinking) 토큰 양을 thinkingLevel 로 조절한다.
+    // 단어 추출은 단순 작업이라 'low' 로 두어 응답 속도를 확보하고, 사고 토큰도 maxOutputTokens 한도에
+    // 포함되므로 실제 단어 목록에 쓸 토큰이 줄어드는 것을 막는다.
+    config.thinkingConfig = { thinkingLevel: 'low' };
+  } else {
+    // Gemini 2.5 계열은 thinkingLevel 을 지원하지 않고, 낮은 temperature 로 일관된 출력을 얻는 기존 방식이 유효하다
+    config.temperature = 0.1;
+  }
+
+  return config;
+}
+
+export function parseGeminiResponse(text) {
+  let words = null;
+
+  // 구조화 출력(responseMimeType: application/json)이면 순수 JSON 이 오므로 그대로 파싱을 먼저 시도한다
+  try {
+    words = JSON.parse(text);
+  } catch {
+    words = null;
+  }
+
+  if (!Array.isArray(words)) {
+    // 스키마를 강제해도 maxOutputTokens 에 걸려 잘리면 JSON 이 불완전해진다. 코드 펜스 제거 → 배열 매칭 →
+    // 마지막으로 완성된 항목까지만 잘라 닫는 순서로 복구를 시도한다.
+    const stripped = text.replace(/```(?:json)?\s*/gi, '').replace(/```/g, '').trim();
+    let candidate = stripped.match(/\[[\s\S]*\]/)?.[0] ?? null;
+
+    if (!candidate) {
+      const arrStart = stripped.indexOf('[');
+      if (arrStart !== -1) {
+        const partial = stripped.slice(arrStart);
+        const lastComplete = partial.lastIndexOf('}');
+        if (lastComplete !== -1) {
+          candidate = partial.slice(0, lastComplete + 1) + ']';
+        }
+      }
+    }
+
+    if (candidate) {
+      try {
+        words = JSON.parse(candidate);
+      } catch {
+        words = null;
+      }
+    }
+  }
+
+  if (!Array.isArray(words)) {
+    throw new Error(`JSON 파싱 실패. Gemini 응답: "${text.slice(0, 200)}"`);
+  }
+
+  return words;
+}
+
 export async function extractWordsFromImage(base64Image, mimeType, step, chapter, textbook) {
   const apiKey = getApiKey();
   if (!apiKey) throw new Error('설정에서 Gemini API 키를 먼저 입력해주세요.');
@@ -93,10 +174,7 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
           },
         ],
       }],
-      generationConfig: {
-        temperature: 0.1,
-        maxOutputTokens: 8192,
-      },
+      generationConfig: buildGenerationConfig(model),
     }),
   });
 
@@ -127,32 +205,16 @@ JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요:
   }
 
   const data = await response.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  // 사고 과정(thought) 파트가 함께 올 수 있으므로, 사고 파트가 아닌 첫 텍스트 파트를 단어 목록으로 본다
+  const parts = data.candidates?.[0]?.content?.parts || [];
+  const text = parts.find(p => typeof p.text === 'string' && !p.thought)?.text || '';
 
   if (!text) {
     const reason = data.candidates?.[0]?.finishReason || '응답 없음';
     throw new Error(`추출 실패: ${reason}`);
   }
 
-  // Strip markdown code fences (```json ... ```)
-  const stripped = text.replace(/```(?:json)?\s*/gi, '').replace(/```/g, '').trim();
-  let jsonMatch = stripped.match(/\[[\s\S]*\]/);
-
-  // Truncated response: try to recover complete entries
-  if (!jsonMatch) {
-    const arrStart = stripped.indexOf('[');
-    if (arrStart !== -1) {
-      const partial = stripped.slice(arrStart);
-      const lastComplete = partial.lastIndexOf('}');
-      if (lastComplete !== -1) {
-        jsonMatch = [partial.slice(0, lastComplete + 1) + ']'];
-      }
-    }
-  }
-
-  if (!jsonMatch) throw new Error(`JSON 파싱 실패. Gemini 응답: "${text.slice(0, 200)}"`);
-
-  const words = JSON.parse(jsonMatch[0]);
+  const words = parseGeminiResponse(text);
   // 로컬 타임존 기준 날짜를 사용하여 KST 자정~오전 9시에 전날로 처리되는 버그 방지
   const today = getLocalDateString();
 

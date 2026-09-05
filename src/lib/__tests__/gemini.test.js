@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { normalizePos, MODELS, getModel } from '../gemini';
+import { normalizePos, MODELS, getModel, buildGenerationConfig, parseGeminiResponse } from '../gemini';
 
 // vitest 기본 환경(node)에는 localStorage가 없어서 Map 기반의 최소 구현을 주입한다
 function createLocalStorageStub() {
@@ -60,5 +60,62 @@ describe('getModel', () => {
   it('서비스 종료된 모델(gemini-2.0-flash)이 저장되어 있으면 기본 모델로 대체한다', () => {
     localStorage.setItem('gemini-model', 'gemini-2.0-flash');
     expect(getModel()).toBe(MODELS[0].id);
+  });
+});
+
+describe('buildGenerationConfig', () => {
+  it('Gemini 3 계열은 thinkingLevel low 를 넣고 temperature 는 넣지 않는다', () => {
+    for (const model of ['gemini-3.8-flash', 'gemini-3.5-flash-lite']) {
+      const config = buildGenerationConfig(model);
+      expect(config.thinkingConfig).toEqual({ thinkingLevel: 'low' });
+      expect(config).not.toHaveProperty('temperature');
+    }
+  });
+
+  it('Gemini 2.5 계열은 temperature 0.1 이고 thinkingConfig 가 없다', () => {
+    const config = buildGenerationConfig('gemini-2.5-flash');
+    expect(config.temperature).toBe(0.1);
+    expect(config).not.toHaveProperty('thinkingConfig');
+  });
+
+  it('모든 모델에 구조화 출력 설정과 출력 토큰 한도가 들어간다', () => {
+    for (const model of MODELS.map(m => m.id)) {
+      const config = buildGenerationConfig(model);
+      expect(config.responseMimeType).toBe('application/json');
+      expect(config.responseSchema.type).toBe('ARRAY');
+      expect(config.responseSchema.items.required).toEqual(['word', 'reading', 'meaning', 'pos']);
+      expect(config.maxOutputTokens).toBe(8192);
+    }
+  });
+});
+
+describe('parseGeminiResponse', () => {
+  const entry = { word: '時計', reading: 'とけい', meaning: '시계', pos: '명사' };
+
+  it('순수 JSON 배열을 파싱한다', () => {
+    expect(parseGeminiResponse(JSON.stringify([entry]))).toEqual([entry]);
+  });
+
+  it('코드 펜스로 감싼 JSON 을 파싱한다', () => {
+    const text = '```json\n' + JSON.stringify([entry]) + '\n```';
+    expect(parseGeminiResponse(text)).toEqual([entry]);
+  });
+
+  it('앞뒤에 잡음 텍스트가 있어도 배열만 골라 파싱한다', () => {
+    const text = '다음은 추출 결과입니다.\n' + JSON.stringify([entry]) + '\n이상입니다.';
+    expect(parseGeminiResponse(text)).toEqual([entry]);
+  });
+
+  it('마지막 항목이 잘린 배열은 완성된 항목까지만 복구한다', () => {
+    const truncated = '[' + JSON.stringify(entry) + ',{"word":"いぬ","reading":"い';
+    expect(parseGeminiResponse(truncated)).toEqual([entry]);
+  });
+
+  it('배열이 아닌 JSON 이면 throw 한다', () => {
+    expect(() => parseGeminiResponse(JSON.stringify(entry))).toThrow('JSON 파싱 실패');
+  });
+
+  it('파싱할 수 없는 텍스트면 throw 한다', () => {
+    expect(() => parseGeminiResponse('사진에서 단어를 찾을 수 없습니다.')).toThrow('JSON 파싱 실패');
   });
 });

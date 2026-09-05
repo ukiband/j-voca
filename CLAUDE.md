@@ -18,7 +18,7 @@
 src/
 ├── components/    # React 컴포넌트 (Dashboard, ReviewSession, FlashCard 등)
 ├── hooks/         # useBrowseMode 등
-├── lib/           # db.js, fsrs.js, review-utils.js 등 유틸리티
+├── lib/           # db.js, fsrs.js, review-utils.js, lesson-utils.js(step/chapter 헬퍼) 등 유틸리티
 │   └── __tests__/ # Vitest 테스트
 ├── styles/        # Tailwind CSS
 ├── main.jsx       # 엔트리 + 버전 체크
@@ -43,5 +43,6 @@ npm run test       # Vitest 테스트
 - FSRS 날짜 단위 스케줄링 (밤 12시 기준)
 - words.json은 public/ 정적 파일 → 빌드 없이 네트워크 우선 전략으로 최신 데이터 제공
 - 단어는 step(교재 단계) > chapter(레슨) 2단계 구조. step 2부터 chapter가 1부터 다시 시작하므로 레슨 식별은 (step, chapter) 복합 키. step 누락 시 1로 간주 (`getStep()`)
+- words.json 정합성은 `src/lib/__tests__/words-data.test.js`가 검증 (모든 단어에 step/chapter 양의 정수, id 유일). 데이터만 바꿔도 `npm run test`로 확인
 - version.json 폴링으로 앱 업데이트 감지
 - base path: `/j-voca/`

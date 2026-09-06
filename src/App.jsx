@@ -1,7 +1,8 @@
 import { Suspense, lazy, useEffect, useState, useCallback } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-import { fetchWordsData } from './lib/github';
-import { openDb, syncWordsFromData, ensureReviewsExist } from './lib/db';
+import { fetchWordsData, fetchSentencesData } from './lib/github';
+import { openDb, syncWordsFromData, ensureReviewsExist, syncSentencesFromData } from './lib/db';
+import { ImmersiveContext } from './hooks/useImmersive';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
 const WordInput = lazy(() => import('./components/WordInput'));
@@ -31,6 +32,8 @@ function PageLoader() {
 export default function App() {
   const [ready, setReady] = useState(false);
   const [syncError, setSyncError] = useState(null);
+  // 복습 카드 화면이 켜져 있는 동안 true. 하단 탭을 숨기고 레이아웃을 화면 높이에 고정한다
+  const [immersive, setImmersive] = useState(false);
 
   const loadData = useCallback(async () => {
     setSyncError(null);
@@ -45,6 +48,14 @@ export default function App() {
       } catch (err) {
         console.error('Data sync error:', err);
         setSyncError(err.message || '데이터 동기화 실패');
+      }
+      // 예문은 보조 정보라 실패해도 단어 학습을 막지 않는다. 오류 배너(syncError)도 띄우지 않고 로그만 남긴다.
+      // 받지 못했으면(null) 이미 저장된 예문을 그대로 쓴다.
+      try {
+        const sentenceData = await fetchSentencesData();
+        if (sentenceData) await syncSentencesFromData(sentenceData.sentences);
+      } catch (err) {
+        console.warn('Sentence sync error:', err);
       }
       setReady(true);
     } catch (err) {
@@ -71,9 +82,12 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen max-w-lg mx-auto">
-      <main className="flex-1 pb-24 px-4 pt-4 safe-top">
-        {syncError && (
+    <ImmersiveContext.Provider value={setImmersive}>
+    <div className={immersive
+      ? 'flex flex-col h-dvh max-w-lg mx-auto overflow-hidden'
+      : 'flex flex-col min-h-dvh max-w-lg mx-auto'}>
+      <main className={immersive ? 'flex-1 min-h-0 flex flex-col' : 'flex-1 pb-24 px-4 pt-4 safe-top'}>
+        {!immersive && syncError && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between">
             <p className="text-sm text-red-600">{syncError}</p>
             <button onClick={loadData} className="text-xs text-red-600 font-medium ml-2 whitespace-nowrap">재시도</button>
@@ -93,7 +107,7 @@ export default function App() {
         </Suspense>
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 safe-bottom">
+      {!immersive && <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 safe-bottom">
         <div className="max-w-lg mx-auto flex justify-around">
           {NAV_ITEMS.map(({ to, icon, label }) => (
             <NavLink
@@ -111,7 +125,8 @@ export default function App() {
             </NavLink>
           ))}
         </div>
-      </nav>
+      </nav>}
     </div>
+    </ImmersiveContext.Provider>
   );
 }

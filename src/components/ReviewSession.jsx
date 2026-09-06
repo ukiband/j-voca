@@ -1,10 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
-import { db } from '../lib/db';
+import { db, getSentencesByWordIds } from '../lib/db';
 import { gradeCard, createInitialReview } from '../lib/fsrs';
 import { getDueWords } from '../lib/review-utils';
 import { formatLesson, parseLessonNumber } from '../lib/lesson-utils';
+import { filterUsableSentences, pickSentence } from '../lib/sentence-utils';
+import { getKstDateString } from '../lib/date-utils';
+import { useImmersive } from '../hooks/useImmersive';
 import FlashCard from './FlashCard';
+
+// 앞면 "뒤집기"와 뒷면 평가 버튼이 같은 자리에 있어서, 뒤집은 직후 연속 탭이 평가로 처리되지 않도록 잠시 막는 시간
+const GRADE_READY_DELAY_MS = 300;
+
+const GRADE_BUTTONS = [
+  { grade: 'again', label: '모름', color: 'bg-red-600' },
+  { grade: 'hard', label: '애매', color: 'bg-amber-700' },
+  { grade: 'good', label: '앎', color: 'bg-green-700' },
+];
 
 export default function ReviewSession() {
   const [params] = useSearchParams();
@@ -29,6 +41,12 @@ export default function ReviewSession() {
   const [results, setResults] = useState({ again: 0, hard: 0, good: 0 });
   const [error, setError] = useState(null);
   const [saveError, setSaveError] = useState(null);
+  const [flipped, setFlipped] = useState(false);
+  const [gradeReady, setGradeReady] = useState(false);
+  // wordId → 예문 배열. 큐가 정해진 뒤 한 번에 읽어 두고 카드마다 골라 쓴다
+  const [sentenceMap, setSentenceMap] = useState(() => new Map());
+  const scrollRef = useRef(null);
+  const readyTimerRef = useRef(null);
 
   useEffect(() => {
     getDueWords(step, chapter, tagParam).then(words => {
@@ -41,6 +59,17 @@ export default function ReviewSession() {
           : [...words].sort(() => Math.random() - 0.5);
         setQueue(ordered);
         setWordCount(ordered.length);
+        // 예문은 보조 정보이므로 읽기에 실패해도 복습은 그대로 진행한다
+        getSentencesByWordIds(ordered.map(w => w.id))
+          .then(rows => {
+            const map = new Map();
+            for (const row of rows) {
+              if (!map.has(row.wordId)) map.set(row.wordId, []);
+              map.get(row.wordId).push(row);
+            }
+            setSentenceMap(map);
+          })
+          .catch(err => console.warn('Sentence load error:', err));
       }
       setLoading(false);
     }).catch((err) => {
@@ -52,6 +81,30 @@ export default function ReviewSession() {
 
   const currentWord = queue[currentIndex];
   const done = !loading && queue.length > 0 && currentIndex >= queue.length;
+  const currentWordId = currentWord?.id;
+
+  // 카드 구간에서만 하단 탭을 숨기고 화면 높이를 고정한다. 로딩·오류·완료 화면은 일반 레이아웃을 쓴다
+  useImmersive(!loading && !error && !noWords && !done && currentWord != null);
+
+  // 새 카드로 넘어가면 스크롤을 맨 위로 되돌리고, 이전 카드의 평가 활성화 타이머를 정리한다
+  useEffect(() => {
+    scrollRef.current?.scrollTo(0, 0);
+    return () => clearTimeout(readyTimerRef.current);
+  }, [currentIndex]);
+
+  // 같은 날에는 같은 문장이 나오도록 날짜 기준으로 고른다. 카드가 바뀌거나 예문이 로드됐을 때만 다시 계산한다
+  const sentence = useMemo(() => {
+    if (!currentWord) return null;
+    const usable = filterUsableSentences(sentenceMap.get(currentWord.id), currentWord);
+    return pickSentence(usable, getKstDateString());
+  }, [currentWordId, sentenceMap]);
+
+  function handleFlip() {
+    if (flipped) return;
+    setFlipped(true);
+    clearTimeout(readyTimerRef.current);
+    readyTimerRef.current = setTimeout(() => setGradeReady(true), GRADE_READY_DELAY_MS);
+  }
 
   async function handleGrade(grade) {
     if (!currentWord || saving) return;
@@ -71,10 +124,14 @@ export default function ReviewSession() {
         });
       });
     } catch (err) {
+      // 저장에 실패한 평가는 기록되지 않았으므로 카드를 넘기지 않고 현재 카드에서 다시 누를 수 있게 둔다
       console.error('Review save error:', err);
       setSaveError(err.message || '저장 실패');
+      setSaving(false);
+      return;
     }
 
+    setSaveError(null);
     setSaving(false);
     setResults(prev => ({ ...prev, [grade]: prev[grade] + 1 }));
 
@@ -83,6 +140,9 @@ export default function ReviewSession() {
       setQueue(prev => [...prev, currentWord]);
     }
 
+    // 다음 카드는 앞면부터. 인덱스와 같은 렌더에서 함께 바꿔야 뒷면이 한 프레임 비치지 않는다
+    setFlipped(false);
+    setGradeReady(false);
     setCurrentIndex(prev => prev + 1);
   }
 
@@ -126,17 +186,18 @@ export default function ReviewSession() {
       <div className="text-center py-12 space-y-6">
         <p className="text-4xl">&#x2705;</p>
         <p className="text-lg font-medium text-slate-800">복습 완료!</p>
+        {/* 결과 칸 색은 평가 버튼(red-600 / amber-700 / green-700)과 같은 계열로 맞춘다 */}
         <div className="grid grid-cols-3 gap-2 text-sm">
           <div className="bg-red-50 rounded-xl p-3">
-            <p className="text-red-500 font-medium">{results.again}</p>
+            <p className="text-red-600 font-medium">{results.again}</p>
             <p className="text-slate-400">모름</p>
           </div>
-          <div className="bg-orange-50 rounded-xl p-3">
-            <p className="text-orange-400 font-medium">{results.hard}</p>
+          <div className="bg-amber-50 rounded-xl p-3">
+            <p className="text-amber-700 font-medium">{results.hard}</p>
             <p className="text-slate-400">애매</p>
           </div>
           <div className="bg-green-50 rounded-xl p-3">
-            <p className="text-green-500 font-medium">{results.good}</p>
+            <p className="text-green-700 font-medium">{results.good}</p>
             <p className="text-slate-400">앎</p>
           </div>
         </div>
@@ -154,32 +215,62 @@ export default function ReviewSession() {
   const progressTotal = isReview ? wordCount : queue.length - wordCount;
   const progressPct = (progressCurrent / progressTotal) * 100;
 
+  const title = (chapter != null ? formatLesson(step, chapter) : tagParam || '전체 복습') + (reverse ? ' · 한→일' : '');
+
+  // 3단 고정 레이아웃: 헤더와 하단 조작 영역은 shrink-0 로 고정하고 본문(카드)만 스크롤한다.
+  // 그래야 문장 길이나 예문 유무와 상관없이 뒤집기/평가 버튼이 항상 같은 자리에 온다.
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold text-slate-800">
-          {chapter != null ? `${formatLesson(step, chapter)} 복습` : tagParam ? `${tagParam} 복습` : '복습'}
-          {reverse && <span className="text-sm font-normal text-indigo-500 ml-2">한→일</span>}
-        </h1>
-        <span className="text-sm text-slate-400">
-          {isReview
-            ? `${progressCurrent} / ${progressTotal}`
-            : `재복습 ${progressCurrent} / ${progressTotal}`}
-        </span>
-      </div>
+    <div className="flex-1 min-h-0 flex flex-col">
+      <header className="shrink-0 safe-top">
+        <div className="flex items-center gap-2 h-[72px] pl-1 pr-4">
+          <Link
+            to="/lesson-select"
+            aria-label="복습 닫기"
+            className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-500 text-2xl"
+          >
+            &times;
+          </Link>
+          <h1 className="flex-1 min-w-0 truncate text-[1rem] font-bold text-slate-800">{title}</h1>
+          <span className="shrink-0 text-sm text-slate-500">
+            {isReview ? `${progressCurrent} / ${progressTotal}` : `재복습 ${progressCurrent} / ${progressTotal}`}
+          </span>
+        </div>
+        <div className="h-[3px] bg-slate-200">
+          <div className="h-full bg-indigo-500 transition-all" style={{ width: `${progressPct}%` }} />
+        </div>
+      </header>
 
       {saveError && (
-        <p className="text-xs text-red-500 bg-red-50 p-2 rounded-lg">저장 오류: {saveError}</p>
+        <p className="shrink-0 mx-4 mt-2 text-xs text-red-600 bg-red-50 p-2 rounded-lg">저장 오류: {saveError}. 다시 평가해주세요.</p>
       )}
 
-      <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-indigo-500 rounded-full transition-all"
-          style={{ width: `${progressPct}%` }}
-        />
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto flex flex-col px-5 py-4">
+        <FlashCard word={currentWord} sentence={sentence} reverse={reverse} flipped={flipped} onFlip={handleFlip} />
       </div>
 
-      {currentWord && <FlashCard key={currentIndex} word={currentWord} onGrade={handleGrade} reverse={reverse} />}
+      <footer className="shrink-0 border-t border-slate-200 bg-white px-4 pt-2 safe-bottom-min">
+        {flipped ? (
+          <div className="grid grid-cols-3 gap-2">
+            {GRADE_BUTTONS.map(({ grade, label, color }) => (
+              <button
+                key={grade}
+                onClick={() => handleGrade(grade)}
+                disabled={!gradeReady || saving}
+                className={`${color} h-14 rounded-xl text-white text-[1rem] font-medium disabled:opacity-50`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <button
+            onClick={handleFlip}
+            className="w-full h-14 rounded-xl bg-indigo-600 text-white text-[1rem] font-medium"
+          >
+            뒤집기
+          </button>
+        )}
+      </footer>
     </div>
   );
 }

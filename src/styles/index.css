@@ -18,31 +18,10 @@ html.font-xlarge { font-size: 23px; }
 html.font-xxlarge { font-size: 26px; }
 
 body {
-  @apply bg-slate-50 text-slate-900 min-h-screen;
+  /* 복습 몰입 화면이 100dvh 를 쓰므로 body 도 같은 단위여야 주소창이 보일 때 남는 높이만큼 페이지가 스크롤되지 않는다 */
+  @apply bg-slate-50 text-slate-900 min-h-dvh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-.card-flip {
-  perspective: 1000px;
-}
-
-.card-flip-inner {
-  transition: transform 0.5s;
-  transform-style: preserve-3d;
-}
-
-.card-flip-inner.flipped {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  backface-visibility: hidden;
-}
-
-.card-back {
-  transform: rotateY(180deg);
 }
 
 .safe-top {
@@ -51,4 +30,15 @@ body {
 
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 하단 고정 조작 영역용. 홈 인디케이터가 없는 기기에서도 버튼이 화면 끝에 붙지 않도록 최소 12px 을 보장한다 */
+.safe-bottom-min {
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+}
+
+/* 일본어 예문 줄. 구두점이 줄 머리에 오지 않게 하고(strict), 긴 문장은 글자 단위로 꺾어 가로 스크롤을 막는다 */
+.jp-text {
+  line-break: strict;
+  overflow-wrap: anywhere;
 }

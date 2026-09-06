@@ -11351,6 +11351,438 @@
       "sentence": "朝起きて[[歯を磨きます]]。",
       "reading": "あさ おきて [[はを みがきます]]。",
       "meaning": "아침에 일어나서 이를 닦아요."
+    },
+    {
+      "wordId": 956,
+      "date": "2026-09-06",
+      "source": {
+        "word": "サークル",
+        "reading": "サークル",
+        "meaning": "서클, 동아리"
+      },
+      "sentence": "大学で[[サークル]]に入ります。",
+      "reading": "だいがくで [[さーくる]]に はいります。",
+      "meaning": "대학에서 동아리에 들어가요."
+    },
+    {
+      "wordId": 957,
+      "date": "2026-09-06",
+      "source": {
+        "word": "たくさん",
+        "reading": "たくさん",
+        "meaning": "많이"
+      },
+      "sentence": "りんごを[[たくさん]]食べます。",
+      "reading": "りんごを [[たくさん]] たべます。",
+      "meaning": "사과를 많이 먹어요."
+    },
+    {
+      "wordId": 958,
+      "date": "2026-09-06",
+      "source": {
+        "word": "見学する",
+        "reading": "けんがくする",
+        "meaning": "견학하다"
+      },
+      "sentence": "工場を[[見学します]]。",
+      "reading": "こうじょうを [[けんがくします]]。",
+      "meaning": "공장을 견학해요."
+    },
+    {
+      "wordId": 959,
+      "date": "2026-09-06",
+      "source": {
+        "word": "興味",
+        "reading": "きょうみ",
+        "meaning": "흥미"
+      },
+      "sentence": "日本文化に[[興味]]があります。",
+      "reading": "にほんぶんかに [[きょうみ]]が あります。",
+      "meaning": "일본 문화에 흥미가 있어요."
+    },
+    {
+      "wordId": 960,
+      "date": "2026-09-06",
+      "source": {
+        "word": "人気",
+        "reading": "にんき",
+        "meaning": "인기"
+      },
+      "sentence": "あの本は[[人気]]があります。",
+      "reading": "あのほんは [[にんき]]が あります。",
+      "meaning": "저 책은 인기가 있어요."
+    },
+    {
+      "wordId": 961,
+      "date": "2026-09-06",
+      "source": {
+        "word": "ギター",
+        "reading": "ギター",
+        "meaning": "기타"
+      },
+      "sentence": "新しい[[ギター]]を買いました。",
+      "reading": "あたらしい [[ぎたー]]を かいました。",
+      "meaning": "새 기타를 샀어요."
+    },
+    {
+      "wordId": 962,
+      "date": "2026-09-06",
+      "source": {
+        "word": "~しに いく",
+        "reading": "~しに いく",
+        "meaning": "~하러 가다"
+      },
+      "sentence": "図書館へ本を[[読みに行きます]]。",
+      "reading": "としょかんへ ほんを [[よみに いきます]]。",
+      "meaning": "도서관에 책을 읽으러 가요."
+    },
+    {
+      "wordId": 963,
+      "date": "2026-09-06",
+      "source": {
+        "word": "よく",
+        "reading": "よく",
+        "meaning": "자주, 잘"
+      },
+      "sentence": "彼は[[よく]]図書館に行きます。",
+      "reading": "かれは [[よく]] としょかんに いきます。",
+      "meaning": "그는 자주 도서관에 가요."
+    },
+    {
+      "wordId": 964,
+      "date": "2026-09-06",
+      "source": {
+        "word": "投げる",
+        "reading": "なげる",
+        "meaning": "던지다"
+      },
+      "sentence": "ボールを[[投げます]]。",
+      "reading": "ぼーるを [[なげます]]。",
+      "meaning": "공을 던져요."
+    },
+    {
+      "wordId": 965,
+      "date": "2026-09-06",
+      "source": {
+        "word": "打つ",
+        "reading": "うつ",
+        "meaning": "치다"
+      },
+      "sentence": "ボールを[[打ちます]]。",
+      "reading": "ぼーるを [[うちます]]。",
+      "meaning": "공을 쳐요."
+    },
+    {
+      "wordId": 966,
+      "date": "2026-09-06",
+      "source": {
+        "word": "荷物",
+        "reading": "にもつ",
+        "meaning": "짐"
+      },
+      "sentence": "部屋に[[荷物]]を置きます。",
+      "reading": "へやに [[にもつ]]を おきます。",
+      "meaning": "방에 짐을 둬요."
+    },
+    {
+      "wordId": 967,
+      "date": "2026-09-06",
+      "source": {
+        "word": "運ぶ",
+        "reading": "はこぶ",
+        "meaning": "나르다"
+      },
+      "sentence": "机を[[運びます]]。",
+      "reading": "つくえを [[はこびます]]。",
+      "meaning": "책상을 날라요."
+    },
+    {
+      "wordId": 968,
+      "date": "2026-09-06",
+      "source": {
+        "word": "ボール",
+        "reading": "ぼーる",
+        "meaning": "공"
+      },
+      "sentence": "公園で[[ボール]]を投げます。",
+      "reading": "こうえんで [[ぼーる]]を なげます。",
+      "meaning": "공원에서 공을 던져요."
+    },
+    {
+      "wordId": 969,
+      "date": "2026-09-06",
+      "source": {
+        "word": "よく うつ せんしゅ",
+        "reading": "よく うつ せんしゅ",
+        "meaning": "잘 치는 선수"
+      },
+      "sentence": "あの人は[[よく うつ せんしゅ]]です。",
+      "reading": "あのひとわ [[よく うつ せんしゅ]]です。",
+      "meaning": "저 사람은 잘 치는 선수예요."
+    },
+    {
+      "wordId": 970,
+      "date": "2026-09-06",
+      "source": {
+        "word": "荷物を 運ぶ 車",
+        "reading": "にもつを はこぶ くるま",
+        "meaning": "짐을 나르는 차"
+      },
+      "sentence": "あれは[[荷物を 運ぶ 車]]です。",
+      "reading": "あれわ [[にもつを はこぶ くるま]]です。",
+      "meaning": "저것은 짐을 나르는 차예요."
+    },
+    {
+      "wordId": 971,
+      "date": "2026-09-06",
+      "source": {
+        "word": "趣味",
+        "reading": "しゅみ",
+        "meaning": "취미"
+      },
+      "sentence": "私の[[趣味]]は読書です。",
+      "reading": "わたしの [[しゅみ]]わ どくしょです。",
+      "meaning": "제 취미는 독서예요."
+    },
+    {
+      "wordId": 972,
+      "date": "2026-09-06",
+      "source": {
+        "word": "息子",
+        "reading": "むすこ",
+        "meaning": "아들"
+      },
+      "sentence": "私の[[息子]]は学生です。",
+      "reading": "わたしの [[むすこ]]わ がくせいです。",
+      "meaning": "제 아들은 학생이에요."
+    },
+    {
+      "wordId": 973,
+      "date": "2026-09-06",
+      "source": {
+        "word": "夢",
+        "reading": "ゆめ",
+        "meaning": "꿈"
+      },
+      "sentence": "大きな[[夢]]を持っています。",
+      "reading": "おおきな [[ゆめ]]を もっています。",
+      "meaning": "큰 꿈을 가지고 있어요."
+    },
+    {
+      "wordId": 974,
+      "date": "2026-09-06",
+      "source": {
+        "word": "世界",
+        "reading": "せかい",
+        "meaning": "세계"
+      },
+      "sentence": "[[世界]]を旅行したいです。",
+      "reading": "[[せかい]]を りょこうしたいです。",
+      "meaning": "세계 여행을 하고 싶어요."
+    },
+    {
+      "wordId": 975,
+      "date": "2026-09-06",
+      "source": {
+        "word": "娘",
+        "reading": "むすめ",
+        "meaning": "딸"
+      },
+      "sentence": "私の[[娘]]は絵を描きます。",
+      "reading": "わたしの [[むすめ]]わ えを かきます。",
+      "meaning": "제 딸은 그림을 그려요."
+    },
+    {
+      "wordId": 976,
+      "date": "2026-09-06",
+      "source": {
+        "word": "お祭り",
+        "reading": "おまつり",
+        "meaning": "마쓰리, 축제"
+      },
+      "sentence": "日曜日に[[お祭り]]に行きます。",
+      "reading": "にちようびに [[おまつり]]に いきます。",
+      "meaning": "일요일에 축제에 갑니다."
+    },
+    {
+      "wordId": 977,
+      "date": "2026-09-06",
+      "source": {
+        "word": "仕事",
+        "reading": "しごと",
+        "meaning": "일"
+      },
+      "sentence": "私の[[仕事]]は大変です。",
+      "reading": "わたしの [[しごと]]は たいへんです。",
+      "meaning": "내 일은 힘들어요."
+    },
+    {
+      "wordId": 978,
+      "date": "2026-09-06",
+      "source": {
+        "word": "作る",
+        "reading": "つくる",
+        "meaning": "만들다"
+      },
+      "sentence": "朝ごはんを[[作ります]]。",
+      "reading": "あさごはんを [[つくります]]。",
+      "meaning": "아침밥을 만듭니다."
+    },
+    {
+      "wordId": 979,
+      "date": "2026-09-06",
+      "source": {
+        "word": "娘",
+        "reading": "むすめ",
+        "meaning": "딸"
+      },
+      "sentence": "[[娘]]は学生です。",
+      "reading": "[[むすめ]]は がくせいです。",
+      "meaning": "딸은 학생입니다."
+    },
+    {
+      "wordId": 980,
+      "date": "2026-09-06",
+      "source": {
+        "word": "夢",
+        "reading": "ゆめ",
+        "meaning": "꿈"
+      },
+      "sentence": "大きな[[夢]]があります。",
+      "reading": "おおきな [[ゆめ]]が あります。",
+      "meaning": "큰 꿈이 있습니다."
+    },
+    {
+      "wordId": 981,
+      "date": "2026-09-06",
+      "source": {
+        "word": "彼",
+        "reading": "かれ",
+        "meaning": "남자친구"
+      },
+      "sentence": "[[彼]]と映画を見ます。",
+      "reading": "[[かれ]]と えいがを みます。",
+      "meaning": "남자친구와 영화를 봅니다."
+    },
+    {
+      "wordId": 982,
+      "date": "2026-09-06",
+      "source": {
+        "word": "時々",
+        "reading": "ときどき",
+        "meaning": "가끔"
+      },
+      "sentence": "[[時々]]図書館に行きます。",
+      "reading": "[[ときどき]] とょかん[->도서관]에 갑니다.",
+      "meaning": "가끔 도서관에 갑니다."
+    },
+    {
+      "wordId": 983,
+      "date": "2026-09-06",
+      "source": {
+        "word": "お酒",
+        "reading": "おさけ",
+        "meaning": "술"
+      },
+      "sentence": "父は[[お酒]]を飲みます。",
+      "reading": "ちちは [[おさけ]]を のみます。",
+      "meaning": "아버지는 술을 마십니다."
+    },
+    {
+      "wordId": 984,
+      "date": "2026-09-06",
+      "source": {
+        "word": "たまに",
+        "reading": "たまに",
+        "meaning": "이따금, 간혹"
+      },
+      "sentence": "[[たまに]]本を読みます。",
+      "reading": "[[たまに]] ほんを よみます。",
+      "meaning": "간혹 책을 읽습니다."
+    },
+    {
+      "wordId": 985,
+      "date": "2026-09-06",
+      "source": {
+        "word": "昔",
+        "reading": "むかし",
+        "meaning": "옛날"
+      },
+      "sentence": "[[昔]]の写真を봅니다[->봅니다].",
+      "reading": "[[むかし]]の しゃしんを みます。",
+      "meaning": "옛날 사진을 봅니다."
+    },
+    {
+      "wordId": 986,
+      "date": "2026-09-06",
+      "source": {
+        "word": "思い出す",
+        "reading": "おもいだす",
+        "meaning": "떠올리다"
+      },
+      "sentence": "昔の[[思い出します]]。",
+      "reading": "むかしの [[おもいだします]]。",
+      "meaning": "옛날을 떠올립니다."
+    },
+    {
+      "wordId": 987,
+      "date": "2026-09-06",
+      "source": {
+        "word": "声",
+        "reading": "こえ",
+        "meaning": "목소리"
+      },
+      "sentence": "きれいな[[声]]ですね。",
+      "reading": "きれいな [[こえ]]ですね。",
+      "meaning": "예쁜 목소리네요."
+    },
+    {
+      "wordId": 988,
+      "date": "2026-09-06",
+      "source": {
+        "word": "聞こえる",
+        "reading": "きこえる",
+        "meaning": "들리다"
+      },
+      "sentence": "鳥の声が[[聞こえます]]。",
+      "reading": "とりの こえが [[きこえます]]。",
+      "meaning": "새소리가 들립니다."
+    },
+    {
+      "wordId": 989,
+      "date": "2026-09-06",
+      "source": {
+        "word": "道",
+        "reading": "みち",
+        "meaning": "길"
+      },
+      "sentence": "この[[道]]をまっすぐ行きます。",
+      "reading": "この [[みち]]を まっすぐ いきます。",
+      "meaning": "이 길을 곧장 갑니다."
+    },
+    {
+      "wordId": 990,
+      "date": "2026-09-06",
+      "source": {
+        "word": "迷う",
+        "reading": "まよう",
+        "meaning": "헤매다"
+      },
+      "sentence": "ここで[[迷います]]。",
+      "reading": "ここで [[まよいます]]。",
+      "meaning": "여기서 헤맵니다."
+    },
+    {
+      "wordId": 991,
+      "date": "2026-09-06",
+      "source": {
+        "word": "忘れる",
+        "reading": "わすれる",
+        "meaning": "잊다"
+      },
+      "sentence": "傘を[[忘れました]]。",
+      "reading": "かさを [[わすれました]]。",
+      "meaning": "우산을 잊어버렸습니다."
     }
   ]
 }

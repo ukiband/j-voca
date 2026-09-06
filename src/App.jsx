@@ -9,8 +9,6 @@ const WordInput = lazy(() => import('./components/WordInput'));
 const WordList = lazy(() => import('./components/WordList'));
 const ReviewSession = lazy(() => import('./components/ReviewSession'));
 const Settings = lazy(() => import('./components/Settings'));
-const Statistics = lazy(() => import('./components/Statistics'));
-const WeakWords = lazy(() => import('./components/WeakWords'));
 const LessonSelect = lazy(() => import('./components/LessonSelect'));
 
 const NAV_ITEMS = [
@@ -101,8 +99,6 @@ export default function App() {
             <Route path="/lesson-select" element={<LessonSelect />} />
             <Route path="/review" element={<ReviewSession />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/stats" element={<Statistics />} />
-            <Route path="/weak-words" element={<WeakWords />} />
           </Routes>
         </Suspense>
       </main>

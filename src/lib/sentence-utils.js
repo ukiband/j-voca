@@ -4,14 +4,27 @@
  * DOM·Dexie·import.meta.env 같은 환경 의존 코드를 넣지 않는다.
  *
  * 예문 한 건의 형태:
- * { wordId, date: 'YYYY-MM-DD', source: { word, reading, meaning }, sentence, reading, meaning }
- * sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
+ * { wordId, date: 'YYYY-MM-DD', generation, source: { word, reading, meaning }, sentence, reading, meaning }
+ * 단어당 예문은 1건만 두고 배치가 매일 새 문장으로 교체한다. generation 은 그 단어의 문장을 몇 번째로 만든 것인지(1부터)이며,
+ * 상한에 닿으면 더 교체하지 않는다. sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
  */
 
 import { getStep, getLatestStep, getChapters } from './lesson-utils.js';
 
-// 단어당 예문 상한. 8번째를 만들거나 오래된 것을 자동 교체하지 않는다
-export const MAX_SENTENCES_PER_WORD = 7;
+// 단어당 예문을 새로 만드는 횟수 상한. 7번째 문장까지 만들면 그 뒤로는 마지막 문장을 그대로 둔다
+export const MAX_GENERATIONS_PER_WORD = 7;
+
+/** 예문 한 건이 몇 번째 생성인지. 필드가 없는 옛 데이터(수작업 초기 데이터 등)는 1로 본다 */
+export function getGeneration(sentence) {
+  const g = sentence?.generation;
+  return Number.isInteger(g) && g > 0 ? g : 1;
+}
+
+/** 한 단어의 예문 배열에서 가장 최근(date 가 가장 큰) 것. 없으면 null */
+export function latestSentence(sentences) {
+  if (!Array.isArray(sentences) || sentences.length === 0) return null;
+  return sentences.reduce((a, b) => (b.date > a.date ? b : a));
+}
 
 const HIGHLIGHT_RE = /\[\[([\s\S]*?)\]\]/g;
 // 유니코드 Han 스크립트 = 한자. 읽기 줄에는 히라가나·가타카나만 있어야 하므로 이 문자가 남아 있으면 거부한다
@@ -138,12 +151,14 @@ export function pruneSentences(sentences, words, latestLessonWordIds) {
 }
 
 /**
- * 오늘 예문을 만들 단어를 고른다. byWord 는 wordId → (정리가 끝난) 예문 배열 Map.
- * 상한(7개)을 채운 단어와 오늘(today, KST) 이미 만든 단어는 제외해 같은 날 재실행해도 중복·초과 생성하지 않는다.
+ * 오늘 예문을 새로 만들(교체할) 단어를 고른다. byWord 는 wordId → (정리가 끝난) 예문 배열 Map.
+ * 예문이 아직 없는 단어는 항상 대상이다. 있는 단어는 마지막 문장이 오늘(today, KST) 만든 것이 아니고
+ * 생성 횟수가 상한 미만일 때만 대상이라, 같은 날 재실행해도 중복 생성하지 않고 상한 뒤에는 멈춘다.
  */
 export function selectTargets(lessonWords, byWord, today) {
   return lessonWords.filter(w => {
-    const own = byWord.get(w.id) || [];
-    return own.length < MAX_SENTENCES_PER_WORD && !own.some(s => s.date === today);
+    const latest = latestSentence(byWord.get(w.id));
+    if (!latest) return true;
+    return latest.date !== today && getGeneration(latest) < MAX_GENERATIONS_PER_WORD;
   });
 }

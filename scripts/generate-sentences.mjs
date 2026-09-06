@@ -5,7 +5,7 @@
  * 1. words.json 에서 최신 레슨(가장 큰 step 의 가장 큰 chapter)을 찾는다. step 이 2 미만이면 아무것도 하지 않는다
  * 2. sentences.json 정리: 삭제된 단어의 예문은 지우고, 최신 레슨 단어의 source 가 현재 데이터와 다른 예문도 지운다
  *    (과거 레슨의 source 불일치는 파일에 남기고 화면에서만 제외한다 — 다시 생성하지 않기 때문)
- * 3. 최신 레슨에서 오늘(KST) 만든 예문이 없고 생성 횟수가 상한(7회) 미만인 단어를 골라 10개씩 묶어 최대 5회 호출한다
+ * 3. 최신 레슨에서 예문이 없거나 만든 지 일주일 이상 지난 단어를 골라 10개씩 묶어 최대 5회 호출한다
  * 4. 검증(validateSentence)을 통과한 결과로 그 단어의 예문을 교체한다(단어당 1건 유지). 실패한 단어는 기존 문장을 그대로 둔다.
  *    변경이 있을 때만 파일을 다시 쓴다
  *
@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getLatestLessonWords, pruneSentences, selectTargets, validateSentence, latestSentence, getGeneration } from '../src/lib/sentence-utils.js';
+import { getLatestLessonWords, pruneSentences, selectTargets, validateSentence, latestSentence } from '../src/lib/sentence-utils.js';
 import { getKstDateString } from '../src/lib/date-utils.js';
 import { generateSentences, GeminiRequestError } from './gemini-node.mjs';
 
@@ -110,7 +110,7 @@ async function main() {
             console.warn(`  거부 wordId=${row.wordId}: 요청하지 않은 단어`);
             continue;
           }
-          // 모델이 같은 단어를 두 번 돌려줘도 하루 1개 규칙을 지킨다
+          // 모델이 같은 단어를 두 번 돌려줘도 한 건만 남긴다
           if (doneInBatch.has(row.wordId)) continue;
           const previous = latestSentence(byWord.get(word.id));
           const reason = validateSentence(row, previous ? [previous] : []);
@@ -121,8 +121,6 @@ async function main() {
           const entry = {
             wordId: word.id,
             date: today,
-            // 몇 번째 문장인지 이어서 센다. 상한에 닿으면 selectTargets 가 다음부터 이 단어를 고르지 않는다
-            generation: previous ? getGeneration(previous) + 1 : 1,
             source: { word: word.word, reading: word.reading, meaning: word.meaning },
             sentence: row.sentence.trim(),
             reading: row.reading.trim(),

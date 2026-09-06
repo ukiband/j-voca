@@ -202,24 +202,19 @@ describe('pruneSentences', () => {
 
 describe('selectTargets', () => {
   const lessonWords = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
-  const today = '2026-09-06';
+  const today = '2026-09-08';
 
-  it('생성 횟수 상한에 닿은 단어와 오늘 이미 만든 단어는 제외하고, 예문이 없는 단어는 항상 대상이다', () => {
+  it('예문이 없거나 만든 지 7일 이상 지난 단어만 고른다', () => {
     const byWord = new Map([
-      [1, [{ date: '2026-09-01', generation: 7 }]],
-      [2, [{ date: today, generation: 2 }]],
-      [3, [{ date: '2026-09-01', generation: 3 }]],
+      [1, [{ date: '2026-09-01' }]], // 7일 → 대상
+      [2, [{ date: '2026-09-02' }]], // 6일 → 아직
+      [3, [{ date: today }]],
     ]);
-    expect(selectTargets(lessonWords, byWord, today).map(w => w.id)).toEqual([3, 4]);
+    expect(selectTargets(lessonWords, byWord, today).map(w => w.id)).toEqual([1, 4]);
   });
 
-  it('generation 필드가 없는 예문은 1회로 보고 교체 대상에 넣는다', () => {
-    const byWord = new Map([[1, [{ date: '2026-09-01' }]]]);
-    expect(selectTargets([{ id: 1 }], byWord, today).map(w => w.id)).toEqual([1]);
-  });
-
-  it('여러 건이 남아 있으면 가장 최근 것의 날짜·횟수로 판단한다', () => {
-    const byWord = new Map([[1, [{ date: '2026-09-01', generation: 1 }, { date: today, generation: 2 }]]]);
+  it('여러 건이 남아 있으면 가장 최근 날짜로 판단한다', () => {
+    const byWord = new Map([[1, [{ date: '2026-08-01' }, { date: '2026-09-05' }]]]);
     expect(selectTargets([{ id: 1 }], byWord, today)).toEqual([]);
   });
 });

@@ -4,21 +4,15 @@
  * DOM·Dexie·import.meta.env 같은 환경 의존 코드를 넣지 않는다.
  *
  * 예문 한 건의 형태:
- * { wordId, date: 'YYYY-MM-DD', generation, source: { word, reading, meaning }, sentence, reading, meaning }
- * 단어당 예문은 1건만 두고 배치가 매일 새 문장으로 교체한다. generation 은 그 단어의 문장을 몇 번째로 만든 것인지(1부터)이며,
- * 상한에 닿으면 더 교체하지 않는다. sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
+ * { wordId, date: 'YYYY-MM-DD', source: { word, reading, meaning }, sentence, reading, meaning }
+ * 단어당 예문은 1건만 두고, 만든 지 일주일이 지나면 배치가 새 문장으로 교체한다.
+ * sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
  */
 
 import { getStep, getLatestStep, getChapters } from './lesson-utils.js';
 
-// 단어당 예문을 새로 만드는 횟수 상한. 7번째 문장까지 만들면 그 뒤로는 마지막 문장을 그대로 둔다
-export const MAX_GENERATIONS_PER_WORD = 7;
-
-/** 예문 한 건이 몇 번째 생성인지. 필드가 없는 옛 데이터(수작업 초기 데이터 등)는 1로 본다 */
-export function getGeneration(sentence) {
-  const g = sentence?.generation;
-  return Number.isInteger(g) && g > 0 ? g : 1;
-}
+// 예문을 새 문장으로 바꾸는 간격(일). 매일 바꾸면 호출이 낭비되고, 한 문장을 일주일은 봐야 익숙해진다
+export const REFRESH_INTERVAL_DAYS = 7;
 
 /** 한 단어의 예문 배열에서 가장 최근(date 가 가장 큰) 것. 없으면 null */
 export function latestSentence(sentences) {
@@ -152,13 +146,14 @@ export function pruneSentences(sentences, words, latestLessonWordIds) {
 
 /**
  * 오늘 예문을 새로 만들(교체할) 단어를 고른다. byWord 는 wordId → (정리가 끝난) 예문 배열 Map.
- * 예문이 아직 없는 단어는 항상 대상이다. 있는 단어는 마지막 문장이 오늘(today, KST) 만든 것이 아니고
- * 생성 횟수가 상한 미만일 때만 대상이라, 같은 날 재실행해도 중복 생성하지 않고 상한 뒤에는 멈춘다.
+ * 예문이 아직 없는 단어는 항상 대상이다. 있는 단어는 마지막 문장을 만든 날부터 REFRESH_INTERVAL_DAYS 이상 지났을 때만 대상이라,
+ * 같은 주에 여러 번 실행해도 다시 만들지 않는다.
  */
 export function selectTargets(lessonWords, byWord, today) {
+  const todayDay = toEpochDay(today);
   return lessonWords.filter(w => {
     const latest = latestSentence(byWord.get(w.id));
     if (!latest) return true;
-    return latest.date !== today && getGeneration(latest) < MAX_GENERATIONS_PER_WORD;
+    return todayDay - toEpochDay(latest.date) >= REFRESH_INTERVAL_DAYS;
   });
 }

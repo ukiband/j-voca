@@ -3,7 +3,6 @@
     {
       "wordId": 1,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おおい",
         "reading": "おおい",
@@ -16,7 +15,6 @@
     {
       "wordId": 2,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かるい",
         "reading": "かるい",
@@ -29,7 +27,6 @@
     {
       "wordId": 3,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "せまい",
         "reading": "せまい",
@@ -42,7 +39,6 @@
     {
       "wordId": 4,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しろい",
         "reading": "しろい",
@@ -55,7 +51,6 @@
     {
       "wordId": 5,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たかい",
         "reading": "たかい",
@@ -68,7 +63,6 @@
     {
       "wordId": 6,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ながい",
         "reading": "ながい",
@@ -81,7 +75,6 @@
     {
       "wordId": 7,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひろい",
         "reading": "ひろい",
@@ -94,7 +87,6 @@
     {
       "wordId": 8,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ほそい",
         "reading": "ほそい",
@@ -107,7 +99,6 @@
     {
       "wordId": 9,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やすい",
         "reading": "やすい",
@@ -120,7 +111,6 @@
     {
       "wordId": 10,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あぶない",
         "reading": "あぶない",
@@ -133,7 +123,6 @@
     {
       "wordId": 11,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おいしい",
         "reading": "おいしい",
@@ -146,7 +135,6 @@
     {
       "wordId": 12,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たのしい",
         "reading": "たのしい",
@@ -159,7 +147,6 @@
     {
       "wordId": 13,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "つめたい",
         "reading": "つめたい",
@@ -172,7 +159,6 @@
     {
       "wordId": 14,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あたらしい",
         "reading": "あたらしい",
@@ -185,7 +171,6 @@
     {
       "wordId": 15,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おもしろい",
         "reading": "おもしろい",
@@ -198,7 +183,6 @@
     {
       "wordId": 16,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "むずかしい",
         "reading": "むずかしい",
@@ -211,7 +195,6 @@
     {
       "wordId": 17,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きれいだ",
         "reading": "きれいだ",
@@ -224,7 +207,6 @@
     {
       "wordId": 18,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "げんきだ",
         "reading": "げんきだ",
@@ -237,7 +219,6 @@
     {
       "wordId": 19,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しずかだ",
         "reading": "しずかだ",
@@ -250,7 +231,6 @@
     {
       "wordId": 20,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "べんりだ",
         "reading": "べんりだ",
@@ -263,7 +243,6 @@
     {
       "wordId": 21,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すてきだ",
         "reading": "すてきだ",
@@ -276,7 +255,6 @@
     {
       "wordId": 22,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しんせつだ",
         "reading": "しんせつだ",
@@ -289,7 +267,6 @@
     {
       "wordId": 23,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ゆうめいだ",
         "reading": "ゆうめいだ",
@@ -302,7 +279,6 @@
     {
       "wordId": 24,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さくら",
         "reading": "さくら",
@@ -315,7 +291,6 @@
     {
       "wordId": 25,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "えいが",
         "reading": "えいが",
@@ -328,7 +303,6 @@
     {
       "wordId": 26,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かぞく",
         "reading": "かぞく",
@@ -341,7 +315,6 @@
     {
       "wordId": 27,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まいにち",
         "reading": "まいにち",
@@ -354,7 +327,6 @@
     {
       "wordId": 28,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "りょうり",
         "reading": "りょうり",
@@ -367,7 +339,6 @@
     {
       "wordId": 29,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きょうしつ",
         "reading": "きょうしつ",
@@ -380,7 +351,6 @@
     {
       "wordId": 30,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たまごやき",
         "reading": "たまごやき",
@@ -393,7 +363,6 @@
     {
       "wordId": 31,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "チゲ",
         "reading": "チゲ",
@@ -406,7 +375,6 @@
     {
       "wordId": 32,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ラーメン",
         "reading": "ラーメン",
@@ -419,7 +387,6 @@
     {
       "wordId": 33,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "べんきょう",
         "reading": "べんきょう",
@@ -432,7 +399,6 @@
     {
       "wordId": 34,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いただきます",
         "reading": "いただきます",
@@ -445,7 +411,6 @@
     {
       "wordId": 35,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "では、また",
         "reading": "では、また",
@@ -458,7 +423,6 @@
     {
       "wordId": 36,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おげんきで",
         "reading": "おげんきで",
@@ -471,7 +435,6 @@
     {
       "wordId": 37,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "わたし",
         "reading": "わたし",
@@ -484,7 +447,6 @@
     {
       "wordId": 38,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かれ",
         "reading": "かれ",
@@ -497,7 +459,6 @@
     {
       "wordId": 39,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かのじょ",
         "reading": "かのじょ",
@@ -510,7 +471,6 @@
     {
       "wordId": 40,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かんこくじん",
         "reading": "かんこくじん",
@@ -523,7 +483,6 @@
     {
       "wordId": 41,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にほんじん",
         "reading": "にほんじん",
@@ -536,7 +495,6 @@
     {
       "wordId": 42,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ちゅうごくじん",
         "reading": "ちゅうごくじん",
@@ -549,7 +507,6 @@
     {
       "wordId": 43,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がいこくじん",
         "reading": "がいこくじん",
@@ -562,7 +519,6 @@
     {
       "wordId": 44,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "アメリカじん",
         "reading": "アメリカじん",
@@ -575,7 +531,6 @@
     {
       "wordId": 45,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "イギリスじん",
         "reading": "イギリスじん",
@@ -588,7 +543,6 @@
     {
       "wordId": 46,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がくせい",
         "reading": "がくせい",
@@ -601,7 +555,6 @@
     {
       "wordId": 47,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しょうがくせい",
         "reading": "しょうがくせい",
@@ -614,7 +567,6 @@
     {
       "wordId": 48,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ちゅうがくせい",
         "reading": "ちゅうがくせい",
@@ -627,7 +579,6 @@
     {
       "wordId": 49,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こうこうせい",
         "reading": "こうこうせい",
@@ -640,7 +591,6 @@
     {
       "wordId": 50,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だいがくせい",
         "reading": "だいがくせい",
@@ -653,7 +603,6 @@
     {
       "wordId": 51,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "りゅうがくせい",
         "reading": "りゅうがくせい",
@@ -666,7 +615,6 @@
     {
       "wordId": 52,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いしゃ",
         "reading": "いしゃ",
@@ -679,7 +627,6 @@
     {
       "wordId": 53,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かしゅ",
         "reading": "かしゅ",
@@ -692,7 +639,6 @@
     {
       "wordId": 54,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "せんせい",
         "reading": "せんせい",
@@ -705,7 +651,6 @@
     {
       "wordId": 55,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かんごし",
         "reading": "かんごし",
@@ -718,7 +663,6 @@
     {
       "wordId": 56,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かいしゃいん",
         "reading": "かいしゃいん",
@@ -731,7 +675,6 @@
     {
       "wordId": 57,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ぎんこういん",
         "reading": "ぎんこういん",
@@ -744,7 +687,6 @@
     {
       "wordId": 58,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やきゅうせんしゅ",
         "reading": "やきゅうせんしゅ",
@@ -757,7 +699,6 @@
     {
       "wordId": 59,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "サッカーせんしゅ",
         "reading": "サッカーせんしゅ",
@@ -770,7 +711,6 @@
     {
       "wordId": 60,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "モデル",
         "reading": "モデル",
@@ -783,7 +723,6 @@
     {
       "wordId": 61,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おとこ",
         "reading": "おとこ",
@@ -796,7 +735,6 @@
     {
       "wordId": 62,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おんな",
         "reading": "おんな",
@@ -809,7 +747,6 @@
     {
       "wordId": 63,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おとうと",
         "reading": "おとうと",
@@ -822,7 +759,6 @@
     {
       "wordId": 64,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いもうと",
         "reading": "いもうと",
@@ -835,7 +771,6 @@
     {
       "wordId": 65,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こんにちは",
         "reading": "こんにちは",
@@ -848,7 +783,6 @@
     {
       "wordId": 66,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はじめまして",
         "reading": "はじめまして",
@@ -861,7 +795,6 @@
     {
       "wordId": 67,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よろしくおねがいします",
         "reading": "よろしくおねがいします",
@@ -874,7 +807,6 @@
     {
       "wordId": 68,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かさ",
         "reading": "かさ",
@@ -887,7 +819,6 @@
     {
       "wordId": 69,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かぎ",
         "reading": "かぎ",
@@ -900,7 +831,6 @@
     {
       "wordId": 70,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くつ",
         "reading": "くつ",
@@ -913,7 +843,6 @@
     {
       "wordId": 71,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "のり",
         "reading": "のり",
@@ -926,7 +855,6 @@
     {
       "wordId": 72,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かばん",
         "reading": "かばん",
@@ -939,7 +867,6 @@
     {
       "wordId": 73,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "めがね",
         "reading": "めがね",
@@ -952,7 +879,6 @@
     {
       "wordId": 74,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おみやげ",
         "reading": "おみやげ",
@@ -965,7 +891,6 @@
     {
       "wordId": 75,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ほん",
         "reading": "ほん",
@@ -978,7 +903,6 @@
     {
       "wordId": 76,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くすり",
         "reading": "くすり",
@@ -991,7 +915,6 @@
     {
       "wordId": 77,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くるま",
         "reading": "くるま",
@@ -1004,7 +927,6 @@
     {
       "wordId": 78,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とけい",
         "reading": "とけい",
@@ -1017,7 +939,6 @@
     {
       "wordId": 79,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おかし",
         "reading": "おかし",
@@ -1030,7 +951,6 @@
     {
       "wordId": 80,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しゃしん",
         "reading": "しゃしん",
@@ -1043,7 +963,6 @@
     {
       "wordId": 81,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "キムチ",
         "reading": "キムチ",
@@ -1056,7 +975,6 @@
     {
       "wordId": 82,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "プレゼント",
         "reading": "プレゼント",
@@ -1069,7 +987,6 @@
     {
       "wordId": 83,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ボールペン",
         "reading": "ボールペン",
@@ -1082,7 +999,6 @@
     {
       "wordId": 84,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がっこう",
         "reading": "がっこう",
@@ -1095,7 +1011,6 @@
     {
       "wordId": 85,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たてもの",
         "reading": "たてもの",
@@ -1108,7 +1023,6 @@
     {
       "wordId": 86,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しょくどう",
         "reading": "しょくどう",
@@ -1121,7 +1035,6 @@
     {
       "wordId": 87,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "びょういん",
         "reading": "びょういん",
@@ -1134,7 +1047,6 @@
     {
       "wordId": 88,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ゆうびんきょく",
         "reading": "ゆうびんきょく",
@@ -1147,7 +1059,6 @@
     {
       "wordId": 89,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "トイレ",
         "reading": "トイレ",
@@ -1160,7 +1071,6 @@
     {
       "wordId": 90,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "レストラン",
         "reading": "レストラン",
@@ -1173,7 +1083,6 @@
     {
       "wordId": 91,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "へや",
         "reading": "へや",
@@ -1186,7 +1095,6 @@
     {
       "wordId": 92,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みず",
         "reading": "みず",
@@ -1199,7 +1107,6 @@
     {
       "wordId": 93,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よこ",
         "reading": "よこ",
@@ -1212,7 +1119,6 @@
     {
       "wordId": 94,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おんがく",
         "reading": "おんがく",
@@ -1225,7 +1131,6 @@
     {
       "wordId": 95,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "りょこう",
         "reading": "りょこう",
@@ -1238,7 +1143,6 @@
     {
       "wordId": 96,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にほんご",
         "reading": "にほんご",
@@ -1251,7 +1155,6 @@
     {
       "wordId": 97,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たんじょうび",
         "reading": "たんじょうび",
@@ -1264,7 +1167,6 @@
     {
       "wordId": 98,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どうぞ",
         "reading": "どうぞ",
@@ -1277,7 +1179,6 @@
     {
       "wordId": 99,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すみません",
         "reading": "すみません",
@@ -1290,7 +1191,6 @@
     {
       "wordId": 100,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しつれいします",
         "reading": "しつれいします",
@@ -1303,7 +1203,6 @@
     {
       "wordId": 101,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ありがとう",
         "reading": "ありがとう",
@@ -1316,7 +1215,6 @@
     {
       "wordId": 102,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ありがとうございます",
         "reading": "ありがとうございます",
@@ -1329,7 +1227,6 @@
     {
       "wordId": 103,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きのう",
         "reading": "きのう",
@@ -1342,7 +1239,6 @@
     {
       "wordId": 104,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おととい",
         "reading": "おととい",
@@ -1355,7 +1251,6 @@
     {
       "wordId": 105,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "せんしゅう",
         "reading": "せんしゅう",
@@ -1368,7 +1263,6 @@
     {
       "wordId": 106,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きょねん",
         "reading": "きょねん",
@@ -1381,7 +1275,6 @@
     {
       "wordId": 107,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あつい",
         "reading": "あつい",
@@ -1394,7 +1287,6 @@
     {
       "wordId": 108,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふるい",
         "reading": "ふるい",
@@ -1407,7 +1299,6 @@
     {
       "wordId": 109,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いい・よい",
         "reading": "いい・よい",
@@ -1420,7 +1311,6 @@
     {
       "wordId": 110,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すずしい",
         "reading": "すずしい",
@@ -1433,7 +1323,6 @@
     {
       "wordId": 111,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あかるい",
         "reading": "あかるい",
@@ -1446,7 +1335,6 @@
     {
       "wordId": 112,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みじかい",
         "reading": "みじかい",
@@ -1459,7 +1347,6 @@
     {
       "wordId": 113,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひくい",
         "reading": "ひくい",
@@ -1472,7 +1359,6 @@
     {
       "wordId": 114,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くろい",
         "reading": "くろい",
@@ -1485,7 +1371,6 @@
     {
       "wordId": 115,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おおきい",
         "reading": "おおきい",
@@ -1498,7 +1383,6 @@
     {
       "wordId": 116,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひまだ",
         "reading": "ひまだ",
@@ -1511,7 +1395,6 @@
     {
       "wordId": 117,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にぎやかだ",
         "reading": "にぎやかだ",
@@ -1524,7 +1407,6 @@
     {
       "wordId": 118,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふべんだ",
         "reading": "ふべんだ",
@@ -1537,7 +1419,6 @@
     {
       "wordId": 119,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あめ",
         "reading": "あめ",
@@ -1550,7 +1431,6 @@
     {
       "wordId": 120,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いえ",
         "reading": "いえ",
@@ -1563,7 +1443,6 @@
     {
       "wordId": 121,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "えき",
         "reading": "えき",
@@ -1576,7 +1455,6 @@
     {
       "wordId": 122,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "せ",
         "reading": "せ",
@@ -1589,7 +1467,6 @@
     {
       "wordId": 123,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ちち",
         "reading": "ちち",
@@ -1602,7 +1479,6 @@
     {
       "wordId": 124,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はは",
         "reading": "はは",
@@ -1615,7 +1491,6 @@
     {
       "wordId": 125,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふく",
         "reading": "ふく",
@@ -1628,7 +1503,6 @@
     {
       "wordId": 126,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まち",
         "reading": "まち",
@@ -1641,7 +1515,6 @@
     {
       "wordId": 127,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "えいご",
         "reading": "えいご",
@@ -1654,7 +1527,6 @@
     {
       "wordId": 128,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やすみ",
         "reading": "やすみ",
@@ -1667,7 +1539,6 @@
     {
       "wordId": 129,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しんごう",
         "reading": "しんごう",
@@ -1680,7 +1551,6 @@
     {
       "wordId": 130,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あさごはん",
         "reading": "あさごはん",
@@ -1693,7 +1563,6 @@
     {
       "wordId": 131,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おとうさん",
         "reading": "おとうさん",
@@ -1706,7 +1575,6 @@
     {
       "wordId": 132,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おかあさん",
         "reading": "おかあさん",
@@ -1719,7 +1587,6 @@
     {
       "wordId": 133,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "べんきょう",
         "reading": "べんきょう",
@@ -1732,7 +1599,6 @@
     {
       "wordId": 134,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あか",
         "reading": "あか",
@@ -1745,7 +1611,6 @@
     {
       "wordId": 135,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "パン",
         "reading": "パン",
@@ -1758,7 +1623,6 @@
     {
       "wordId": 136,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ゲーム",
         "reading": "ゲーム",
@@ -1771,7 +1635,6 @@
     {
       "wordId": 137,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テスト",
         "reading": "テスト",
@@ -1784,7 +1647,6 @@
     {
       "wordId": 138,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ただいま",
         "reading": "ただいま",
@@ -1797,7 +1659,6 @@
     {
       "wordId": 139,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おかえりなさい",
         "reading": "おかえりなさい",
@@ -1810,7 +1671,6 @@
     {
       "wordId": 140,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "暑い",
         "reading": "あつい",
@@ -1823,7 +1683,6 @@
     {
       "wordId": 141,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "昨日",
         "reading": "きのう",
@@ -1836,7 +1695,6 @@
     {
       "wordId": 142,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きょう",
         "reading": "きょう",
@@ -1849,7 +1707,6 @@
     {
       "wordId": 143,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あした",
         "reading": "あした",
@@ -1862,7 +1719,6 @@
     {
       "wordId": 144,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あさって",
         "reading": "あさって",
@@ -1875,7 +1731,6 @@
     {
       "wordId": 145,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "母",
         "reading": "はは",
@@ -1888,7 +1743,6 @@
     {
       "wordId": 147,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "楽しかった",
         "reading": "たのしかった",
@@ -1901,7 +1755,6 @@
     {
       "wordId": 148,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とても",
         "reading": "とても",
@@ -1914,7 +1767,6 @@
     {
       "wordId": 149,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おもしろかった",
         "reading": "おもしろかった",
@@ -1927,7 +1779,6 @@
     {
       "wordId": 150,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "何",
         "reading": "なに",
@@ -1940,7 +1791,6 @@
     {
       "wordId": 151,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "服",
         "reading": "ふく",
@@ -1953,7 +1803,6 @@
     {
       "wordId": 152,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "女の人",
         "reading": "おんなのひと",
@@ -1966,7 +1815,6 @@
     {
       "wordId": 153,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "多い",
         "reading": "おおい",
@@ -1979,7 +1827,6 @@
     {
       "wordId": 154,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "母さん",
         "reading": "かあさん",
@@ -1992,7 +1839,6 @@
     {
       "wordId": 155,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すごく",
         "reading": "すごく",
@@ -2005,7 +1851,6 @@
     {
       "wordId": 156,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "春",
         "reading": "はる",
@@ -2018,7 +1863,6 @@
     {
       "wordId": 157,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "夏",
         "reading": "なつ",
@@ -2031,7 +1875,6 @@
     {
       "wordId": 158,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "秋",
         "reading": "あき",
@@ -2044,7 +1887,6 @@
     {
       "wordId": 159,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "冬",
         "reading": "ふゆ",
@@ -2057,7 +1899,6 @@
     {
       "wordId": 160,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "休み",
         "reading": "やすみ",
@@ -2070,7 +1911,6 @@
     {
       "wordId": 161,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "これから",
         "reading": "これから",
@@ -2083,7 +1923,6 @@
     {
       "wordId": 162,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "それから",
         "reading": "それから",
@@ -2096,7 +1935,6 @@
     {
       "wordId": 163,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あれから",
         "reading": "あれから",
@@ -2109,7 +1947,6 @@
     {
       "wordId": 164,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "暑かった",
         "reading": "あつかった",
@@ -2122,7 +1959,6 @@
     {
       "wordId": 165,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひまな人",
         "reading": "ひまなひと",
@@ -2135,7 +1971,6 @@
     {
       "wordId": 166,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いまひま",
         "reading": "いまひま",
@@ -2148,7 +1983,6 @@
     {
       "wordId": 167,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あか しんごう",
         "reading": "あかしんごう",
@@ -2161,7 +1995,6 @@
     {
       "wordId": 168,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あお しんごう",
         "reading": "あおしんごう",
@@ -2174,7 +2007,6 @@
     {
       "wordId": 170,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひだり",
         "reading": "ひだり",
@@ -2187,7 +2019,6 @@
     {
       "wordId": 171,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みぎ",
         "reading": "みぎ",
@@ -2200,7 +2031,6 @@
     {
       "wordId": 172,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あし",
         "reading": "あし",
@@ -2213,7 +2043,6 @@
     {
       "wordId": 173,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "て",
         "reading": "て",
@@ -2226,7 +2055,6 @@
     {
       "wordId": 174,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みみ",
         "reading": "みみ",
@@ -2239,7 +2067,6 @@
     {
       "wordId": 175,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だんじょ",
         "reading": "だんじょ",
@@ -2252,7 +2079,6 @@
     {
       "wordId": 176,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あお",
         "reading": "あお",
@@ -2265,7 +2091,6 @@
     {
       "wordId": 177,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "目",
         "reading": "め",
@@ -2278,7 +2103,6 @@
     {
       "wordId": 178,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大きい",
         "reading": "おおきい",
@@ -2291,7 +2115,6 @@
     {
       "wordId": 179,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "黒い",
         "reading": "くろい",
@@ -2304,7 +2127,6 @@
     {
       "wordId": 180,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "信号",
         "reading": "しんごう",
@@ -2317,7 +2139,6 @@
     {
       "wordId": 181,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "赤",
         "reading": "あか",
@@ -2330,7 +2151,6 @@
     {
       "wordId": 182,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "男の人",
         "reading": "おとこのひと",
@@ -2343,7 +2163,6 @@
     {
       "wordId": 183,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "入口",
         "reading": "いりぐち",
@@ -2356,7 +2175,6 @@
     {
       "wordId": 184,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "出口",
         "reading": "でぐち",
@@ -2369,7 +2187,6 @@
     {
       "wordId": 185,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はな",
         "reading": "はな",
@@ -2382,7 +2199,6 @@
     {
       "wordId": 186,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くち",
         "reading": "くち",
@@ -2395,7 +2211,6 @@
     {
       "wordId": 187,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しょう",
         "reading": "しょう",
@@ -2408,7 +2223,6 @@
     {
       "wordId": 188,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なみ",
         "reading": "なみ",
@@ -2421,7 +2235,6 @@
     {
       "wordId": 189,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "多もり",
         "reading": "おおもり",
@@ -2434,7 +2247,6 @@
     {
       "wordId": 190,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とくもり",
         "reading": "とくもり",
@@ -2447,7 +2259,6 @@
     {
       "wordId": 191,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "果物",
         "reading": "くだもの",
@@ -2460,7 +2271,6 @@
     {
       "wordId": 192,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "好きだ",
         "reading": "すきだ",
@@ -2473,7 +2283,6 @@
     {
       "wordId": 193,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "暖かい",
         "reading": "あたたかい",
@@ -2486,7 +2295,6 @@
     {
       "wordId": 194,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "今日",
         "reading": "きょう",
@@ -2499,7 +2307,6 @@
     {
       "wordId": 195,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "店員",
         "reading": "てんいん",
@@ -2512,7 +2319,6 @@
     {
       "wordId": 196,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ください",
         "reading": "ください",
@@ -2525,7 +2331,6 @@
     {
       "wordId": 197,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おめでとうございます",
         "reading": "おめでとうございます",
@@ -2538,7 +2343,6 @@
     {
       "wordId": 198,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "スポーツ",
         "reading": "スポーツ",
@@ -2551,7 +2355,6 @@
     {
       "wordId": 199,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ぼく",
         "reading": "ぼく",
@@ -2564,7 +2367,6 @@
     {
       "wordId": 200,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大好きだ",
         "reading": "だいすきだ",
@@ -2577,7 +2379,6 @@
     {
       "wordId": 201,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "今週",
         "reading": "こんしゅう",
@@ -2590,7 +2391,6 @@
     {
       "wordId": 202,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みんな",
         "reading": "みんな",
@@ -2603,7 +2403,6 @@
     {
       "wordId": 203,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一緒に",
         "reading": "いっしょに",
@@ -2616,7 +2415,6 @@
     {
       "wordId": 204,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "プロ野球",
         "reading": "プロやきゅう",
@@ -2629,7 +2427,6 @@
     {
       "wordId": 205,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やった",
         "reading": "やった",
@@ -2642,7 +2439,6 @@
     {
       "wordId": 206,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一",
         "reading": "いち",
@@ -2655,7 +2451,6 @@
     {
       "wordId": 207,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "二",
         "reading": "に",
@@ -2668,7 +2463,6 @@
     {
       "wordId": 208,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "三",
         "reading": "さん",
@@ -2681,7 +2475,6 @@
     {
       "wordId": 209,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "四",
         "reading": "よん",
@@ -2694,7 +2487,6 @@
     {
       "wordId": 211,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "五",
         "reading": "ご",
@@ -2707,7 +2499,6 @@
     {
       "wordId": 212,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "六",
         "reading": "ろく",
@@ -2720,7 +2511,6 @@
     {
       "wordId": 213,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "七",
         "reading": "なな",
@@ -2733,7 +2523,6 @@
     {
       "wordId": 215,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "八",
         "reading": "はち",
@@ -2746,7 +2535,6 @@
     {
       "wordId": 216,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "九",
         "reading": "きゅう",
@@ -2759,7 +2547,6 @@
     {
       "wordId": 218,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "十",
         "reading": "じゅう",
@@ -2772,7 +2559,6 @@
     {
       "wordId": 219,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一つ",
         "reading": "ひとつ",
@@ -2785,7 +2571,6 @@
     {
       "wordId": 220,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "二つ",
         "reading": "ふたつ",
@@ -2798,7 +2583,6 @@
     {
       "wordId": 221,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "三つ",
         "reading": "みっつ",
@@ -2811,7 +2595,6 @@
     {
       "wordId": 222,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "四つ",
         "reading": "よっつ",
@@ -2824,7 +2607,6 @@
     {
       "wordId": 223,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "五つ",
         "reading": "いつつ",
@@ -2837,7 +2619,6 @@
     {
       "wordId": 224,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "六つ",
         "reading": "むっつ",
@@ -2850,7 +2631,6 @@
     {
       "wordId": 225,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "七つ",
         "reading": "ななつ",
@@ -2863,7 +2643,6 @@
     {
       "wordId": 226,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "八つ",
         "reading": "やっつ",
@@ -2876,7 +2655,6 @@
     {
       "wordId": 227,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "九つ",
         "reading": "ここのつ",
@@ -2889,7 +2667,6 @@
     {
       "wordId": 228,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "十",
         "reading": "とお",
@@ -2902,7 +2679,6 @@
     {
       "wordId": 229,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "100 円",
         "reading": "ひゃくえん",
@@ -2915,7 +2691,6 @@
     {
       "wordId": 230,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "200 円",
         "reading": "にひゃくえん",
@@ -2928,7 +2703,6 @@
     {
       "wordId": 231,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "300 円",
         "reading": "さんびゃくえん",
@@ -2941,7 +2715,6 @@
     {
       "wordId": 232,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "400 円",
         "reading": "よんひゃくえん",
@@ -2954,7 +2727,6 @@
     {
       "wordId": 233,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "500 円",
         "reading": "ごひゃくえん",
@@ -2967,7 +2739,6 @@
     {
       "wordId": 234,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "600 円",
         "reading": "ろっぴゃくえん",
@@ -2980,7 +2751,6 @@
     {
       "wordId": 235,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "700 円",
         "reading": "ななひゃくえん",
@@ -2993,7 +2763,6 @@
     {
       "wordId": 236,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "800 円",
         "reading": "はっぴゃくえん",
@@ -3006,7 +2775,6 @@
     {
       "wordId": 237,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "900 円",
         "reading": "きゅうひゃくえん",
@@ -3019,7 +2787,6 @@
     {
       "wordId": 238,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "1000 円",
         "reading": "せんえん",
@@ -3032,7 +2799,6 @@
     {
       "wordId": 239,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "2000 円",
         "reading": "にせんえん",
@@ -3045,7 +2811,6 @@
     {
       "wordId": 240,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "3000 円",
         "reading": "さんぜんえん",
@@ -3058,7 +2823,6 @@
     {
       "wordId": 241,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "4000 円",
         "reading": "よんせんえん",
@@ -3071,7 +2835,6 @@
     {
       "wordId": 242,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "5000 円",
         "reading": "ごせんえん",
@@ -3084,7 +2847,6 @@
     {
       "wordId": 243,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "6000 円",
         "reading": "ろくせんえん",
@@ -3097,7 +2859,6 @@
     {
       "wordId": 244,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "7000 円",
         "reading": "ななせんえん",
@@ -3110,7 +2871,6 @@
     {
       "wordId": 245,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "8000 円",
         "reading": "はっせんえん",
@@ -3123,7 +2883,6 @@
     {
       "wordId": 246,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "9000 円",
         "reading": "きゅうせんえん",
@@ -3136,7 +2895,6 @@
     {
       "wordId": 247,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "10000 円",
         "reading": "いちまんえん",
@@ -3149,7 +2907,6 @@
     {
       "wordId": 248,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "1 月",
         "reading": "いちがつ",
@@ -3162,7 +2919,6 @@
     {
       "wordId": 249,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "2 月",
         "reading": "にがつ",
@@ -3175,7 +2931,6 @@
     {
       "wordId": 250,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "3 月",
         "reading": "さんがつ",
@@ -3188,7 +2943,6 @@
     {
       "wordId": 251,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "4 月",
         "reading": "しがつ",
@@ -3201,7 +2955,6 @@
     {
       "wordId": 252,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "5 月",
         "reading": "ごがつ",
@@ -3214,7 +2967,6 @@
     {
       "wordId": 253,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "6 月",
         "reading": "ろくがつ",
@@ -3227,7 +2979,6 @@
     {
       "wordId": 254,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "7 月",
         "reading": "しちがつ",
@@ -3240,7 +2991,6 @@
     {
       "wordId": 255,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "8 月",
         "reading": "はちがつ",
@@ -3253,7 +3003,6 @@
     {
       "wordId": 256,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "9 月",
         "reading": "くがつ",
@@ -3266,7 +3015,6 @@
     {
       "wordId": 257,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "10 月",
         "reading": "じゅうがつ",
@@ -3279,7 +3027,6 @@
     {
       "wordId": 258,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "11 月",
         "reading": "じゅういちがつ",
@@ -3292,7 +3039,6 @@
     {
       "wordId": 259,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "12 月",
         "reading": "じゅうにがつ",
@@ -3305,7 +3051,6 @@
     {
       "wordId": 260,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "1日",
         "reading": "ついたち",
@@ -3318,7 +3063,6 @@
     {
       "wordId": 261,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "2日",
         "reading": "ふつか",
@@ -3331,7 +3075,6 @@
     {
       "wordId": 262,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "3日",
         "reading": "みっか",
@@ -3344,7 +3087,6 @@
     {
       "wordId": 263,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "4日",
         "reading": "よっか",
@@ -3357,7 +3099,6 @@
     {
       "wordId": 264,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "5日",
         "reading": "いつか",
@@ -3370,7 +3111,6 @@
     {
       "wordId": 265,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "6日",
         "reading": "むいか",
@@ -3383,7 +3123,6 @@
     {
       "wordId": 266,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "7日",
         "reading": "なのか",
@@ -3396,7 +3135,6 @@
     {
       "wordId": 267,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "8日",
         "reading": "ようか",
@@ -3409,7 +3147,6 @@
     {
       "wordId": 268,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "9日",
         "reading": "ここのか",
@@ -3422,7 +3159,6 @@
     {
       "wordId": 269,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "10日",
         "reading": "とおか",
@@ -3435,7 +3171,6 @@
     {
       "wordId": 270,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "11日",
         "reading": "じゅういちにち",
@@ -3448,7 +3183,6 @@
     {
       "wordId": 271,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "12日",
         "reading": "じゅうににち",
@@ -3461,7 +3195,6 @@
     {
       "wordId": 272,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "13日",
         "reading": "じゅうさんにち",
@@ -3474,7 +3207,6 @@
     {
       "wordId": 273,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "14日",
         "reading": "じゅうよっか",
@@ -3487,7 +3219,6 @@
     {
       "wordId": 274,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "15日",
         "reading": "じゅうごにち",
@@ -3500,7 +3231,6 @@
     {
       "wordId": 275,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "16日",
         "reading": "じゅうろくにち",
@@ -3513,7 +3243,6 @@
     {
       "wordId": 276,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "17日",
         "reading": "じゅうしちにち",
@@ -3526,7 +3255,6 @@
     {
       "wordId": 277,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "18日",
         "reading": "じゅうはちにち",
@@ -3539,7 +3267,6 @@
     {
       "wordId": 278,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "19日",
         "reading": "じゅうくにち",
@@ -3552,7 +3279,6 @@
     {
       "wordId": 279,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "20日",
         "reading": "はつか",
@@ -3565,7 +3291,6 @@
     {
       "wordId": 280,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "21日",
         "reading": "にじゅういちにち",
@@ -3578,7 +3303,6 @@
     {
       "wordId": 281,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "22日",
         "reading": "にじゅうににち",
@@ -3591,7 +3315,6 @@
     {
       "wordId": 282,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "23日",
         "reading": "にじゅうさんにち",
@@ -3604,7 +3327,6 @@
     {
       "wordId": 283,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "24日",
         "reading": "にじゅうよっか",
@@ -3617,7 +3339,6 @@
     {
       "wordId": 284,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "25日",
         "reading": "にじゅうごにち",
@@ -3630,7 +3351,6 @@
     {
       "wordId": 285,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "26日",
         "reading": "にじゅうろくにち",
@@ -3643,7 +3363,6 @@
     {
       "wordId": 286,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "27日",
         "reading": "にじゅうしちにち",
@@ -3656,7 +3375,6 @@
     {
       "wordId": 287,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "28日",
         "reading": "にじゅうはちにち",
@@ -3669,7 +3387,6 @@
     {
       "wordId": 288,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "29日",
         "reading": "にじゅうくにち",
@@ -3682,7 +3399,6 @@
     {
       "wordId": 289,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "30日",
         "reading": "さんじゅうにち",
@@ -3695,7 +3411,6 @@
     {
       "wordId": 290,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "月曜日",
         "reading": "げつようび",
@@ -3708,7 +3423,6 @@
     {
       "wordId": 291,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "火曜日",
         "reading": "かようび",
@@ -3721,7 +3435,6 @@
     {
       "wordId": 292,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "水曜日",
         "reading": "すいようび",
@@ -3734,7 +3447,6 @@
     {
       "wordId": 293,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "木曜日",
         "reading": "もくようび",
@@ -3747,7 +3459,6 @@
     {
       "wordId": 294,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "金曜日",
         "reading": "きんようび",
@@ -3760,7 +3471,6 @@
     {
       "wordId": 295,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "土曜日",
         "reading": "どようび",
@@ -3773,7 +3483,6 @@
     {
       "wordId": 296,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "日曜日",
         "reading": "にちようび",
@@ -3786,7 +3495,6 @@
     {
       "wordId": 297,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "1時",
         "reading": "いちじ",
@@ -3799,7 +3507,6 @@
     {
       "wordId": 298,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "2時",
         "reading": "にじ",
@@ -3812,7 +3519,6 @@
     {
       "wordId": 299,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "3時",
         "reading": "さんじ",
@@ -3825,7 +3531,6 @@
     {
       "wordId": 300,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "4時",
         "reading": "よじ",
@@ -3838,7 +3543,6 @@
     {
       "wordId": 301,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "5時",
         "reading": "ごじ",
@@ -3851,7 +3555,6 @@
     {
       "wordId": 302,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "6時",
         "reading": "ろくじ",
@@ -3864,7 +3567,6 @@
     {
       "wordId": 303,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "7時",
         "reading": "しちじ",
@@ -3877,7 +3579,6 @@
     {
       "wordId": 304,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "8時",
         "reading": "はちじ",
@@ -3890,7 +3591,6 @@
     {
       "wordId": 305,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "9時",
         "reading": "くじ",
@@ -3903,7 +3603,6 @@
     {
       "wordId": 306,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "10時",
         "reading": "じゅうじ",
@@ -3916,7 +3615,6 @@
     {
       "wordId": 307,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "11時",
         "reading": "じゅういちじ",
@@ -3929,7 +3627,6 @@
     {
       "wordId": 308,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "12時",
         "reading": "じゅうにじ",
@@ -3942,7 +3639,6 @@
     {
       "wordId": 309,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "牛乳",
         "reading": "ぎゅうにゅう",
@@ -3955,7 +3651,6 @@
     {
       "wordId": 310,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たまご",
         "reading": "たまご",
@@ -3968,7 +3663,6 @@
     {
       "wordId": 311,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "コップ",
         "reading": "コップ",
@@ -3981,7 +3675,6 @@
     {
       "wordId": 312,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "りんご",
         "reading": "りんご",
@@ -3994,7 +3687,6 @@
     {
       "wordId": 313,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "牛乳",
         "reading": "ぎゅうにゅう",
@@ -4007,7 +3699,6 @@
     {
       "wordId": 314,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "出発",
         "reading": "しゅっぱつ",
@@ -4020,7 +3711,6 @@
     {
       "wordId": 315,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "練習",
         "reading": "れんしゅう",
@@ -4033,7 +3723,6 @@
     {
       "wordId": 316,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "パーティー",
         "reading": "パーティー",
@@ -4046,7 +3735,6 @@
     {
       "wordId": 317,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "仕事",
         "reading": "しごと",
@@ -4059,7 +3747,6 @@
     {
       "wordId": 318,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "東京",
         "reading": "とうきょう",
@@ -4072,7 +3759,6 @@
     {
       "wordId": 319,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "バス",
         "reading": "バス",
@@ -4085,7 +3771,6 @@
     {
       "wordId": 320,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "新宿",
         "reading": "しんじゅく",
@@ -4098,7 +3783,6 @@
     {
       "wordId": 321,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "渋谷",
         "reading": "しぶや",
@@ -4111,7 +3795,6 @@
     {
       "wordId": 322,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "試合",
         "reading": "しあい",
@@ -4124,7 +3807,6 @@
     {
       "wordId": 323,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "授業",
         "reading": "じゅぎょう",
@@ -4137,7 +3819,6 @@
     {
       "wordId": 324,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "サンドイッチ",
         "reading": "サンドイッチ",
@@ -4150,7 +3831,6 @@
     {
       "wordId": 325,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うどん",
         "reading": "うどん",
@@ -4163,7 +3843,6 @@
     {
       "wordId": 326,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "カメラ",
         "reading": "カメラ",
@@ -4176,7 +3855,6 @@
     {
       "wordId": 327,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とんかつ",
         "reading": "とんかつ",
@@ -4189,7 +3867,6 @@
     {
       "wordId": 328,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "店",
         "reading": "みせ",
@@ -4202,7 +3879,6 @@
     {
       "wordId": 329,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "姉",
         "reading": "あね",
@@ -4215,7 +3891,6 @@
     {
       "wordId": 330,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "野菜",
         "reading": "やさい",
@@ -4228,7 +3903,6 @@
     {
       "wordId": 331,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "嫌いだ",
         "reading": "きらいだ",
@@ -4241,7 +3915,6 @@
     {
       "wordId": 332,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すいか",
         "reading": "すいか",
@@ -4254,7 +3927,6 @@
     {
       "wordId": 333,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "サッカー",
         "reading": "サッカー",
@@ -4267,7 +3939,6 @@
     {
       "wordId": 334,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "上手だ",
         "reading": "じょうずだ",
@@ -4280,7 +3951,6 @@
     {
       "wordId": 335,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "下手だ",
         "reading": "へただ",
@@ -4293,7 +3963,6 @@
     {
       "wordId": 336,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "兄",
         "reading": "あに",
@@ -4306,7 +3975,6 @@
     {
       "wordId": 337,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やさい",
         "reading": "やさい",
@@ -4319,7 +3987,6 @@
     {
       "wordId": 338,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くだもの",
         "reading": "くだもの",
@@ -4332,7 +3999,6 @@
     {
       "wordId": 339,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ぎゅうにゅう",
         "reading": "ぎゅうにゅう",
@@ -4345,7 +4011,6 @@
     {
       "wordId": 340,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "メロン",
         "reading": "メロン",
@@ -4358,7 +4023,6 @@
     {
       "wordId": 341,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あたたかい",
         "reading": "あたたかい",
@@ -4371,7 +4035,6 @@
     {
       "wordId": 342,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じょうずだ",
         "reading": "じょうずだ",
@@ -4384,7 +4047,6 @@
     {
       "wordId": 343,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "へただ",
         "reading": "へただ",
@@ -4397,7 +4059,6 @@
     {
       "wordId": 344,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すきだ",
         "reading": "すきだ",
@@ -4410,7 +4071,6 @@
     {
       "wordId": 345,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だいすきだ",
         "reading": "だいすきだ",
@@ -4423,7 +4083,6 @@
     {
       "wordId": 346,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きらいだ",
         "reading": "きらいだ",
@@ -4436,7 +4095,6 @@
     {
       "wordId": 347,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そと",
         "reading": "そと",
@@ -4449,7 +4107,6 @@
     {
       "wordId": 348,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みせ",
         "reading": "みせ",
@@ -4462,7 +4119,6 @@
     {
       "wordId": 349,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しあい",
         "reading": "しあい",
@@ -4475,7 +4131,6 @@
     {
       "wordId": 350,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しごと",
         "reading": "しごと",
@@ -4488,7 +4143,6 @@
     {
       "wordId": 351,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しゅっぱつ",
         "reading": "しゅっぱつ",
@@ -4501,7 +4155,6 @@
     {
       "wordId": 352,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅぎょう",
         "reading": "じゅぎょう",
@@ -4514,7 +4167,6 @@
     {
       "wordId": 353,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "れんしゅう",
         "reading": "れんしゅう",
@@ -4527,7 +4179,6 @@
     {
       "wordId": 354,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "プロやきゅう",
         "reading": "プロやきゅう",
@@ -4540,7 +4191,6 @@
     {
       "wordId": 355,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きょう",
         "reading": "きょう",
@@ -4553,7 +4203,6 @@
     {
       "wordId": 356,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こんしゅう",
         "reading": "こんしゅう",
@@ -4566,7 +4215,6 @@
     {
       "wordId": 357,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あに",
         "reading": "あに",
@@ -4579,7 +4227,6 @@
     {
       "wordId": 358,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あね",
         "reading": "あね",
@@ -4592,7 +4239,6 @@
     {
       "wordId": 359,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "てんいん",
         "reading": "てんいん",
@@ -4605,7 +4251,6 @@
     {
       "wordId": 360,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おめでとう",
         "reading": "おめでとう",
@@ -4618,7 +4263,6 @@
     {
       "wordId": 361,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いっぷん",
         "reading": "いっぷん",
@@ -4631,7 +4275,6 @@
     {
       "wordId": 362,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にふん",
         "reading": "にふん",
@@ -4644,7 +4287,6 @@
     {
       "wordId": 363,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さんぷん",
         "reading": "さんぷん",
@@ -4657,7 +4299,6 @@
     {
       "wordId": 364,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よんぷん",
         "reading": "よんぷん",
@@ -4670,7 +4311,6 @@
     {
       "wordId": 365,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ごふん",
         "reading": "ごふん",
@@ -4683,7 +4323,6 @@
     {
       "wordId": 366,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ろっぷん",
         "reading": "ろっぷん",
@@ -4696,7 +4335,6 @@
     {
       "wordId": 367,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ななふん",
         "reading": "ななふん",
@@ -4709,7 +4347,6 @@
     {
       "wordId": 368,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はっぷん",
         "reading": "はっぷん",
@@ -4722,7 +4359,6 @@
     {
       "wordId": 369,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きゅうふん",
         "reading": "きゅうふん",
@@ -4735,7 +4371,6 @@
     {
       "wordId": 370,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅっぷん・じっぷん",
         "reading": "じゅっぷん・じっぷん",
@@ -4748,7 +4383,6 @@
     {
       "wordId": 371,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅういっぷん",
         "reading": "じゅういっぷん",
@@ -4761,7 +4395,6 @@
     {
       "wordId": 372,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅうにふん",
         "reading": "じゅうにふん",
@@ -4774,7 +4407,6 @@
     {
       "wordId": 373,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅうさんぷん",
         "reading": "じゅうさんぷん",
@@ -4787,7 +4419,6 @@
     {
       "wordId": 374,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅうよんぷん",
         "reading": "じゅうよんぷん",
@@ -4800,7 +4431,6 @@
     {
       "wordId": 375,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いってきます",
         "reading": "いってきます",
@@ -4813,7 +4443,6 @@
     {
       "wordId": 376,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いってらっしゃい",
         "reading": "いってらっしゃい",
@@ -4826,7 +4455,6 @@
     {
       "wordId": 377,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "早い",
         "reading": "はやい",
@@ -4839,7 +4467,6 @@
     {
       "wordId": 378,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "朝",
         "reading": "あさ",
@@ -4852,7 +4479,6 @@
     {
       "wordId": 379,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だから",
         "reading": "だから",
@@ -4865,7 +4491,6 @@
     {
       "wordId": 380,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "同じだ",
         "reading": "おなじだ",
@@ -4878,7 +4503,6 @@
     {
       "wordId": 381,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遅い",
         "reading": "おそい",
@@ -4891,7 +4515,6 @@
     {
       "wordId": 382,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "早い",
         "reading": "はやい",
@@ -4904,7 +4527,6 @@
     {
       "wordId": 383,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "速い",
         "reading": "はやい",
@@ -4917,7 +4539,6 @@
     {
       "wordId": 384,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遠い",
         "reading": "とおい",
@@ -4930,7 +4551,6 @@
     {
       "wordId": 385,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "近い",
         "reading": "ちかい",
@@ -4943,7 +4563,6 @@
     {
       "wordId": 386,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ほう",
         "reading": "ほう",
@@ -4956,7 +4575,6 @@
     {
       "wordId": 387,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一番",
         "reading": "いちばん",
@@ -4969,7 +4587,6 @@
     {
       "wordId": 388,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "便利",
         "reading": "べんり",
@@ -4982,7 +4599,6 @@
     {
       "wordId": 389,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "同じ",
         "reading": "おなじ",
@@ -4995,7 +4611,6 @@
     {
       "wordId": 390,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どんな",
         "reading": "どんな",
@@ -5008,7 +4623,6 @@
     {
       "wordId": 391,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こんな",
         "reading": "こんな",
@@ -5021,7 +4635,6 @@
     {
       "wordId": 392,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そんな",
         "reading": "そんな",
@@ -5034,7 +4647,6 @@
     {
       "wordId": 393,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あんな",
         "reading": "あんな",
@@ -5047,7 +4659,6 @@
     {
       "wordId": 394,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そうですか",
         "reading": "そうですか",
@@ -5060,7 +4671,6 @@
     {
       "wordId": 395,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やっぱり",
         "reading": "やっぱり",
@@ -5073,7 +4683,6 @@
     {
       "wordId": 396,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "美人",
         "reading": "びじん",
@@ -5086,7 +4695,6 @@
     {
       "wordId": 397,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "顔",
         "reading": "かお",
@@ -5099,7 +4707,6 @@
     {
       "wordId": 398,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "小さい",
         "reading": "ちいさい",
@@ -5112,7 +4719,6 @@
     {
       "wordId": 399,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ピアノ",
         "reading": "ピアノ",
@@ -5125,7 +4731,6 @@
     {
       "wordId": 400,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "重い",
         "reading": "おもい",
@@ -5138,7 +4743,6 @@
     {
       "wordId": 401,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "魚",
         "reading": "さかな",
@@ -5151,7 +4755,6 @@
     {
       "wordId": 402,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "肉",
         "reading": "にく",
@@ -5164,7 +4767,6 @@
     {
       "wordId": 403,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "行く",
         "reading": "いく",
@@ -5177,7 +4779,6 @@
     {
       "wordId": 404,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "来る",
         "reading": "くる",
@@ -5190,7 +4791,6 @@
     {
       "wordId": 405,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "〜と",
         "reading": "と",
@@ -5203,7 +4803,6 @@
     {
       "wordId": 406,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ほうが",
         "reading": "ほうが",
@@ -5216,7 +4815,6 @@
     {
       "wordId": 407,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "第一",
         "reading": "だいいち",
@@ -5229,7 +4827,6 @@
     {
       "wordId": 408,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "学校",
         "reading": "がっこう",
@@ -5242,7 +4839,6 @@
     {
       "wordId": 409,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "電車",
         "reading": "でんしゃ",
@@ -5255,7 +4851,6 @@
     {
       "wordId": 410,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どちら",
         "reading": "どちら",
@@ -5268,7 +4863,6 @@
     {
       "wordId": 411,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "東京",
         "reading": "とうきょう",
@@ -5281,7 +4875,6 @@
     {
       "wordId": 412,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "車",
         "reading": "くるま",
@@ -5294,7 +4887,6 @@
     {
       "wordId": 413,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "多い",
         "reading": "おおい",
@@ -5307,7 +4899,6 @@
     {
       "wordId": 414,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ソウル",
         "reading": "ソウル",
@@ -5320,7 +4911,6 @@
     {
       "wordId": 415,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "早く",
         "reading": "はやく",
@@ -5333,7 +4923,6 @@
     {
       "wordId": 416,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なん さい",
         "reading": "なんさい",
@@ -5346,7 +4935,6 @@
     {
       "wordId": 417,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さい",
         "reading": "さい",
@@ -5359,7 +4947,6 @@
     {
       "wordId": 418,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あたま",
         "reading": "あたま",
@@ -5372,7 +4959,6 @@
     {
       "wordId": 419,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かみ",
         "reading": "かみ",
@@ -5385,7 +4971,6 @@
     {
       "wordId": 420,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "女性",
         "reading": "じょせい",
@@ -5398,7 +4983,6 @@
     {
       "wordId": 421,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "男性",
         "reading": "だんせい",
@@ -5411,7 +4995,6 @@
     {
       "wordId": 422,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "警察官",
         "reading": "けいさつかん",
@@ -5424,7 +5007,6 @@
     {
       "wordId": 423,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "アメリカ人",
         "reading": "アメリカじん",
@@ -5437,7 +5019,6 @@
     {
       "wordId": 424,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "英語の先生",
         "reading": "えいごのせんせい",
@@ -5450,7 +5031,6 @@
     {
       "wordId": 425,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だんじょ",
         "reading": "だんじょ",
@@ -5463,7 +5043,6 @@
     {
       "wordId": 426,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひがし",
         "reading": "ひがし",
@@ -5476,7 +5055,6 @@
     {
       "wordId": 427,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にし",
         "reading": "にし",
@@ -5489,7 +5067,6 @@
     {
       "wordId": 428,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みなみ",
         "reading": "みなみ",
@@ -5502,7 +5079,6 @@
     {
       "wordId": 429,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きた",
         "reading": "きた",
@@ -5515,7 +5091,6 @@
     {
       "wordId": 430,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すいか",
         "reading": "すいか",
@@ -5528,7 +5103,6 @@
     {
       "wordId": 431,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大きい",
         "reading": "おおきい",
@@ -5541,7 +5115,6 @@
     {
       "wordId": 432,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "細い",
         "reading": "ほそい",
@@ -5554,7 +5127,6 @@
     {
       "wordId": 433,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "長い",
         "reading": "ながい",
@@ -5567,7 +5139,6 @@
     {
       "wordId": 434,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "便利だ",
         "reading": "べんりだ",
@@ -5580,7 +5151,6 @@
     {
       "wordId": 435,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ぞう",
         "reading": "ぞう",
@@ -5593,7 +5163,6 @@
     {
       "wordId": 436,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "鼻",
         "reading": "はな",
@@ -5606,7 +5175,6 @@
     {
       "wordId": 437,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "太い",
         "reading": "ふとい",
@@ -5619,7 +5187,6 @@
     {
       "wordId": 438,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "つまらない",
         "reading": "つまらない",
@@ -5632,7 +5199,6 @@
     {
       "wordId": 439,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "丸い",
         "reading": "まるい",
@@ -5645,7 +5211,6 @@
     {
       "wordId": 440,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "指",
         "reading": "ゆび",
@@ -5658,7 +5223,6 @@
     {
       "wordId": 441,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どっち",
         "reading": "どっち",
@@ -5671,7 +5235,6 @@
     {
       "wordId": 442,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みんな",
         "reading": "みんな",
@@ -5684,7 +5247,6 @@
     {
       "wordId": 443,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いっしょに",
         "reading": "いっしょに",
@@ -5697,7 +5259,6 @@
     {
       "wordId": 444,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "コーヒー",
         "reading": "コーヒー",
@@ -5710,7 +5271,6 @@
     {
       "wordId": 445,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お茶",
         "reading": "おちゃ",
@@ -5723,7 +5283,6 @@
     {
       "wordId": 446,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "好きだ",
         "reading": "すきだ",
@@ -5736,7 +5295,6 @@
     {
       "wordId": 447,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "土曜日",
         "reading": "どようび",
@@ -5749,7 +5307,6 @@
     {
       "wordId": 448,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "日曜日",
         "reading": "にちようび",
@@ -5762,7 +5319,6 @@
     {
       "wordId": 449,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "暇だ",
         "reading": "ひまだ",
@@ -5775,7 +5331,6 @@
     {
       "wordId": 450,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "図書館",
         "reading": "としょかん",
@@ -5788,7 +5343,6 @@
     {
       "wordId": 451,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "広い",
         "reading": "ひろい",
@@ -5801,7 +5355,6 @@
     {
       "wordId": 452,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "スキー",
         "reading": "スキー",
@@ -5814,7 +5367,6 @@
     {
       "wordId": 453,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テニス",
         "reading": "テニス",
@@ -5827,7 +5379,6 @@
     {
       "wordId": 454,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "コーヒー",
         "reading": "コーヒー",
@@ -5840,7 +5391,6 @@
     {
       "wordId": 455,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お茶",
         "reading": "おちゃ",
@@ -5853,7 +5403,6 @@
     {
       "wordId": 456,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "図書館",
         "reading": "としょかん",
@@ -5866,7 +5415,6 @@
     {
       "wordId": 457,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みな",
         "reading": "みな",
@@ -5879,7 +5427,6 @@
     {
       "wordId": 458,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いいです",
         "reading": "いいです",
@@ -5892,7 +5439,6 @@
     {
       "wordId": 459,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大丈夫です",
         "reading": "だいじょうぶです",
@@ -5905,7 +5451,6 @@
     {
       "wordId": 460,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かばん",
         "reading": "かばん",
@@ -5918,7 +5463,6 @@
     {
       "wordId": 461,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "丈夫だ",
         "reading": "じょうぶだ",
@@ -5931,7 +5475,6 @@
     {
       "wordId": 462,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にぎやかだ",
         "reading": "にぎやかだ",
@@ -5944,7 +5487,6 @@
     {
       "wordId": 463,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "人",
         "reading": "ひと",
@@ -5957,7 +5499,6 @@
     {
       "wordId": 464,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "サッカー",
         "reading": "サッカー",
@@ -5970,7 +5511,6 @@
     {
       "wordId": 465,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "上手",
         "reading": "じょうず",
@@ -5983,7 +5523,6 @@
     {
       "wordId": 466,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "明るい",
         "reading": "あかるい",
@@ -5996,7 +5535,6 @@
     {
       "wordId": 467,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "優しい",
         "reading": "やさしい",
@@ -6009,7 +5547,6 @@
     {
       "wordId": 468,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "友達",
         "reading": "ともだち",
@@ -6022,7 +5559,6 @@
     {
       "wordId": 469,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がんじょうだ",
         "reading": "がんじょうだ",
@@ -6035,7 +5571,6 @@
     {
       "wordId": 470,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さんぽ",
         "reading": "さんぽ",
@@ -6048,7 +5583,6 @@
     {
       "wordId": 471,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "果物",
         "reading": "くだもの",
@@ -6061,7 +5595,6 @@
     {
       "wordId": 472,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "私",
         "reading": "わたし",
@@ -6074,7 +5607,6 @@
     {
       "wordId": 473,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "中",
         "reading": "なか",
@@ -6087,7 +5619,6 @@
     {
       "wordId": 474,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "好き",
         "reading": "すき",
@@ -6100,7 +5631,6 @@
     {
       "wordId": 475,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "りんご",
         "reading": "りんご",
@@ -6113,7 +5643,6 @@
     {
       "wordId": 476,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "スポーツ",
         "reading": "スポーツ",
@@ -6126,7 +5655,6 @@
     {
       "wordId": 477,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "映画",
         "reading": "えいが",
@@ -6139,7 +5667,6 @@
     {
       "wordId": 478,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食べ物",
         "reading": "たべもの",
@@ -6152,7 +5679,6 @@
     {
       "wordId": 479,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一週間",
         "reading": "いっしゅうかん",
@@ -6165,7 +5691,6 @@
     {
       "wordId": 480,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "理想",
         "reading": "りそう",
@@ -6178,7 +5703,6 @@
     {
       "wordId": 481,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "タイプ",
         "reading": "タイプ",
@@ -6191,7 +5715,6 @@
     {
       "wordId": 482,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "話",
         "reading": "はなし",
@@ -6204,7 +5727,6 @@
     {
       "wordId": 483,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "面白い",
         "reading": "おもしろい",
@@ -6217,7 +5739,6 @@
     {
       "wordId": 484,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "絵",
         "reading": "え",
@@ -6230,7 +5751,6 @@
     {
       "wordId": 485,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かっこいい",
         "reading": "かっこいい",
@@ -6243,7 +5763,6 @@
     {
       "wordId": 486,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "高い",
         "reading": "たかい",
@@ -6256,7 +5775,6 @@
     {
       "wordId": 487,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "低い",
         "reading": "ひくい",
@@ -6269,7 +5787,6 @@
     {
       "wordId": 488,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "親切だ",
         "reading": "しんせつだ",
@@ -6282,7 +5799,6 @@
     {
       "wordId": 489,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きれいだ",
         "reading": "きれいだ",
@@ -6295,7 +5811,6 @@
     {
       "wordId": 490,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "上手だ",
         "reading": "じょうずだ",
@@ -6308,7 +5823,6 @@
     {
       "wordId": 491,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "下手だ",
         "reading": "へただ",
@@ -6321,7 +5835,6 @@
     {
       "wordId": 492,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "素敵だ",
         "reading": "すてきだ",
@@ -6334,7 +5847,6 @@
     {
       "wordId": 493,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "短い",
         "reading": "みじかい",
@@ -6347,7 +5859,6 @@
     {
       "wordId": 494,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いい",
         "reading": "いい",
@@ -6360,7 +5871,6 @@
     {
       "wordId": 495,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "楽しい",
         "reading": "たのしい",
@@ -6373,7 +5883,6 @@
     {
       "wordId": 496,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "静かだ",
         "reading": "しずかだ",
@@ -6386,7 +5895,6 @@
     {
       "wordId": 497,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "好み",
         "reading": "このみ",
@@ -6399,7 +5907,6 @@
     {
       "wordId": 498,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お好み焼き",
         "reading": "おこのみやき",
@@ -6412,7 +5919,6 @@
     {
       "wordId": 499,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おもい",
         "reading": "おもい",
@@ -6425,7 +5931,6 @@
     {
       "wordId": 500,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はやい",
         "reading": "はやい",
@@ -6438,7 +5943,6 @@
     {
       "wordId": 501,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やさしい",
         "reading": "やさしい",
@@ -6451,7 +5955,6 @@
     {
       "wordId": 502,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふとい",
         "reading": "ふとい",
@@ -6464,7 +5967,6 @@
     {
       "wordId": 503,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まるい",
         "reading": "まるい",
@@ -6477,7 +5979,6 @@
     {
       "wordId": 504,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ちかい",
         "reading": "ちかい",
@@ -6490,7 +5991,6 @@
     {
       "wordId": 505,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たいせつだ",
         "reading": "たいせつだ",
@@ -6503,7 +6003,6 @@
     {
       "wordId": 506,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とくいだ",
         "reading": "とくいだ",
@@ -6516,7 +6015,6 @@
     {
       "wordId": 507,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じょうぶだ",
         "reading": "じょうぶだ",
@@ -6529,7 +6027,6 @@
     {
       "wordId": 508,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おなじだ",
         "reading": "おなじだ",
@@ -6542,7 +6039,6 @@
     {
       "wordId": 509,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "びじん",
         "reading": "びじん",
@@ -6555,7 +6051,6 @@
     {
       "wordId": 510,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だんせい",
         "reading": "だんせい",
@@ -6568,7 +6063,6 @@
     {
       "wordId": 511,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じょせい",
         "reading": "じょせい",
@@ -6581,7 +6075,6 @@
     {
       "wordId": 512,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ともだち",
         "reading": "ともだち",
@@ -6594,7 +6087,6 @@
     {
       "wordId": 513,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "え",
         "reading": "え",
@@ -6607,7 +6099,6 @@
     {
       "wordId": 514,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あさ",
         "reading": "あさ",
@@ -6620,7 +6111,6 @@
     {
       "wordId": 515,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かお",
         "reading": "かお",
@@ -6633,7 +6123,6 @@
     {
       "wordId": 516,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はな",
         "reading": "はな",
@@ -6646,7 +6135,6 @@
     {
       "wordId": 517,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なつ",
         "reading": "なつ",
@@ -6659,7 +6147,6 @@
     {
       "wordId": 518,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふゆ",
         "reading": "ふゆ",
@@ -6672,7 +6159,6 @@
     {
       "wordId": 519,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ゆび",
         "reading": "ゆび",
@@ -6685,7 +6171,6 @@
     {
       "wordId": 520,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はなし",
         "reading": "はなし",
@@ -6698,7 +6183,6 @@
     {
       "wordId": 521,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "りそう",
         "reading": "りそう",
@@ -6711,7 +6195,6 @@
     {
       "wordId": 522,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いちばん",
         "reading": "いちばん",
@@ -6724,7 +6207,6 @@
     {
       "wordId": 523,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たべもの",
         "reading": "たべもの",
@@ -6737,7 +6219,6 @@
     {
       "wordId": 524,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "でんしゃ",
         "reading": "でんしゃ",
@@ -6750,7 +6231,6 @@
     {
       "wordId": 525,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はんたい",
         "reading": "はんたい",
@@ -6763,7 +6243,6 @@
     {
       "wordId": 526,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しゅうかん",
         "reading": "しゅうかん",
@@ -6776,7 +6255,6 @@
     {
       "wordId": 527,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "としょかん",
         "reading": "としょかん",
@@ -6789,7 +6267,6 @@
     {
       "wordId": 528,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おちゃ",
         "reading": "おちゃ",
@@ -6802,7 +6279,6 @@
     {
       "wordId": 529,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おれ",
         "reading": "おれ",
@@ -6815,7 +6291,6 @@
     {
       "wordId": 530,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ぼく",
         "reading": "ぼく",
@@ -6828,7 +6303,6 @@
     {
       "wordId": 532,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おきる",
         "reading": "おきる",
@@ -6841,7 +6315,6 @@
     {
       "wordId": 533,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "それから",
         "reading": "それから",
@@ -6854,7 +6327,6 @@
     {
       "wordId": 534,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あまり",
         "reading": "あまり",
@@ -6867,7 +6339,6 @@
     {
       "wordId": 535,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いつも",
         "reading": "いつも",
@@ -6880,7 +6351,6 @@
     {
       "wordId": 536,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こうして",
         "reading": "こうして",
@@ -6893,7 +6363,6 @@
     {
       "wordId": 537,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そうして",
         "reading": "そうして",
@@ -6906,7 +6375,6 @@
     {
       "wordId": 538,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ああして",
         "reading": "ああして",
@@ -6919,7 +6387,6 @@
     {
       "wordId": 539,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どうして",
         "reading": "どうして",
@@ -6932,7 +6399,6 @@
     {
       "wordId": 540,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "毎朝",
         "reading": "まいあさ",
@@ -6945,7 +6411,6 @@
     {
       "wordId": 541,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "でも",
         "reading": "でも",
@@ -6958,7 +6423,6 @@
     {
       "wordId": 542,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "早く",
         "reading": "はやく",
@@ -6971,7 +6435,6 @@
     {
       "wordId": 543,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いつも",
         "reading": "いつも",
@@ -6984,7 +6447,6 @@
     {
       "wordId": 544,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "けさ",
         "reading": "けさ",
@@ -6997,7 +6459,6 @@
     {
       "wordId": 545,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みなさん",
         "reading": "みなさん",
@@ -7010,7 +6471,6 @@
     {
       "wordId": 546,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みんな",
         "reading": "みんな",
@@ -7023,7 +6483,6 @@
     {
       "wordId": 548,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おやすみなさい",
         "reading": "おやすみなさい",
@@ -7036,7 +6495,6 @@
     {
       "wordId": 549,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "もう",
         "reading": "もう",
@@ -7049,7 +6507,6 @@
     {
       "wordId": 550,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がんばる",
         "reading": "がんばる",
@@ -7062,7 +6519,6 @@
     {
       "wordId": 551,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "夕方",
         "reading": "ゆうがた",
@@ -7075,7 +6531,6 @@
     {
       "wordId": 552,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おやすみなさい",
         "reading": "おやすみなさい",
@@ -7088,7 +6543,6 @@
     {
       "wordId": 553,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あれ？",
         "reading": "あれ",
@@ -7101,7 +6555,6 @@
     {
       "wordId": 554,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "もう",
         "reading": "もう",
@@ -7114,7 +6567,6 @@
     {
       "wordId": 555,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "何時",
         "reading": "なんじ",
@@ -7127,7 +6579,6 @@
     {
       "wordId": 556,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がんばる",
         "reading": "がんばる",
@@ -7140,7 +6591,6 @@
     {
       "wordId": 557,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "アルバイト代",
         "reading": "アルバイトだい",
@@ -7153,7 +6603,6 @@
     {
       "wordId": 558,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "買う",
         "reading": "かう",
@@ -7166,7 +6615,6 @@
     {
       "wordId": 559,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "もちろん",
         "reading": "もちろん",
@@ -7179,7 +6627,6 @@
     {
       "wordId": 560,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "教科書",
         "reading": "きょうかしょ",
@@ -7192,7 +6639,6 @@
     {
       "wordId": 561,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "〜とか",
         "reading": "〜とか",
@@ -7205,7 +6651,6 @@
     {
       "wordId": 562,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がんばれ",
         "reading": "がんばれ",
@@ -7218,7 +6663,6 @@
     {
       "wordId": 563,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "がんばって",
         "reading": "がんばって",
@@ -7231,7 +6675,6 @@
     {
       "wordId": 564,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "行く",
         "reading": "いく",
@@ -7244,7 +6687,6 @@
     {
       "wordId": 565,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "飲む",
         "reading": "のむ",
@@ -7257,7 +6699,6 @@
     {
       "wordId": 566,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "走る",
         "reading": "はしる",
@@ -7270,7 +6711,6 @@
     {
       "wordId": 567,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "行きます",
         "reading": "いきます",
@@ -7283,7 +6723,6 @@
     {
       "wordId": 568,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "飲みます",
         "reading": "のみます",
@@ -7296,7 +6735,6 @@
     {
       "wordId": 569,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "走ります",
         "reading": "はしります",
@@ -7309,7 +6747,6 @@
     {
       "wordId": 570,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ようこそ",
         "reading": "ようこそ",
@@ -7322,7 +6759,6 @@
     {
       "wordId": 571,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "笑う",
         "reading": "わらう",
@@ -7335,7 +6771,6 @@
     {
       "wordId": 572,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "笑います",
         "reading": "わらいます",
@@ -7348,7 +6783,6 @@
     {
       "wordId": 573,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "読む",
         "reading": "よむ",
@@ -7361,7 +6795,6 @@
     {
       "wordId": 574,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "働く",
         "reading": "はたらく",
@@ -7374,7 +6807,6 @@
     {
       "wordId": 575,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "見る",
         "reading": "みる",
@@ -7387,7 +6819,6 @@
     {
       "wordId": 576,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食べる",
         "reading": "たべる",
@@ -7400,7 +6831,6 @@
     {
       "wordId": 577,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "寝る",
         "reading": "ねる",
@@ -7413,7 +6843,6 @@
     {
       "wordId": 578,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "出る",
         "reading": "でる",
@@ -7426,7 +6855,6 @@
     {
       "wordId": 579,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "着る",
         "reading": "きる",
@@ -7439,7 +6867,6 @@
     {
       "wordId": 580,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "借りる",
         "reading": "かりる",
@@ -7452,7 +6879,6 @@
     {
       "wordId": 581,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "する",
         "reading": "する",
@@ -7465,7 +6891,6 @@
     {
       "wordId": 582,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "来る",
         "reading": "くる",
@@ -7478,7 +6903,6 @@
     {
       "wordId": 583,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "散歩する",
         "reading": "さんぽする",
@@ -7491,7 +6915,6 @@
     {
       "wordId": 584,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "運動する",
         "reading": "うんどうする",
@@ -7504,7 +6927,6 @@
     {
       "wordId": 585,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "友達",
         "reading": "ともだち",
@@ -7517,7 +6939,6 @@
     {
       "wordId": 586,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "帰る",
         "reading": "かえる",
@@ -7530,7 +6951,6 @@
     {
       "wordId": 587,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "~に",
         "reading": "に",
@@ -7543,7 +6963,6 @@
     {
       "wordId": 588,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "アルバイト",
         "reading": "あるばいと",
@@ -7556,7 +6975,6 @@
     {
       "wordId": 591,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "日曜日",
         "reading": "にちようび",
@@ -7569,7 +6987,6 @@
     {
       "wordId": 592,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "父",
         "reading": "ちち",
@@ -7582,7 +6999,6 @@
     {
       "wordId": 593,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "映画",
         "reading": "えいが",
@@ -7595,7 +7011,6 @@
     {
       "wordId": 594,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "今日",
         "reading": "きょう",
@@ -7608,7 +7023,6 @@
     {
       "wordId": 595,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "薬",
         "reading": "くすり",
@@ -7621,7 +7035,6 @@
     {
       "wordId": 596,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "エレベーター",
         "reading": "エレベーター",
@@ -7634,7 +7047,6 @@
     {
       "wordId": 597,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "使う",
         "reading": "つかう",
@@ -7647,7 +7059,6 @@
     {
       "wordId": 598,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "バス",
         "reading": "バス",
@@ -7660,7 +7071,6 @@
     {
       "wordId": 599,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "銀行",
         "reading": "ぎんこう",
@@ -7673,7 +7083,6 @@
     {
       "wordId": 600,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食堂",
         "reading": "しょくどう",
@@ -7686,7 +7095,6 @@
     {
       "wordId": 601,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ご飯",
         "reading": "ごはん",
@@ -7699,7 +7107,6 @@
     {
       "wordId": 602,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "外",
         "reading": "そと",
@@ -7712,7 +7119,6 @@
     {
       "wordId": 603,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たばこ",
         "reading": "たばこ",
@@ -7725,7 +7131,6 @@
     {
       "wordId": 604,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "吸う",
         "reading": "すう",
@@ -7738,7 +7143,6 @@
     {
       "wordId": 605,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "新聞",
         "reading": "しんぶん",
@@ -7751,7 +7155,6 @@
     {
       "wordId": 606,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "撮る",
         "reading": "とる",
@@ -7764,7 +7167,6 @@
     {
       "wordId": 607,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食堂",
         "reading": "しょくどう",
@@ -7777,7 +7179,6 @@
     {
       "wordId": 608,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たばこ",
         "reading": "たばこ",
@@ -7790,7 +7191,6 @@
     {
       "wordId": 609,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "吸う",
         "reading": "すう",
@@ -7803,7 +7203,6 @@
     {
       "wordId": 610,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "します",
         "reading": "します",
@@ -7816,7 +7215,6 @@
     {
       "wordId": 611,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しません",
         "reading": "しません",
@@ -7829,7 +7227,6 @@
     {
       "wordId": 612,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "明日",
         "reading": "あした",
@@ -7842,7 +7239,6 @@
     {
       "wordId": 613,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "電車",
         "reading": "でんしゃ",
@@ -7855,7 +7251,6 @@
     {
       "wordId": 614,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "会社",
         "reading": "かいしゃ",
@@ -7868,7 +7263,6 @@
     {
       "wordId": 615,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いじょう",
         "reading": "いじょう",
@@ -7881,7 +7275,6 @@
     {
       "wordId": 616,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いか",
         "reading": "いか",
@@ -7894,7 +7287,6 @@
     {
       "wordId": 617,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "毎週",
         "reading": "まいしゅう",
@@ -7907,7 +7299,6 @@
     {
       "wordId": 618,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "階段",
         "reading": "かいだん",
@@ -7920,7 +7311,6 @@
     {
       "wordId": 619,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "健康",
         "reading": "けんこう",
@@ -7933,7 +7323,6 @@
     {
       "wordId": 620,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "注意",
         "reading": "ちゅうい",
@@ -7946,7 +7335,6 @@
     {
       "wordId": 621,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "起きる",
         "reading": "おきる",
@@ -7959,7 +7347,6 @@
     {
       "wordId": 622,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "夜ご飯",
         "reading": "よるごはん",
@@ -7972,7 +7359,6 @@
     {
       "wordId": 623,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テレビ",
         "reading": "テレビ",
@@ -7985,7 +7371,6 @@
     {
       "wordId": 624,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ごぜん",
         "reading": "ごぜん",
@@ -7998,7 +7383,6 @@
     {
       "wordId": 625,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ごご",
         "reading": "ごご",
@@ -8011,7 +7395,6 @@
     {
       "wordId": 626,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いく",
         "reading": "いく",
@@ -8024,7 +7407,6 @@
     {
       "wordId": 627,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かう",
         "reading": "かう",
@@ -8037,7 +7419,6 @@
     {
       "wordId": 628,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すう",
         "reading": "すう",
@@ -8050,7 +7431,6 @@
     {
       "wordId": 629,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とる",
         "reading": "とる",
@@ -8063,7 +7443,6 @@
     {
       "wordId": 630,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "のむ",
         "reading": "のむ",
@@ -8076,7 +7455,6 @@
     {
       "wordId": 631,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よむ",
         "reading": "よむ",
@@ -8089,7 +7467,6 @@
     {
       "wordId": 632,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かえる",
         "reading": "かえる",
@@ -8102,7 +7479,6 @@
     {
       "wordId": 633,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "つかう",
         "reading": "つかう",
@@ -8115,7 +7491,6 @@
     {
       "wordId": 634,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はしる",
         "reading": "はしる",
@@ -8128,7 +7503,6 @@
     {
       "wordId": 635,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "わらう",
         "reading": "わらう",
@@ -8141,7 +7515,6 @@
     {
       "wordId": 636,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はたらく",
         "reading": "はたらく",
@@ -8154,7 +7527,6 @@
     {
       "wordId": 637,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きる",
         "reading": "きる",
@@ -8167,7 +7539,6 @@
     {
       "wordId": 638,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "でる",
         "reading": "でる",
@@ -8180,7 +7551,6 @@
     {
       "wordId": 639,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ねる",
         "reading": "ねる",
@@ -8193,7 +7563,6 @@
     {
       "wordId": 640,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "みる",
         "reading": "みる",
@@ -8206,7 +7575,6 @@
     {
       "wordId": 641,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かりる",
         "reading": "かりる",
@@ -8219,7 +7587,6 @@
     {
       "wordId": 642,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たべる",
         "reading": "たべる",
@@ -8232,7 +7599,6 @@
     {
       "wordId": 643,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くる",
         "reading": "くる",
@@ -8245,7 +7611,6 @@
     {
       "wordId": 644,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うんどうする",
         "reading": "うんどうする",
@@ -8258,7 +7623,6 @@
     {
       "wordId": 645,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さんぽする",
         "reading": "さんぽする",
@@ -8271,7 +7635,6 @@
     {
       "wordId": 646,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "〜だい",
         "reading": "〜だい",
@@ -8284,7 +7647,6 @@
     {
       "wordId": 647,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あした",
         "reading": "あした",
@@ -8297,7 +7659,6 @@
     {
       "wordId": 648,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かいだん",
         "reading": "かいだん",
@@ -8310,7 +7671,6 @@
     {
       "wordId": 649,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "けんこう",
         "reading": "けんこう",
@@ -8323,7 +7683,6 @@
     {
       "wordId": 650,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しんぶん",
         "reading": "しんぶん",
@@ -8336,7 +7695,6 @@
     {
       "wordId": 651,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ちゅうい",
         "reading": "ちゅうい",
@@ -8349,7 +7707,6 @@
     {
       "wordId": 652,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まいしゅう",
         "reading": "まいしゅう",
@@ -8362,7 +7719,6 @@
     {
       "wordId": 653,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よるごはん",
         "reading": "よるごはん",
@@ -8375,7 +7731,6 @@
     {
       "wordId": 654,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "もどる",
         "reading": "もどる",
@@ -8388,7 +7743,6 @@
     {
       "wordId": 655,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あいさつ",
         "reading": "あいさつ",
@@ -8401,7 +7755,6 @@
     {
       "wordId": 656,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "花火大会",
         "reading": "はなびたいかい",
@@ -8414,7 +7767,6 @@
     {
       "wordId": 657,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お弁当",
         "reading": "おべんとう",
@@ -8427,7 +7779,6 @@
     {
       "wordId": 658,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "手伝う",
         "reading": "てつだう",
@@ -8440,7 +7791,6 @@
     {
       "wordId": 659,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "全然",
         "reading": "ぜんぜん",
@@ -8453,7 +7803,6 @@
     {
       "wordId": 660,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "本当",
         "reading": "ほんとう",
@@ -8466,7 +7815,6 @@
     {
       "wordId": 661,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "マジ",
         "reading": "マジ",
@@ -8479,7 +7827,6 @@
     {
       "wordId": 662,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すごく",
         "reading": "すごく",
@@ -8492,7 +7839,6 @@
     {
       "wordId": 663,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遠い",
         "reading": "とおい",
@@ -8505,7 +7851,6 @@
     {
       "wordId": 664,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大丈夫だ",
         "reading": "だいじょうぶだ",
@@ -8518,7 +7863,6 @@
     {
       "wordId": 665,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すごい",
         "reading": "すごい",
@@ -8531,7 +7875,6 @@
     {
       "wordId": 666,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大変",
         "reading": "たいへん",
@@ -8544,7 +7887,6 @@
     {
       "wordId": 667,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "飲む",
         "reading": "のむ",
@@ -8557,7 +7899,6 @@
     {
       "wordId": 668,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "見る",
         "reading": "みる",
@@ -8570,7 +7911,6 @@
     {
       "wordId": 669,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "読む",
         "reading": "よむ",
@@ -8583,7 +7923,6 @@
     {
       "wordId": 670,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "旅行",
         "reading": "りょこう",
@@ -8596,7 +7935,6 @@
     {
       "wordId": 671,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遊園地",
         "reading": "ゆうえんち",
@@ -8609,7 +7947,6 @@
     {
       "wordId": 672,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遊ぶ",
         "reading": "あそぶ",
@@ -8622,7 +7959,6 @@
     {
       "wordId": 673,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "コンサート",
         "reading": "コンサート",
@@ -8635,7 +7971,6 @@
     {
       "wordId": 674,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遊園地",
         "reading": "ゆうえんち",
@@ -8648,7 +7983,6 @@
     {
       "wordId": 675,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遊ぶ",
         "reading": "あそぶ",
@@ -8661,7 +7995,6 @@
     {
       "wordId": 676,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "安い",
         "reading": "やすい",
@@ -8674,7 +8007,6 @@
     {
       "wordId": 677,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "買う",
         "reading": "かう",
@@ -8687,7 +8019,6 @@
     {
       "wordId": 678,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "辞書",
         "reading": "じしょ",
@@ -8700,7 +8031,6 @@
     {
       "wordId": 679,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "便利だ",
         "reading": "べんりだ",
@@ -8713,7 +8043,6 @@
     {
       "wordId": 680,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よく",
         "reading": "よく",
@@ -8726,7 +8055,6 @@
     {
       "wordId": 681,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "使う",
         "reading": "つかう",
@@ -8739,7 +8067,6 @@
     {
       "wordId": 682,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "牛乳",
         "reading": "ぎゅうにゅう",
@@ -8752,7 +8079,6 @@
     {
       "wordId": 683,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "体",
         "reading": "からだ",
@@ -8765,7 +8091,6 @@
     {
       "wordId": 684,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いい",
         "reading": "いい",
@@ -8778,7 +8103,6 @@
     {
       "wordId": 685,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "毎日",
         "reading": "まいにち",
@@ -8791,7 +8115,6 @@
     {
       "wordId": 686,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "遅れる",
         "reading": "おくれる",
@@ -8804,7 +8127,6 @@
     {
       "wordId": 687,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "つまらない",
         "reading": "つまらない",
@@ -8817,7 +8139,6 @@
     {
       "wordId": 688,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おちつく",
         "reading": "おちつく",
@@ -8830,7 +8151,6 @@
     {
       "wordId": 689,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "問題",
         "reading": "もんだい",
@@ -8843,7 +8163,6 @@
     {
       "wordId": 690,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "分かる",
         "reading": "わかる",
@@ -8856,7 +8175,6 @@
     {
       "wordId": 691,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "宿題",
         "reading": "しゅくだい",
@@ -8869,7 +8187,6 @@
     {
       "wordId": 692,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "大変だ",
         "reading": "たいへんだ",
@@ -8882,7 +8199,6 @@
     {
       "wordId": 693,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "忙しい",
         "reading": "いそがしい",
@@ -8895,7 +8211,6 @@
     {
       "wordId": 694,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "図書館",
         "reading": "としょかん",
@@ -8908,7 +8223,6 @@
     {
       "wordId": 695,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "読み",
         "reading": "よみ",
@@ -8921,7 +8235,6 @@
     {
       "wordId": 696,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "借り",
         "reading": "かり",
@@ -8934,7 +8247,6 @@
     {
       "wordId": 697,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "勉強",
         "reading": "べんきょう",
@@ -8947,7 +8259,6 @@
     {
       "wordId": 698,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あそこ",
         "reading": "あそこ",
@@ -8960,7 +8271,6 @@
     {
       "wordId": 699,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あっち",
         "reading": "あっち",
@@ -8973,7 +8283,6 @@
     {
       "wordId": 700,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そこ",
         "reading": "そこ",
@@ -8986,7 +8295,6 @@
     {
       "wordId": 701,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そっち",
         "reading": "そっち",
@@ -8999,7 +8307,6 @@
     {
       "wordId": 702,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やる",
         "reading": "やる",
@@ -9012,7 +8319,6 @@
     {
       "wordId": 703,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "やります",
         "reading": "やります",
@@ -9025,7 +8331,6 @@
     {
       "wordId": 704,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "映画",
         "reading": "えいが",
@@ -9038,7 +8343,6 @@
     {
       "wordId": 705,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "場所",
         "reading": "ばしょ",
@@ -9051,7 +8355,6 @@
     {
       "wordId": 706,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "時間",
         "reading": "じかん",
@@ -9064,7 +8367,6 @@
     {
       "wordId": 707,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "明日",
         "reading": "あした",
@@ -9077,7 +8379,6 @@
     {
       "wordId": 708,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "暇",
         "reading": "ひま",
@@ -9090,7 +8391,6 @@
     {
       "wordId": 709,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どうして",
         "reading": "どうして",
@@ -9103,7 +8403,6 @@
     {
       "wordId": 710,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一緒",
         "reading": "いっしょ",
@@ -9116,7 +8415,6 @@
     {
       "wordId": 711,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "行きませんか",
         "reading": "いきませんか",
@@ -9129,7 +8427,6 @@
     {
       "wordId": 712,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いいですね",
         "reading": "いいですね",
@@ -9142,7 +8439,6 @@
     {
       "wordId": 713,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "どこ",
         "reading": "どこ",
@@ -9155,7 +8451,6 @@
     {
       "wordId": 714,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "サッカーの試合",
         "reading": "サッカーのしあい",
@@ -9168,7 +8463,6 @@
     {
       "wordId": 715,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "写真",
         "reading": "しゃしん",
@@ -9181,7 +8475,6 @@
     {
       "wordId": 716,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "撮る",
         "reading": "とる",
@@ -9194,7 +8487,6 @@
     {
       "wordId": 717,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "会う",
         "reading": "あう",
@@ -9207,7 +8499,6 @@
     {
       "wordId": 718,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "持つ",
         "reading": "もつ",
@@ -9220,7 +8511,6 @@
     {
       "wordId": 719,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あう",
         "reading": "あう",
@@ -9233,7 +8523,6 @@
     {
       "wordId": 720,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "泳ぐ",
         "reading": "およぐ",
@@ -9246,7 +8535,6 @@
     {
       "wordId": 721,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "友達",
         "reading": "ともだち",
@@ -9259,7 +8547,6 @@
     {
       "wordId": 722,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食事",
         "reading": "しょくじ",
@@ -9272,7 +8559,6 @@
     {
       "wordId": 723,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "アイスクリーム",
         "reading": "アイスクリーム",
@@ -9285,7 +8571,6 @@
     {
       "wordId": 724,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "買い物",
         "reading": "かいもの",
@@ -9298,7 +8583,6 @@
     {
       "wordId": 725,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "もつ",
         "reading": "もつ",
@@ -9311,7 +8595,6 @@
     {
       "wordId": 726,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "およぐ",
         "reading": "およぐ",
@@ -9324,7 +8607,6 @@
     {
       "wordId": 727,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あそぶ",
         "reading": "あそぶ",
@@ -9337,7 +8619,6 @@
     {
       "wordId": 728,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "わかる",
         "reading": "わかる",
@@ -9350,7 +8631,6 @@
     {
       "wordId": 729,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "てつだう",
         "reading": "てつだう",
@@ -9363,7 +8643,6 @@
     {
       "wordId": 730,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おくれる",
         "reading": "おくれる",
@@ -9376,7 +8655,6 @@
     {
       "wordId": 731,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とおい",
         "reading": "とおい",
@@ -9389,7 +8667,6 @@
     {
       "wordId": 732,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いそがしい",
         "reading": "いそがしい",
@@ -9402,7 +8679,6 @@
     {
       "wordId": 733,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たいへんだ",
         "reading": "たいへんだ",
@@ -9415,7 +8691,6 @@
     {
       "wordId": 734,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だいじょうぶだ",
         "reading": "だいじょうぶだ",
@@ -9428,7 +8703,6 @@
     {
       "wordId": 735,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ごご",
         "reading": "ごご",
@@ -9441,7 +8715,6 @@
     {
       "wordId": 736,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "からだ",
         "reading": "からだ",
@@ -9454,7 +8727,6 @@
     {
       "wordId": 737,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ばしょ",
         "reading": "ばしょ",
@@ -9467,7 +8739,6 @@
     {
       "wordId": 738,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かいもの",
         "reading": "かいもの",
@@ -9480,7 +8751,6 @@
     {
       "wordId": 739,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しょくじ",
         "reading": "しょくじ",
@@ -9493,7 +8763,6 @@
     {
       "wordId": 740,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ほんとう",
         "reading": "ほんとう",
@@ -9506,7 +8775,6 @@
     {
       "wordId": 741,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "もんだい",
         "reading": "もんだい",
@@ -9519,7 +8787,6 @@
     {
       "wordId": 742,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しゅくだい",
         "reading": "しゅくだい",
@@ -9532,7 +8799,6 @@
     {
       "wordId": 743,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ゆうえんち",
         "reading": "ゆうえんち",
@@ -9545,7 +8811,6 @@
     {
       "wordId": 744,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はなびたいかい",
         "reading": "はなびたいかい",
@@ -9558,7 +8823,6 @@
     {
       "wordId": 745,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ドラマ",
         "reading": "ドラマ",
@@ -9571,7 +8835,6 @@
     {
       "wordId": 746,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひとり",
         "reading": "ひとり",
@@ -9584,7 +8847,6 @@
     {
       "wordId": 747,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふたり",
         "reading": "ふたり",
@@ -9597,7 +8859,6 @@
     {
       "wordId": 748,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さんにん",
         "reading": "さんにん",
@@ -9610,7 +8871,6 @@
     {
       "wordId": 749,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よにん",
         "reading": "よにん",
@@ -9623,7 +8883,6 @@
     {
       "wordId": 750,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ごにん",
         "reading": "ごにん",
@@ -9636,7 +8895,6 @@
     {
       "wordId": 751,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ろくにん",
         "reading": "ろくにん",
@@ -9649,7 +8907,6 @@
     {
       "wordId": 752,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しちにん",
         "reading": "しちにん",
@@ -9662,7 +8919,6 @@
     {
       "wordId": 753,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ななにん",
         "reading": "ななにん",
@@ -9675,7 +8931,6 @@
     {
       "wordId": 754,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はちにん",
         "reading": "はちにん",
@@ -9688,7 +8943,6 @@
     {
       "wordId": 755,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "くにん",
         "reading": "くにん",
@@ -9701,7 +8955,6 @@
     {
       "wordId": 756,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きゅうにん",
         "reading": "きゅうにん",
@@ -9714,7 +8967,6 @@
     {
       "wordId": 757,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "じゅうにん",
         "reading": "じゅうにん",
@@ -9727,7 +8979,6 @@
     {
       "wordId": 758,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なんめい さまですか",
         "reading": "なんめい さまですか",
@@ -9740,7 +8991,6 @@
     {
       "wordId": 759,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いちにんまえ",
         "reading": "いちにんまえ",
@@ -9753,7 +9003,6 @@
     {
       "wordId": 760,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "できない",
         "reading": "できない",
@@ -9766,7 +9015,6 @@
     {
       "wordId": 761,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "できる",
         "reading": "できる",
@@ -9779,7 +9027,6 @@
     {
       "wordId": 762,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いろいろ",
         "reading": "いろいろ",
@@ -9792,7 +9039,6 @@
     {
       "wordId": 763,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いろいろな",
         "reading": "いろいろな",
@@ -9805,7 +9051,6 @@
     {
       "wordId": 764,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お寺",
         "reading": "おてら",
@@ -9818,7 +9063,6 @@
     {
       "wordId": 765,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "観光",
         "reading": "かんこう",
@@ -9831,7 +9075,6 @@
     {
       "wordId": 766,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おそば",
         "reading": "おそば",
@@ -9844,7 +9087,6 @@
     {
       "wordId": 767,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しながら",
         "reading": "しながら",
@@ -9857,7 +9099,6 @@
     {
       "wordId": 768,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "泣く",
         "reading": "なく",
@@ -9870,7 +9111,6 @@
     {
       "wordId": 769,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ビール",
         "reading": "ビール",
@@ -9883,7 +9123,6 @@
     {
       "wordId": 770,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "手紙",
         "reading": "てがみ",
@@ -9896,7 +9135,6 @@
     {
       "wordId": 771,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "出す",
         "reading": "だす",
@@ -9909,7 +9147,6 @@
     {
       "wordId": 772,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "週末",
         "reading": "しゅうまつ",
@@ -9922,7 +9159,6 @@
     {
       "wordId": 773,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "教える",
         "reading": "おしえる",
@@ -9935,7 +9171,6 @@
     {
       "wordId": 774,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "今朝",
         "reading": "けさ",
@@ -9948,7 +9183,6 @@
     {
       "wordId": 775,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "降る",
         "reading": "ふる",
@@ -9961,7 +9195,6 @@
     {
       "wordId": 776,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "作る",
         "reading": "つくる",
@@ -9974,7 +9207,6 @@
     {
       "wordId": 777,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "聞く",
         "reading": "きく",
@@ -9987,7 +9219,6 @@
     {
       "wordId": 778,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "運転",
         "reading": "うんてん",
@@ -10000,7 +9231,6 @@
     {
       "wordId": 779,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "よく",
         "reading": "よく",
@@ -10013,7 +9243,6 @@
     {
       "wordId": 780,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "夏休み",
         "reading": "なつやすみ",
@@ -10026,7 +9255,6 @@
     {
       "wordId": 781,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "帰る",
         "reading": "かえる",
@@ -10039,7 +9267,6 @@
     {
       "wordId": 782,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "英語",
         "reading": "えいご",
@@ -10052,7 +9279,6 @@
     {
       "wordId": 783,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テスト",
         "reading": "テスト",
@@ -10065,7 +9291,6 @@
     {
       "wordId": 784,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "受ける",
         "reading": "うける",
@@ -10078,7 +9303,6 @@
     {
       "wordId": 785,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "昨日",
         "reading": "きのう",
@@ -10091,7 +9315,6 @@
     {
       "wordId": 786,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "会議",
         "reading": "かいぎ",
@@ -10104,7 +9327,6 @@
     {
       "wordId": 787,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "する",
         "reading": "する",
@@ -10117,7 +9339,6 @@
     {
       "wordId": 788,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うける",
         "reading": "うける",
@@ -10130,7 +9351,6 @@
     {
       "wordId": 789,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "夜",
         "reading": "よる",
@@ -10143,7 +9363,6 @@
     {
       "wordId": 790,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "薬",
         "reading": "くすり",
@@ -10156,7 +9375,6 @@
     {
       "wordId": 791,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "飲む",
         "reading": "のむ",
@@ -10169,7 +9387,6 @@
     {
       "wordId": 792,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "先月",
         "reading": "せんげつ",
@@ -10182,7 +9399,6 @@
     {
       "wordId": 793,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "友達",
         "reading": "ともだち",
@@ -10195,7 +9411,6 @@
     {
       "wordId": 794,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "会う",
         "reading": "あう",
@@ -10208,7 +9423,6 @@
     {
       "wordId": 795,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "今日",
         "reading": "きょう",
@@ -10221,7 +9435,6 @@
     {
       "wordId": 796,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "洗濯",
         "reading": "せんたく",
@@ -10234,7 +9447,6 @@
     {
       "wordId": 797,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テストを受ける",
         "reading": "テストをうける",
@@ -10247,7 +9459,6 @@
     {
       "wordId": 798,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "薬を飲む",
         "reading": "くすりをのむ",
@@ -10260,7 +9471,6 @@
     {
       "wordId": 799,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "電話",
         "reading": "でんわ",
@@ -10273,7 +9483,6 @@
     {
       "wordId": 800,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "掃除",
         "reading": "そうじ",
@@ -10286,7 +9495,6 @@
     {
       "wordId": 801,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "歌",
         "reading": "うた",
@@ -10299,7 +9507,6 @@
     {
       "wordId": 802,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "歌う",
         "reading": "うたう",
@@ -10312,7 +9519,6 @@
     {
       "wordId": 803,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ノート",
         "reading": "ノート",
@@ -10325,7 +9531,6 @@
     {
       "wordId": 804,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "漢字",
         "reading": "かんじ",
@@ -10338,7 +9543,6 @@
     {
       "wordId": 805,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "覚える",
         "reading": "おぼえる",
@@ -10351,7 +9555,6 @@
     {
       "wordId": 806,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "料理",
         "reading": "りょうり",
@@ -10364,7 +9567,6 @@
     {
       "wordId": 807,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お菓子",
         "reading": "おかし",
@@ -10377,7 +9579,6 @@
     {
       "wordId": 808,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食べる",
         "reading": "たべる",
@@ -10390,7 +9591,6 @@
     {
       "wordId": 809,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "見る",
         "reading": "みる",
@@ -10403,7 +9603,6 @@
     {
       "wordId": 810,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "できる人",
         "reading": "できるひと",
@@ -10416,7 +9615,6 @@
     {
       "wordId": 811,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "バスケットボール",
         "reading": "バスケットボール",
@@ -10429,7 +9627,6 @@
     {
       "wordId": 812,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "水泳",
         "reading": "すいえい",
@@ -10442,7 +9639,6 @@
     {
       "wordId": 813,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "仕事",
         "reading": "しごと",
@@ -10455,7 +9651,6 @@
     {
       "wordId": 814,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "パソコン",
         "reading": "パソコン",
@@ -10468,7 +9663,6 @@
     {
       "wordId": 815,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "修理",
         "reading": "しゅうり",
@@ -10481,7 +9675,6 @@
     {
       "wordId": 816,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "バスケ",
         "reading": "バスケ",
@@ -10494,7 +9687,6 @@
     {
       "wordId": 817,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まる と ばつ",
         "reading": "まる と ばつ",
@@ -10507,7 +9699,6 @@
     {
       "wordId": 818,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "三角",
         "reading": "さんかく",
@@ -10520,7 +9711,6 @@
     {
       "wordId": 819,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "パソコンの修理",
         "reading": "パソコンのしゅうり",
@@ -10533,7 +9723,6 @@
     {
       "wordId": 820,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "話す",
         "reading": "はなす",
@@ -10546,7 +9735,6 @@
     {
       "wordId": 821,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ご飯",
         "reading": "ごはん",
@@ -10559,7 +9747,6 @@
     {
       "wordId": 822,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "食べます",
         "reading": "たべます",
@@ -10572,7 +9759,6 @@
     {
       "wordId": 823,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "話",
         "reading": "はなし",
@@ -10585,7 +9771,6 @@
     {
       "wordId": 824,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "します",
         "reading": "します",
@@ -10598,7 +9783,6 @@
     {
       "wordId": 825,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "お酒",
         "reading": "おさけ",
@@ -10611,7 +9795,6 @@
     {
       "wordId": 826,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "飲みます",
         "reading": "のみます",
@@ -10624,7 +9807,6 @@
     {
       "wordId": 827,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テレビ",
         "reading": "テレビ",
@@ -10637,7 +9819,6 @@
     {
       "wordId": 828,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "見ます",
         "reading": "みます",
@@ -10650,7 +9831,6 @@
     {
       "wordId": 829,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "待ちます",
         "reading": "まちます",
@@ -10663,7 +9843,6 @@
     {
       "wordId": 830,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まつ",
         "reading": "まつ",
@@ -10676,7 +9855,6 @@
     {
       "wordId": 831,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "本",
         "reading": "ほん",
@@ -10689,7 +9867,6 @@
     {
       "wordId": 832,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "読みます",
         "reading": "よみます",
@@ -10702,7 +9879,6 @@
     {
       "wordId": 833,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "携帯電話",
         "reading": "けいたいでんわ",
@@ -10715,7 +9891,6 @@
     {
       "wordId": 834,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "散歩",
         "reading": "さんぽ",
@@ -10728,7 +9903,6 @@
     {
       "wordId": 835,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "写真を撮ります",
         "reading": "しゃしんをとります",
@@ -10741,7 +9915,6 @@
     {
       "wordId": 836,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "景色",
         "reading": "けしき",
@@ -10754,7 +9927,6 @@
     {
       "wordId": 837,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "音楽",
         "reading": "おんがく",
@@ -10767,7 +9939,6 @@
     {
       "wordId": 838,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "聞きます",
         "reading": "ききます",
@@ -10780,7 +9951,6 @@
     {
       "wordId": 839,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ばけものがたり",
         "reading": "ばけものがたり",
@@ -10793,7 +9963,6 @@
     {
       "wordId": 840,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おいしい",
         "reading": "おいしい",
@@ -10806,7 +9975,6 @@
     {
       "wordId": 841,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おいしくない",
         "reading": "おいしくない",
@@ -10819,7 +9987,6 @@
     {
       "wordId": 842,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "わかりません",
         "reading": "わかりません",
@@ -10832,7 +9999,6 @@
     {
       "wordId": 843,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ばける",
         "reading": "ばける",
@@ -10845,7 +10011,6 @@
     {
       "wordId": 844,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "カフェ",
         "reading": "カフェ",
@@ -10858,7 +10023,6 @@
     {
       "wordId": 845,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "学校",
         "reading": "がっこう",
@@ -10871,7 +10035,6 @@
     {
       "wordId": 846,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "図書館",
         "reading": "としょかん",
@@ -10884,7 +10047,6 @@
     {
       "wordId": 847,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "家",
         "reading": "いえ",
@@ -10897,7 +10059,6 @@
     {
       "wordId": 848,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "郵便局",
         "reading": "ゆうびんきょく",
@@ -10910,7 +10071,6 @@
     {
       "wordId": 849,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きく",
         "reading": "きく",
@@ -10923,7 +10083,6 @@
     {
       "wordId": 850,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だす",
         "reading": "だす",
@@ -10936,7 +10095,6 @@
     {
       "wordId": 851,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なく",
         "reading": "なく",
@@ -10949,7 +10107,6 @@
     {
       "wordId": 852,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ふる",
         "reading": "ふる",
@@ -10962,7 +10119,6 @@
     {
       "wordId": 853,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うたう",
         "reading": "うたう",
@@ -10975,7 +10131,6 @@
     {
       "wordId": 854,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かよう",
         "reading": "かよう",
@@ -10988,7 +10143,6 @@
     {
       "wordId": 855,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "つくる",
         "reading": "つくる",
@@ -11001,7 +10155,6 @@
     {
       "wordId": 856,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はなす",
         "reading": "はなす",
@@ -11014,7 +10167,6 @@
     {
       "wordId": 857,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おしえる",
         "reading": "おしえる",
@@ -11027,7 +10179,6 @@
     {
       "wordId": 858,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おぼえる",
         "reading": "おぼえる",
@@ -11040,7 +10191,6 @@
     {
       "wordId": 859,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "けさ",
         "reading": "けさ",
@@ -11053,7 +10203,6 @@
     {
       "wordId": 860,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "せんげつ",
         "reading": "せんげつ",
@@ -11066,7 +10215,6 @@
     {
       "wordId": 861,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しゅうまつ",
         "reading": "しゅうまつ",
@@ -11079,7 +10227,6 @@
     {
       "wordId": 862,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なつやすみ",
         "reading": "なつやすみ",
@@ -11092,7 +10239,6 @@
     {
       "wordId": 863,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おてら",
         "reading": "おてら",
@@ -11105,7 +10251,6 @@
     {
       "wordId": 864,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "そうじ",
         "reading": "そうじ",
@@ -11118,7 +10263,6 @@
     {
       "wordId": 865,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "てがみ",
         "reading": "てがみ",
@@ -11131,7 +10275,6 @@
     {
       "wordId": 866,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "でんわ",
         "reading": "でんわ",
@@ -11144,7 +10287,6 @@
     {
       "wordId": 867,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うんてん",
         "reading": "うんてん",
@@ -11157,7 +10299,6 @@
     {
       "wordId": 868,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かんこう",
         "reading": "かんこう",
@@ -11170,7 +10311,6 @@
     {
       "wordId": 869,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "しゅうり",
         "reading": "しゅうり",
@@ -11183,7 +10323,6 @@
     {
       "wordId": 870,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "せんたく",
         "reading": "せんたく",
@@ -11196,7 +10335,6 @@
     {
       "wordId": 871,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うた",
         "reading": "うた",
@@ -11209,7 +10347,6 @@
     {
       "wordId": 872,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かいぎ",
         "reading": "かいぎ",
@@ -11222,7 +10359,6 @@
     {
       "wordId": 873,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かんじ",
         "reading": "かんじ",
@@ -11235,7 +10371,6 @@
     {
       "wordId": 874,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すいえい",
         "reading": "すいえい",
@@ -11248,7 +10383,6 @@
     {
       "wordId": 875,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だれかと",
         "reading": "だれかと",
@@ -11261,7 +10395,6 @@
     {
       "wordId": 876,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "〜と",
         "reading": "〜と",
@@ -11274,7 +10407,6 @@
     {
       "wordId": 877,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なかま",
         "reading": "なかま",
@@ -11287,7 +10419,6 @@
     {
       "wordId": 878,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "旅行",
         "reading": "りょこう",
@@ -11300,7 +10431,6 @@
     {
       "wordId": 879,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "機体",
         "reading": "きたい",
@@ -11313,7 +10443,6 @@
     {
       "wordId": 880,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いつか",
         "reading": "いつか",
@@ -11326,7 +10455,6 @@
     {
       "wordId": 881,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "~に のる",
         "reading": "~に のる",
@@ -11339,7 +10467,6 @@
     {
       "wordId": 882,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "机",
         "reading": "つくえ",
@@ -11352,7 +10479,6 @@
     {
       "wordId": 883,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "猫",
         "reading": "ねこ",
@@ -11365,7 +10491,6 @@
     {
       "wordId": 884,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "箱",
         "reading": "はこ",
@@ -11378,7 +10503,6 @@
     {
       "wordId": 885,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "すみません",
         "reading": "すみません",
@@ -11391,7 +10515,6 @@
     {
       "wordId": 886,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "棚",
         "reading": "たな",
@@ -11404,7 +10527,6 @@
     {
       "wordId": 887,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "自転車",
         "reading": "じてんしゃ",
@@ -11417,7 +10539,6 @@
     {
       "wordId": 888,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "チャリ",
         "reading": "ちゃり",
@@ -11430,7 +10551,6 @@
     {
       "wordId": 889,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "うえ",
         "reading": "うえ",
@@ -11443,7 +10563,6 @@
     {
       "wordId": 890,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "した",
         "reading": "した",
@@ -11456,7 +10575,6 @@
     {
       "wordId": 891,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "なか",
         "reading": "なか",
@@ -11469,7 +10587,6 @@
     {
       "wordId": 892,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いぬ",
         "reading": "いぬ",
@@ -11482,7 +10599,6 @@
     {
       "wordId": 893,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ねこ",
         "reading": "ねこ",
@@ -11495,7 +10611,6 @@
     {
       "wordId": 894,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "さかな",
         "reading": "さかな",
@@ -11508,7 +10623,6 @@
     {
       "wordId": 895,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ペット",
         "reading": "ペット",
@@ -11521,7 +10635,6 @@
     {
       "wordId": 896,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こども",
         "reading": "こども",
@@ -11534,7 +10647,6 @@
     {
       "wordId": 897,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "きょうだい",
         "reading": "きょうだい",
@@ -11547,7 +10659,6 @@
     {
       "wordId": 898,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こいびと",
         "reading": "こいびと",
@@ -11560,7 +10671,6 @@
     {
       "wordId": 899,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おとこのこ",
         "reading": "おとこのこ",
@@ -11573,7 +10683,6 @@
     {
       "wordId": 900,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "おんなのこ",
         "reading": "おんなのこ",
@@ -11586,7 +10695,6 @@
     {
       "wordId": 901,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "のる",
         "reading": "のる",
@@ -11599,7 +10707,6 @@
     {
       "wordId": 902,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "つくえ",
         "reading": "つくえ",
@@ -11612,7 +10719,6 @@
     {
       "wordId": 903,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "れいぞうこ",
         "reading": "れいぞうこ",
@@ -11625,7 +10731,6 @@
     {
       "wordId": 904,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ほんだな",
         "reading": "ほんだな",
@@ -11638,7 +10743,6 @@
     {
       "wordId": 905,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いす",
         "reading": "いす",
@@ -11651,7 +10755,6 @@
     {
       "wordId": 906,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ソファー",
         "reading": "ソファー",
@@ -11664,7 +10767,6 @@
     {
       "wordId": 907,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "テーブル",
         "reading": "テーブル",
@@ -11677,7 +10779,6 @@
     {
       "wordId": 908,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ベッド",
         "reading": "ベッド",
@@ -11690,7 +10791,6 @@
     {
       "wordId": 909,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "タンス",
         "reading": "タンス",
@@ -11703,7 +10803,6 @@
     {
       "wordId": 910,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "たな",
         "reading": "たな",
@@ -11716,7 +10815,6 @@
     {
       "wordId": 911,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はこ",
         "reading": "はこ",
@@ -11729,7 +10827,6 @@
     {
       "wordId": 912,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "まど",
         "reading": "まど",
@@ -11742,7 +10839,6 @@
     {
       "wordId": 913,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "にく",
         "reading": "にく",
@@ -11755,7 +10851,6 @@
     {
       "wordId": 914,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひこうき",
         "reading": "ひこうき",
@@ -11768,7 +10863,6 @@
     {
       "wordId": 915,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こんばん",
         "reading": "こんばん",
@@ -11781,7 +10875,6 @@
     {
       "wordId": 916,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "のみもの",
         "reading": "のみもの",
@@ -11794,7 +10887,6 @@
     {
       "wordId": 917,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "だいどころ",
         "reading": "だいどころ",
@@ -11807,7 +10899,6 @@
     {
       "wordId": 918,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "こうえん",
         "reading": "こうえん",
@@ -11820,7 +10911,6 @@
     {
       "wordId": 919,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "はな",
         "reading": "はな",
@@ -11833,7 +10923,6 @@
     {
       "wordId": 920,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "コンビニ",
         "reading": "コンビニ",
@@ -11846,7 +10935,6 @@
     {
       "wordId": 921,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ジュース",
         "reading": "ジュース",
@@ -11859,7 +10947,6 @@
     {
       "wordId": 922,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "デート",
         "reading": "デート",
@@ -11872,7 +10959,6 @@
     {
       "wordId": 923,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ドア",
         "reading": "ドア",
@@ -11885,7 +10971,6 @@
     {
       "wordId": 924,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "とびら",
         "reading": "とびら",
@@ -11898,7 +10983,6 @@
     {
       "wordId": 925,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "上",
         "reading": "うえ",
@@ -11911,7 +10995,6 @@
     {
       "wordId": 926,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "下",
         "reading": "した",
@@ -11924,7 +11007,6 @@
     {
       "wordId": 927,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "中",
         "reading": "なか",
@@ -11937,7 +11019,6 @@
     {
       "wordId": 928,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "外",
         "reading": "そと",
@@ -11950,7 +11031,6 @@
     {
       "wordId": 929,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "前",
         "reading": "まえ",
@@ -11963,7 +11043,6 @@
     {
       "wordId": 930,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "後ろ",
         "reading": "うしろ",
@@ -11976,7 +11055,6 @@
     {
       "wordId": 931,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "横",
         "reading": "よこ",
@@ -11989,7 +11067,6 @@
     {
       "wordId": 932,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "かばん",
         "reading": "かばん",
@@ -12002,7 +11079,6 @@
     {
       "wordId": 933,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "財布",
         "reading": "さいふ",
@@ -12015,7 +11091,6 @@
     {
       "wordId": 934,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "銀行",
         "reading": "ぎんこう",
@@ -12028,7 +11103,6 @@
     {
       "wordId": 935,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "レストラン",
         "reading": "レストラン",
@@ -12041,7 +11115,6 @@
     {
       "wordId": 936,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "犬",
         "reading": "いぬ",
@@ -12054,7 +11127,6 @@
     {
       "wordId": 937,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "花",
         "reading": "はな",
@@ -12067,7 +11139,6 @@
     {
       "wordId": 938,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ある",
         "reading": "ある",
@@ -12080,7 +11151,6 @@
     {
       "wordId": 939,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ない",
         "reading": "ない",
@@ -12093,7 +11163,6 @@
     {
       "wordId": 940,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いる",
         "reading": "いる",
@@ -12106,7 +11175,6 @@
     {
       "wordId": 941,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "いない",
         "reading": "いない",
@@ -12119,7 +11187,6 @@
     {
       "wordId": 942,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "公園",
         "reading": "こうえん",
@@ -12132,7 +11199,6 @@
     {
       "wordId": 943,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "男の子",
         "reading": "おとこのこ",
@@ -12145,7 +11211,6 @@
     {
       "wordId": 944,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "女の子",
         "reading": "おんなのこ",
@@ -12158,7 +11223,6 @@
     {
       "wordId": 945,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "冷蔵庫",
         "reading": "れいぞうこ",
@@ -12171,7 +11235,6 @@
     {
       "wordId": 946,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひとめぼれ",
         "reading": "ひとめぼれ",
@@ -12184,7 +11247,6 @@
     {
       "wordId": 947,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ひとめぼれする",
         "reading": "ひとめぼれする",
@@ -12197,7 +11259,6 @@
     {
       "wordId": 948,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "する",
         "reading": "する",
@@ -12210,7 +11271,6 @@
     {
       "wordId": 949,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "飲み物",
         "reading": "のみもの",
@@ -12223,7 +11283,6 @@
     {
       "wordId": 950,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "一人で",
         "reading": "ひとりで",
@@ -12236,7 +11295,6 @@
     {
       "wordId": 951,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "イートインスペース",
         "reading": "イートインスペース",
@@ -12249,7 +11307,6 @@
     {
       "wordId": 952,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "あっためますか",
         "reading": "あっためますか",
@@ -12262,7 +11319,6 @@
     {
       "wordId": 953,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "歌を歌う",
         "reading": "うたをうたう",
@@ -12275,7 +11331,6 @@
     {
       "wordId": 954,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "ピアノを弾く",
         "reading": "ぴあのをひく",
@@ -12288,7 +11343,6 @@
     {
       "wordId": 955,
       "date": "2026-09-06",
-      "generation": 1,
       "source": {
         "word": "歯を磨く",
         "reading": "はをみがく",

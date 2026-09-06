@@ -1,7 +1,8 @@
 import { Suspense, lazy, useEffect, useState, useCallback } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-import { fetchWordsData, fetchSentencesData } from './lib/github';
-import { openDb, syncWordsFromData, ensureReviewsExist, syncSentencesFromData } from './lib/db';
+import { fetchWordsData } from './lib/github';
+import { openDb, syncWordsFromData, ensureReviewsExist } from './lib/db';
+import { refreshSentences } from './lib/sentence-sync';
 import { ImmersiveContext } from './hooks/useImmersive';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
@@ -47,14 +48,8 @@ export default function App() {
         console.error('Data sync error:', err);
         setSyncError(err.message || '데이터 동기화 실패');
       }
-      // 예문은 보조 정보라 실패해도 단어 학습을 막지 않는다. 오류 배너(syncError)도 띄우지 않고 로그만 남긴다.
-      // 받지 못했으면(null) 이미 저장된 예문을 그대로 쓴다.
-      try {
-        const sentenceData = await fetchSentencesData();
-        if (sentenceData) await syncSentencesFromData(sentenceData.sentences);
-      } catch (err) {
-        console.warn('Sentence sync error:', err);
-      }
+      // 예문은 보조 정보라 실패해도 단어 학습을 막지 않는다. 오류 배너(syncError)도 띄우지 않는다
+      await refreshSentences({ force: true });
       setReady(true);
     } catch (err) {
       console.error('DB open error:', err);
@@ -63,6 +58,14 @@ export default function App() {
   }, []);
 
   useEffect(() => { loadData(); }, [loadData]);
+
+  // 홈 화면 앱은 백그라운드에 오래 살아 있어 시작 시 한 번만 받으면 배치가 만든 예문이 반영되지 않는다.
+  // 화면에 다시 나타날 때 조용히 다시 받는다 (간격 제한은 refreshSentences 안에서)
+  useEffect(() => {
+    const handler = () => { if (document.visibilityState === 'visible') refreshSentences(); };
+    document.addEventListener('visibilitychange', handler);
+    return () => document.removeEventListener('visibilitychange', handler);
+  }, []);
 
   if (!ready) {
     return (

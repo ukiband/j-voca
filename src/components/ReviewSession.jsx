@@ -7,6 +7,7 @@ import { formatLesson, parseLessonNumber } from '../lib/lesson-utils';
 import { filterUsableSentences, pickSentence } from '../lib/sentence-utils';
 import { getKstDateString } from '../lib/date-utils';
 import { useImmersive } from '../hooks/useImmersive';
+import { refreshSentences } from '../lib/sentence-sync';
 import FlashCard from './FlashCard';
 
 // 앞면 "뒤집기"와 뒷면 평가 버튼이 같은 자리에 있어서, 뒤집은 직후 연속 탭이 평가로 처리되지 않도록 잠시 막는 시간
@@ -47,6 +48,10 @@ export default function ReviewSession() {
   const [sentenceMap, setSentenceMap] = useState(() => new Map());
   const scrollRef = useRef(null);
   const readyTimerRef = useRef(null);
+
+  // 복습 시작을 기다리게 하지 않고 옆에서 예문을 다시 받는다. 이번 세션의 예문은 아래에서 한 번 읽은 것을 유지하므로
+  // 여기서 받은 것은 다음 복습부터 보인다 (읽는 도중 문장이 바뀌지 않게 하려는 기획 원칙)
+  useEffect(() => { refreshSentences(); }, []);
 
   useEffect(() => {
     getDueWords(step, chapter, tagParam).then(words => {

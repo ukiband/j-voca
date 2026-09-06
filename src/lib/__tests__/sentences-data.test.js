@@ -49,10 +49,15 @@ describe('public/data/sentences.json', () => {
     expect(new Set(keys).size).toBe(keys.length);
   });
 
-  it('단어당 예문이 7개를 넘지 않는다', () => {
+  it('단어당 예문은 1건이다 (배치가 매일 교체하고 쌓지 않는다)', () => {
     const counts = new Map();
     for (const s of data.sentences) counts.set(s.wordId, (counts.get(s.wordId) || 0) + 1);
-    const over = [...counts].filter(([, n]) => n > 7).map(([id]) => id);
+    const over = [...counts].filter(([, n]) => n > 1).map(([id]) => id);
     expect(over).toEqual([]);
+  });
+
+  it('generation 은 1 이상 7 이하의 정수다', () => {
+    const bad = data.sentences.filter(s => !isPositiveInt(s.generation) || s.generation > 7);
+    expect(bad.map(s => s.wordId)).toEqual([]);
   });
 });

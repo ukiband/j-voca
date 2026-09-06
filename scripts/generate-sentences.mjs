@@ -5,8 +5,9 @@
  * 1. words.json 에서 최신 레슨(가장 큰 step 의 가장 큰 chapter)을 찾는다. step 이 2 미만이면 아무것도 하지 않는다
  * 2. sentences.json 정리: 삭제된 단어의 예문은 지우고, 최신 레슨 단어의 source 가 현재 데이터와 다른 예문도 지운다
  *    (과거 레슨의 source 불일치는 파일에 남기고 화면에서만 제외한다 — 다시 생성하지 않기 때문)
- * 3. 최신 레슨에서 유효 예문이 7개 미만이고 오늘(KST) 만든 예문이 없는 단어를 골라 10개씩 묶어 최대 5회 호출한다
- * 4. 검증(validateSentence)을 통과한 결과만 추가하고, 변경이 있을 때만 파일을 다시 쓴다
+ * 3. 최신 레슨에서 오늘(KST) 만든 예문이 없고 생성 횟수가 상한(7회) 미만인 단어를 골라 10개씩 묶어 최대 5회 호출한다
+ * 4. 검증(validateSentence)을 통과한 결과로 그 단어의 예문을 교체한다(단어당 1건 유지). 실패한 단어는 기존 문장을 그대로 둔다.
+ *    변경이 있을 때만 파일을 다시 쓴다
  *
  * 종료 코드: 성공(변경 없음 포함) 0. 키 누락, 400/401/403 처럼 다시 돌려도 같은 결과인 치명 오류만 1.
  * 쿼터 소진·서버 장애·네트워크 오류는 성공분을 보존하고 0 으로 끝낸다 (다음 날 실행이 이어서 채운다).
@@ -14,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getLatestLessonWords, pruneSentences, selectTargets, validateSentence } from '../src/lib/sentence-utils.js';
+import { getLatestLessonWords, pruneSentences, selectTargets, validateSentence, latestSentence, getGeneration } from '../src/lib/sentence-utils.js';
 import { getKstDateString } from '../src/lib/date-utils.js';
 import { generateSentences, GeminiRequestError } from './gemini-node.mjs';
 
@@ -63,7 +64,8 @@ async function main() {
   const targets = selectTargets(lessonWords, byWord, today);
   console.log(`생성 대상 단어: ${targets.length}개`);
 
-  const added = [];
+  // 새로 만든 예문. 같은 단어의 기존 예문은 파일에 쓸 때 이것으로 바꾼다
+  const replaced = new Map();
   let fatalError = null;
 
   if (targets.length > 0) {
@@ -83,7 +85,7 @@ async function main() {
           reading: w.reading,
           meaning: w.meaning,
           pos: w.pos,
-          existing: (byWord.get(w.id) || []).map(s => s.sentence),
+          existing: (byWord.get(w.id) || []).map(s => s.sentence),  // 지금 갖고 있는 문장(1건)과 다른 상황을 요구하기 위한 참고용
         }));
 
         let result;
@@ -110,7 +112,8 @@ async function main() {
           }
           // 모델이 같은 단어를 두 번 돌려줘도 하루 1개 규칙을 지킨다
           if (doneInBatch.has(row.wordId)) continue;
-          const reason = validateSentence(row, byWord.get(word.id) || []);
+          const previous = latestSentence(byWord.get(word.id));
+          const reason = validateSentence(row, previous ? [previous] : []);
           if (reason) {
             console.warn(`  거부 ${word.word}(${word.id}): ${reason} — ${String(row.sentence).slice(0, 40)}`);
             continue;
@@ -118,26 +121,27 @@ async function main() {
           const entry = {
             wordId: word.id,
             date: today,
+            // 몇 번째 문장인지 이어서 센다. 상한에 닿으면 selectTargets 가 다음부터 이 단어를 고르지 않는다
+            generation: previous ? getGeneration(previous) + 1 : 1,
             source: { word: word.word, reading: word.reading, meaning: word.meaning },
             sentence: row.sentence.trim(),
             reading: row.reading.trim(),
             meaning: row.meaning.trim(),
           };
-          added.push(entry);
+          replaced.set(word.id, entry);
           doneInBatch.add(word.id);
-          if (!byWord.has(word.id)) byWord.set(word.id, []);
-          byWord.get(word.id).push(entry);
         }
         console.log(`[batch] ${result.model}: 요청 ${batch.length}개 → 저장 ${doneInBatch.size}개`);
       }
     }
   }
 
-  // 정리와 추가를 합친 결과를 한 번에 쓴다. 변경이 없으면 파일을 건드리지 않아 불필요한 커밋이 생기지 않는다
-  if (removed > 0 || added.length > 0) {
-    const out = { sentences: [...kept, ...added] };
+  // 정리 결과에 새 예문을 덧씌워 한 번에 쓴다. 교체된 단어의 옛 문장은 빠지고, 실패한 단어는 옛 문장이 그대로 남는다.
+  // 변경이 없으면 파일을 건드리지 않아 불필요한 커밋이 생기지 않는다
+  if (removed > 0 || replaced.size > 0) {
+    const out = { sentences: [...kept.filter(s => !replaced.has(s.wordId)), ...replaced.values()] };
     fs.writeFileSync(SENTENCES_PATH, JSON.stringify(out, null, 2) + '\n');
-    console.log(`sentences.json 저장: 제거 ${removed}건, 추가 ${added.length}건, 총 ${out.sentences.length}건`);
+    console.log(`sentences.json 저장: 제거 ${removed}건, 교체·추가 ${replaced.size}건, 총 ${out.sentences.length}건`);
   } else {
     console.log('변경 없음. 파일을 쓰지 않습니다.');
   }

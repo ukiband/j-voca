@@ -3,6 +3,8 @@ import { getStep, isSameLesson, isValidLessonNumber } from './lesson-utils';
 const REPO_OWNER = 'ukiband';
 const REPO_NAME = 'j-voca';
 const FILE_PATH = 'public/data/words.json';
+// 예문은 GitHub Actions 배치만 쓰고 앱은 읽기만 한다. 아래 쓰기 함수들은 모두 FILE_PATH(words.json)만 다룬다
+const SENTENCES_FILE_PATH = 'public/data/sentences.json';
 
 export function getGithubToken() {
   return localStorage.getItem('github-pat') || '';
@@ -24,22 +26,38 @@ function utf8ToBase64(str) {
   );
 }
 
-export async function fetchWordsData() {
-  // 1. GitHub raw URL (항상 최신, public repo는 토큰 불필요)
+// 공개 데이터 파일(words.json, sentences.json)을 읽는 공통 경로. 두 파일이 같은 방식으로 최신 데이터를 받는다.
+// 1. GitHub raw URL (항상 최신, public repo 는 토큰 불필요)
+// 2. 실패하면 정적 빌드에 포함된 파일 (배포 시점 데이터)
+// 둘 다 실패하면 null 을 돌려 호출 측이 "받지 못함"과 "빈 파일"을 구분할 수 있게 한다.
+async function fetchPublicData(filePath) {
   try {
-    const rawUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${FILE_PATH}?t=${Date.now()}`;
+    const rawUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${filePath}?t=${Date.now()}`;
     const res = await fetch(rawUrl);
-    if (res.ok) return res.json();
+    if (res.ok) return await res.json();
   } catch {}
 
-  // 2. Fallback: 정적 빌드 파일
   try {
-    const url = import.meta.env.BASE_URL + 'data/words.json';
+    const url = import.meta.env.BASE_URL + filePath.replace(/^public\//, '');
     const res = await fetch(url);
-    if (res.ok) return res.json();
+    if (res.ok) return await res.json();
   } catch {}
 
-  return { lastId: 0, words: [] };
+  return null;
+}
+
+export async function fetchWordsData() {
+  return (await fetchPublicData(FILE_PATH)) ?? { lastId: 0, words: [] };
+}
+
+/**
+ * 예문 파일을 읽는다. 받지 못하면 null 을 돌려준다.
+ * 빈 배열을 돌려주면 App 이 IndexedDB 의 예문을 비워 버려, 오프라인일 때 이미 받아 둔 예문까지 사라지기 때문이다.
+ */
+export async function fetchSentencesData() {
+  const data = await fetchPublicData(SENTENCES_FILE_PATH);
+  if (!data || !Array.isArray(data.sentences)) return null;
+  return data;
 }
 
 async function getFileFromGithub() {

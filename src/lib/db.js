@@ -12,6 +12,12 @@ function createDb() {
     reviewLogs: '++id, wordId, review_date, grade',
   });
 
+  // 예문 테이블. 같은 단어에 날짜별로 예문이 쌓이므로 (wordId, date) 복합 키로 한 건씩 식별하고,
+  // 카드에서 "이 단어의 예문 전부"를 뽑기 위해 wordId 인덱스를 둔다. 기존 테이블은 구조 변경이 없어 그대로 이어진다.
+  d.version(4).stores({
+    sentences: '[wordId+date], wordId',
+  });
+
   return d;
 }
 
@@ -38,6 +44,23 @@ export async function syncWordsFromData(words) {
   });
 }
 
+/**
+ * sentences.json 전체를 받아 테이블을 통째로 바꾼다. 배치가 삭제된 단어의 예문을 파일에서 지우기도 하므로
+ * bulkPut 만 하면 지워진 항목이 남는다. words 동기화와 같은 clear → bulkPut 방식을 쓴다.
+ */
+export async function syncSentencesFromData(sentences) {
+  await db.transaction('rw', db.sentences, async () => {
+    await db.sentences.clear();
+    if (sentences?.length) await db.sentences.bulkPut(sentences);
+  });
+}
+
+/** 여러 단어의 예문을 한 번에 읽는다. 복습 큐가 정해진 직후 한 번 호출해 카드마다 DB 를 다시 읽지 않게 한다 */
+export async function getSentencesByWordIds(wordIds) {
+  if (!wordIds?.length) return [];
+  return db.sentences.where('wordId').anyOf(wordIds).toArray();
+}
+
 export async function putReview(review) {
   return db.reviews.put(review);
 }
@@ -54,7 +77,8 @@ export async function exportData() {
   const words = await db.words.toArray();
   const reviews = await db.reviews.toArray();
   const reviewLogs = await db.reviewLogs.toArray();
-  return { words, reviews, reviewLogs, exportedAt: new Date().toISOString() };
+  const sentences = await db.sentences.toArray();
+  return { words, reviews, reviewLogs, sentences, exportedAt: new Date().toISOString() };
 }
 
 export async function importReviews(reviews, reviewLogs) {
@@ -85,9 +109,10 @@ export async function clearAllReviews() {
 }
 
 export async function clearAllData() {
-  await db.transaction('rw', db.words, db.reviews, db.reviewLogs, async () => {
+  await db.transaction('rw', db.words, db.reviews, db.reviewLogs, db.sentences, async () => {
     await db.words.clear();
     await db.reviews.clear();
     await db.reviewLogs.clear();
+    await db.sentences.clear();
   });
 }

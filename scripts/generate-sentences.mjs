@@ -2,10 +2,10 @@
  * 예문 생성 배치. GitHub Actions 가 하루 1회(KST 07:00) 실행한다. 로컬에서는 GEMINI_API_KEY=... node scripts/generate-sentences.mjs
  *
  * 흐름
- * 1. words.json 에서 최신 레슨(가장 큰 step 의 가장 큰 chapter)을 찾는다. step 이 2 미만이면 아무것도 하지 않는다
- * 2. sentences.json 정리: 삭제된 단어의 예문은 지우고, 최신 레슨 단어의 source 가 현재 데이터와 다른 예문도 지운다
- *    (과거 레슨의 source 불일치는 파일에 남기고 화면에서만 제외한다 — 다시 생성하지 않기 때문)
- * 3. 최신 레슨에서 예문이 없거나 만든 지 일주일 이상 지난 단어를 골라 10개씩 묶어 최대 5회 호출한다
+ * 1. words.json 에서 등록일(createdAt)이 오늘로부터 7일 안인 단어를 고른다. 없으면 아무것도 하지 않는다
+ * 2. sentences.json 정리: 삭제된 단어의 예문은 지우고, 대상 단어의 source 가 현재 데이터와 다른 예문도 지운다
+ *    (그 외 단어의 source 불일치는 파일에 남기고 화면에서만 제외한다 — 다시 생성하지 않기 때문)
+ * 3. 대상 단어 중 오늘(KST) 아직 만들지 않은 것을 10개씩 묶어 최대 5회 호출한다. 등록 후 일주일이 지난 단어는 마지막 문장을 그대로 둔다
  * 4. 검증(validateSentence)을 통과한 결과로 그 단어의 예문을 교체한다(단어당 1건 유지). 실패한 단어는 기존 문장을 그대로 둔다.
  *    변경이 있을 때만 파일을 다시 쓴다
  *
@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getLatestLessonWords, pruneSentences, selectTargets, validateSentence, latestSentence } from '../src/lib/sentence-utils.js';
+import { getRecentWords, pruneSentences, selectTargets, validateSentence, latestSentence } from '../src/lib/sentence-utils.js';
 import { getKstDateString } from '../src/lib/date-utils.js';
 import { generateSentences, GeminiRequestError } from './gemini-node.mjs';
 
@@ -44,15 +44,15 @@ async function main() {
   const sentenceData = readJson(SENTENCES_PATH, { sentences: [] });
   const sentences = Array.isArray(sentenceData.sentences) ? sentenceData.sentences : [];
 
-  const { step, chapter, words: lessonWords } = getLatestLessonWords(words);
-  if (lessonWords.length === 0) {
-    console.log(`최신 step 이 ${step} 이라 생성 대상이 없습니다 (step 2 이상만 생성).`);
+  const recentWords = getRecentWords(words, today);
+  if (recentWords.length === 0) {
+    console.log(`최근 7일 안에 등록된 단어가 없어 생성 대상이 없습니다. 오늘(KST): ${today}`);
     return 0;
   }
-  console.log(`대상 레슨: Step ${step} · Lesson ${chapter} (단어 ${lessonWords.length}개), 오늘(KST): ${today}`);
+  console.log(`최근 7일 등록 단어 ${recentWords.length}개, 오늘(KST): ${today}`);
 
   const wordsById = new Map(words.map(w => [w.id, w]));
-  const kept = pruneSentences(sentences, words, new Set(lessonWords.map(w => w.id)));
+  const kept = pruneSentences(sentences, words, new Set(recentWords.map(w => w.id)));
   const removed = sentences.length - kept.length;
   if (removed > 0) console.log(`정리: 삭제된 단어·source 불일치 예문 ${removed}건 제거`);
 
@@ -61,7 +61,7 @@ async function main() {
     if (!byWord.has(s.wordId)) byWord.set(s.wordId, []);
     byWord.get(s.wordId).push(s);
   }
-  const targets = selectTargets(lessonWords, byWord, today);
+  const targets = selectTargets(recentWords, byWord, today);
   console.log(`생성 대상 단어: ${targets.length}개`);
 
   // 새로 만든 예문. 같은 단어의 기존 예문은 파일에 쓸 때 이것으로 바꾼다

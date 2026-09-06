@@ -5,14 +5,12 @@
  *
  * 예문 한 건의 형태:
  * { wordId, date: 'YYYY-MM-DD', source: { word, reading, meaning }, sentence, reading, meaning }
- * 단어당 예문은 1건만 두고, 만든 지 일주일이 지나면 배치가 새 문장으로 교체한다.
+ * 단어당 예문은 1건만 둔다. 단어를 등록한 뒤 일주일 동안은 배치가 매일 새 문장으로 교체하고, 그 뒤로는 마지막 문장을 그대로 둔다.
  * sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
  */
 
-import { getStep, getLatestStep, getChapters } from './lesson-utils.js';
-
-// 예문을 새 문장으로 바꾸는 간격(일). 매일 바꾸면 호출이 낭비되고, 한 문장을 일주일은 봐야 익숙해진다
-export const REFRESH_INTERVAL_DAYS = 7;
+// 단어 등록일(createdAt)로부터 이 일수 안에 있는 단어만 예문을 새로 만든다. 지금 배우는 단어에만 호출을 쓰기 위한 것이다
+export const RECENT_WORD_DAYS = 7;
 
 /** 한 단어의 예문 배열에서 가장 최근(date 가 가장 큰) 것. 없으면 null */
 export function latestSentence(sentences) {
@@ -115,45 +113,39 @@ export function validateSentence(candidate, existing = []) {
 }
 
 /**
- * 예문 생성 대상 레슨(가장 큰 step 의 가장 큰 chapter)의 단어를 id 순으로 돌려준다.
- * step 1 교재는 대상이 아니므로 최신 step 이 2 미만이면 빈 배열이다. 과거 레슨은 최신이 아니면 대상에서 빠진다.
+ * 예문 생성 대상 단어: 등록일(createdAt, 'YYYY-MM-DD')이 오늘(today, KST)로부터 RECENT_WORD_DAYS 안에 있는 단어를 id 순으로 돌려준다.
+ * 등록일이 없거나 형식이 다른 단어는 대상에서 뺀다. 레슨·step 은 보지 않는다.
  */
-export function getLatestLessonWords(words) {
-  const step = getLatestStep(words);
-  if (step < 2) return { step, chapter: null, words: [] };
-  const chapters = getChapters(words, step);
-  const chapter = chapters[chapters.length - 1];
-  const lessonWords = words
-    .filter(w => getStep(w) === step && w.chapter === chapter)
+export function getRecentWords(words, today) {
+  const todayDay = toEpochDay(today);
+  return words
+    .filter(w => {
+      if (typeof w.createdAt !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(w.createdAt)) return false;
+      const age = todayDay - toEpochDay(w.createdAt);
+      return age >= 0 && age <= RECENT_WORD_DAYS;
+    })
     .sort((a, b) => a.id - b.id);
-  return { step, chapter, words: lessonWords };
 }
 
 /**
  * 파일에서 지울 예문을 걸러낸다.
- * - 삭제된 단어(words 에 없는 wordId)의 예문은 레슨과 상관없이 모두 제거
- * - 최신 레슨(latestLessonWordIds) 단어는 source 가 현재 데이터와 다르면 제거 — 그 자리를 새 예문으로 다시 채우기 때문
- * - 과거 레슨의 source 불일치는 다시 생성하지 않으므로 파일에 남기고 화면(filterUsableSentences)에서만 제외한다
+ * - 삭제된 단어(words 에 없는 wordId)의 예문은 모두 제거
+ * - 생성 대상 단어(activeWordIds)는 source 가 현재 데이터와 다르면 제거 — 그 자리를 새 예문으로 다시 채우기 때문
+ * - 그 외 단어의 source 불일치는 다시 생성하지 않으므로 파일에 남기고 화면(filterUsableSentences)에서만 제외한다
  */
-export function pruneSentences(sentences, words, latestLessonWordIds) {
+export function pruneSentences(sentences, words, activeWordIds) {
   const wordsById = new Map(words.map(w => [w.id, w]));
   return sentences.filter(s => {
     const word = wordsById.get(s.wordId);
     if (!word) return false;
-    return !(latestLessonWordIds.has(s.wordId) && !matchesSource(s, word));
+    return !(activeWordIds.has(s.wordId) && !matchesSource(s, word));
   });
 }
 
 /**
- * 오늘 예문을 새로 만들(교체할) 단어를 고른다. byWord 는 wordId → (정리가 끝난) 예문 배열 Map.
- * 예문이 아직 없는 단어는 항상 대상이다. 있는 단어는 마지막 문장을 만든 날부터 REFRESH_INTERVAL_DAYS 이상 지났을 때만 대상이라,
- * 같은 주에 여러 번 실행해도 다시 만들지 않는다.
+ * 오늘 예문을 새로 만들(교체할) 단어를 고른다. recentWords 는 getRecentWords 결과, byWord 는 wordId → (정리가 끝난) 예문 배열 Map.
+ * 오늘(today, KST) 이미 만든 단어만 빼서, 같은 날 재실행해도 다시 만들지 않는다.
  */
-export function selectTargets(lessonWords, byWord, today) {
-  const todayDay = toEpochDay(today);
-  return lessonWords.filter(w => {
-    const latest = latestSentence(byWord.get(w.id));
-    if (!latest) return true;
-    return todayDay - toEpochDay(latest.date) >= REFRESH_INTERVAL_DAYS;
-  });
+export function selectTargets(recentWords, byWord, today) {
+  return recentWords.filter(w => latestSentence(byWord.get(w.id))?.date !== today);
 }

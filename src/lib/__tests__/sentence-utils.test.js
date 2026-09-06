@@ -6,7 +6,7 @@ import {
   filterUsableSentences,
   pickSentence,
   validateSentence,
-  getLatestLessonWords,
+  getRecentWords,
   pruneSentences,
   selectTargets,
 } from '../sentence-utils';
@@ -158,23 +158,22 @@ describe('validateSentence', () => {
   });
 });
 
-describe('getLatestLessonWords', () => {
-  it('Step 1 만 있으면 대상이 없다', () => {
-    const words = [{ id: 1, step: 1, chapter: 3 }, { id: 2, chapter: 4 }];
-    expect(getLatestLessonWords(words)).toEqual({ step: 1, chapter: null, words: [] });
+describe('getRecentWords', () => {
+  const today = '2026-09-08';
+
+  it('등록일이 오늘로부터 7일 안인 단어만 id 순으로 고른다', () => {
+    const words = [
+      { id: 5, createdAt: '2026-09-01' }, // 7일 전 → 포함
+      { id: 1, createdAt: '2026-08-31' }, // 8일 전 → 제외
+      { id: 3, createdAt: today },
+      { id: 2, createdAt: '2026-09-05' },
+    ];
+    expect(getRecentWords(words, today).map(w => w.id)).toEqual([2, 3, 5]);
   });
 
-  it('가장 큰 step 의 가장 큰 chapter 단어만 id 순으로 고른다', () => {
-    const words = [
-      { id: 5, step: 2, chapter: 2 },
-      { id: 1, step: 1, chapter: 3 },
-      { id: 4, step: 2, chapter: 2 },
-      { id: 3, step: 2, chapter: 1 },
-    ];
-    const result = getLatestLessonWords(words);
-    expect(result.step).toBe(2);
-    expect(result.chapter).toBe(2);
-    expect(result.words.map(w => w.id)).toEqual([4, 5]);
+  it('등록일이 없거나 형식이 다르거나 미래인 단어는 제외한다', () => {
+    const words = [{ id: 1 }, { id: 2, createdAt: '2026/09/07' }, { id: 3, createdAt: '2026-09-09' }];
+    expect(getRecentWords(words, today)).toEqual([]);
   });
 });
 
@@ -183,38 +182,37 @@ describe('pruneSentences', () => {
     { id: 10, step: 1, chapter: 1, word: 'a', reading: 'a', meaning: '옛' },
     { id: 20, step: 2, chapter: 1, word: 'b', reading: 'b', meaning: '새' },
   ];
-  const latestIds = new Set([20]);
+  const activeIds = new Set([20]);
   const row = (wordId, meaning, date = '2026-09-01') => ({
     wordId, date, source: { word: wordId === 10 ? 'a' : 'b', reading: wordId === 10 ? 'a' : 'b', meaning },
     sentence: '[[x]]', reading: '[[x]]', meaning: 'x',
   });
 
-  it('삭제된 wordId 는 레슨과 상관없이 모두 제거한다', () => {
-    const kept = pruneSentences([row(99, 'x'), row(20, '새')], words, latestIds);
+  it('삭제된 wordId 는 모두 제거한다', () => {
+    const kept = pruneSentences([row(99, 'x'), row(20, '새')], words, activeIds);
     expect(kept.map(s => s.wordId)).toEqual([20]);
   });
 
-  it('최신 레슨의 source 불일치는 제거하고, 과거 레슨의 source 불일치는 유지한다', () => {
-    const kept = pruneSentences([row(10, '다른 뜻'), row(20, '다른 뜻'), row(20, '새')], words, latestIds);
+  it('생성 대상 단어의 source 불일치는 제거하고, 그 외 단어의 source 불일치는 유지한다', () => {
+    const kept = pruneSentences([row(10, '다른 뜻'), row(20, '다른 뜻'), row(20, '새')], words, activeIds);
     expect(kept.map(s => [s.wordId, s.source.meaning])).toEqual([[10, '다른 뜻'], [20, '새']]);
   });
 });
 
 describe('selectTargets', () => {
-  const lessonWords = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   const today = '2026-09-08';
 
-  it('예문이 없거나 만든 지 7일 이상 지난 단어만 고른다', () => {
+  it('예문이 없는 단어와 오늘 만들지 않은 단어는 대상, 오늘 이미 만든 단어는 제외한다', () => {
+    const recentWords = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const byWord = new Map([
-      [1, [{ date: '2026-09-01' }]], // 7일 → 대상
-      [2, [{ date: '2026-09-02' }]], // 6일 → 아직
-      [3, [{ date: today }]],
+      [1, [{ date: '2026-09-07' }]],
+      [2, [{ date: today }]],
     ]);
-    expect(selectTargets(lessonWords, byWord, today).map(w => w.id)).toEqual([1, 4]);
+    expect(selectTargets(recentWords, byWord, today).map(w => w.id)).toEqual([1, 3]);
   });
 
   it('여러 건이 남아 있으면 가장 최근 날짜로 판단한다', () => {
-    const byWord = new Map([[1, [{ date: '2026-08-01' }, { date: '2026-09-05' }]]]);
+    const byWord = new Map([[1, [{ date: '2026-08-01' }, { date: today }]]]);
     expect(selectTargets([{ id: 1 }], byWord, today)).toEqual([]);
   });
 });

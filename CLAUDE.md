@@ -50,7 +50,7 @@ npm run test       # Vitest 테스트
 - 단어는 step(교재 단계) > chapter(레슨) 2단계 구조. step 2부터 chapter가 1부터 다시 시작하므로 레슨 식별은 (step, chapter) 복합 키. step 누락 시 1로 간주 (`getStep()`)
 - words.json 정합성은 `src/lib/__tests__/words-data.test.js`가 검증 (모든 단어에 step/chapter 양의 정수, id 유일). 데이터만 바꿔도 `npm run test`로 확인
 - Gemini 모델은 사용자가 고르지 않고 `gemini.js`의 MODEL_CHAIN 순서(3.5-flash-lite → 3.8-flash → 2.5-flash)로 503/404/429 시 자동 대체. 프롬프트는 교재 하단 '단어' 칸 항목과 손글씨(단어·문장, 손글씨 뜻이 붙은 인쇄 표현)만 추출하도록 설계. 예문·회화문의 인쇄 단어는 제외
-- 예문은 words.json 과 분리된 `public/data/sentences.json`(Dexie `sentences` 테이블, PK `[wordId+date]`)에 두고 앱은 읽기만 한다. `.github/workflows/generate-sentences.yml`이 매일 KST 07시에 `scripts/generate-sentences.mjs`로 최신 레슨(step ≥ 2) 단어의 예문을 Gemini 로 새로 만들어 교체해 커밋한다. 단어당 예문은 1건이고, 만든 지 7일 이상 지난 것만 교체한다. 실패하면 기존 문장 유지
+- 예문은 words.json 과 분리된 `public/data/sentences.json`(Dexie `sentences` 테이블, PK `[wordId+date]`)에 두고 앱은 읽기만 한다. `.github/workflows/generate-sentences.yml`이 매일 KST 07시에 `scripts/generate-sentences.mjs`로 등록일(createdAt)이 최근 7일 안인 단어의 예문을 Gemini 로 새로 만들어 교체해 커밋한다. 단어당 예문은 1건이고, 등록 후 7일이 지난 단어는 건드리지 않는다. 실패하면 기존 문장 유지
 - 예문의 목표 단어 강조는 문자열 검색이 아니라 생성 시 `sentence`·`reading` 양쪽에 넣은 `[[ ]]` 표식을 `parseHighlight()`로 풀어 그린다. 후리가나는 쓰지 않고 가나 읽기 줄을 따로 둔다. 순수 함수는 `src/lib/sentence-utils.js`(브라우저·Node 공용)
 - version.json 폴링으로 앱 업데이트 감지
 - base path: `/j-voca/`

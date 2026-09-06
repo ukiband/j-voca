@@ -30,6 +30,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
+      # 스크립트가 exit 1(키 오류 등)로 끝나면 이 스텝은 건너뛰어 정리(prune)만 반영된 파일도 커밋하지 않는다.
+      # 실패한 날은 파일을 건드리지 않고 원인을 고친 뒤 다시 돌리는 편이 추적하기 쉽기 때문이다 (if: always() 를 쓰지 않음)
       - name: Commit and push if changed
         run: |
           if git diff --quiet -- public/data/sentences.json; then

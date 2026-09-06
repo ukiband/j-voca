@@ -8,18 +8,16 @@
  * 3. 최신 레슨에서 유효 예문이 7개 미만이고 오늘(KST) 만든 예문이 없는 단어를 골라 10개씩 묶어 최대 5회 호출한다
  * 4. 검증(validateSentence)을 통과한 결과만 추가하고, 변경이 있을 때만 파일을 다시 쓴다
  *
- * 종료 코드: 성공(변경 없음 포함) 0. 키 누락·키 오류처럼 다시 돌려도 같은 결과인 치명 오류만 1.
- * 한도 초과·일부 실패는 성공분을 보존하고 0 으로 끝낸다 (다음 날 실행이 이어서 채운다).
+ * 종료 코드: 성공(변경 없음 포함) 0. 키 누락, 400/401/403 처럼 다시 돌려도 같은 결과인 치명 오류만 1.
+ * 쿼터 소진·서버 장애·네트워크 오류는 성공분을 보존하고 0 으로 끝낸다 (다음 날 실행이 이어서 채운다).
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getStep, getLatestStep, getChapters } from '../src/lib/lesson-utils.js';
-import { matchesSource, validateSentence } from '../src/lib/sentence-utils.js';
+import { getLatestLessonWords, pruneSentences, selectTargets, validateSentence } from '../src/lib/sentence-utils.js';
 import { getKstDateString } from '../src/lib/date-utils.js';
 import { generateSentences, GeminiRequestError } from './gemini-node.mjs';
 
-const MAX_PER_WORD = 7;
 const WORDS_PER_REQUEST = 10;
 const MAX_REQUESTS_PER_RUN = 5;
 
@@ -45,40 +43,24 @@ async function main() {
   const sentenceData = readJson(SENTENCES_PATH, { sentences: [] });
   const sentences = Array.isArray(sentenceData.sentences) ? sentenceData.sentences : [];
 
-  const latestStep = getLatestStep(words);
-  if (latestStep < 2) {
-    console.log(`최신 step 이 ${latestStep} 이라 생성 대상이 없습니다 (step 2 이상만 생성).`);
+  const { step, chapter, words: lessonWords } = getLatestLessonWords(words);
+  if (lessonWords.length === 0) {
+    console.log(`최신 step 이 ${step} 이라 생성 대상이 없습니다 (step 2 이상만 생성).`);
     return 0;
   }
-  const chapters = getChapters(words, latestStep);
-  const latestChapter = chapters[chapters.length - 1];
-  const lessonWords = words
-    .filter(w => getStep(w) === latestStep && w.chapter === latestChapter)
-    .sort((a, b) => a.id - b.id);
-  console.log(`대상 레슨: Step ${latestStep} · Lesson ${latestChapter} (단어 ${lessonWords.length}개), 오늘(KST): ${today}`);
+  console.log(`대상 레슨: Step ${step} · Lesson ${chapter} (단어 ${lessonWords.length}개), 오늘(KST): ${today}`);
 
-  // 2. 정리
   const wordsById = new Map(words.map(w => [w.id, w]));
-  const lessonIds = new Set(lessonWords.map(w => w.id));
-  const kept = sentences.filter(s => {
-    const word = wordsById.get(s.wordId);
-    if (!word) return false;
-    if (lessonIds.has(s.wordId) && !matchesSource(s, word)) return false;
-    return true;
-  });
+  const kept = pruneSentences(sentences, words, new Set(lessonWords.map(w => w.id)));
   const removed = sentences.length - kept.length;
   if (removed > 0) console.log(`정리: 삭제된 단어·source 불일치 예문 ${removed}건 제거`);
 
-  // 3. 대상 선정
   const byWord = new Map();
   for (const s of kept) {
     if (!byWord.has(s.wordId)) byWord.set(s.wordId, []);
     byWord.get(s.wordId).push(s);
   }
-  const targets = lessonWords.filter(w => {
-    const own = byWord.get(w.id) || [];
-    return own.length < MAX_PER_WORD && !own.some(s => s.date === today);
-  });
+  const targets = selectTargets(lessonWords, byWord, today);
   console.log(`생성 대상 단어: ${targets.length}개`);
 
   const added = [];
@@ -110,7 +92,7 @@ async function main() {
         } catch (err) {
           console.error(`[batch] 실패: ${err.message}`);
           if (err instanceof GeminiRequestError) {
-            // API 단계 실패(한도 초과·서버 장애·키 오류)는 다음 묶음도 같은 결과일 가능성이 높아 여기서 멈춘다
+            // API 단계 실패(한도 초과·서버 장애·요청 오류)는 다음 묶음도 같은 결과일 가능성이 높아 여기서 멈춘다
             if (err.fatal) fatalError = err;
             break;
           }
@@ -151,7 +133,7 @@ async function main() {
     }
   }
 
-  // 4. 저장 (변경이 있을 때만). 정리와 추가를 합친 결과를 한 번에 쓴다
+  // 정리와 추가를 합친 결과를 한 번에 쓴다. 변경이 없으면 파일을 건드리지 않아 불필요한 커밋이 생기지 않는다
   if (removed > 0 || added.length > 0) {
     const out = { sentences: [...kept, ...added] };
     fs.writeFileSync(SENTENCES_PATH, JSON.stringify(out, null, 2) + '\n');

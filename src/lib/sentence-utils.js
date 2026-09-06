@@ -8,6 +8,11 @@
  * sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
  */
 
+import { getStep, getLatestStep, getChapters } from './lesson-utils.js';
+
+// 단어당 예문 상한. 8번째를 만들거나 오래된 것을 자동 교체하지 않는다
+export const MAX_SENTENCES_PER_WORD = 7;
+
 const HIGHLIGHT_RE = /\[\[([\s\S]*?)\]\]/g;
 // 유니코드 Han 스크립트 = 한자. 읽기 줄에는 히라가나·가타카나만 있어야 하므로 이 문자가 남아 있으면 거부한다
 const HAN_RE = /\p{Script=Han}/u;
@@ -100,4 +105,45 @@ export function validateSentence(candidate, existing = []) {
   const plain = stripHighlight(sentence).trim();
   if (existing.some(e => stripHighlight(e?.sentence).trim() === plain)) return '기존 예문과 같은 문장';
   return null;
+}
+
+/**
+ * 예문 생성 대상 레슨(가장 큰 step 의 가장 큰 chapter)의 단어를 id 순으로 돌려준다.
+ * step 1 교재는 대상이 아니므로 최신 step 이 2 미만이면 빈 배열이다. 과거 레슨은 최신이 아니면 대상에서 빠진다.
+ */
+export function getLatestLessonWords(words) {
+  const step = getLatestStep(words);
+  if (step < 2) return { step, chapter: null, words: [] };
+  const chapters = getChapters(words, step);
+  const chapter = chapters[chapters.length - 1];
+  const lessonWords = words
+    .filter(w => getStep(w) === step && w.chapter === chapter)
+    .sort((a, b) => a.id - b.id);
+  return { step, chapter, words: lessonWords };
+}
+
+/**
+ * 파일에서 지울 예문을 걸러낸다.
+ * - 삭제된 단어(words 에 없는 wordId)의 예문은 레슨과 상관없이 모두 제거
+ * - 최신 레슨(latestLessonWordIds) 단어는 source 가 현재 데이터와 다르면 제거 — 그 자리를 새 예문으로 다시 채우기 때문
+ * - 과거 레슨의 source 불일치는 다시 생성하지 않으므로 파일에 남기고 화면(filterUsableSentences)에서만 제외한다
+ */
+export function pruneSentences(sentences, words, latestLessonWordIds) {
+  const wordsById = new Map(words.map(w => [w.id, w]));
+  return sentences.filter(s => {
+    const word = wordsById.get(s.wordId);
+    if (!word) return false;
+    return !(latestLessonWordIds.has(s.wordId) && !matchesSource(s, word));
+  });
+}
+
+/**
+ * 오늘 예문을 만들 단어를 고른다. byWord 는 wordId → (정리가 끝난) 예문 배열 Map.
+ * 상한(7개)을 채운 단어와 오늘(today, KST) 이미 만든 단어는 제외해 같은 날 재실행해도 중복·초과 생성하지 않는다.
+ */
+export function selectTargets(lessonWords, byWord, today) {
+  return lessonWords.filter(w => {
+    const own = byWord.get(w.id) || [];
+    return own.length < MAX_SENTENCES_PER_WORD && !own.some(s => s.date === today);
+  });
 }

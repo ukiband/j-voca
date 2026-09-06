@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useLayoutEffect } from 'react';
 
 /**
  * 몰입 모드 컨텍스트. App 이 setImmersive 를 내려주고, 복습 카드 화면이 켜져 있는 동안만 true 로 둔다.
@@ -7,10 +7,13 @@ import { createContext, useContext, useEffect } from 'react';
  */
 export const ImmersiveContext = createContext(() => {});
 
-/** active 가 true 인 동안 몰입 모드를 켠다. 컴포넌트가 사라지면(뒤로 가기 등) 자동으로 끈다 */
+/**
+ * active 가 true 인 동안 몰입 모드를 켠다. 컴포넌트가 사라지면(뒤로 가기 등) 자동으로 끈다.
+ * useLayoutEffect 인 이유: 로딩 → 카드 첫 렌더가 화면에 그려진 뒤 nav 를 숨기면 하단 메뉴가 한 프레임 비치기 때문이다
+ */
 export function useImmersive(active) {
   const setImmersive = useContext(ImmersiveContext);
-  useEffect(() => {
+  useLayoutEffect(() => {
     setImmersive(active);
     return () => setImmersive(false);
   }, [active, setImmersive]);

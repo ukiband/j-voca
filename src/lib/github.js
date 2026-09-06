@@ -3,7 +3,6 @@ import { getStep, isSameLesson, isValidLessonNumber } from './lesson-utils';
 const REPO_OWNER = 'ukiband';
 const REPO_NAME = 'j-voca';
 const FILE_PATH = 'public/data/words.json';
-// 예문은 GitHub Actions 배치만 쓰고 앱은 읽기만 한다. 아래 쓰기 함수들은 모두 FILE_PATH(words.json)만 다룬다
 const SENTENCES_FILE_PATH = 'public/data/sentences.json';
 
 export function getGithubToken() {

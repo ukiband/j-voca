@@ -1,15 +1,12 @@
 /**
  * GitHub Actions(Node)에서 쓰는 Gemini 예문 생성 호출.
  * 브라우저용 src/lib/gemini.js 는 localStorage 에서 키를 읽고 사진 추출 프롬프트를 쓰므로 import 하지 않고,
- * MODEL_CHAIN 순서와 503/404/429/5xx 를 다음 모델로 넘기는 판정 방식만 그대로 옮겼다.
- * 두 파일의 MODEL_CHAIN 은 함께 바꿔야 한다.
+ * 모델 순서와 대체 판정은 src/lib/gemini-common.js 를 공유한다.
  */
 
+import { MODEL_CHAIN, isOverloaded, shouldTryNextModel, getModelTuning } from '../src/lib/gemini-common.js';
+
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
-
-// src/lib/gemini.js 와 같은 순서. 실측 근거(속도·503 빈도·정확도)는 그쪽 주석 참고
-export const MODEL_CHAIN = ['gemini-3.5-flash-lite', 'gemini-3.8-flash', 'gemini-2.5-flash'];
-
 const RETRY_DELAY_MS = 2000;
 
 // 응답을 단어별 예문 배열로 강제한다. wordId 를 되돌려 받아야 어느 단어의 결과인지 순서에 의존하지 않고 맞출 수 있다
@@ -28,27 +25,13 @@ const RESPONSE_JSON_SCHEMA = {
   },
 };
 
-export function isOverloaded(status, msg) {
-  return status === 503 || (status !== 429 && /high demand|overloaded/i.test(msg));
-}
-
-export function isQuotaExceeded(status, msg) {
-  return status === 429 || /quota|rate limit/i.test(msg);
-}
-
-// gemini.js 의 buildGenerationConfig 와 같은 규칙: Gemini 3 계열은 temperature 대신 thinkingLevel, 2.5 계열은 낮은 temperature
-export function buildGenerationConfig(model) {
-  const config = {
+function buildGenerationConfig(model) {
+  return {
     responseMimeType: 'application/json',
     responseJsonSchema: RESPONSE_JSON_SCHEMA,
     maxOutputTokens: 8192,
+    ...getModelTuning(model),
   };
-  if (model.startsWith('gemini-3')) {
-    config.thinkingConfig = { thinkingLevel: model === 'gemini-3.5-flash-lite' ? 'MEDIUM' : 'LOW' };
-  } else {
-    config.temperature = 0.1;
-  }
-  return config;
 }
 
 /**
@@ -114,7 +97,8 @@ export class GeminiRequestError extends Error {
     this.name = 'GeminiRequestError';
     this.status = status;
     this.model = model;
-    // fatal: 키 오류처럼 다시 보내도 같은 결과라 실행 자체를 실패로 끝내야 하는 경우
+    // fatal: 모델을 바꿔도 같은 실패(400/401/403 등)라 실행을 실패(종료 코드 1)로 끝내 알려야 하는 경우.
+    // 쿼터 소진·서버 장애·네트워크 오류는 다음 날 실행이 이어서 채우면 되므로 fatal 이 아니다
     this.fatal = fatal;
   }
 }
@@ -170,16 +154,17 @@ export async function generateSentences(items, apiKey, options = {}) {
     }
 
     const msg = result.data?.error?.message || '';
-    if (isOverloaded(result.status, msg) || isQuotaExceeded(result.status, msg) || result.status === 404 || result.status >= 500) {
+    if (shouldTryNextModel(result.status, msg)) {
       console.warn(`[gemini] ${model} ${result.status}: ${msg.slice(0, 120)} → 다음 모델`);
       lastFailure = { status: result.status, msg, model };
       continue;
     }
-    // 400(요청·키 오류), 401/403(인증) 은 모델을 바꿔도 같으므로 즉시 중단한다
+    // 모델을 바꿔도 같은 실패는 조용히 넘기면 매일 초록인데 아무것도 생성되지 않는 상태를 알 수 없으므로 fatal 로 끝낸다
     const keyProblem = result.status === 401 || result.status === 403 || /api[ _]?key/i.test(msg);
-    throw new GeminiRequestError(`${model} ${result.status}: ${msg || '요청 실패'}`, {
-      status: result.status, model, fatal: keyProblem,
-    });
+    throw new GeminiRequestError(
+      `${model} ${result.status}: ${msg || '요청 실패'}${keyProblem ? ' (API 키를 확인하세요)' : ''}`,
+      { status: result.status, model, fatal: true }
+    );
   }
 
   throw new GeminiRequestError(

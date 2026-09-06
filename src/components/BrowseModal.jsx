@@ -14,7 +14,6 @@ export default function BrowseModal({ browse }) {
   const [sentence, setSentence] = useState(null);
   const scrollRef = useRef(null);
   const word = browse.currentWord;
-  const wordId = word?.id;
 
   // 이전/다음 또는 듣기 모드로 단어가 바뀌면 앞면으로 돌리고 스크롤을 맨 위로 되돌린다
   useEffect(() => {
@@ -25,17 +24,16 @@ export default function BrowseModal({ browse }) {
   // 현재 단어 1개의 예문만 읽는다. 단어가 바뀌는 순간 먼저 비워서 이전 단어의 예문이 잠깐 보이지 않게 한다
   useEffect(() => {
     setSentence(null);
-    if (wordId == null) return;
+    if (!word) return;
     let cancelled = false;
-    getSentencesByWordIds([wordId])
+    getSentencesByWordIds([word.id])
       .then(rows => {
         if (cancelled) return;
         setSentence(pickSentence(filterUsableSentences(rows, word), getKstDateString()));
       })
       .catch(err => console.warn('Sentence load error:', err));
     return () => { cancelled = true; };
-    // word 객체는 큐 안에서 바뀌지 않으므로 의존성은 id 만 본다
-  }, [wordId]);
+  }, [word]);
 
   if (!browse.isOpen) return null;
 
@@ -60,7 +58,6 @@ export default function BrowseModal({ browse }) {
           </div>
         </div>
 
-        {/* 앞면일 때만 카드 탭으로 뒤집는다. 뒷면에서는 예문을 읽거나 스크롤해도 아무 일도 일어나지 않는다 */}
         <div ref={scrollRef} className="flex-1 min-h-[40dvh] overflow-y-auto flex flex-col px-4 py-2">
           <FlashCard word={word} sentence={sentence} flipped={flipped} onFlip={() => setFlipped(true)} />
         </div>

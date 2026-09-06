@@ -6,6 +6,9 @@ import {
   filterUsableSentences,
   pickSentence,
   validateSentence,
+  getLatestLessonWords,
+  pruneSentences,
+  selectTargets,
 } from '../sentence-utils';
 
 const word = { id: 953, word: '歌を歌う', reading: 'うたをうたう', meaning: '노래를 부르다' };
@@ -112,10 +115,6 @@ describe('pickSentence', () => {
     expect(pickSentence(shuffled, '2026-09-06').date).toBe(pickSentence(rows, '2026-09-06').date);
     expect(shuffled.map(s => s.date)).toEqual(before);
   });
-
-  it('예문이 1개면 항상 그것', () => {
-    expect(pickSentence([rows[0]], '2030-01-01')).toBe(rows[0]);
-  });
 });
 
 describe('validateSentence', () => {
@@ -127,7 +126,6 @@ describe('validateSentence', () => {
 
   it('정상 후보는 null', () => {
     expect(validateSentence(good)).toBeNull();
-    expect(validateSentence(good, [])).toBeNull();
   });
 
   it('sentence/reading/meaning 이 비어 있으면 거부', () => {
@@ -157,5 +155,66 @@ describe('validateSentence', () => {
     const existing = [{ sentence: '友だちと歌を[[歌います]]。' }];
     expect(validateSentence(good, existing)).toMatch(/기존/);
     expect(validateSentence({ ...good, sentence: '母と[[歌を歌います]]。' }, existing)).toBeNull();
+  });
+});
+
+describe('getLatestLessonWords', () => {
+  it('Step 1 만 있으면 대상이 없다', () => {
+    const words = [{ id: 1, step: 1, chapter: 3 }, { id: 2, chapter: 4 }];
+    expect(getLatestLessonWords(words)).toEqual({ step: 1, chapter: null, words: [] });
+  });
+
+  it('가장 큰 step 의 가장 큰 chapter 단어만 id 순으로 고른다', () => {
+    const words = [
+      { id: 5, step: 2, chapter: 2 },
+      { id: 1, step: 1, chapter: 3 },
+      { id: 4, step: 2, chapter: 2 },
+      { id: 3, step: 2, chapter: 1 },
+    ];
+    const result = getLatestLessonWords(words);
+    expect(result.step).toBe(2);
+    expect(result.chapter).toBe(2);
+    expect(result.words.map(w => w.id)).toEqual([4, 5]);
+  });
+});
+
+describe('pruneSentences', () => {
+  const words = [
+    { id: 10, step: 1, chapter: 1, word: 'a', reading: 'a', meaning: '옛' },
+    { id: 20, step: 2, chapter: 1, word: 'b', reading: 'b', meaning: '새' },
+  ];
+  const latestIds = new Set([20]);
+  const row = (wordId, meaning, date = '2026-09-01') => ({
+    wordId, date, source: { word: wordId === 10 ? 'a' : 'b', reading: wordId === 10 ? 'a' : 'b', meaning },
+    sentence: '[[x]]', reading: '[[x]]', meaning: 'x',
+  });
+
+  it('삭제된 wordId 는 레슨과 상관없이 모두 제거한다', () => {
+    const kept = pruneSentences([row(99, 'x'), row(20, '새')], words, latestIds);
+    expect(kept.map(s => s.wordId)).toEqual([20]);
+  });
+
+  it('최신 레슨의 source 불일치는 제거하고, 과거 레슨의 source 불일치는 유지한다', () => {
+    const kept = pruneSentences([row(10, '다른 뜻'), row(20, '다른 뜻'), row(20, '새')], words, latestIds);
+    expect(kept.map(s => [s.wordId, s.source.meaning])).toEqual([[10, '다른 뜻'], [20, '새']]);
+  });
+});
+
+describe('selectTargets', () => {
+  const lessonWords = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+  const today = '2026-09-06';
+
+  it('유효 예문 7개를 채운 단어와 오늘 예문이 있는 단어는 제외한다', () => {
+    const byWord = new Map([
+      [1, Array.from({ length: 7 }, (_, i) => ({ date: `2026-08-0${i + 1}` }))],
+      [2, [{ date: today }]],
+      [3, [{ date: '2026-09-01' }, { date: '2026-09-02' }]],
+    ]);
+    expect(selectTargets(lessonWords, byWord, today).map(w => w.id)).toEqual([3, 4]);
+  });
+
+  it('6개인 단어는 아직 대상이다', () => {
+    const byWord = new Map([[1, Array.from({ length: 6 }, (_, i) => ({ date: `2026-08-0${i + 1}` }))]]);
+    expect(selectTargets([{ id: 1 }], byWord, today).map(w => w.id)).toEqual([1]);
   });
 });

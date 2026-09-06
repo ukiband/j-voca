@@ -81,7 +81,6 @@ export default function ReviewSession() {
 
   const currentWord = queue[currentIndex];
   const done = !loading && queue.length > 0 && currentIndex >= queue.length;
-  const currentWordId = currentWord?.id;
 
   // 카드 구간에서만 하단 탭을 숨기고 화면 높이를 고정한다. 로딩·오류·완료 화면은 일반 레이아웃을 쓴다
   useImmersive(!loading && !error && !noWords && !done && currentWord != null);
@@ -97,7 +96,7 @@ export default function ReviewSession() {
     if (!currentWord) return null;
     const usable = filterUsableSentences(sentenceMap.get(currentWord.id), currentWord);
     return pickSentence(usable, getKstDateString());
-  }, [currentWordId, sentenceMap]);
+  }, [currentWord, sentenceMap]);
 
   function handleFlip() {
     if (flipped) return;
@@ -186,7 +185,6 @@ export default function ReviewSession() {
       <div className="text-center py-12 space-y-6">
         <p className="text-4xl">&#x2705;</p>
         <p className="text-lg font-medium text-slate-800">복습 완료!</p>
-        {/* 결과 칸 색은 평가 버튼(red-600 / amber-700 / green-700)과 같은 계열로 맞춘다 */}
         <div className="grid grid-cols-3 gap-2 text-sm">
           <div className="bg-red-50 rounded-xl p-3">
             <p className="text-red-600 font-medium">{results.again}</p>

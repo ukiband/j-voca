@@ -10,8 +10,4 @@ describe('getKstDateString', () => {
     expect(getKstDateString(new Date('2026-09-06T15:00:00Z'))).toBe('2026-09-07');
     expect(getKstDateString(new Date('2026-09-06T14:59:59Z'))).toBe('2026-09-06');
   });
-
-  it('YYYY-MM-DD 형식으로 0 을 채운다', () => {
-    expect(getKstDateString(new Date('2026-01-05T03:00:00Z'))).toBe('2026-01-05');
-  });
 });

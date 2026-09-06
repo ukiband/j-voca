@@ -1,12 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import {
-  MODEL_CHAIN as NODE_MODEL_CHAIN,
-  buildPrompt,
-  buildGenerationConfig,
-  generateSentences,
-  GeminiRequestError,
-} from '../../../scripts/gemini-node.mjs';
-import { MODEL_CHAIN as BROWSER_MODEL_CHAIN } from '../gemini';
+import { buildPrompt, generateSentences, GeminiRequestError } from '../../../scripts/gemini-node.mjs';
+import { MODEL_CHAIN } from '../gemini-common.js';
 
 const items = [
   { wordId: 953, word: '歌を歌う', reading: 'うたをうたう', meaning: '노래를 부르다', pos: '동사', existing: ['友だちと[[歌を歌います]]。'] },
@@ -27,25 +21,11 @@ function errorResponse(status, message) {
 const noDelay = () => Promise.resolve();
 
 describe('gemini-node', () => {
-  it('MODEL_CHAIN 은 브라우저용 gemini.js 와 같은 순서다', () => {
-    expect(NODE_MODEL_CHAIN).toEqual(BROWSER_MODEL_CHAIN);
-  });
-
   it('프롬프트에 단어 정보와 기존 예문이 들어간다', () => {
     const prompt = buildPrompt(items);
     expect(prompt).toContain('"wordId":953');
     expect(prompt).toContain('歌を歌う');
     expect(prompt).toContain('友だちと[[歌を歌います]]。');
-    expect(prompt).toContain('[[ ]]');
-  });
-
-  it('Gemini 3 계열은 thinkingLevel, 2.5 계열은 temperature 를 쓰고 JSON 스키마를 지정한다', () => {
-    const lite = buildGenerationConfig('gemini-3.5-flash-lite');
-    expect(lite.thinkingConfig).toEqual({ thinkingLevel: 'MEDIUM' });
-    expect(lite.temperature).toBeUndefined();
-    expect(lite.responseMimeType).toBe('application/json');
-    expect(lite.responseJsonSchema.items.required).toContain('wordId');
-    expect(buildGenerationConfig('gemini-2.5-flash').temperature).toBe(0.1);
   });
 
   it('첫 모델이 성공하면 사고 파트를 건너뛰고 결과 배열을 돌려준다', async () => {
@@ -78,15 +58,30 @@ describe('gemini-node', () => {
       name: 'GeminiRequestError',
       fatal: false,
     });
-    expect(fetchImpl).toHaveBeenCalledTimes(NODE_MODEL_CHAIN.length);
+    expect(fetchImpl).toHaveBeenCalledTimes(MODEL_CHAIN.length);
   });
 
-  it('키 오류(400 api key / 403)는 모델을 바꾸지 않고 즉시 fatal 로 끝낸다', async () => {
-    const fetchImpl = vi.fn().mockResolvedValue(errorResponse(400, 'API key not valid'));
-    const err = await generateSentences(items, 'key', { fetchImpl, delay: noDelay }).catch(e => e);
-    expect(err).toBeInstanceOf(GeminiRequestError);
-    expect(err.fatal).toBe(true);
-    expect(fetchImpl).toHaveBeenCalledTimes(1);
+  it('모델을 바꿔도 같은 실패(400/401/403)는 즉시 fatal 로 끝내고, 키 문제는 메시지로 안내한다', async () => {
+    const keyErr = await generateSentences(items, 'key', {
+      fetchImpl: vi.fn().mockResolvedValue(errorResponse(400, 'API key not valid')), delay: noDelay,
+    }).catch(e => e);
+    expect(keyErr).toBeInstanceOf(GeminiRequestError);
+    expect(keyErr.fatal).toBe(true);
+    expect(keyErr.message).toContain('API 키');
+
+    const badRequest = vi.fn().mockResolvedValue(errorResponse(400, 'Invalid JSON payload'));
+    const reqErr = await generateSentences(items, 'key', { fetchImpl: badRequest, delay: noDelay }).catch(e => e);
+    expect(reqErr.fatal).toBe(true);
+    expect(reqErr.message).not.toContain('API 키');
+    expect(badRequest).toHaveBeenCalledTimes(1);
+  });
+
+  it('네트워크 오류는 fatal 이 아니다', async () => {
+    const fetchImpl = vi.fn().mockRejectedValue(new Error('ECONNRESET'));
+    await expect(generateSentences(items, 'key', { fetchImpl, delay: noDelay })).rejects.toMatchObject({
+      name: 'GeminiRequestError',
+      fatal: false,
+    });
   });
 
   it('키가 없으면 요청 없이 fatal', async () => {

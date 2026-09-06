@@ -4,6 +4,7 @@ const REPO_OWNER = 'ukiband';
 const REPO_NAME = 'j-voca';
 const FILE_PATH = 'public/data/words.json';
 const SENTENCES_FILE_PATH = 'public/data/sentences.json';
+const SENTENCE_WORKFLOW_FILE = 'generate-sentences.yml';
 
 export function getGithubToken() {
   return localStorage.getItem('github-pat') || '';
@@ -177,4 +178,31 @@ export async function deleteChapterFromRepo(step, chapter) {
 export async function resetWordsInRepo() {
   const { sha } = await getFileFromGithub();
   await commitFile({ lastId: 0, words: [] }, sha, '전체 단어 초기화');
+}
+
+/**
+ * 예문 생성 워크플로를 바로 실행한다. 단어를 등록한 직후 호출해 다음 날 07시까지 기다리지 않고 새 단어의 예문을 만든다.
+ * 토큰에 Actions 쓰기 권한이 없거나 네트워크가 끊겨도 다음 정기 실행이 만드므로, 실패는 알리지 않고 false 만 돌려준다.
+ */
+export async function triggerSentenceWorkflow() {
+  const token = getGithubToken();
+  if (!token) return false;
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${SENTENCE_WORKFLOW_FILE}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ref: 'main' }),
+      }
+    );
+    // 성공 응답은 본문 없는 204
+    return res.status === 204;
+  } catch {
+    return false;
+  }
 }

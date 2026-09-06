@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { extractWordsFromImage, getApiKey } from '../lib/gemini';
-import { hasGithubToken, addWordsToRepo } from '../lib/github';
+import { hasGithubToken, addWordsToRepo, triggerSentenceWorkflow } from '../lib/github';
 import { syncWordsFromData, db } from '../lib/db';
 import { createInitialReview } from '../lib/fsrs';
 import { getLatestStep, getChapters, parseLessonNumber } from '../lib/lesson-utils';
@@ -31,6 +31,7 @@ export default function WordInput() {
   const [words, setWords] = useState([]);
   const [error, setError] = useState('');
   const [savedCount, setSavedCount] = useState(0);
+  const [sentenceQueued, setSentenceQueued] = useState(false);
   const [skippedCount, setSkippedCount] = useState(0);
   const fileRef = useRef();
 
@@ -103,6 +104,10 @@ export default function WordInput() {
       setSavedCount(wordsWithIds.length);
       setSkippedCount(skipped);
       setStage('done');
+      // 새 단어가 있으면 예문 배치를 바로 돌린다. 저장 완료 화면을 먼저 보여준 뒤 결과에 따라 안내 한 줄만 붙인다
+      if (wordsWithIds.length > 0) {
+        setSentenceQueued(await triggerSentenceWorkflow());
+      }
     } catch (err) {
       setError(err.message);
       setStage('preview');
@@ -111,6 +116,7 @@ export default function WordInput() {
 
   function reset() {
     setWords([]);
+    setSentenceQueued(false);
     setStage('upload');
     setError('');
     if (fileRef.current) fileRef.current.value = '';
@@ -252,6 +258,7 @@ export default function WordInput() {
             <p className="text-xs text-amber-500 mt-1">{skippedCount}개 중복 단어 제외</p>
           )}
           {savedCount > 0 && <p className="text-xs text-slate-400 mt-2">GitHub에 커밋되었습니다</p>}
+          {sentenceQueued && <p className="text-xs text-slate-400 mt-1">예문은 잠시 뒤 자동으로 준비됩니다</p>}
           <button onClick={reset} className="mt-4 text-indigo-600 font-medium text-sm">
             더 추가하기
           </button>

@@ -7,6 +7,8 @@ import {
   pickSentence,
   validateSentence,
   getRecentWords,
+  shouldRefreshSentences,
+  SENTENCE_REFRESH_MIN_MS,
   pruneSentences,
   selectTargets,
 } from '../sentence-utils';
@@ -214,5 +216,15 @@ describe('selectTargets', () => {
   it('여러 건이 남아 있으면 가장 최근 날짜로 판단한다', () => {
     const byWord = new Map([[1, [{ date: '2026-08-01' }, { date: today }]]]);
     expect(selectTargets([{ id: 1 }], byWord, today)).toEqual([]);
+  });
+});
+
+describe('shouldRefreshSentences', () => {
+  it('마지막 성공 후 최소 간격이 지나야 다시 받고, force 면 간격을 무시한다', () => {
+    const last = 1_000_000;
+    expect(shouldRefreshSentences(last, last + SENTENCE_REFRESH_MIN_MS - 1)).toBe(false);
+    expect(shouldRefreshSentences(last, last + SENTENCE_REFRESH_MIN_MS)).toBe(true);
+    expect(shouldRefreshSentences(last, last + 1, true)).toBe(true);
+    expect(shouldRefreshSentences(0, 1)).toBe(true);
   });
 });

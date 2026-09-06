@@ -12,6 +12,14 @@
 // 단어 등록일(createdAt)로부터 이 일수 안에 있는 단어만 예문을 새로 만든다. 지금 배우는 단어에만 호출을 쓰기 위한 것이다
 export const RECENT_WORD_DAYS = 7;
 
+// 앱이 예문 파일을 다시 받는 최소 간격. 배치는 하루 1회 돌고 단어 등록 직후에도 한 번 도니, 그보다 잦게 받을 이유가 없다
+export const SENTENCE_REFRESH_MIN_MS = 10 * 60 * 1000;
+
+/** 마지막으로 예문을 받은 시각(lastAt, ms) 기준으로 지금(now) 다시 받아야 하는지. 아직 받은 적이 없거나(0) force 면 간격을 무시한다 */
+export function shouldRefreshSentences(lastAt, now, force = false) {
+  return force || !lastAt || now - lastAt >= SENTENCE_REFRESH_MIN_MS;
+}
+
 /** 한 단어의 예문 배열에서 가장 최근(date 가 가장 큰) 것. 없으면 null */
 export function latestSentence(sentences) {
   if (!Array.isArray(sentences) || sentences.length === 0) return null;

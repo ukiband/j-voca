@@ -119,8 +119,9 @@ export default function Settings() {
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
         <h2 className="font-medium text-slate-700">GitHub 연동</h2>
         <p className="text-xs text-slate-400">
-          단어를 GitHub에 저장합니다.{' '}
+          단어를 GitHub에 저장하고, 저장 직후 예문 생성 배치를 실행합니다.{' '}
           <ExtLink href="https://github.com/settings/personal-access-tokens/new">Fine-grained PAT</ExtLink>를 발급받으세요.
+          저장소 권한은 Contents 읽기/쓰기(단어 저장)와 Actions 읽기/쓰기(예문 배치 실행)가 필요합니다.
         </p>
         <input
           type="password"

@@ -2,8 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
-import { calculateStats } from '../lib/stats';
-import { calculateWeakWords } from '../lib/weak-utils';
 import { getStep, getSteps, getLatestStep, lessonKey, formatLesson } from '../lib/lesson-utils';
 
 function isStandalone() {
@@ -14,19 +12,16 @@ export default function Dashboard() {
   // useLiveQuery 대신 직접 쿼리 — Safari에서 liveQuery 구독이 갱신 안 되는 문제 우회
   const [words, setWords] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [reviewLogs, setReviewLogs] = useState([]);
   // 레슨별 진행률에서 보여줄 step. null이면 "아직 고르지 않음" → 최신 step을 기본으로 쓴다
   const [selectedStep, setSelectedStep] = useState(null);
 
   const loadData = useCallback(async () => {
-    const [w, r, l] = await Promise.all([
+    const [w, r] = await Promise.all([
       db.words.toArray(),
       db.reviews.toArray(),
-      db.reviewLogs.toArray(),
     ]);
     setWords(w);
     setReviews(r);
-    setReviewLogs(l);
   }, []);
 
   // 마운트 시마다 DB에서 최신 데이터를 직접 읽음
@@ -43,8 +38,6 @@ export default function Dashboard() {
   const [showInstall, setShowInstall] = useState(() => !isStandalone() && !sessionStorage.getItem('hide-install'));
 
   const { total: dueCount, reconfirm: reconfirmCount } = getDueCount(words, reviews);
-  const { streak, totalReviews, overallAccuracy } = calculateStats(reviewLogs);
-  const weakCount = calculateWeakWords(words, reviews, reviewLogs).length;
 
   const lessonMap = {};
   for (const w of words) {
@@ -115,40 +108,6 @@ export default function Dashboard() {
           {dueCount > 0 && <p className="text-xs text-indigo-200 mt-1">탭하여 시작</p>}
         </Link>
       </div>
-
-      {/* 학습 통계 카드 */}
-      {totalReviews > 0 && (
-        <Link
-          to="/stats"
-          className="block bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-4 shadow-sm text-white"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-blue-200">학습 통계</p>
-              <div className="flex items-baseline gap-3 mt-1">
-                <span className="text-2xl font-bold">{streak}일 연속</span>
-                <span className="text-sm text-blue-200">
-                  정확도 {Math.round(overallAccuracy * 100)}%
-                </span>
-              </div>
-            </div>
-            <span className="text-2xl text-blue-200">→</span>
-          </div>
-        </Link>
-      )}
-
-      {/* 오답노트 카드 */}
-      {weakCount > 0 && (
-        <Link to="/weak-words" className="block bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm">
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-sm font-medium text-amber-800">오답노트</p>
-              <p className="text-xs text-amber-600 mt-1">취약 단어를 집중 연습하세요</p>
-            </div>
-            <span className="text-2xl font-bold text-amber-700">{weakCount}</span>
-          </div>
-        </Link>
-      )}
 
       {words.length > 0 && (
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">

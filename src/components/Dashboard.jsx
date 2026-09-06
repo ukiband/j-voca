@@ -58,7 +58,8 @@ export default function Dashboard() {
   const currentStep = steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
   const lessons = Object.values(lessonMap)
     .filter(l => l.step === currentStep)
-    .sort((a, b) => a.chapter - b.chapter);
+    // 최신 레슨을 주로 보므로 레슨 번호 내림차순으로 놓아 지금 공부하는 레슨이 맨 위에 오게 한다
+    .sort((a, b) => b.chapter - a.chapter);
 
   return (
     <div className="space-y-6">

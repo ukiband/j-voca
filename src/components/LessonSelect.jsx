@@ -110,7 +110,8 @@ export default function LessonSelect() {
 
       {/* step별 섹션 안의 lesson 카드 (due 없는 lesson도 포함) */}
       {steps.map(step => {
-        const chapters = getChapters(words, step);
+        // step 과 마찬가지로 최신 레슨이 위에 오도록 내림차순. getChapters 는 다른 화면이 오름차순으로 쓰므로 여기서만 뒤집는다
+        const chapters = getChapters(words, step).reverse();
         return (
           <div key={step} className="space-y-2">
             <h2 className="text-sm font-semibold text-slate-500">Step {step}</h2>

@@ -1,5 +1,5 @@
 {
-  "lastId": 981,
+  "lastId": 991,
   "words": [
     {
       "word": "おおい",
@@ -11034,6 +11034,116 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
       "id": 981
+    },
+    {
+      "word": "時々",
+      "reading": "ときどき",
+      "meaning": "가끔",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 982
+    },
+    {
+      "word": "お酒",
+      "reading": "おさけ",
+      "meaning": "술",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 983
+    },
+    {
+      "word": "たまに",
+      "reading": "たまに",
+      "meaning": "이따금, 간혹",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 984
+    },
+    {
+      "word": "昔",
+      "reading": "むかし",
+      "meaning": "옛날",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 985
+    },
+    {
+      "word": "思い出す",
+      "reading": "おもいだす",
+      "meaning": "떠올리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 986
+    },
+    {
+      "word": "声",
+      "reading": "こえ",
+      "meaning": "목소리",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 987
+    },
+    {
+      "word": "聞こえる",
+      "reading": "きこえる",
+      "meaning": "들리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 988
+    },
+    {
+      "word": "道",
+      "reading": "みち",
+      "meaning": "길",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 989
+    },
+    {
+      "word": "迷う",
+      "reading": "まよう",
+      "meaning": "헤매다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 990
+    },
+    {
+      "word": "忘れる",
+      "reading": "わすれる",
+      "meaning": "잊다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 991
     }
   ]
 }

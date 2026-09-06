@@ -5,6 +5,7 @@ on:
     branches: [main, 'feature/*']
     paths-ignore:
       - 'public/data/words.json'
+      - 'public/data/sentences.json'
 
 permissions:
   contents: read

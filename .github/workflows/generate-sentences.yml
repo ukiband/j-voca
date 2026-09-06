@@ -1,0 +1,47 @@
+name: Generate sentences
+
+on:
+  schedule:
+    # 한국 시간 매일 오전 7시 (UTC 22:00, 전날)
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+# sentences.json 을 main 에 직접 커밋해야 하므로 쓰기 권한이 필요하다
+permissions:
+  contents: write
+
+# 수동 실행과 예약 실행이 겹쳐 같은 파일을 동시에 커밋하지 않게 한다
+concurrency:
+  group: generate-sentences
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.nvmrc'
+
+      # 스크립트는 Node 내장 모듈과 src/lib 의 순수 함수만 쓰므로 npm ci 가 필요 없다
+      - run: node scripts/generate-sentences.mjs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      # 스크립트가 exit 1(키 오류 등)로 끝나면 이 스텝은 건너뛰어 정리(prune)만 반영된 파일도 커밋하지 않는다.
+      # 실패한 날은 파일을 건드리지 않고 원인을 고친 뒤 다시 돌리는 편이 추적하기 쉽기 때문이다 (if: always() 를 쓰지 않음)
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- public/data/sentences.json; then
+            echo "변경 없음"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/data/sentences.json
+          git commit -m "예문 자동 생성 $(TZ=Asia/Seoul date +%F)"
+          # 실행 중 앱에서 words.json 이 커밋됐을 수 있으므로 최신 main 위에 얹어서 푸시한다
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push

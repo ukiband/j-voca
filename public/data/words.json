@@ -1,5 +1,5 @@
 {
-  "lastId": 955,
+  "lastId": 962,
   "words": [
     {
       "word": "おおい",
@@ -10748,6 +10748,83 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-05",
       "id": 955
+    },
+    {
+      "word": "サークル",
+      "reading": "サークル",
+      "meaning": "서클, 동아리",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 956
+    },
+    {
+      "word": "たくさん",
+      "reading": "たくさん",
+      "meaning": "많이",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 957
+    },
+    {
+      "word": "見学する",
+      "reading": "けんがくする",
+      "meaning": "견학하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 958
+    },
+    {
+      "word": "興味",
+      "reading": "きょうみ",
+      "meaning": "흥미",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 959
+    },
+    {
+      "word": "人気",
+      "reading": "にんき",
+      "meaning": "인기",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 960
+    },
+    {
+      "word": "ギター",
+      "reading": "ギター",
+      "meaning": "기타",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 961
+    },
+    {
+      "word": "~しに いく",
+      "reading": "~しに いく",
+      "meaning": "~하러 가다",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 962
     }
   ]
 }

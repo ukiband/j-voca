@@ -1,5 +1,5 @@
 {
-  "lastId": 999,
+  "lastId": 1000,
   "words": [
     {
       "word": "おおい",
@@ -11232,6 +11232,17 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
       "id": 999
+    },
+    {
+      "word": "楽譜",
+      "reading": "がくふ",
+      "meaning": "악보",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 1000
     }
   ]
 }

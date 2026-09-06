@@ -1,5 +1,5 @@
 {
-  "lastId": 991,
+  "lastId": 999,
   "words": [
     {
       "word": "おおい",
@@ -11144,6 +11144,94 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
       "id": 991
+    },
+    {
+      "word": "先輩",
+      "reading": "せんぱい",
+      "meaning": "선배",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 992
+    },
+    {
+      "word": "楽器",
+      "reading": "がっき",
+      "meaning": "악기",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 993
+    },
+    {
+      "word": "全然",
+      "reading": "ぜんぜん",
+      "meaning": "전혀",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 994
+    },
+    {
+      "word": "一生懸命",
+      "reading": "いっしょうけんめい",
+      "meaning": "열심히",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 995
+    },
+    {
+      "word": "曲",
+      "reading": "きょく",
+      "meaning": "곡",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 996
+    },
+    {
+      "word": "最初",
+      "reading": "さいしょ",
+      "meaning": "처음, 최초",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 997
+    },
+    {
+      "word": "初心者",
+      "reading": "しょしんしゃ",
+      "meaning": "초보자",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 998
+    },
+    {
+      "word": "こうはい",
+      "reading": "こうはい",
+      "meaning": "후배",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 999
     }
   ]
 }

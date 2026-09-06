@@ -1,5 +1,5 @@
 /**
- * 예문 생성 배치. GitHub Actions 가 하루 1회(KST 10:00) 실행한다. 로컬에서는 GEMINI_API_KEY=... node scripts/generate-sentences.mjs
+ * 예문 생성 배치. GitHub Actions 가 하루 1회(KST 07:00) 실행한다. 로컬에서는 GEMINI_API_KEY=... node scripts/generate-sentences.mjs
  *
  * 흐름
  * 1. words.json 에서 최신 레슨(가장 큰 step 의 가장 큰 chapter)을 찾는다. step 이 2 미만이면 아무것도 하지 않는다

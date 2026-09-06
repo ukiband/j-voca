@@ -1,5 +1,5 @@
 {
-  "lastId": 962,
+  "lastId": 970,
   "words": [
     {
       "word": "おおい",
@@ -10825,6 +10825,94 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
       "id": 962
+    },
+    {
+      "word": "よく",
+      "reading": "よく",
+      "meaning": "자주, 잘",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 963
+    },
+    {
+      "word": "投げる",
+      "reading": "なげる",
+      "meaning": "던지다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 964
+    },
+    {
+      "word": "打つ",
+      "reading": "うつ",
+      "meaning": "치다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 965
+    },
+    {
+      "word": "荷物",
+      "reading": "にもつ",
+      "meaning": "짐",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 966
+    },
+    {
+      "word": "運ぶ",
+      "reading": "はこぶ",
+      "meaning": "나르다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 967
+    },
+    {
+      "word": "ボール",
+      "reading": "ぼーる",
+      "meaning": "공",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 968
+    },
+    {
+      "word": "よく うつ せんしゅ",
+      "reading": "よく うつ せんしゅ",
+      "meaning": "잘 치는 선수",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 969
+    },
+    {
+      "word": "荷物を 運ぶ 車",
+      "reading": "にもつを はこぶ くるま",
+      "meaning": "짐을 나르는 차",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-06",
+      "id": 970
     }
   ]
 }

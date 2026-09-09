@@ -11891,6 +11891,66 @@
       "sentence": "きれいな[[楽譜]]ですね。",
       "reading": "きれいな [[がくふ]]ですね。",
       "meaning": "예쁜 악보네요."
+    },
+    {
+      "wordId": 1001,
+      "date": "2026-09-09",
+      "source": {
+        "word": "弾く",
+        "reading": "ひく",
+        "meaning": "(악기를) 치다"
+      },
+      "sentence": "ピアノを[[弾きます]]。",
+      "reading": "ぴあのを [[ひきます]]。",
+      "meaning": "피아노를 칩니다."
+    },
+    {
+      "wordId": 1002,
+      "date": "2026-09-09",
+      "source": {
+        "word": "海",
+        "reading": "うみ",
+        "meaning": "바다"
+      },
+      "sentence": "[[海]]がきれいです。",
+      "reading": "[[うみ]]が きれいです。",
+      "meaning": "바다가 예쁩니다."
+    },
+    {
+      "wordId": 1003,
+      "date": "2026-09-09",
+      "source": {
+        "word": "自転車",
+        "reading": "じてんしゃ",
+        "meaning": "자전거"
+      },
+      "sentence": "[[自転車]]に乗ります。",
+      "reading": "[[じてんしゃ]]に のります。",
+      "meaning": "자전거를 탑니다."
+    },
+    {
+      "wordId": 1004,
+      "date": "2026-09-09",
+      "source": {
+        "word": "描く",
+        "reading": "かく",
+        "meaning": "그리다"
+      },
+      "sentence": "絵を[[描きます]]。",
+      "reading": "えを [[かきます]]。",
+      "meaning": "그림을 그립니다."
+    },
+    {
+      "wordId": 1005,
+      "date": "2026-09-09",
+      "source": {
+        "word": "絵",
+        "reading": "え",
+        "meaning": "그림"
+      },
+      "sentence": ";きれいで面白い[[絵]]です。",
+      "reading": "きれいでおもしろい [[え]]です。",
+      "meaning": "예쁘고 재미있는 그림입니다."
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 1015,
+  "lastId": 1016,
   "words": [
     {
       "word": "おおい",
@@ -11408,6 +11408,17 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
       "id": 1015
+    },
+    {
+      "word": "集める",
+      "reading": "あつめる",
+      "meaning": "모으다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1016
     }
   ]
 }

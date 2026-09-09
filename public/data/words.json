@@ -1,5 +1,5 @@
 {
-  "lastId": 1016,
+  "lastId": 1021,
   "words": [
     {
       "word": "おおい",
@@ -11419,6 +11419,61 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
       "id": 1016
+    },
+    {
+      "word": "釣る",
+      "reading": "つる",
+      "meaning": "낚다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1017
+    },
+    {
+      "word": "塗る",
+      "reading": "ぬる",
+      "meaning": "칠하다, 바르다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1018
+    },
+    {
+      "word": "吹く",
+      "reading": "ふく",
+      "meaning": "(바람이) 불다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1019
+    },
+    {
+      "word": "降りる",
+      "reading": "おりる",
+      "meaning": "내리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1020
+    },
+    {
+      "word": "船",
+      "reading": "ふね",
+      "meaning": "배",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1021
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 1005,
+  "lastId": 1014,
   "words": [
     {
       "word": "おおい",
@@ -11298,6 +11298,105 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
       "id": 1005
+    },
+    {
+      "word": "歯",
+      "reading": "は",
+      "meaning": "이, 치아",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1006
+    },
+    {
+      "word": "磨く",
+      "reading": "みがく",
+      "meaning": "닦다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1007
+    },
+    {
+      "word": "風呂に入る",
+      "reading": "ふろにはいる",
+      "meaning": "목욕을 하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1008
+    },
+    {
+      "word": "脱ぐ",
+      "reading": "ぬぐ",
+      "meaning": "벗다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1009
+    },
+    {
+      "word": "手",
+      "reading": "て",
+      "meaning": "손",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1010
+    },
+    {
+      "word": "洗う",
+      "reading": "あらう",
+      "meaning": "씻다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1011
+    },
+    {
+      "word": "切符",
+      "reading": "きっぷ",
+      "meaning": "전철표",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1012
+    },
+    {
+      "word": "書く",
+      "reading": "かく",
+      "meaning": "쓰다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1013
+    },
+    {
+      "word": "食事を します",
+      "reading": "しょくじを します",
+      "meaning": "식사하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1014
     }
   ]
 }

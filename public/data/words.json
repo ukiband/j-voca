@@ -1,5 +1,5 @@
 {
-  "lastId": 1000,
+  "lastId": 1005,
   "words": [
     {
       "word": "おおい",
@@ -11243,6 +11243,61 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
       "id": 1000
+    },
+    {
+      "word": "弾く",
+      "reading": "ひく",
+      "meaning": "(악기를) 치다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1001
+    },
+    {
+      "word": "海",
+      "reading": "うみ",
+      "meaning": "바다",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1002
+    },
+    {
+      "word": "自転車",
+      "reading": "じてんしゃ",
+      "meaning": "자전거",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1003
+    },
+    {
+      "word": "描く",
+      "reading": "かく",
+      "meaning": "그리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1004
+    },
+    {
+      "word": "絵",
+      "reading": "え",
+      "meaning": "그림",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 1,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-09",
+      "id": 1005
     }
   ]
 }

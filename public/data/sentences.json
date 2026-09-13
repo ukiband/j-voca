@@ -11317,198 +11317,6 @@
       "meaning": "\"도시락 데워드릴까요?\" \"네, 부탁해요.\""
     },
     {
-      "wordId": 1006,
-      "date": "2026-09-09",
-      "source": {
-        "word": "歯",
-        "reading": "は",
-        "meaning": "이, 치아"
-      },
-      "sentence": "毎朝、[[歯]]を磨きます。",
-      "reading": "まいあさ、 [[は]]を みがきます。",
-      "meaning": "매일 아침 이를 닦습니다."
-    },
-    {
-      "wordId": 1007,
-      "date": "2026-09-09",
-      "source": {
-        "word": "磨く",
-        "reading": "みがく",
-        "meaning": "닦다"
-      },
-      "sentence": "毎日、歯を[[磨く]]。",
-      "reading": "まいにち、 はを [[みがく]]。",
-      "meaning": "매일 이를 닦는다."
-    },
-    {
-      "wordId": 1008,
-      "date": "2026-09-09",
-      "source": {
-        "word": "風呂に入る",
-        "reading": "ふろにはいる",
-        "meaning": "목욕을 하다"
-      },
-      "sentence": "夜、[[風呂に入る]]。",
-      "reading": "よる、 [[ふろに はいる]]。",
-      "meaning": "밤에 목욕을 한다."
-    },
-    {
-      "wordId": 1009,
-      "date": "2026-09-09",
-      "source": {
-        "word": "脱ぐ",
-        "reading": "ぬぐ",
-        "meaning": "벗다"
-      },
-      "sentence": "部屋で靴を[[脱ぎます]]。",
-      "reading": "へやで くつを [[ぬぎます]]。",
-      "meaning": "방에서 신발을 벗습니다."
-    },
-    {
-      "wordId": 1010,
-      "date": "2026-09-09",
-      "source": {
-        "word": "手",
-        "reading": "て",
-        "meaning": "손"
-      },
-      "sentence": "きれいな[[手]]ですね。",
-      "reading": "きれいな [[て]]ですね。",
-      "meaning": "예쁜 손이네요."
-    },
-    {
-      "wordId": 1011,
-      "date": "2026-09-09",
-      "source": {
-        "word": "洗う",
-        "reading": "あらう",
-        "meaning": "씻다"
-      },
-      "sentence": "ご飯の前に[[手を洗います]]。",
-      "reading": "ごはんの まえに [[てを あらいます]]。",
-      "meaning": "식사 전에 손을 씻습니다."
-    },
-    {
-      "wordId": 1012,
-      "date": "2026-09-09",
-      "source": {
-        "word": "切符",
-        "reading": "きっぷ",
-        "meaning": "전철표"
-      },
-      "sentence": "駅で[[切符]]を買います。",
-      "reading": "えきで [[きっぷ]]を かいます。",
-      "meaning": "역에서 전철표를 삽니다."
-    },
-    {
-      "wordId": 1013,
-      "date": "2026-09-09",
-      "source": {
-        "word": "書く",
-        "reading": "かく",
-        "meaning": "쓰다"
-      },
-      "sentence": "ノートに名前を[[書きます]]。",
-      "reading": "ノートに なまえを [[かきます]]。",
-      "meaning": "노트에 이름을 씁니다."
-    },
-    {
-      "wordId": 1014,
-      "date": "2026-09-09",
-      "source": {
-        "word": "食事を します",
-        "reading": "しょくじを します",
-        "meaning": "식사하다"
-      },
-      "sentence": "レストランで[[食事を します]]。",
-      "reading": "レストランで [[しょくじを します]]。",
-      "meaning": "식당에서 식사합니다."
-    },
-    {
-      "wordId": 1015,
-      "date": "2026-09-09",
-      "source": {
-        "word": "はんぶん",
-        "reading": "はんぶん",
-        "meaning": "반, 절반"
-      },
-      "sentence": "りんごを[[はんぶん]]食べます。",
-      "reading": "りんごを [[はんぶん]] たべます。",
-      "meaning": "사과를 반을 먹어요."
-    },
-    {
-      "wordId": 1016,
-      "date": "2026-09-09",
-      "source": {
-        "word": "集める",
-        "reading": "あつめる",
-        "meaning": "모으다"
-      },
-      "sentence": "切手を[[集めます]]。",
-      "reading": "きってを [[あつめます]]。",
-      "meaning": "우표를 모읍니다."
-    },
-    {
-      "wordId": 1017,
-      "date": "2026-09-09",
-      "source": {
-        "word": "釣る",
-        "reading": "つる",
-        "meaning": "낚다"
-      },
-      "sentence": "川で魚を[[釣ります]]。",
-      "reading": "かわで さかなを [[つります]]。",
-      "meaning": "강에서 물고기를 낚아요."
-    },
-    {
-      "wordId": 1018,
-      "date": "2026-09-09",
-      "source": {
-        "word": "塗る",
-        "reading": "ぬる",
-        "meaning": "칠하다, 바르다"
-      },
-      "sentence": "壁にペンキを[[塗ります]]。",
-      "reading": "かべに ぺんきを [[ぬります]]。",
-      "meaning": "벽에 페인트를 칠해요."
-    },
-    {
-      "wordId": 1019,
-      "date": "2026-09-09",
-      "source": {
-        "word": "吹く",
-        "reading": "ふく",
-        "meaning": "(바람이) 불다"
-      },
-      "sentence": "風が強く[[吹きます]]。",
-      "reading": "かぜが つよく [[ふきます]]。",
-      "meaning": "바람이 세차게 불어요."
-    },
-    {
-      "wordId": 1020,
-      "date": "2026-09-09",
-      "source": {
-        "word": "降りる",
-        "reading": "おりる",
-        "meaning": "내리다"
-      },
-      "sentence": "次の駅で[[降ります]]。",
-      "reading": "つぎの えきで [[おります]]。",
-      "meaning": "다음 역에서 내려요."
-    },
-    {
-      "wordId": 1021,
-      "date": "2026-09-09",
-      "source": {
-        "word": "船",
-        "reading": "ふね",
-        "meaning": "배"
-      },
-      "sentence": "海に大きな[[船]]があります。",
-      "reading": "うみに おおきな [[ふね]]が あります。",
-      "meaning": "바다에 큰 배가 있어요."
-    },
-    {
       "wordId": 953,
       "date": "2026-09-12",
       "source": {
@@ -12086,63 +11894,255 @@
     },
     {
       "wordId": 1001,
-      "date": "2026-09-13",
+      "date": "2026-09-14",
       "source": {
         "word": "弾く",
         "reading": "ひく",
         "meaning": "(악기를) 치다"
       },
-      "sentence": "上手にピアノを[[弾きます]]。",
-      "reading": "じょうずに ぴあのを [[ひきます]]。",
-      "meaning": "피아노를 능숙하게 칩니다."
+      "sentence": "ギターを[[弾く]]ことが好きです。",
+      "reading": "ぎたーを [[ひく]] ことがいすきです。",
+      "meaning": "기타를 치는 것을 좋아합니다."
     },
     {
       "wordId": 1002,
-      "date": "2026-09-13",
+      "date": "2026-09-14",
       "source": {
         "word": "海",
         "reading": "うみ",
         "meaning": "바다"
       },
-      "sentence": "青い[[海]]がきれいです。",
-      "reading": "あおい [[うみ]]が きれいです。",
-      "meaning": "푸른 바다가 아름답습니다."
+      "sentence": "夏休みに[[海]]へ行きます。",
+      "reading": "なつやすみに [[うみ]] へいきます。",
+      "meaning": "여름휴가에 바다로 갑니다."
     },
     {
       "wordId": 1003,
-      "date": "2026-09-13",
+      "date": "2026-09-14",
       "source": {
         "word": "自転車",
         "reading": "じてんしゃ",
         "meaning": "자전거"
       },
-      "sentence": "新しい[[自転車]]を買いました。",
-      "reading": "あたらしい [[じてんしゃ]]を かいました。",
-      "meaning": "새 자전거를 샀습니다."
+      "sentence": "毎日[[自転車]]で学校に行きます。",
+      "reading": "まいにち [[じてんしゃ]] でがっこうにいきます。",
+      "meaning": "매일 자전거로 학교에 갑니다."
     },
     {
       "wordId": 1004,
-      "date": "2026-09-13",
+      "date": "2026-09-14",
       "source": {
         "word": "描く",
         "reading": "かく",
         "meaning": "그리다"
       },
-      "sentence": "白い紙に[[描きます]]。",
-      "reading": "しろい かみに [[かきます]]。",
-      "meaning": "하얀 종이에 그립니다."
+      "sentence": "きれいに絵を[[描く]]。",
+      "reading": "きれいになを [[かく]]。",
+      "meaning": "예쁘게 그림을 그리다."
     },
     {
       "wordId": 1005,
-      "date": "2026-09-13",
+      "date": "2026-09-14",
       "source": {
         "word": "絵",
         "reading": "え",
         "meaning": "그림"
       },
-      "sentence": "上手に[[絵]]をかきます。",
-      "reading": "じょうずに [[え]]を かきます。",
-      "meaning": "그림을 잘 그립니다."
+      "sentence": "壁に[[絵]]をかけます。",
+      "reading": "かべに [[え]] をかけます。",
+      "meaning": "벽에 그림을 겁니다."
+    },
+    {
+      "wordId": 1006,
+      "date": "2026-09-14",
+      "source": {
+        "word": "歯",
+        "reading": "は",
+        "meaning": "이, 치아"
+      },
+      "sentence": "[[歯]]が痛いです。",
+      "reading": "[[は]]がいいたいです。",
+      "meaning": "이가 아픕니다."
+    },
+    {
+      "wordId": 1007,
+      "date": "2026-09-14",
+      "source": {
+        "word": "磨く",
+        "reading": "みがく",
+        "meaning": "닦다"
+      },
+      "sentence": "靴を[[磨く]]。",
+      "reading": "くつを [[みがく]]。",
+      "meaning": "구두를 닦다."
+    },
+    {
+      "wordId": 1008,
+      "date": "2026-09-14",
+      "source": {
+        "word": "風呂に入る",
+        "reading": "ふろにはいる",
+        "meaning": "목욕을 하다"
+      },
+      "sentence": "今から[[風呂に入ります]]。",
+      "reading": "いまから [[ふろにはいります]]。",
+      "meaning": "지금부터 목욕을 합니다."
+    },
+    {
+      "wordId": 1009,
+      "date": "2026-09-14",
+      "source": {
+        "word": "脱ぐ",
+        "reading": "ぬぐ",
+        "meaning": "벗다"
+      },
+      "sentence": "ここで靴を[[脱いで]]ください。",
+      "reading": "ここでくつを [[ぬいで]] ください。",
+      "meaning": "여기서 신발을 벗어주세요."
+    },
+    {
+      "wordId": 1010,
+      "date": "2026-09-14",
+      "source": {
+        "word": "手",
+        "reading": "て",
+        "meaning": "손"
+      },
+      "sentence": "[[手]]を洗います。",
+      "reading": "[[て]]をあらいます。",
+      "meaning": "손을 씻습니다."
+    },
+    {
+      "wordId": 1011,
+      "date": "2026-09-14",
+      "source": {
+        "word": "洗う",
+        "reading": "あらう",
+        "meaning": "씻다"
+      },
+      "sentence": "野菜を[[洗います]]。",
+      "reading": "やさいを [[あらいます]]。",
+      "meaning": "야채를 씻어요."
+    },
+    {
+      "wordId": 1012,
+      "date": "2026-09-14",
+      "source": {
+        "word": "切符",
+        "reading": "きっぷ",
+        "meaning": "전철표"
+      },
+      "sentence": "[[切符]]をなくしました。",
+      "reading": "[[きっぷ]]を なくしました。",
+      "meaning": "표를 잃어버렸습니다."
+    },
+    {
+      "wordId": 1013,
+      "date": "2026-09-14",
+      "source": {
+        "word": "書く",
+        "reading": "かく",
+        "meaning": "쓰다"
+      },
+      "sentence": "手紙を[[書きます]]。",
+      "reading": "てがみを [[かきます]]。",
+      "meaning": "편지를 씁니다."
+    },
+    {
+      "wordId": 1014,
+      "date": "2026-09-14",
+      "source": {
+        "word": "食事を します",
+        "reading": "しょくじを します",
+        "meaning": "식사하다"
+      },
+      "sentence": "家族と[[食事を します]]。",
+      "reading": "かぞくと [[しょくじを します]]。",
+      "meaning": "가족과 식사합니다."
+    },
+    {
+      "wordId": 1015,
+      "date": "2026-09-14",
+      "source": {
+        "word": "はんぶん",
+        "reading": "はんぶん",
+        "meaning": "반, 절반"
+      },
+      "sentence": "パンを[[はんぶん]]ください。",
+      "reading": "ぱんを [[はんぶん]] ください。",
+      "meaning": "빵을 반 주세요."
+    },
+    {
+      "wordId": 1016,
+      "date": "2026-09-14",
+      "source": {
+        "word": "集める",
+        "reading": "あつめる",
+        "meaning": "모으다"
+      },
+      "sentence": "古いコインを[[集めます]]。",
+      "reading": "ふるい こいんを [[あつめます]]。",
+      "meaning": "오래된 코인을 모읍니다."
+    },
+    {
+      "wordId": 1017,
+      "date": "2026-09-14",
+      "source": {
+        "word": "釣る",
+        "reading": "つる",
+        "meaning": "낚다"
+      },
+      "sentence": "海で魚を[[釣ります]]。",
+      "reading": "うみで さかなを [[つります]]。",
+      "meaning": "바다에서 물고기를 낚습니다."
+    },
+    {
+      "wordId": 1018,
+      "date": "2026-09-14",
+      "source": {
+        "word": "塗る",
+        "reading": "ぬる",
+        "meaning": "칠하다, 바르다"
+      },
+      "sentence": "パンにジャムを[[塗ります]]。",
+      "reading": "ぱんに じゃむを [[ぬります]]。",
+      "meaning": "빵에 잼을 바릅니다."
+    },
+    {
+      "wordId": 1019,
+      "date": "2026-09-14",
+      "source": {
+        "word": "吹く",
+        "reading": "ふく",
+        "meaning": "(바람이) 불다"
+      },
+      "sentence": "春風が[[吹きます]]。",
+      "reading": "はるかぜが [[ふきます]]。",
+      "meaning": "봄바람이 붑니다."
+    },
+    {
+      "wordId": 1020,
+      "date": "2026-09-14",
+      "source": {
+        "word": "降りる",
+        "reading": "おりる",
+        "meaning": "내리다"
+      },
+      "sentence": "バスを[[降ります]]。",
+      "reading": "ばすを [[おります]]。",
+      "meaning": "버스를 내려요."
+    },
+    {
+      "wordId": 1021,
+      "date": "2026-09-14",
+      "source": {
+        "word": "船",
+        "reading": "ふね",
+        "meaning": "배"
+      },
+      "sentence": "[[船]]に乗ります。",
+      "reading": "[[ふね]]に のります。",
+      "meaning": "배를 탑니다."
     }
   ]
 }

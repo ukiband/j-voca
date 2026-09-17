@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { getApiKey, setApiKey } from '../lib/gemini';
 import { getLocalDateString } from '../lib/date-utils';
 import { getGithubToken, setGithubToken, hasGithubToken, resetWordsInRepo } from '../lib/github';
 import { exportData, importReviews, clearAllReviews, clearAllData, ensureReviewsExist } from '../lib/db';
+import { THEME_OPTIONS, getThemePreference, setThemePreference, subscribeToTheme } from '../lib/theme';
 
 const FONT_SIZES = [
   { id: 'base', label: '보통' },
@@ -13,7 +14,7 @@ const FONT_SIZES = [
 
 function ExtLink({ href, children }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-indigo-500 underline">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-indigo-500 dark:text-indigo-400 underline">
       {children}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
         <path fillRule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5zm7.25-.75a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V6.31l-5.47 5.47a.75.75 0 01-1.06-1.06l5.47-5.47H12.25a.75.75 0 01-.75-.75z" clipRule="evenodd" />
@@ -23,6 +24,7 @@ function ExtLink({ href, children }) {
 }
 
 export default function Settings() {
+  const theme = useSyncExternalStore(subscribeToTheme, getThemePreference);
   const [apiKey, setApiKeyState] = useState(getApiKey());
   const [githubToken, setGithubTokenState] = useState(getGithubToken());
   const [fontSize, setFontSizeState] = useState(localStorage.getItem('font-size') || 'base');
@@ -43,7 +45,7 @@ export default function Settings() {
     if (!message.text || message.section !== section) return null;
     return (
       <div className={`text-sm p-3 rounded-xl ${
-        message.text.includes('실패') ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'
+        message.text.includes('실패') ? 'bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-300' : 'bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-300'
       }`}>{message.text}</div>
     );
   }
@@ -93,10 +95,31 @@ export default function Settings() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-bold text-slate-800">설정</h1>
+      <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">설정</h1>
 
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
-        <h2 className="font-medium text-slate-700">Gemini API</h2>
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
+        <h2 id="theme-heading" className="font-medium text-slate-700 dark:text-slate-200">화면 테마</h2>
+        <div className="grid grid-cols-3 gap-2" role="group" aria-labelledby="theme-heading">
+          {THEME_OPTIONS.map(option => (
+            <button
+              key={option.id}
+              onClick={() => setThemePreference(option.id)}
+              aria-pressed={theme === option.id}
+              className={`py-2 rounded-xl text-sm font-medium transition-colors ${
+                theme === option.id
+                  ? 'bg-indigo-600 text-white'
+                  : 'border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-slate-400">시스템을 선택하면 기기의 화면 모드를 따릅니다.</p>
+      </div>
+
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
+        <h2 className="font-medium text-slate-700 dark:text-slate-200">Gemini API</h2>
         <p className="text-xs text-slate-400">
           <ExtLink href="https://aistudio.google.com/apikey">Google AI Studio</ExtLink>에서 무료 API 키를 발급받으세요.
         </p>
@@ -104,7 +127,7 @@ export default function Settings() {
           type="password"
           value={apiKey}
           onChange={e => setApiKeyState(e.target.value)}
-          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm"
+          className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm"
           placeholder="API 키를 입력하세요"
         />
         <button
@@ -116,8 +139,8 @@ export default function Settings() {
         <MessageBox section="gemini" />
       </div>
 
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
-        <h2 className="font-medium text-slate-700">GitHub 연동</h2>
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
+        <h2 className="font-medium text-slate-700 dark:text-slate-200">GitHub 연동</h2>
         <p className="text-xs text-slate-400">
           단어를 GitHub에 저장하고, 저장 직후 예문 생성 배치를 실행합니다.{' '}
           <ExtLink href="https://github.com/settings/personal-access-tokens/new">Fine-grained PAT</ExtLink>를 발급받으세요.
@@ -127,7 +150,7 @@ export default function Settings() {
           type="password"
           value={githubToken}
           onChange={e => setGithubTokenState(e.target.value)}
-          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm"
+          className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm"
           placeholder="GitHub Personal Access Token"
         />
         <button
@@ -139,8 +162,8 @@ export default function Settings() {
         <MessageBox section="github" />
       </div>
 
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
-        <h2 className="font-medium text-slate-700">글자 크기</h2>
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
+        <h2 className="font-medium text-slate-700 dark:text-slate-200">글자 크기</h2>
         <div className="grid grid-cols-4 gap-2">
           {FONT_SIZES.map(s => (
             <button
@@ -149,7 +172,7 @@ export default function Settings() {
               className={`py-2 rounded-xl text-sm font-medium transition-colors ${
                 fontSize === s.id
                   ? 'bg-indigo-600 text-white'
-                  : 'border border-slate-200 text-slate-600'
+                  : 'border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {s.label}
@@ -158,26 +181,26 @@ export default function Settings() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
-        <h2 className="font-medium text-slate-700">학습 기록 백업</h2>
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
+        <h2 className="font-medium text-slate-700 dark:text-slate-200">학습 기록 백업</h2>
         <p className="text-xs text-slate-400">
           복습 기록은 브라우저에 저장됩니다. 정기적으로 백업하세요.
         </p>
         <button
           onClick={handleExport}
-          className="w-full py-2 border border-slate-200 rounded-xl text-sm text-slate-600"
+          className="w-full py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-600 dark:text-slate-300"
         >
           학습 기록 내보내기 (JSON)
         </button>
-        <label className="block w-full py-2 border border-slate-200 rounded-xl text-sm text-slate-600 text-center cursor-pointer">
+        <label className="block w-full py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-600 dark:text-slate-300 text-center cursor-pointer">
           학습 기록 가져오기 (JSON)
           <input type="file" accept=".json" onChange={handleImport} className="hidden" />
         </label>
         <MessageBox section="backup" />
       </div>
 
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-red-100 space-y-3">
-        <h2 className="font-medium text-red-600">초기화</h2>
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-red-100 dark:border-red-900/70 space-y-3">
+        <h2 className="font-medium text-red-600 dark:text-red-400">초기화</h2>
         <p className="text-xs text-slate-400">
           되돌릴 수 없습니다. 단어 데이터는 GitHub에서 복구할 수 있습니다.
         </p>
@@ -188,7 +211,7 @@ export default function Settings() {
             await ensureReviewsExist();
             showMessage('학습 기록이 초기화되었습니다.', 'reset');
           }}
-          className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"
+          className="w-full py-2 border border-red-200 dark:border-red-900 rounded-xl text-sm text-red-500 dark:text-red-400"
         >
           학습 기록만 초기화
         </button>
@@ -205,7 +228,7 @@ export default function Settings() {
                 showMessage('초기화 실패: ' + err.message, 'reset');
               }
             }}
-            className="w-full py-2 border border-red-300 bg-red-50 rounded-xl text-sm text-red-600 font-medium"
+            className="w-full py-2 border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/50 rounded-xl text-sm text-red-600 dark:text-red-400 font-medium"
           >
             전체 초기화 (단어 + 학습 기록)
           </button>
@@ -213,7 +236,7 @@ export default function Settings() {
         <MessageBox section="reset" />
       </div>
 
-      <p className="text-center text-xs text-slate-300">
+      <p className="text-center text-xs text-slate-300 dark:text-slate-500">
         최근 업데이트: {(() => {
           const d = new Date(__BUILD_TIME__);
           return `${d.getMonth() + 1}.${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;

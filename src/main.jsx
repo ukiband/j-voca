@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import App from './App';
 import './styles/index.css';
+import { initializeTheme } from './lib/theme';
+
+const cleanupTheme = initializeTheme();
+if (import.meta.hot) import.meta.hot.dispose(cleanupTheme);
 
 // Apply saved font size
 const savedSize = localStorage.getItem('font-size') || 'base';

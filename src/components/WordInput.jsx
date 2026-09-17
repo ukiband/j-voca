@@ -124,47 +124,47 @@ export default function WordInput() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-slate-800">단어 입력</h1>
+      <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">단어 입력</h1>
 
       {stage === 'upload' && (
         <div className="space-y-4">
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="text-sm text-slate-500">Step</label>
+              <label className="text-sm text-slate-500 dark:text-slate-400">Step</label>
               <input
                 type="number"
                 min="1"
                 value={step}
                 onChange={e => setStep(e.target.value)}
-                className="w-full mt-1 px-3 py-2 border border-slate-200 rounded-xl text-sm"
+                className="w-full mt-1 px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm"
                 placeholder="예: 2"
               />
             </div>
             <div>
-              <label className="text-sm text-slate-500">레슨</label>
+              <label className="text-sm text-slate-500 dark:text-slate-400">레슨</label>
               <input
                 type="number"
                 value={chapter}
                 onChange={e => setChapter(e.target.value)}
-                className="w-full mt-1 px-3 py-2 border border-slate-200 rounded-xl text-sm"
+                className="w-full mt-1 px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm"
                 placeholder="예: 5"
               />
             </div>
             <div>
-              <label className="text-sm text-slate-500">교재명</label>
+              <label className="text-sm text-slate-500 dark:text-slate-400">교재명</label>
               <input
                 type="text"
                 value={textbook}
                 onChange={e => setTextbook(e.target.value)}
-                className="w-full mt-1 px-3 py-2 border border-slate-200 rounded-xl text-sm"
+                className="w-full mt-1 px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm"
                 placeholder="예: 민나노니홍고"
               />
             </div>
           </div>
 
-          <label className="block border-2 border-dashed border-slate-300 rounded-2xl p-8 text-center cursor-pointer hover:border-indigo-400 transition-colors">
+          <label className="block border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-8 text-center cursor-pointer hover:border-indigo-400 transition-colors">
             <span className="text-4xl block mb-2">📸</span>
-            <span className="text-sm text-slate-500">교재 사진을 촬영하거나 선택하세요</span>
+            <span className="text-sm text-slate-500 dark:text-slate-400">교재 사진을 촬영하거나 선택하세요</span>
             <input
               ref={fileRef}
               type="file"
@@ -175,52 +175,52 @@ export default function WordInput() {
           </label>
 
           {!hasGithubToken() && (
-            <p className="text-xs text-amber-600 bg-amber-50 p-3 rounded-xl">
+            <p className="text-xs text-amber-600 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 p-3 rounded-xl">
               설정에서 GitHub PAT를 입력해야 단어를 저장할 수 있습니다.
             </p>
           )}
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && <p className="text-sm text-red-500 dark:text-red-400">{error}</p>}
         </div>
       )}
 
       {stage === 'loading' && (
         <div className="text-center py-16">
-          <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-          <p className="mt-4 text-sm text-slate-500">단어를 추출하는 중...</p>
+          <div className="inline-block w-8 h-8 border-4 border-indigo-600 dark:border-indigo-400 border-t-transparent rounded-full animate-spin" />
+          <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">단어를 추출하는 중...</p>
         </div>
       )}
 
       {stage === 'preview' && (
         <div className="space-y-3">
-          <p className="text-sm text-slate-500">{words.length}개 단어를 찾았습니다. 수정 후 저장하세요.</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{words.length}개 단어를 찾았습니다. 수정 후 저장하세요.</p>
 
           {words.map((w, i) => (
-            <div key={i} className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 space-y-2">
+            <div key={i} className="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-2">
               <div className="flex justify-between items-start">
                 <div className="flex-1 grid grid-cols-2 gap-2">
                   <input
                     value={w.word}
                     onChange={e => updateWord(i, 'word', e.target.value)}
-                    className="px-2 py-1 border border-slate-200 rounded-lg text-sm font-medium"
+                    className="px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium"
                     placeholder="단어"
                   />
                   <input
                     value={w.reading}
                     onChange={e => updateWord(i, 'reading', e.target.value)}
-                    className="px-2 py-1 border border-slate-200 rounded-lg text-sm"
+                    className="px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                     placeholder="읽기"
                   />
                   <input
                     value={w.meaning}
                     onChange={e => updateWord(i, 'meaning', e.target.value)}
-                    className="px-2 py-1 border border-slate-200 rounded-lg text-sm col-span-2"
+                    className="px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm col-span-2"
                     placeholder="뜻"
                   />
                 </div>
                 <button
                   onClick={() => removeWord(i)}
-                  className="ml-2 text-slate-300 hover:text-red-400 text-lg"
+                  className="ml-2 text-slate-300 dark:text-slate-500 hover:text-red-400 text-lg"
                 >
                   &times;
                 </button>
@@ -229,7 +229,7 @@ export default function WordInput() {
           ))}
 
           <div className="flex gap-3">
-            <button onClick={reset} className="flex-1 py-3 rounded-xl border border-slate-200 text-sm text-slate-600">
+            <button onClick={reset} className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-300">
               다시하기
             </button>
             <button onClick={saveWords} className="flex-1 py-3 rounded-xl bg-indigo-600 text-white text-sm font-medium">
@@ -237,21 +237,21 @@ export default function WordInput() {
             </button>
           </div>
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && <p className="text-sm text-red-500 dark:text-red-400">{error}</p>}
         </div>
       )}
 
       {stage === 'saving' && (
         <div className="text-center py-16">
-          <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-          <p className="mt-4 text-sm text-slate-500">GitHub에 저장하는 중...</p>
+          <div className="inline-block w-8 h-8 border-4 border-indigo-600 dark:border-indigo-400 border-t-transparent rounded-full animate-spin" />
+          <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">GitHub에 저장하는 중...</p>
         </div>
       )}
 
       {stage === 'done' && (
         <div className="text-center py-16">
           <p className="text-4xl mb-4">&#x2705;</p>
-          <p className="text-lg font-medium text-slate-800">
+          <p className="text-lg font-medium text-slate-800 dark:text-slate-100">
             {savedCount > 0 ? `${savedCount}개 단어가 저장되었습니다` : '새로 저장할 단어가 없습니다'}
           </p>
           {skippedCount > 0 && (
@@ -259,7 +259,7 @@ export default function WordInput() {
           )}
           {savedCount > 0 && <p className="text-xs text-slate-400 mt-2">GitHub에 커밋되었습니다</p>}
           {sentenceQueued && <p className="text-xs text-slate-400 mt-1">예문은 잠시 뒤 자동으로 준비됩니다</p>}
-          <button onClick={reset} className="mt-4 text-indigo-600 font-medium text-sm">
+          <button onClick={reset} className="mt-4 text-indigo-600 dark:text-indigo-400 font-medium text-sm">
             더 추가하기
           </button>
         </div>

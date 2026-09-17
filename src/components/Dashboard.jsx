@@ -63,11 +63,11 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-800">J-VOCA</h1>
+      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">J-VOCA</h1>
 
       {hasUpdate && (
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
-          <p className="text-sm font-medium text-emerald-800 mb-1">새 버전이 있습니다</p>
+        <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-4">
+          <p className="text-sm font-medium text-emerald-800 dark:text-emerald-200 mb-1">새 버전이 있습니다</p>
           <button
             onClick={async () => {
               // SW 캐시를 삭제하여 다음 로드 시 최신 파일을 가져오도록 강제
@@ -83,13 +83,13 @@ export default function Dashboard() {
       )}
 
       {showInstall && (
-        <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 relative">
+        <div className="bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900 rounded-2xl p-4 relative">
           <button
             onClick={() => { setShowInstall(false); sessionStorage.setItem('hide-install', '1'); }}
             className="absolute top-2 right-3 text-slate-400 text-lg"
           >&times;</button>
-          <p className="text-sm font-medium text-indigo-800 mb-1">홈 화면에 추가하기</p>
-          <p className="text-xs text-indigo-600 leading-relaxed">
+          <p className="text-sm font-medium text-indigo-800 dark:text-indigo-200 mb-1">홈 화면에 추가하기</p>
+          <p className="text-xs text-indigo-600 dark:text-indigo-400 leading-relaxed">
             <strong>iPhone</strong>: Safari 하단 공유(↑) &rarr; "홈 화면에 추가"<br/>
             <strong>Android</strong>: Chrome 메뉴(&#8942;) &rarr; "홈 화면에 추가"<br/>
             앱처럼 전체 화면으로 사용할 수 있습니다.
@@ -98,9 +98,9 @@ export default function Dashboard() {
       )}
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
-          <p className="text-sm text-slate-500">전체 단어</p>
-          <p className="text-3xl font-bold text-slate-800">{words.length}</p>
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70">
+          <p className="text-sm text-slate-500 dark:text-slate-400">전체 단어</p>
+          <p className="text-3xl font-bold text-slate-800 dark:text-slate-100">{words.length}</p>
         </div>
         <Link to="/lesson-select" className="bg-indigo-600 rounded-2xl p-4 shadow-sm text-white">
           <p className="text-sm text-indigo-200">오늘 복습</p>
@@ -111,9 +111,9 @@ export default function Dashboard() {
       </div>
 
       {words.length > 0 && (
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-sm font-medium text-slate-500">레슨별 진행률</h2>
+            <h2 className="text-sm font-medium text-slate-500 dark:text-slate-400">레슨별 진행률</h2>
             {steps.length > 1 && (
               <div className="flex gap-1">
                 {steps.map(step => (
@@ -121,7 +121,7 @@ export default function Dashboard() {
                     key={step}
                     onClick={() => setSelectedStep(step)}
                     className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                      currentStep === step ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-500'
+                      currentStep === step ? 'bg-slate-800 dark:bg-slate-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
                     }`}
                   >
                     Step {step}
@@ -136,10 +136,10 @@ export default function Dashboard() {
               return (
                 <div key={lessonKey(ls.step, ls.chapter)}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-700">{formatLesson(ls.step, ls.chapter, { withStep: false })}</span>
+                    <span className="text-slate-700 dark:text-slate-200">{formatLesson(ls.step, ls.chapter, { withStep: false })}</span>
                     <span className="text-slate-400">{ls.reviewed}/{ls.total}</span>
                   </div>
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-indigo-500 rounded-full transition-all"
                       style={{ width: `${pct}%` }}
@@ -155,7 +155,7 @@ export default function Dashboard() {
       {words.length === 0 && (
         <div className="text-center py-12 text-slate-400">
           <p className="text-lg mb-2">아직 단어가 없습니다</p>
-          <Link to="/input" className="text-indigo-600 font-medium">
+          <Link to="/input" className="text-indigo-600 dark:text-indigo-400 font-medium">
             교재 사진으로 단어 추가하기
           </Link>
         </div>

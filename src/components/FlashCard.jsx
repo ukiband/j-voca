@@ -5,7 +5,7 @@ import { parseHighlight } from '../lib/sentence-utils';
 function HighlightedText({ text }) {
   return parseHighlight(text).map((seg, i) =>
     seg.highlight
-      ? <span key={i} className="font-bold text-indigo-700">{seg.text}</span>
+      ? <span key={i} className="font-bold text-indigo-700 dark:text-indigo-300">{seg.text}</span>
       : <span key={i}>{seg.text}</span>
   );
 }
@@ -20,7 +20,7 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) 
     // 앞면: 단어(역방향이면 뜻) 하나만 본문 가운데에 크게. flex-1 로 본문 영역을 꽉 채우므로 본문 어디를 탭해도 뒤집힌다
     return (
       <div className="flex-1 flex items-center justify-center py-8 text-center" onClick={onFlip}>
-        <p className={`text-[1.65rem] font-bold text-slate-800 ${reverse ? '' : 'jp-text'}`}>
+        <p className={`text-[1.65rem] font-bold text-slate-800 dark:text-slate-100 ${reverse ? '' : 'jp-text'}`}>
           {reverse ? word.meaning : word.word}
         </p>
       </div>
@@ -30,10 +30,10 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) 
   return (
     <div className="flex-1 flex flex-col text-left">
       <div className="flex items-center gap-1">
-        <p className="text-[1.65rem] font-bold text-slate-800 jp-text">{word.word}</p>
+        <p className="text-[1.65rem] font-bold text-slate-800 dark:text-slate-100 jp-text">{word.word}</p>
         <button
           onClick={(e) => { e.stopPropagation(); speak(word.word); }}
-          className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-400 hover:text-indigo-500 transition-colors"
+          className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors"
           aria-label="발음 듣기"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -44,19 +44,19 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) 
       </div>
       {/* 히라가나 단어는 읽기가 표기와 같아 같은 글자를 두 번 보여줄 필요가 없다 */}
       {word.reading && word.reading !== word.word && (
-        <p className="text-[1.2rem] text-indigo-600 jp-text">{word.reading}</p>
+        <p className="text-[1.2rem] text-indigo-600 dark:text-indigo-400 jp-text">{word.reading}</p>
       )}
-      <p className="text-[1rem] text-slate-600 mt-2">
+      <p className="text-[1rem] text-slate-600 dark:text-slate-300 mt-2">
         {word.meaning}
         {word.pos && <span className="text-xs text-slate-400 ml-2">{word.pos}</span>}
       </p>
 
       {/* 예문이 없는 카드는 구분선도 빈 공간도 두지 않는다. 하단 버튼 위치는 부모가 고정하므로 여기 높이는 자유롭다 */}
       {sentence && (
-        <div className="mt-4 pt-4 border-t border-slate-200 space-y-1">
-          <p className="text-[1.4rem] leading-[1.6] text-slate-800 jp-text"><HighlightedText text={sentence.sentence} /></p>
-          <p className="text-[1.4rem] leading-[1.6] text-slate-500 jp-text"><HighlightedText text={sentence.reading} /></p>
-          <p className="text-[1rem] text-slate-600 pt-1">{sentence.meaning}</p>
+        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 space-y-1">
+          <p className="text-[1.4rem] leading-[1.6] text-slate-800 dark:text-slate-100 jp-text"><HighlightedText text={sentence.sentence} /></p>
+          <p className="text-[1.4rem] leading-[1.6] text-slate-500 dark:text-slate-400 jp-text"><HighlightedText text={sentence.reading} /></p>
+          <p className="text-[1rem] text-slate-600 dark:text-slate-300 pt-1">{sentence.meaning}</p>
         </div>
       )}
     </div>

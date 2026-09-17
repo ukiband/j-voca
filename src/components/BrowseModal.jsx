@@ -39,20 +39,20 @@ export default function BrowseModal({ browse }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center sm:p-4"
+      className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-end sm:items-center justify-center sm:p-4"
       onClick={browse.close}
     >
       <div
-        className="bg-slate-50 rounded-t-2xl sm:rounded-2xl w-full max-w-lg flex flex-col max-h-[92dvh]"
+        className="bg-slate-50 dark:bg-slate-900 rounded-t-2xl sm:rounded-2xl w-full max-w-lg flex flex-col max-h-[92dvh]"
         onClick={e => e.stopPropagation()}
       >
         <div className="shrink-0 flex justify-between items-center pl-4 pr-1 h-14">
           <span className="text-sm text-slate-400">{browse.browseIndex + 1} / {browse.browseQueue.length}</span>
           <div className="flex items-center gap-1">
             {browse.listening ? (
-              <button onClick={browse.stopListening} className="text-emerald-500 text-sm font-medium px-2 h-11">■ 정지</button>
+              <button onClick={browse.stopListening} className="text-emerald-500 dark:text-emerald-400 text-sm font-medium px-2 h-11">■ 정지</button>
             ) : (
-              <button onClick={() => browse.startListening(browse.browseQueue, browse.browseIndex)} className="text-emerald-500 text-sm font-medium px-2 h-11">▶ 듣기</button>
+              <button onClick={() => browse.startListening(browse.browseQueue, browse.browseIndex)} className="text-emerald-500 dark:text-emerald-400 text-sm font-medium px-2 h-11">▶ 듣기</button>
             )}
             <button onClick={browse.close} className="w-11 h-11 flex items-center justify-center text-slate-400 text-2xl" aria-label="닫기">&times;</button>
           </div>
@@ -62,18 +62,18 @@ export default function BrowseModal({ browse }) {
           <FlashCard word={word} sentence={sentence} flipped={flipped} onFlip={() => setFlipped(true)} />
         </div>
 
-        <div className="shrink-0 flex gap-2 px-4 pt-2 border-t border-slate-200 safe-bottom-min">
+        <div className="shrink-0 flex gap-2 px-4 pt-2 border-t border-slate-200 dark:border-slate-700 safe-bottom-min">
           <button
             onClick={browse.prev ?? undefined}
             disabled={!browse.prev}
-            className="flex-1 h-14 rounded-xl border border-slate-200 bg-white text-sm text-slate-600 disabled:opacity-30"
+            className="flex-1 h-14 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-300 disabled:opacity-30"
           >
             ← 이전
           </button>
           <button
             onClick={browse.next ?? undefined}
             disabled={!browse.next}
-            className="flex-1 h-14 rounded-xl border border-slate-200 bg-white text-sm text-slate-600 disabled:opacity-30"
+            className="flex-1 h-14 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-300 disabled:opacity-30"
           >
             다음 →
           </button>

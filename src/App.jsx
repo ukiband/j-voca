@@ -23,7 +23,7 @@ const NAV_ITEMS = [
 function PageLoader() {
   return (
     <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+      <div className="w-8 h-8 border-4 border-indigo-600 dark:border-indigo-400 border-t-transparent rounded-full animate-spin" />
     </div>
   );
 }
@@ -72,7 +72,7 @@ export default function App() {
       <div className="flex flex-col items-center justify-center min-h-screen">
         {syncError ? (
           <div className="text-center px-4">
-            <p className="text-sm text-red-600 mb-3">{syncError}</p>
+            <p className="text-sm text-red-600 dark:text-red-400 mb-3">{syncError}</p>
             <button onClick={loadData} className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm">재시도</button>
           </div>
         ) : (
@@ -89,9 +89,9 @@ export default function App() {
       : 'flex flex-col min-h-dvh max-w-lg mx-auto'}>
       <main className={immersive ? 'flex-1 min-h-0 flex flex-col' : 'flex-1 pb-24 px-4 pt-4 safe-top'}>
         {!immersive && syncError && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between">
-            <p className="text-sm text-red-600">{syncError}</p>
-            <button onClick={loadData} className="text-xs text-red-600 font-medium ml-2 whitespace-nowrap">재시도</button>
+          <div className="mb-4 p-3 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900 rounded-xl flex items-center justify-between">
+            <p className="text-sm text-red-600 dark:text-red-400">{syncError}</p>
+            <button onClick={loadData} className="text-xs text-red-600 dark:text-red-400 font-medium ml-2 whitespace-nowrap">재시도</button>
           </div>
         )}
         <Suspense fallback={<PageLoader />}>
@@ -106,7 +106,7 @@ export default function App() {
         </Suspense>
       </main>
 
-      {!immersive && <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 safe-bottom">
+      {!immersive && <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 safe-bottom">
         <div className="max-w-lg mx-auto flex justify-around">
           {NAV_ITEMS.map(({ to, icon, label }) => (
             <NavLink
@@ -115,7 +115,7 @@ export default function App() {
               end={to === '/'}
               className={({ isActive }) =>
                 `flex flex-col items-center py-2 px-3 text-xs transition-colors ${
-                  isActive ? 'text-indigo-600' : 'text-slate-400'
+                  isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400'
                 }`
               }
             >

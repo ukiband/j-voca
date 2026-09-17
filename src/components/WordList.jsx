@@ -99,7 +99,7 @@ export default function WordList() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-slate-800">단어 목록</h1>
+      <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">단어 목록</h1>
 
       {/* 검색 입력 */}
       <input
@@ -107,7 +107,7 @@ export default function WordList() {
         value={searchQuery}
         onChange={e => setSearchQuery(e.target.value)}
         placeholder="단어, 읽기, 뜻 검색..."
-        className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300"
+        className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300"
       />
 
       {/* step 칩: step이 하나뿐이면 고를 게 없으므로 숨긴다 */}
@@ -118,7 +118,7 @@ export default function WordList() {
               key={step}
               onClick={() => selectStep(step)}
               className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
-                currentStep === step ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600'
+                currentStep === step ? 'bg-slate-800 dark:bg-slate-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               }`}
             >
               Step {step}
@@ -132,7 +132,7 @@ export default function WordList() {
           <button
             onClick={() => selectChapter(null)}
             className={`px-3 py-1 rounded-full text-sm whitespace-nowrap ${
-              selectedChapter === null ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+              selectedChapter === null ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
             }`}
           >
             전체 ({stepWordCount})
@@ -142,7 +142,7 @@ export default function WordList() {
               key={ch}
               onClick={() => selectChapter(ch)}
               className={`px-3 py-1 rounded-full text-sm whitespace-nowrap ${
-                selectedChapter === ch ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+                selectedChapter === ch ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               }`}
             >
               {formatLesson(currentStep, ch, { withStep: false })} ({countByChapter[ch] || 0})
@@ -155,13 +155,13 @@ export default function WordList() {
         <div className="flex gap-2">
           <button
             onClick={() => browse.open(filtered)}
-            className="flex-1 py-2 bg-indigo-50 border border-indigo-200 rounded-xl text-sm text-indigo-600 font-medium"
+            className="flex-1 py-2 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 rounded-xl text-sm text-indigo-600 dark:text-indigo-400 font-medium"
           >
             플래시카드 ({filtered.length}개)
           </button>
           <button
             onClick={() => browse.openWithListening(filtered)}
-            className="flex-1 py-2 bg-emerald-50 border border-emerald-200 rounded-xl text-sm text-emerald-600 font-medium"
+            className="flex-1 py-2 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-xl text-sm text-emerald-600 dark:text-emerald-400 font-medium"
           >
             듣기 모드
           </button>
@@ -174,7 +174,7 @@ export default function WordList() {
         <button
           onClick={handleDeleteChapter}
           disabled={saving}
-          className="w-full py-2 border border-red-200 rounded-xl text-sm text-red-500"
+          className="w-full py-2 border border-red-200 dark:border-red-900 rounded-xl text-sm text-red-500 dark:text-red-400"
         >
           {saving ? '삭제 중...' : `${formatLesson(currentStep, selectedChapter)} 전체 삭제 (${lessonWordCount}개)`}
         </button>
@@ -185,27 +185,27 @@ export default function WordList() {
       ) : (
         <div className="space-y-2">
           {filtered.map(w => (
-            <div key={w.id} className="bg-white rounded-xl p-3 shadow-sm border border-slate-100">
+            <div key={w.id} className="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-100 dark:border-slate-700/70">
               {editingId === w.id ? (
                 <div className="space-y-2">
                   <input
                     value={editForm.word}
                     onChange={e => setEditForm(f => ({ ...f, word: e.target.value }))}
-                    className="w-full px-2 py-1 border border-slate-200 rounded-lg text-sm"
+                    className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                   />
                   <input
                     value={editForm.reading}
                     onChange={e => setEditForm(f => ({ ...f, reading: e.target.value }))}
-                    className="w-full px-2 py-1 border border-slate-200 rounded-lg text-sm"
+                    className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                   />
                   <input
                     value={editForm.meaning}
                     onChange={e => setEditForm(f => ({ ...f, meaning: e.target.value }))}
-                    className="w-full px-2 py-1 border border-slate-200 rounded-lg text-sm"
+                    className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                   />
                   <div className="flex gap-2">
                     <button onClick={() => setEditingId(null)} className="text-xs text-slate-400" disabled={saving}>취소</button>
-                    <button onClick={() => saveEdit(w.id)} className="text-xs text-indigo-600 font-medium" disabled={saving}>
+                    <button onClick={() => saveEdit(w.id)} className="text-xs text-indigo-600 dark:text-indigo-400 font-medium" disabled={saving}>
                       {saving ? '저장 중...' : '저장'}
                     </button>
                   </div>
@@ -213,9 +213,9 @@ export default function WordList() {
               ) : (
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="font-medium text-slate-800">{w.word}</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-100">{w.word}</span>
                     <span className="text-slate-400 text-sm ml-2">{w.reading}</span>
-                    <p className="text-sm text-slate-500">{w.meaning}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{w.meaning}</p>
                   </div>
                   {canEdit && (
                     <div className="flex gap-2 text-xs">

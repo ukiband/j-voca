@@ -153,7 +153,7 @@ export default function ReviewSession() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-indigo-600 dark:border-indigo-400 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -162,7 +162,7 @@ export default function ReviewSession() {
     return (
       <div className="text-center py-16">
         <p className="text-4xl mb-4">&#x26A0;&#xFE0F;</p>
-        <p className="text-lg font-medium text-slate-800">데이터 로드 실패</p>
+        <p className="text-lg font-medium text-slate-800 dark:text-slate-100">데이터 로드 실패</p>
         <p className="text-sm text-slate-400 mt-2">{error}</p>
         <button
           onClick={() => window.location.reload()}
@@ -178,9 +178,9 @@ export default function ReviewSession() {
     return (
       <div className="text-center py-16">
         <p className="text-4xl mb-4">&#x1F389;</p>
-        <p className="text-lg font-medium text-slate-800">복습할 단어가 없습니다</p>
+        <p className="text-lg font-medium text-slate-800 dark:text-slate-100">복습할 단어가 없습니다</p>
         <p className="text-sm text-slate-400 mt-2">내일 다시 확인해보세요</p>
-        <Link to="/lesson-select" className="text-indigo-600 font-medium text-sm mt-4 inline-block">돌아가기</Link>
+        <Link to="/lesson-select" className="text-indigo-600 dark:text-indigo-400 font-medium text-sm mt-4 inline-block">돌아가기</Link>
       </div>
     );
   }
@@ -189,25 +189,25 @@ export default function ReviewSession() {
     return (
       <div className="text-center py-12 space-y-6">
         <p className="text-4xl">&#x2705;</p>
-        <p className="text-lg font-medium text-slate-800">복습 완료!</p>
+        <p className="text-lg font-medium text-slate-800 dark:text-slate-100">복습 완료!</p>
         <div className="grid grid-cols-3 gap-2 text-sm">
-          <div className="bg-red-50 rounded-xl p-3">
-            <p className="text-red-600 font-medium">{results.again}</p>
+          <div className="bg-red-50 dark:bg-red-950/50 rounded-xl p-3">
+            <p className="text-red-600 dark:text-red-400 font-medium">{results.again}</p>
             <p className="text-slate-400">모름</p>
           </div>
-          <div className="bg-amber-50 rounded-xl p-3">
-            <p className="text-amber-700 font-medium">{results.hard}</p>
+          <div className="bg-amber-50 dark:bg-amber-950/50 rounded-xl p-3">
+            <p className="text-amber-700 dark:text-amber-300 font-medium">{results.hard}</p>
             <p className="text-slate-400">애매</p>
           </div>
-          <div className="bg-green-50 rounded-xl p-3">
-            <p className="text-green-700 font-medium">{results.good}</p>
+          <div className="bg-green-50 dark:bg-green-950/50 rounded-xl p-3">
+            <p className="text-green-700 dark:text-green-300 font-medium">{results.good}</p>
             <p className="text-slate-400">앎</p>
           </div>
         </div>
         <p className="text-sm text-slate-400">
           {chapter != null ? `${formatLesson(step, chapter)} · ` : tagParam ? `${tagParam} · ` : ''}{wordCount}개 단어 복습 완료
         </p>
-        <Link to="/lesson-select" className="text-indigo-600 font-medium text-sm inline-block">돌아가기</Link>
+        <Link to="/lesson-select" className="text-indigo-600 dark:text-indigo-400 font-medium text-sm inline-block">돌아가기</Link>
       </div>
     );
   }
@@ -229,29 +229,29 @@ export default function ReviewSession() {
           <Link
             to="/lesson-select"
             aria-label="복습 닫기"
-            className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-500 text-2xl"
+            className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-500 dark:text-slate-400 text-2xl"
           >
             &times;
           </Link>
-          <h1 className="flex-1 min-w-0 truncate text-[1rem] font-bold text-slate-800">{title}</h1>
-          <span className="shrink-0 text-sm text-slate-500">
+          <h1 className="flex-1 min-w-0 truncate text-[1rem] font-bold text-slate-800 dark:text-slate-100">{title}</h1>
+          <span className="shrink-0 text-sm text-slate-500 dark:text-slate-400">
             {isReview ? `${progressCurrent} / ${progressTotal}` : `재복습 ${progressCurrent} / ${progressTotal}`}
           </span>
         </div>
-        <div className="h-[3px] bg-slate-200">
+        <div className="h-[3px] bg-slate-200 dark:bg-slate-700">
           <div className="h-full bg-indigo-500 transition-all" style={{ width: `${progressPct}%` }} />
         </div>
       </header>
 
       {saveError && (
-        <p className="shrink-0 mx-4 mt-2 text-xs text-red-600 bg-red-50 p-2 rounded-lg">저장 오류: {saveError}. 다시 평가해주세요.</p>
+        <p className="shrink-0 mx-4 mt-2 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/50 p-2 rounded-lg">저장 오류: {saveError}. 다시 평가해주세요.</p>
       )}
 
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto flex flex-col px-5 py-4">
         <FlashCard word={currentWord} sentence={sentence} reverse={reverse} flipped={flipped} onFlip={handleFlip} />
       </div>
 
-      <footer className="shrink-0 border-t border-slate-200 bg-white px-4 pt-2 safe-bottom-min">
+      <footer className="shrink-0 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 pt-2 safe-bottom-min">
         {flipped ? (
           <div className="grid grid-cols-3 gap-2">
             {GRADE_BUTTONS.map(({ grade, label, color }) => (

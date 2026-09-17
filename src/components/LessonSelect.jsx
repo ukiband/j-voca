@@ -45,8 +45,8 @@ export default function LessonSelect() {
   if (words.length === 0) {
     return (
       <div className="text-center py-16">
-        <p className="text-lg font-medium text-slate-800">단어가 없습니다</p>
-        <Link to="/input" className="text-indigo-600 font-medium text-sm mt-4 inline-block">
+        <p className="text-lg font-medium text-slate-800 dark:text-slate-100">단어가 없습니다</p>
+        <Link to="/input" className="text-indigo-600 dark:text-indigo-400 font-medium text-sm mt-4 inline-block">
           단어 추가하기
         </Link>
       </div>
@@ -56,7 +56,7 @@ export default function LessonSelect() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold text-slate-800">복습</h1>
+        <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">복습</h1>
         <div className="flex items-center gap-2">
           {/* 복습 순서 토글: 랜덤/순차 */}
           <button
@@ -68,7 +68,7 @@ export default function LessonSelect() {
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               order === 'sequential'
                 ? 'bg-indigo-600 text-white'
-                : 'bg-slate-100 text-slate-600'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
             }`}
           >
             {order === 'sequential' ? '순차' : '랜덤'}
@@ -79,7 +79,7 @@ export default function LessonSelect() {
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               reverse
                 ? 'bg-indigo-600 text-white'
-                : 'bg-slate-100 text-slate-600'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
             }`}
           >
             {reverse ? '한→일' : '일→한'}
@@ -93,7 +93,7 @@ export default function LessonSelect() {
         className={`block rounded-2xl p-4 shadow-sm ${
           totalDue > 0
             ? 'bg-indigo-600 text-white'
-            : 'bg-slate-100 text-slate-400 pointer-events-none'
+            : 'bg-slate-100 dark:bg-slate-800 text-slate-400 pointer-events-none'
         }`}
       >
         <div className="flex justify-between items-center">
@@ -114,7 +114,7 @@ export default function LessonSelect() {
         const chapters = getChapters(words, step).reverse();
         return (
           <div key={step} className="space-y-2">
-            <h2 className="text-sm font-semibold text-slate-500">Step {step}</h2>
+            <h2 className="text-sm font-semibold text-slate-500 dark:text-slate-400">Step {step}</h2>
             {chapters.map(ch => {
               const counts = byLesson[lessonKey(step, ch)] || { total: 0, reconfirm: 0 };
               const hasDue = counts.total > 0;
@@ -124,16 +124,16 @@ export default function LessonSelect() {
                   to={hasDue ? reviewPath(`/review?step=${step}&lesson=${ch}`) : '#'}
                   className={`block rounded-xl p-4 border ${
                     hasDue
-                      ? 'bg-white border-slate-200 shadow-sm'
-                      : 'bg-slate-50 border-slate-100 pointer-events-none'
+                      ? 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-sm'
+                      : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-700/70 pointer-events-none'
                   }`}
                 >
                   <div className="flex justify-between items-center">
-                    <span className={`font-medium ${hasDue ? 'text-slate-800' : 'text-slate-400'}`}>
+                    <span className={`font-medium ${hasDue ? 'text-slate-800 dark:text-slate-100' : 'text-slate-400'}`}>
                       {formatLesson(step, ch, { withStep: false })}
                     </span>
                     <div className="text-right">
-                      <span className={`font-bold ${hasDue ? 'text-indigo-600' : 'text-slate-300'}`}>
+                      <span className={`font-bold ${hasDue ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-300 dark:text-slate-500'}`}>
                         {counts.total}개
                       </span>
                       {counts.reconfirm > 0 && (
@@ -151,7 +151,7 @@ export default function LessonSelect() {
       {/* 카테고리별 복습 */}
       {allTags.length > 0 && (
         <div className="space-y-2">
-          <h2 className="text-sm font-semibold text-slate-500">카테고리별</h2>
+          <h2 className="text-sm font-semibold text-slate-500 dark:text-slate-400">카테고리별</h2>
           <div className="grid grid-cols-2 gap-2">
             {allTags.map(tag => {
               const counts = byTag[tag] || { total: 0, reconfirm: 0 };
@@ -162,14 +162,14 @@ export default function LessonSelect() {
                   to={hasDue ? reviewPath(`/review?tag=${encodeURIComponent(tag)}`) : '#'}
                   className={`block rounded-xl p-3 border ${
                     hasDue
-                      ? 'bg-white border-slate-200 shadow-sm'
-                      : 'bg-slate-50 border-slate-100 pointer-events-none'
+                      ? 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-sm'
+                      : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-700/70 pointer-events-none'
                   }`}
                 >
-                  <p className={`text-sm font-medium ${hasDue ? 'text-slate-800' : 'text-slate-400'}`}>
+                  <p className={`text-sm font-medium ${hasDue ? 'text-slate-800 dark:text-slate-100' : 'text-slate-400'}`}>
                     {tag}
                   </p>
-                  <p className={`text-lg font-bold ${hasDue ? 'text-indigo-600' : 'text-slate-300'}`}>
+                  <p className={`text-lg font-bold ${hasDue ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-300 dark:text-slate-500'}`}>
                     {counts.total}개
                   </p>
                   {counts.reconfirm > 0 && (

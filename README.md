@@ -1,62 +1,109 @@
 # J-VOCA
 
-일본어 교재 사진을 찍으면 단어를 자동 추출하고, FSRS 알고리즘으로 복습하는 PWA 단어장.
+일본어 교재 사진에서 단어를 추출하고, AI 예문과 FSRS 간격 반복으로 학습하는 모바일 우선 PWA 단어장.
 
 ## 사용법
 
-1. https://ukiband.github.io/j-voca/ 접속
-2. 설정에서 Gemini API 키 + GitHub PAT 입력
-3. 입력 탭 > Step/레슨 확인 > 교재 사진 촬영 > 단어 추출 > 저장
-4. 단어 탭에서 플래시카드로 자유 열람 또는 듣기 모드로 암기
-5. 복습 탭에서 FSRS 스케줄에 따라 복습 (모름/애매/앎 3단계)
+1. [J-VOCA](https://ukiband.github.io/j-voca/)에 접속합니다. 기존 단어와 예문은 키 설정 없이 열람·복습할 수 있습니다.
+2. 단어를 추가하려면 설정에서 Gemini API 키와 GitHub PAT를 입력합니다. 용도와 권한은 [키 설정](#키-설정)을 참고하세요.
+3. 입력 탭에서 Step·레슨을 확인하고 교재를 촬영하거나 사진을 선택합니다. 추출 결과의 표기·읽기·뜻을 확인하고 수정한 뒤 저장합니다.
+4. 단어 탭에서 Step·레슨과 검색어로 단어를 찾고, 플래시카드 열람이나 듣기 모드로 학습합니다.
+5. 복습 탭에서 전체 또는 레슨별 복습을 선택합니다. 일→한/한→일 방향과 랜덤/순차 순서를 선택하고, 카드를 탭해 정답과 예문을 확인한 뒤 모름/애매/앎으로 평가합니다.
 
-iPhone/Android에서 "홈 화면에 추가"하면 앱처럼 사용 가능.
+iPhone의 Safari 또는 Android의 Chrome에서 **홈 화면에 추가**하면 앱처럼 사용할 수 있습니다.
 
 ## 주요 기능
 
-- **사진 OCR**: Gemini Vision API로 교재 사진에서 단어 자동 추출
-- **간격 반복**: FSRS (Free Spaced Repetition Scheduler) 알고리즘 기반 날짜 단위 복습 스케줄링
-- **3단계 평가**: 모름(Again) / 애매(Hard) / 앎(Good) 직관적 복습 버튼 — "모름" 단어는 같은 세션에서 재출제
-- **교재 구조**: 단어를 Step(교재 단계) > Lesson 2단계로 관리. 복습 선택, 단어 목록, 대시보드 진행률을 Step별로 확인
-- **플래시카드 열람**: Step/Lesson별 단어를 랜덤 셔플 플래시카드로 자유 탐색
-- **듣기 모드**: 일본어 발음 자동 재생 (3초 간격) + Wake Lock으로 화면 꺼짐 방지
-- **단어 검색**: 단어, 읽기, 뜻으로 검색
-- **오답노트**: 오답률 기반 취약 단어 모아보기 및 집중 연습
-- **학습 통계**: 일별 복습 수, 정확도, 연속 학습일(streak) 추이
-- **업데이트 알림**: 새 버전 배포 시 앱 내 배너로 안내 + 원터치 업데이트
-- **GitHub 동기화**: 단어 데이터를 GitHub repo에 자동 커밋
-- **PWA**: 홈 화면 설치, 오프라인에서 기존 데이터 열람/복습 가능
+- **사진에서 단어 추출**: 교재의 새 단어 정리 칸, 손글씨 단어·문장, 손글씨 뜻이 붙은 인쇄 표현을 추출합니다. 저장 전에 수정·제외할 수 있고, 같은 Step·레슨에 이미 있는 동일 표기의 단어는 건너뜁니다.
+- **교재별 관리**: Step(교재 단계) > Lesson 구조로 분류합니다. 단어의 표기·읽기·뜻 수정, 개별 삭제, 레슨 전체 삭제를 지원합니다.
+- **간격 반복 복습**: FSRS가 다음 복습 시점을 계산합니다. 일반 복습은 날짜 단위, 학습·재학습 단계의 재확인은 시각 단위로 대상을 고릅니다. 모름(Again)으로 평가한 단어는 같은 세션에서 다시 나옵니다.
+- **복습 방향·순서 선택**: 일→한/한→일, 랜덤/등록 순서(ID 오름차순)를 지원합니다. 전체·레슨별로 복습하며, 태그가 있는 단어는 카테고리별 복습도 가능합니다.
+- **예문 학습**: 복습·열람 카드의 뒷면에 일본어 예문, 가나 읽기, 한국어 번역을 표시합니다. 예문과 읽기에서 학습 단어의 활용형을 강조합니다.
+- **플래시카드·듣기**: 검색하거나 필터링한 단어를 섞어서 열람합니다. 단어 발음을 들을 수 있고, 연속 듣기는 각 단어의 발음이 끝난 뒤 3초 후 다음 단어로 넘어갑니다. 지원 기기에서는 화면 꺼짐을 방지합니다.
+- **학습 현황**: 전체 단어 수, 현재 복습·재확인 대상 수, 레슨별로 한 번 이상 복습한 단어의 비율, 세션 완료 시 평가별 횟수를 표시합니다.
+- **백업·설정**: JSON으로 학습 기록을 내보내고 가져올 수 있습니다. 글자 크기 4단계와 학습 기록 초기화를 지원합니다.
+- **GitHub 동기화**: 단어 추가·수정·삭제를 저장소에 커밋하고, 앱 시작 시 최신 단어 데이터를 받습니다.
+- **PWA·업데이트 알림**: 홈 화면 설치와 이미 받아 둔 데이터의 오프라인 학습을 지원합니다. 새 앱 버전을 감지하면 홈 화면에서 업데이트를 안내합니다.
+
+## 예문 생성과 갱신
+
+예문은 [GitHub Actions 워크플로](.github/workflows/generate-sentences.yml)가 Gemini로 생성하고, 앱은 저장된 예문을 받아 표시합니다.
+
+- **정기 생성**: 매일 한국 시간 오전 7시에 실행하도록 설정되어 있습니다. 등록일(`createdAt`)과 오늘의 날짜 차이가 0~7일인 단어가 대상입니다.
+- **신규 등록**: 앱에서 새 단어를 저장하면 배치 실행을 요청합니다. PAT에 Actions 쓰기 권한이 없거나 요청에 실패하면 정기 실행에서 처리합니다.
+- **교체 주기**: 단어당 예문은 1건을 유지하며, 대상 단어의 예문을 하루 한 번 새 문장으로 교체합니다. 현재 단어 내용과 일치하는 예문을 같은 날 이미 생성했다면 건너뛰고, 등록 후 7일이 지나면 마지막 예문을 유지합니다.
+- **생성 한도**: 한 번 실행할 때 10단어씩 최대 5묶음(50단어)을 처리합니다. 한도를 넘긴 단어는 다음 실행으로 넘깁니다. 생성에 실패한 경우 단어 내용과 일치하는 기존 예문은 유지합니다.
+- **앱 반영**: 앱 시작, 화면 복귀, 복습 진입 시 예문을 다시 받습니다. 시작 시 강제 갱신을 제외하면 마지막 성공 이후 최소 10분 간격을 둡니다. 진행 중인 복습 세션은 처음 읽은 예문을 유지하며, 새로 받은 예문은 다음 복습부터 표시합니다.
+
+### 단어를 수정했을 때
+
+`sentences.json`의 `source`는 **예문 생성 당시 단어의 표기·읽기·뜻**을 보관합니다. 현재 단어와 하나라도 다르면 기존 예문을 화면에서 숨깁니다. `source`만 최신 값으로 덮어쓰면 옛 내용으로 만든 예문이 유효한 것으로 판단되므로, 예문을 재생성할 때 함께 갱신합니다.
+
+현재 앱의 단어 수정은 `words.json`만 갱신하며 예문 배치를 즉시 실행하지 않습니다. 최근 등록한 단어는 다음 배치에서 재생성을 시도하지만, **등록 후 7일이 지난 단어는 수정해도 재생성되지 않아 예문이 계속 숨겨질 수 있습니다.** 수정된 단어를 등록일과 무관하게 재생성하는 처리는 아직 구현되어 있지 않습니다.
+
+## 데이터 저장과 백업
+
+| 데이터 | 저장 위치와 역할 |
+|---|---|
+| [words.json](public/data/words.json) | 단어의 현재 값. ID, 표기, 읽기, 뜻, 품사, Step·레슨, 교재, 등록일 등을 저장 |
+| [sentences.json](public/data/sentences.json) | `wordId`로 단어와 연결. 생성일, 생성 당시 단어 값(`source`), 예문·읽기·번역을 저장 |
+| IndexedDB (`words`, `sentences`) | 브라우저에서 열람·오프라인 학습에 사용하는 단어·예문 사본 |
+| IndexedDB (`reviews`, `reviewLogs`) | 해당 브라우저의 FSRS 복습 상태와 평가 이력 |
+
+단어·예문 파일은 GitHub의 `main` 브랜치에서 우선 가져오고, 실패하면 앱 배포본의 파일을 사용합니다. 복습 기록은 브라우저에 저장되며 기기 간 자동 동기화는 지원하지 않습니다.
+
+설정의 **학습 기록 내보내기**는 단어·예문·복습 상태·평가 이력을 JSON으로 저장합니다. **학습 기록 가져오기**는 그중 복습 상태와 평가 이력만 복원하며, 기존 기록을 대체합니다. 단어와 예문은 저장소 데이터를 사용합니다.
+
+## 키 설정
+
+| 설정 | 용도 | 설정 위치 |
+|---|---|---|
+| [Gemini API 키](https://aistudio.google.com/apikey) | 교재 사진에서 단어 추출 | 앱의 설정 > Gemini API |
+| [GitHub PAT (Fine-grained)](https://github.com/settings/personal-access-tokens/new) | 단어 저장·수정·삭제, 신규 등록 후 예문 배치 실행 요청 | 앱의 설정 > GitHub |
+| `GEMINI_API_KEY` | GitHub Actions에서 예문 생성 | 저장소의 Settings > Secrets and variables > Actions에 repository secret으로 등록 |
+
+GitHub PAT는 대상 저장소의 **Contents: Read and write** 권한이 필요합니다. 신규 단어 저장 직후 예문 생성을 요청하려면 **Actions: Read and write** 권한도 부여합니다. 앱에 입력한 Gemini 키와 PAT는 해당 브라우저의 로컬 저장소에 저장되며, 예문 배치는 별도로 설정한 repository secret을 사용합니다.
 
 ## 기술 스택
 
 | 영역 | 기술 |
 |---|---|
-| Frontend | React 19, Tailwind CSS 4, Vite 6 |
-| 데이터 | IndexedDB (Dexie), GitHub Contents API |
-| 복습 알고리즘 | FSRS (ts-fsrs) |
-| AI | Gemini API (Vision) |
-| 배포 | GitHub Pages, GitHub Actions |
+| Frontend | React 19, React Router 7, Tailwind CSS 4, Vite 6 |
+| 데이터 | IndexedDB (Dexie 4), 정적 JSON, GitHub Contents API |
+| 복습 알고리즘 | FSRS (ts-fsrs 5) |
+| AI | Gemini API — 사진 추출·예문 생성, 일부 오류 시 모델 자동 대체 |
+| 음성·오프라인 | Web Speech API, Service Worker, Web App Manifest |
+| 배포·배치 | GitHub Pages, GitHub Actions |
+| 테스트 | Vitest 4 |
 
 ## 로컬 개발
 
+Node.js 24를 사용합니다([.nvmrc](.nvmrc)). nvm을 사용한다면 먼저 `nvm use`로 버전을 맞춥니다.
+
 ```bash
-npm install
+npm ci
 npm run dev -- --host
 ```
 
-http://localhost:5173/j-voca/ 에서 확인.
+[로컬 앱](http://localhost:5173/j-voca/)에서 확인합니다.
 
-## 테스트
+빌드·미리보기·테스트:
 
 ```bash
+npm run build
+npm run preview
 npm test
+npm run test:watch
 ```
 
-## 필요한 키
+테스트는 FSRS 복습 계산, Step·레슨 및 단어 필터링, Gemini 응답 처리, 예문 유효성, 실제 JSON 데이터의 정합성 등을 검증합니다.
 
-| 키 | 발급처 |
-|---|---|
-| Gemini API Key | https://aistudio.google.com/apikey |
-| GitHub PAT (Fine-grained) | https://github.com/settings/personal-access-tokens/new |
+예문 배치를 로컬에서 실행하려면 `GEMINI_API_KEY` 환경 변수를 설정한 뒤 실행합니다. 생성 대상은 정기 배치와 같고, 결과는 로컬 `public/data/sentences.json`에 저장됩니다.
 
-GitHub PAT에는 해당 repo의 Contents 읽기/쓰기 권한이 필요합니다.
+```bash
+node scripts/generate-sentences.mjs
+```
+
+## 배포
+
+[배포 워크플로](.github/workflows/deploy.yml)는 `main` 또는 `feature/*` 브랜치에 push하면 빌드한 `dist`를 GitHub Pages에 배포합니다. `words.json`·`sentences.json`만 바뀐 경우에는 배포를 실행하지 않으며, 앱이 저장소에서 최신 데이터를 직접 받습니다. 앱의 기본 경로는 `/j-voca/`입니다.

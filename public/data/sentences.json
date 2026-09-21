@@ -12323,6 +12323,126 @@
       "sentence": "母を[[てつだいます]]。",
       "reading": "ははを [[てつだいます]]。",
       "meaning": "어머니를 도와드려요."
+    },
+    {
+      "wordId": 1038,
+      "date": "2026-09-21",
+      "source": {
+        "word": "遅い",
+        "reading": "おそい",
+        "meaning": "늦다"
+      },
+      "sentence": "今日は[[遅い]]ですね。",
+      "reading": "きょうは [[おそい]]ですね。",
+      "meaning": "오늘은 늦네요."
+    },
+    {
+      "wordId": 1039,
+      "date": "2026-09-21",
+      "source": {
+        "word": "いないですね",
+        "reading": "いないですね",
+        "meaning": "없네요"
+      },
+      "sentence": "教室に[[いないですね]]。",
+      "reading": "きょうしつに [[いないですね]]。",
+      "meaning": "교실에 없네요."
+    },
+    {
+      "wordId": 1040,
+      "date": "2026-09-21",
+      "source": {
+        "word": "ある",
+        "reading": "ある",
+        "meaning": "있다(움직이지 않는 것)"
+      },
+      "sentence": "机の上に本が[[ある]]。",
+      "reading": "つくえのうえに ほんが [[ある]]。",
+      "meaning": "책상 위에 책이 있다."
+    },
+    {
+      "wordId": 1041,
+      "date": "2026-09-21",
+      "source": {
+        "word": "ない",
+        "reading": "ない",
+        "meaning": "없다"
+      },
+      "sentence": "お金が[[ない]]です。",
+      "reading": "おかねが [[ない]]です。",
+      "meaning": "돈이 없어요."
+    },
+    {
+      "wordId": 1042,
+      "date": "2026-09-21",
+      "source": {
+        "word": "いる",
+        "reading": "いる",
+        "meaning": "있다(움직이는 것)"
+      },
+      "sentence": "公園に犬が[[いる]]。",
+      "reading": "こうえんに いぬが [[いる]]。",
+      "meaning": "공원에 개가 있다."
+    },
+    {
+      "wordId": 1043,
+      "date": "2026-09-21",
+      "source": {
+        "word": "いない",
+        "reading": "いない",
+        "meaning": "없다"
+      },
+      "sentence": "部屋に誰も[[いない]]。",
+      "reading": "へやに だれも [[いない]]。",
+      "meaning": "방에 아무도 없다."
+    },
+    {
+      "wordId": 1044,
+      "date": "2026-09-21",
+      "source": {
+        "word": "風邪をひく",
+        "reading": "かぜをひく",
+        "meaning": "감기에 걸리다"
+      },
+      "sentence": "冬には[[風邪をひきます]]。",
+      "reading": "ふゆには [[かぜを ひきます]]。",
+      "meaning": "겨울에는 감기에 걸립니다."
+    },
+    {
+      "wordId": 1045,
+      "date": "2026-09-21",
+      "source": {
+        "word": "止まる",
+        "reading": "とまる",
+        "meaning": "멈추다"
+      },
+      "sentence": "車が[[止まる]]。",
+      "reading": "くるまが [[とまる]]。",
+      "meaning": "차가 멈춘다."
+    },
+    {
+      "wordId": 1046,
+      "date": "2026-09-21",
+      "source": {
+        "word": "急用",
+        "reading": "きゅうよう",
+        "meaning": "급한 일, 급한 업무"
+      },
+      "sentence": "[[急用]]ができました。",
+      "reading": "[[きゅうよう]]ができました。",
+      "meaning": "급한 일이 생겼습니다."
+    },
+    {
+      "wordId": 1047,
+      "date": "2026-09-21",
+      "source": {
+        "word": "まったく もう",
+        "reading": "まったく もう",
+        "meaning": "정말로, 참으로"
+      },
+      "sentence": "[[まったく もう]]困ります。",
+      "reading": "[[まったく もう]]こまります。",
+      "meaning": "정말이지 곤란합니다."
     }
   ]
 }

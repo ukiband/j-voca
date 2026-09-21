@@ -11,7 +11,8 @@ export default function VerbMetadataFields({ word, onChange }) {
         <select aria-label="동사 분류" value={selected} onChange={e => onChange({
           verbGroup: e.target.value ? Number(e.target.value) : null,
           isDictionaryForm: !!e.target.value,
-          potentialAllowed: false,
+          // 1류↔2류처럼 분류만 고칠 때는 가능형 체크를 유지하고, 연습 제외로 바꿀 때만 끈다
+          potentialAllowed: e.target.value ? word.potentialAllowed === true : false,
         })} className="flex-1 min-w-0 px-2 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <option value="">연습 제외 / 분류 미확인</option>
           <option value="1">사전형 · 1류</option>

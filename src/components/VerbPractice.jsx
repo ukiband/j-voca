@@ -66,7 +66,6 @@ function Practice() {
       <div>
         <Link to="/lesson-select" className="text-sm text-slate-500 dark:text-slate-400">← 복습</Link>
         <h1 className="text-xl font-bold mt-4">동사 활용</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">사전형을 보고 원하는 형태로 바꿔 보세요.</p>
       </div>
       {verbs.length ? <>
         <fieldset className="space-y-3">
@@ -81,19 +80,12 @@ function Practice() {
             </label>
           ))}
         </fieldset>
-        <div className="text-sm text-slate-500 dark:text-slate-400 space-y-2">
-          <p>모든 Step · 사전형 동사 {verbs.length}개</p>
-          <p>선택한 형태의 문제를 모두 섞어 연습합니다. 같은 표기와 읽기의 중복 동사는 한 번만 나옵니다.</p>
-          {forms.includes('potential') && <p>가능형 연습에 적절하지 않은 동사는 해당 문제에서 제외합니다.</p>}
-          <p>학습 기록에 반영되지 않으며, 언제든 끝낼 수 있습니다.</p>
-        </div>
         <button onClick={start} disabled={!questionCount} className="w-full py-4 rounded-xl bg-indigo-600 text-white font-semibold disabled:opacity-40">
-          {forms.length ? `전체 ${questionCount}문제 시작` : '연습할 형태를 선택하세요'}
+          {forms.length ? '시작' : '연습할 형태를 선택하세요'}
         </button>
         {forms.length > 0 && questionCount === 0 && <p role="status" className="text-sm text-center text-slate-500 dark:text-slate-400">선택한 형태로 연습할 수 있는 동사가 없습니다.</p>}
       </> : <div className="py-10 text-center space-y-3">
         <p className="font-medium">연습할 사전형 동사가 없습니다.</p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">사전형으로 등록되고 동사 분류가 확인된 단어가 대상입니다.</p>
         <Link to="/words" className="inline-block text-indigo-600 dark:text-indigo-400 text-sm">단어 목록 보기</Link>
       </div>}
     </div>

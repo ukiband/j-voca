@@ -13,6 +13,20 @@ export default function DateTimeQuestion() {
     if (revealed) answerRef.current?.scrollIntoView({ block: 'nearest' });
   }, [revealed]);
 
+  // 홈을 띄운 채 백그라운드로 갔다가 돌아오면 마운트가 다시 일어나지 않으므로,
+  // 화면이 다시 보일 때 숨김 시간이 지났는지 한 번 더 확인해서 질문을 낸다.
+  useEffect(() => {
+    if (question) return;
+    const handler = () => {
+      if (document.visibilityState === 'visible' && shouldShowDateTimeQuestion()) {
+        setRevealed(false);
+        setQuestion(createDateTimeQuestion());
+      }
+    };
+    document.addEventListener('visibilitychange', handler);
+    return () => document.removeEventListener('visibilitychange', handler);
+  }, [question]);
+
   useEffect(() => {
     if (!question) return;
     const dialog = dialogRef.current;

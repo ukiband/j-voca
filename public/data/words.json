@@ -1,5 +1,5 @@
 {
-  "lastId": 1027,
+  "lastId": 1037,
   "words": [
     {
       "word": "おおい",
@@ -11529,6 +11529,116 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
       "id": 1027
+    },
+    {
+      "word": "ページ",
+      "reading": "ぺーじ",
+      "meaning": "페이지",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1028
+    },
+    {
+      "word": "開ける",
+      "reading": "あける",
+      "meaning": "펴다, 열다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1029
+    },
+    {
+      "word": "レポート",
+      "reading": "れぽーと",
+      "meaning": "리포트",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1030
+    },
+    {
+      "word": "提出する",
+      "reading": "ていしゅつする",
+      "meaning": "제출하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1031
+    },
+    {
+      "word": "自分で",
+      "reading": "じぶんで",
+      "meaning": "스스로, 혼자서",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1032
+    },
+    {
+      "word": "教科書",
+      "reading": "きょうかしょ",
+      "meaning": "교과서",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1033
+    },
+    {
+      "word": "では",
+      "reading": "では",
+      "meaning": "그러면",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1034
+    },
+    {
+      "word": "書いて",
+      "reading": "かいて",
+      "meaning": "쓰고 나서",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1035
+    },
+    {
+      "word": "提出して",
+      "reading": "ていしゅつして",
+      "meaning": "제출하고 나서",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1036
+    },
+    {
+      "word": "てつだう",
+      "reading": "てつだう",
+      "meaning": "도와주다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1037
     }
   ]
 }

@@ -139,7 +139,70 @@ describe('validateSentence', () => {
 
   it('reading 에 한자가 남아 있으면 거부, 가타카나는 허용', () => {
     expect(validateSentence({ ...good, reading: 'ともだちと [[歌を うたいます]]。' })).toMatch(/한자/);
-    expect(validateSentence({ ...good, reading: 'コーヒーを [[のみます]]。' })).toBeNull();
+    expect(validateSentence({ ...good, sentence: 'コーヒーを[[飲みます]]。', reading: 'コーヒーを [[のみます]]。' })).toBeNull();
+  });
+
+  it('가타카나는 강조 안팎 모두 원문 그대로 유지한다', () => {
+    const piano = { ...good, sentence: '妹は[[ピアノを弾きます]]。', reading: 'いもうとは [[ピアノを ひきます]]。' };
+    expect(validateSentence(piano)).toBeNull();
+    expect(validateSentence({ ...piano, reading: 'いもうとは [[ぴあのを ひきます]]。' })).toMatch(/표기/);
+    const coffee = { ...good, sentence: '[[時々]]コーヒーを飲みます。', reading: '[[ときどき]] コーヒーを のみます。' };
+    expect(validateSentence(coffee)).toBeNull();
+    expect(validateSentence({ ...coffee, reading: '[[ときどき]] こーひーを のみます。' })).toMatch(/표기/);
+    expect(validateSentence({ ...coffee, reading: '[[ときどき]] コヒーを のみます。' })).toMatch(/표기/);
+  });
+
+  it('원문과 다른 조사·어미·불필요한 글자·문장부호를 거부한다', () => {
+    const cases = [
+      ['この人は私の[[息子]]です。', 'このひとわ わたしの [[むすこ]]です。'],
+      ['[[最初]]は分かりません。', '[[さいしょ]]は わからないです。'],
+      ['昔の事を[[思い出しました]]。', 'むかしの ことをつ [[おもいだしました]]。'],
+      ['これは[[ペン]]ですか？', 'これは [[ペン]]ですか。'],
+    ];
+    for (const [sentence, reading] of cases) {
+      expect(validateSentence({ ...good, sentence, reading })).toMatch(/표기/);
+    }
+  });
+
+  it('문장이 같아도 읽기의 강조 위치가 다른 부분이면 거부한다', () => {
+    expect(validateSentence({ ...good, reading: '[[ともだち]]と うたを うたいます。' })).toMatch(/강조 위치/);
+  });
+
+  it('한자와 숫자·조수사의 읽기, 띄어쓰기 차이는 허용한다', () => {
+    const cases = [
+      ['このパンは[[300円]]です。', 'この パンは [[さんびゃくえん]]です。'],
+      ['[[3日]]に会います。', '[[みっか]]に あいます。'],
+      ['[[時々]]本を読みます。', '[[ときどき]] ほんを よみます。'],
+      ['[[行ったり来たり]]します。', '[[いったり きたり]] します。'],
+      ['[[お茶]]を飲みます。', '[[おちゃ]]を のみます。'],
+      ['[[3人]]います。', '[[3にん]] います。'],
+      ['[[3月4日]]です。', '[[3がつ よっか]]です。'],
+    ];
+    for (const [sentence, reading] of cases) {
+      expect(validateSentence({ ...good, sentence, reading })).toBeNull();
+    }
+  });
+
+  it('한자를 숫자로 바꾸거나 원문 숫자를 다른 숫자로 바꾸면 거부한다', () => {
+    expect(validateSentence({ ...good, sentence: '[[猫]]がいます。', reading: '[[123]]が います。' })).toMatch(/표기/);
+    expect(validateSentence({ ...good, sentence: '[[3人]]います。', reading: '[[4にん]]います。' })).toMatch(/표기/);
+  });
+
+  it('탁점의 유니코드 결합 방식이 달라도 같은 표기로 인정한다', () => {
+    const candidate = { ...good, sentence: '学校で[[ゴミ]]を拾います。', reading: 'がっこうで [[ゴミ]]を ひろいます。'.normalize('NFD') };
+    expect(validateSentence(candidate)).toBeNull();
+  });
+
+  it('일본어 원문 또는 읽기에 한국어가 섞이면 거부한다', () => {
+    expect(validateSentence({ ...good, sentence: '외출할 때 [[帽子をかぶります]]。' })).toMatch(/한국어/);
+    expect(validateSentence({ ...good, reading: '친구와 [[うたをうたいます]]。' })).toMatch(/한국어/);
+  });
+
+  it('정규식에 쓰이는 기호도 원문 그대로 비교한다', () => {
+    const candidate = { ...good, sentence: '[[ペン]]（赤）を買います。', reading: '[[ペン]]（あか）を かいます。' };
+    expect(validateSentence(candidate)).toBeNull();
+    expect(validateSentence({ ...good, sentence: '[[ペン]](赤)を買います。', reading: '[[ペン]](あか)を かいます。' })).toBeNull();
+    expect(validateSentence({ ...good, sentence: '[[ペン]](赤)を買います。', reading: '[[ペン]]あかを かいます。' })).not.toBeNull();
   });
 
   it('sentence 와 reading 각각 [[ ]] 가 정확히 1개여야 한다', () => {
@@ -153,10 +216,15 @@ describe('validateSentence', () => {
     expect(validateSentence({ ...good, sentence: '友だちと[[歌を歌います]]。]]' })).not.toBeNull();
   });
 
+  it('빈 강조 표식은 거부', () => {
+    expect(validateSentence({ ...good, sentence: '友だちと[[]]歌を歌います。' })).toMatch(/비어/);
+    expect(validateSentence({ ...good, reading: 'ともだちと [[ ]]うたをうたいます。' })).toMatch(/비어/);
+  });
+
   it('같은 단어의 기존 예문과 (표식을 뗀) 문장이 같으면 거부', () => {
     const existing = [{ sentence: '友だちと歌を[[歌います]]。' }];
     expect(validateSentence(good, existing)).toMatch(/기존/);
-    expect(validateSentence({ ...good, sentence: '母と[[歌を歌います]]。' }, existing)).toBeNull();
+    expect(validateSentence({ ...good, sentence: '母と[[歌を歌います]]。', reading: 'ははと [[うたを うたいます]]。' }, existing)).toBeNull();
   });
 });
 

@@ -37,7 +37,7 @@ describe('public/data/sentences.json', () => {
     expect(bad.map(s => s.wordId)).toEqual([]);
   });
 
-  it('모든 항목이 저장 규칙(빈 값·reading 한자·[[ ]] 1회)을 만족한다', () => {
+  it('모든 항목이 저장 규칙(빈 값·reading 한자·[[ ]] 1회·원문/읽기 표기 대응)을 만족한다', () => {
     const bad = data.sentences
       .map(s => ({ wordId: s.wordId, date: s.date, reason: validateSentence(s) }))
       .filter(r => r.reason);

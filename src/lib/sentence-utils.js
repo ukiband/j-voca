@@ -58,6 +58,34 @@ function countHighlights(text) {
   return typeof text === 'string' ? [...text.matchAll(HIGHLIGHT_RE)].length : 0;
 }
 
+/** 한자·숫자 읽기와 띄어쓰기를 제외하면 원문을 그대로 유지해야 한다. */
+function matchesReadingSegment(sentence, reading) {
+  const compact = text => text.normalize('NFC').replace(/\s/g, '');
+  const kana = '[\\p{Script=Hiragana}ー]+';
+  const parts = compact(sentence).split(/([\p{Script=Han}0-9０-９]+)/u);
+  const pattern = parts.map((part, index) => {
+    if (index % 2 === 0) return part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // 숫자+조수사의 불규칙 읽기(300円 → さんびゃくえん, 3日 → みっか)도 허용한다.
+    // 숫자를 그대로 적을 때는 원래 숫자와 같아야 한다 (3人 → 4にん 방지).
+    if (!/[0-9０-９]/u.test(part)) return kana;
+    const withNumbers = part.match(/[\p{Script=Han}]+|[0-9０-９]+/gu)
+      .map(run => HAN_RE.test(run) ? kana : `(?:${run}|${kana})`).join('');
+    return `(?:${kana}|${withNumbers})`;
+  }).join('');
+  return new RegExp(`^${pattern}$`, 'u').test(compact(reading));
+}
+
+/** 강조 앞·안·뒤를 따로 비교해, 읽기의 강조 위치가 다른 단어로 옮겨진 경우도 거부한다. */
+function hasMatchingReading(sentence, reading) {
+  const split = text => {
+    const match = [...text.matchAll(HIGHLIGHT_RE)][0];
+    return [text.slice(0, match.index), match[1], text.slice(match.index + match[0].length)];
+  };
+  const sentenceParts = split(sentence);
+  const readingParts = split(reading);
+  return sentenceParts.every((part, index) => matchesReadingSegment(part, readingParts[index]));
+}
+
 /**
  * 예문의 source(생성 당시 단어 표기·읽기·뜻)가 현재 단어와 일치하는지 본다.
  * 사용자가 앱에서 단어를 고친 뒤에는 옛 뜻으로 만든 예문이 어긋날 수 있어, 세 필드가 모두 같을 때만 사용한다.
@@ -100,6 +128,7 @@ export function pickSentence(sentences, today) {
  * - sentence/reading/meaning 중 빈 값이 있으면 거부
  * - reading 에 한자가 남아 있으면 거부 (읽기 줄은 가나만 있어야 발음용으로 쓸 수 있다)
  * - sentence 와 reading 각각에 [[ ]] 가 정확히 1개씩 있어야 한다 (0개면 강조 불가, 2개 이상이면 위치가 모호). 짝이 깨진 표식도 거부
+ * - 한자·숫자의 읽기와 띄어쓰기를 제외한 원문 표기(가타카나·조사·문장부호 등) 및 강조 위치를 유지해야 한다
  * - 같은 단어에 이미 저장된 문장과 표식을 뗀 본문이 같으면 거부 (다른 상황·표현을 요구했는데 반복한 경우)
  */
 export function validateSentence(candidate, existing = []) {
@@ -109,12 +138,17 @@ export function validateSentence(candidate, existing = []) {
     if (typeof value !== 'string' || value.trim() === '') return `${name} 이 비어 있음`;
   }
   if (HAN_RE.test(reading)) return 'reading 에 한자가 남아 있음';
+  if (/\p{Script=Hangul}/u.test(sentence + reading)) return '일본어 예문 또는 읽기에 한국어가 섞여 있음';
   if (countHighlights(sentence) !== 1) return 'sentence 의 [[ ]] 가 정확히 1개가 아님';
   if (countHighlights(reading) !== 1) return 'reading 의 [[ ]] 가 정확히 1개가 아님';
   // 짝이 맞는 표식을 뗀 뒤에도 "[[" 나 "]]" 가 남아 있으면 표식이 깨진 것이다
   if (/\[\[|\]\]/.test(stripHighlight(sentence)) || /\[\[|\]\]/.test(stripHighlight(reading))) {
     return '짝이 맞지 않는 표식이 있음';
   }
+  if ([sentence, reading].some(text => [...text.matchAll(HIGHLIGHT_RE)][0][1].trim() === '')) {
+    return '강조한 목표 단어가 비어 있음';
+  }
+  if (!hasMatchingReading(sentence, reading)) return 'sentence 와 reading 의 표기 또는 강조 위치가 다름';
   const plain = stripHighlight(sentence).trim();
   if (existing.some(e => stripHighlight(e?.sentence).trim() === plain)) return '기존 예문과 같은 문장';
   return null;

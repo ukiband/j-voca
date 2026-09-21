@@ -45,6 +45,12 @@ describe('사전형 동사 활용', () => {
     expect(conjugateVerb(verb('持って来る', 'もってくる', 3), 'nai')).toMatchObject({ word: '持って来ない', reading: 'もってこない' });
     expect(conjugateVerb(verb('学校に行く', 'がっこうにいく'), 'te')).toMatchObject({ word: '学校に行って', reading: 'がっこうにいって' });
   });
+
+  it('て형 뒤에 붙은 히라가나 いく도 行く 예외로 활용하고 다른 く동사는 건드리지 않는다', () => {
+    expect(conjugateVerb(verb('持っていく', 'もっていく'), 'te').word).toBe('持っていって');
+    expect(conjugateVerb(verb('ついていく', 'ついていく'), 'ta').word).toBe('ついていった');
+    expect(conjugateVerb(verb('ピアノをひく', 'ぴあのをひく'), 'te').word).toBe('ピアノをひいて');
+  });
 });
 
 describe('동사 대상 검증과 저장', () => {

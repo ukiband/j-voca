@@ -59,7 +59,9 @@ export function normalizeVerbMetadata(entry) {
     isDictionaryForm: isDictionaryForm === true,
     potentialAllowed: potentialAllowed === true,
   };
+  // 사전형이 아닌 동사는 분류도 비운다. 마이그레이션 데이터·프롬프트 규칙("사전형이 아니면 null")과 맞춘다.
   if (!isPracticeVerb(normalized)) {
+    normalized.verbGroup = null;
     normalized.isDictionaryForm = false;
     normalized.potentialAllowed = false;
   }
@@ -76,7 +78,8 @@ export function editVerbEntry(entry, changes) {
   };
 }
 
-const isIku = text => /[行往逝]く$/.test(text) || /(?:^|[\sをにはへとが])(?:いく|ゆく)$/.test(text);
+// 히라가나 いく는 조사 뒤(学校にいく)와 て형 복합동사 뒤(持っていく·ついていく)만 行く로 본다. ひく·かく 같은 다른 く동사와 섞이지 않게 앞 글자를 제한한다.
+const isIku = text => /[行往逝]く$/.test(text) || /(?:^|[\sをにはへとがてで])(?:いく|ゆく)$/.test(text);
 const isAru = text => /(?:^|[\sをにはへとが])ある$/.test(text) || /[有在]る$/.test(text);
 
 export function conjugateVerb(word, form) {

@@ -56,7 +56,8 @@ const RESPONSE_JSON_SCHEMA = {
       reading: { type: 'string' },
       meaning: { type: 'string' },
       pos: { type: 'string' },
-      verbGroup: { type: ['integer', 'null'], enum: [1, 2, 3, null] },
+      // null 을 섞은 enum 은 Gemini 스키마에서 수용이 불확실해 범위 제한으로 대신한다
+      verbGroup: { type: ['integer', 'null'], minimum: 1, maximum: 3 },
       isDictionaryForm: { type: 'boolean' },
       potentialAllowed: { type: 'boolean' },
     },

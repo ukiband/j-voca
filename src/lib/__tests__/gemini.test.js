@@ -453,7 +453,7 @@ describe('extractWordsFromImage 모델 체인', () => {
     const words = await extractWordsFromImage('base64', 'image/jpeg', 2, 3, '', { delay });
     expect(words).toHaveLength(3);
     expect(words[0]).toMatchObject({ word: '帰る', verbGroup: 1, isDictionaryForm: true, potentialAllowed: true });
-    expect(words[1]).toMatchObject({ word: '行きます', reading: 'いきます', isDictionaryForm: false, potentialAllowed: false });
+    expect(words[1]).toMatchObject({ word: '行きます', reading: 'いきます', verbGroup: null, isDictionaryForm: false, potentialAllowed: false });
     expect(words[2]).toMatchObject({ word: '書く', verbGroup: null, isDictionaryForm: false });
   });
 });

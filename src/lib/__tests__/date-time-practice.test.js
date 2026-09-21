@@ -9,9 +9,11 @@ describe('날짜·시간 질문', () => {
     expect(result.answer).toBe('今日は1月1日です。');
   });
 
-  it('시각은 24시간제로 표시하고 정각에는 분을 생략한다', () => {
-    expect(createDateTimeQuestion(new Date(2026, 8, 22, 23, 59), 'time').answer).toBe('今は23時59分です。');
-    expect(createDateTimeQuestion(new Date(2026, 8, 23, 0, 0), 'time').answer).toBe('今は0時です。');
+  it('시각은 午前·午後 12시간제로 표시하고 정각에는 분을 생략한다', () => {
+    expect(createDateTimeQuestion(new Date(2026, 8, 22, 9, 5), 'time').answer).toBe('今は午前9時5分です。');
+    expect(createDateTimeQuestion(new Date(2026, 8, 22, 23, 59), 'time').answer).toBe('今は午後11時59分です。');
+    expect(createDateTimeQuestion(new Date(2026, 8, 23, 0, 0), 'time').answer).toBe('今は午前0時です。');
+    expect(createDateTimeQuestion(new Date(2026, 8, 23, 12, 0), 'time').answer).toBe('今は午後0時です。');
   });
 
   it('처음에는 표시하고, 닫은 시각부터 정확히 한 시간 동안 숨기며 설정을 껐다 켜도 시간을 유지한다', () => {

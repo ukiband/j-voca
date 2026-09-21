@@ -33,11 +33,13 @@ export function createDateTimeQuestion(date = new Date(), kind = Math.random() <
       answer: `今日は${month + 1}月${day}日です。`,
     };
   }
+  // 회화에서 쓰는 12시간제. 자정은 午前0時, 정오는 午後0時로 적는다(NHK 표기 기준).
   const hour = date.getHours();
   const minute = date.getMinutes();
+  const period = hour < 12 ? '午前' : '午後';
   return {
     question: '今、何時何分ですか。',
     meaning: '지금은 몇 시 몇 분인가요?',
-    answer: `今は${hour}時${minute ? `${minute}分` : ''}です。`,
+    answer: `今は${period}${hour % 12}時${minute ? `${minute}分` : ''}です。`,
   };
 }

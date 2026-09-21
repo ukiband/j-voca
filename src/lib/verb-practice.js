@@ -11,7 +11,7 @@ export function startVerbPractice(words, forms) {
   return { queue, initialCount: queue.length, index: 0, flipped: false };
 }
 
-// 세션 상태만 바꾼다. 빠르게 연속 클릭해도 앞면에서 다음 문제로 넘어갈 수 없다.
+// 연속 클릭으로 다음 카드의 앞면까지 건너뛰지 않게 한다.
 export function verbPracticeReducer(state, action) {
   if (action.type === 'start') return action.session;
   if (!state || !state.queue[state.index]) return state;

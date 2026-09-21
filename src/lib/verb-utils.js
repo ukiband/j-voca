@@ -1,4 +1,3 @@
-// 사전형으로 확인한 동사만 활용한다. 사전형 복원이나 어미를 통한 동사 분류 추측은 하지 않는다.
 export const VERB_FORMS = [
   { id: 'te', label: 'て형', example: '書く → 書いて' },
   { id: 'nai', label: 'ない형', example: '書く → 書かない' },
@@ -37,7 +36,6 @@ export function verbReading(word) {
   return reading;
 }
 
-/** 메타데이터와 표기·읽기의 어미가 맞지 않으면 출제하지 않는다. */
 export function isPracticeVerb(word) {
   if (word?.pos !== '동사' || word.isDictionaryForm !== true || ![1, 2, 3].includes(word.verbGroup)) return false;
   const text = textOf(word.word);
@@ -52,7 +50,6 @@ export function isPracticeVerb(word) {
   return word.verbGroup === 1 || ending === 'る';
 }
 
-/** 저장 전에도 적용하여 불명확한 분류나 어미가 맞지 않는 항목의 출제를 막는다. */
 export function normalizeVerbMetadata(entry) {
   const { verbGroup, isDictionaryForm, potentialAllowed, ...base } = entry;
   if (base.pos !== '동사') return base;
@@ -69,7 +66,7 @@ export function normalizeVerbMetadata(entry) {
   return normalized;
 }
 
-/** 표기·읽기를 수정하면 종전 동사의 분류를 자동 승계하지 않는다. 사용자가 다시 확인할 수 있다. */
+// 표기·읽기가 바뀌면 다른 동사가 될 수 있으므로 분류를 다시 확인한다.
 export function editVerbEntry(entry, changes) {
   const changed = ['word', 'reading'].some(key => Object.hasOwn(changes, key) && changes[key] !== entry[key]);
   return {
@@ -79,7 +76,6 @@ export function editVerbEntry(entry, changes) {
   };
 }
 
-// ある의 부정형은 らない가 아니며, 行く의 음편은 일반적인 く와 다르다.
 const isIku = text => /[行往逝]く$/.test(text) || /(?:^|[\sをにはへとが])(?:いく|ゆく)$/.test(text);
 const isAru = text => /(?:^|[\sをにはへとが])ある$/.test(text) || /[有在]る$/.test(text);
 
@@ -131,7 +127,6 @@ export function conjugateVerb(word, form) {
   };
 }
 
-/** 레슨만 다른 같은 표기·읽기·분류는 한 번 출제한다. 동음이의어는 읽기만으로 합치지 않는다. */
 export function getPracticeVerbs(words) {
   const unique = new Map();
   for (const word of words) {
@@ -144,7 +139,6 @@ export function getPracticeVerbs(words) {
   return [...unique.values()];
 }
 
-/** 복습 일정과 학습 기록을 참조하지 않는다. 중복되거나 잘못된 형태 선택도 걸러 낸다. */
 export function buildVerbQuestions(words, forms) {
   const selected = VERB_FORMS.filter(f => forms.includes(f.id));
   return getPracticeVerbs(words).flatMap(word => selected.flatMap(form => {

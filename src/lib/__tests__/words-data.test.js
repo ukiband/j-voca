@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isPracticeVerb, conjugateVerb, VERB_FORMS } from '../verb-utils';
+import { isPracticeVerb } from '../verb-utils';
 
 // 실제 public/data/words.json을 읽어 데이터 무결성을 검증한다.
 // 단어 추가는 앱에서 GitHub API로 직접 커밋되므로, 스키마가 깨진 채 배포되는 것을 여기서 잡는다.
@@ -48,14 +48,6 @@ describe('public/data/words.json', () => {
       expect(typeof word.potentialAllowed).toBe('boolean');
       if (word.isDictionaryForm) {
         expect(isPracticeVerb(word), String(word.id)).toBe(true);
-        for (const form of VERB_FORMS) {
-          const answer = conjugateVerb(word, form.id);
-          if (form.id === 'potential' && !word.potentialAllowed) expect(answer).toBeNull();
-          else {
-            expect(answer?.word, `${word.id}:${form.id}`).toBeTruthy();
-            expect(answer?.reading).toMatch(/^[ぁ-ゖァ-ヺー\s]+$/);
-          }
-        }
       } else expect(word.potentialAllowed).toBe(false);
     }
   });

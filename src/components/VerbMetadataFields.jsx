@@ -1,6 +1,5 @@
 import { isPracticeVerb } from '../lib/verb-utils';
 
-/** 입력 확인과 기존 단어 수정에서 같은 분류 UI를 쓴다. 원형을 새로 입력하는 필드는 없다. */
 export default function VerbMetadataFields({ word, onChange }) {
   if (word.pos !== '동사') return null;
   const selected = word.isDictionaryForm && word.verbGroup ? String(word.verbGroup) : '';

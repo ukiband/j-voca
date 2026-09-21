@@ -32,7 +32,6 @@ function utf8ToBase64(str) {
 // 2. 실패하면 정적 빌드에 포함된 파일 (배포 시점 데이터)
 // 둘 다 실패하면 null 을 돌려 호출 측이 "받지 못함"과 "빈 파일"을 구분할 수 있게 한다.
 async function fetchPublicData(filePath) {
-  // 개발 중에는 현재 체크아웃의 마이그레이션 결과를 확인한다. 배포 앱의 main 우선 정책은 유지한다.
   if (import.meta.env.DEV) {
     try {
       const res = await fetch(import.meta.env.BASE_URL + filePath.replace(/^public\//, ''), { cache: 'no-store' });

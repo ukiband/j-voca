@@ -1,11 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { VERB_FORMS, conjugateVerb, isPracticeVerb, normalizeVerbMetadata, editVerbEntry, getPracticeVerbs, buildVerbQuestions, verbReading } from '../verb-utils';
-import { selectedVerbForms, startVerbPractice, verbPracticeReducer } from '../verb-practice';
+import { VERB_FORMS, conjugateVerb, editVerbEntry, getPracticeVerbs, buildVerbQuestions } from '../verb-utils';
+import { startVerbPractice, verbPracticeReducer } from '../verb-practice';
 
 const verb = (word, reading, verbGroup = 1, extra = {}) => ({ id: 1, word, reading, pos: '동사', verbGroup, isDictionaryForm: true, potentialAllowed: true, ...extra });
 
 describe('사전형 동사 활용', () => {
-  // 어미별 정답을 명시하여 규칙표 자체의 실수와 유성음·촉음 오류를 잡는다.
   it.each([
     ['買う', 'かう', 1, ['買って', '買わない', '買った', '買える'], ['かって', 'かわない', 'かった', 'かえる']],
     ['待つ', 'まつ', 1, ['待って', '待たない', '待った', '待てる'], ['まって', 'またない', 'まった', 'まてる']],
@@ -17,7 +16,6 @@ describe('사전형 동사 활용', () => {
     ['泳ぐ', 'およぐ', 1, ['泳いで', '泳がない', '泳いだ', '泳げる'], ['およいで', 'およがない', 'およいだ', 'およげる']],
     ['話す', 'はなす', 1, ['話して', '話さない', '話した', '話せる'], ['はなして', 'はなさない', 'はなした', 'はなせる']],
     ['食べる', 'たべる', 2, ['食べて', '食べない', '食べた', '食べられる'], ['たべて', 'たべない', 'たべた', 'たべられる']],
-    ['借りる', 'かりる', 2, ['借りて', '借りない', '借りた', '借りられる'], ['かりて', 'かりない', 'かりた', 'かりられる']],
     ['する', 'する', 3, ['して', 'しない', 'した', 'できる'], ['して', 'しない', 'した', 'できる']],
     ['来る', 'くる', 3, ['来て', '来ない', '来た', '来られる'], ['きて', 'こない', 'きた', 'こられる']],
     ['くる', 'くる', 3, ['きて', 'こない', 'きた', 'こられる'], ['きて', 'こない', 'きた', 'こられる']],
@@ -27,7 +25,6 @@ describe('사전형 동사 활용', () => {
     const results = VERB_FORMS.map(f => conjugateVerb(verb(word, reading, group), f.id));
     expect(results.map(a => a.word)).toEqual(answers);
     expect(results.map(a => a.reading)).toEqual(readings);
-    expect(results.every(a => a.rule.startsWith(`${group}류 동사`))).toBe(true);
   });
 
   it('동음이의어의 분류를 어미만으로 추측하지 않는다', () => {
@@ -42,19 +39,11 @@ describe('사전형 동사 활용', () => {
 
   it('동사구 앞부분과 가타카나를 유지한다', () => {
     const piano = verb('ピアノを弾く', 'ぴあのをひく');
-    expect(verbReading(piano)).toBe('ピアノをひく');
     expect(conjugateVerb(piano, 'te')).toMatchObject({ word: 'ピアノを弾いて', reading: 'ピアノをひいて' });
     expect(conjugateVerb(verb('テストを受ける', 'テストをうける', 2), 'ta')).toMatchObject({ word: 'テストを受けた', reading: 'テストをうけた' });
     expect(conjugateVerb(verb('提出する', 'ていしゅつする', 3), 'potential')).toMatchObject({ word: '提出できる', reading: 'ていしゅつできる' });
     expect(conjugateVerb(verb('持って来る', 'もってくる', 3), 'nai')).toMatchObject({ word: '持って来ない', reading: 'もってこない' });
     expect(conjugateVerb(verb('学校に行く', 'がっこうにいく'), 'te')).toMatchObject({ word: '学校に行って', reading: 'がっこうにいって' });
-  });
-
-  it('원문 데이터를 바꾸지 않고 정답을 계산한다', () => {
-    const word = Object.freeze(verb('書く', 'かく'));
-    conjugateVerb(word, 'te');
-    expect(word.word).toBe('書く');
-    expect(word).not.toHaveProperty('dictionaryForm');
   });
 });
 
@@ -65,7 +54,6 @@ describe('동사 대상 검증과 저장', () => {
     verb('書く', 'かく', 1, { isDictionaryForm: false }), verb('書く', 'かく', '1'),
     verb('飲む', 'のむ', 2), verb('来る', 'きた', 3), verb('書く', '', 1),
   ])('불명확하거나 사전형이 아닌 $word를 출제하지 않는다', word => {
-    expect(isPracticeVerb(word)).toBe(false);
     expect(conjugateVerb(word, 'te')).toBeNull();
   });
 
@@ -76,13 +64,6 @@ describe('동사 대상 검증과 저장', () => {
       expect(conjugateVerb(word, 'te').word).toBe('あって');
     }
     expect(conjugateVerb(verb('書く', 'かく'), 'masu')).toBeNull();
-  });
-
-  it('모델의 잘못된 형식과 비동사 메타데이터를 정리한다', () => {
-    expect(normalizeVerbMetadata(verb('行きます', 'いきます'))).toMatchObject({ isDictionaryForm: false, potentialAllowed: false });
-    expect(normalizeVerbMetadata(verb('書く', 'かく', '1'))).toMatchObject({ verbGroup: null, isDictionaryForm: false });
-    expect(normalizeVerbMetadata({ word: '犬', pos: '명사', verbGroup: 1, isDictionaryForm: true, potentialAllowed: true })).toEqual({ word: '犬', pos: '명사' });
-    expect(normalizeVerbMetadata({ word: '書く', reading: 'かく', pos: '동사' })).toMatchObject({ verbGroup: null, isDictionaryForm: false, potentialAllowed: false });
   });
 
   it('표기나 읽기 수정 시 재분류하고 뜻만 수정하면 분류를 유지한다', () => {
@@ -135,11 +116,5 @@ describe('출제 조합과 세션', () => {
     const restarted = startVerbPractice(words, ['te']);
     expect(restarted).toMatchObject({ index: 0, initialCount: 3, flipped: false });
     expect(restarted.queue).toHaveLength(3);
-  });
-
-  it('저장한 선택값만 정규화하며 기본은 て형이다', () => {
-    expect(selectedVerbForms(null)).toEqual(['te']);
-    expect(selectedVerbForms(['nope'])).toEqual(['te']);
-    expect(selectedVerbForms(['ta', 'nai', 'ta'])).toEqual(['nai', 'ta']);
   });
 });

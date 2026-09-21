@@ -108,16 +108,6 @@ export default function LessonSelect() {
         </div>
       </Link>
 
-      <Link to="/verb-practice" className="block rounded-2xl p-4 border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/50">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="font-bold text-indigo-700 dark:text-indigo-300">동사 활용</p>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">て형 · ない형 · た형 · 가능형</p>
-          </div>
-          <span className="text-xl text-indigo-500" aria-hidden="true">→</span>
-        </div>
-      </Link>
-
       {/* step별 섹션 안의 lesson 카드 (due 없는 lesson도 포함) */}
       {steps.map(step => {
         // step 과 마찬가지로 최신 레슨이 위에 오도록 내림차순. getChapters 는 다른 화면이 오름차순으로 쓰므로 여기서만 뒤집는다

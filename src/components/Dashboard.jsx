@@ -1,19 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
-import { getStep, getSteps, getLatestStep, lessonKey, formatLesson } from '../lib/lesson-utils';
+import DateTimeQuestion from './DateTimeQuestion';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 }
 
 export default function Dashboard() {
+  const location = useLocation();
   // useLiveQuery 대신 직접 쿼리 — Safari에서 liveQuery 구독이 갱신 안 되는 문제 우회
   const [words, setWords] = useState([]);
   const [reviews, setReviews] = useState([]);
-  // 레슨별 진행률에서 보여줄 step. null이면 "아직 고르지 않음" → 최신 step을 기본으로 쓴다
-  const [selectedStep, setSelectedStep] = useState(null);
 
   const loadData = useCallback(async () => {
     const [w, r] = await Promise.all([
@@ -39,30 +38,9 @@ export default function Dashboard() {
 
   const { total: dueCount, reconfirm: reconfirmCount } = getDueCount(words, reviews);
 
-  const lessonMap = {};
-  for (const w of words) {
-    const key = lessonKey(getStep(w), w.chapter);
-    if (!lessonMap[key]) lessonMap[key] = { step: getStep(w), chapter: w.chapter, total: 0, reviewed: 0 };
-    lessonMap[key].total++;
-  }
-  const wordById = new Map(words.map(w => [w.id, w]));
-  for (const r of reviews) {
-    const word = wordById.get(r.wordId);
-    if (!word || !(r.reps > 0)) continue;
-    const entry = lessonMap[lessonKey(getStep(word), word.chapter)];
-    if (entry) entry.reviewed++;
-  }
-
-  // 기본은 지금 공부 중인 최신 step만 보여주고, step이 여럿이면 칩으로 전환한다
-  const steps = getSteps(words);
-  const currentStep = steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
-  const lessons = Object.values(lessonMap)
-    .filter(l => l.step === currentStep)
-    // 최신 레슨을 주로 보므로 레슨 번호 내림차순으로 놓아 지금 공부하는 레슨이 맨 위에 오게 한다
-    .sort((a, b) => b.chapter - a.chapter);
-
   return (
     <div className="space-y-6">
+      <DateTimeQuestion key={location.key} />
       <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">J-VOCA</h1>
 
       {hasUpdate && (
@@ -110,47 +88,15 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      {words.length > 0 && (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70">
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="text-sm font-medium text-slate-500 dark:text-slate-400">레슨별 진행률</h2>
-            {steps.length > 1 && (
-              <div className="flex gap-1">
-                {steps.map(step => (
-                  <button
-                    key={step}
-                    onClick={() => setSelectedStep(step)}
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                      currentStep === step ? 'bg-slate-800 dark:bg-slate-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
-                    }`}
-                  >
-                    Step {step}
-                  </button>
-                ))}
-              </div>
-            )}
+      <Link to="/verb-practice" className="block rounded-2xl p-4 border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/50">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="font-bold text-indigo-700 dark:text-indigo-300">동사 활용</p>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">て형 · ない형 · た형 · 가능형</p>
           </div>
-          <div className="space-y-3">
-            {lessons.map(ls => {
-              const pct = ls.total > 0 ? Math.round((ls.reviewed / ls.total) * 100) : 0;
-              return (
-                <div key={lessonKey(ls.step, ls.chapter)}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-700 dark:text-slate-200">{formatLesson(ls.step, ls.chapter, { withStep: false })}</span>
-                    <span className="text-slate-400">{ls.reviewed}/{ls.total}</span>
-                  </div>
-                  <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-indigo-500 rounded-full transition-all"
-                      style={{ width: `${pct}%` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <span className="text-xl text-indigo-500" aria-hidden="true">→</span>
         </div>
-      )}
+      </Link>
 
       {words.length === 0 && (
         <div className="text-center py-12 text-slate-400">

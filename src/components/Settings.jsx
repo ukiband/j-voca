@@ -4,6 +4,7 @@ import { getLocalDateString } from '../lib/date-utils';
 import { getGithubToken, setGithubToken, hasGithubToken, resetWordsInRepo } from '../lib/github';
 import { exportData, importReviews, clearAllReviews, clearAllData, ensureReviewsExist } from '../lib/db';
 import { THEME_OPTIONS, getThemePreference, setThemePreference, subscribeToTheme } from '../lib/theme';
+import { getDateTimePopupEnabled, setDateTimePopupEnabled } from '../lib/date-time-practice';
 
 const FONT_SIZES = [
   { id: 'base', label: '보통' },
@@ -25,6 +26,7 @@ function ExtLink({ href, children }) {
 
 export default function Settings() {
   const theme = useSyncExternalStore(subscribeToTheme, getThemePreference);
+  const [dateTimePopupEnabled, setDateTimePopupEnabledState] = useState(getDateTimePopupEnabled);
   const [apiKey, setApiKeyState] = useState(getApiKey());
   const [githubToken, setGithubTokenState] = useState(getGithubToken());
   const [fontSize, setFontSizeState] = useState(localStorage.getItem('font-size') || 'base');
@@ -116,6 +118,23 @@ export default function Settings() {
           ))}
         </div>
         <p className="text-xs text-slate-400">시스템을 선택하면 기기의 화면 모드를 따릅니다.</p>
+      </div>
+
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70">
+        <label className="flex items-center justify-between gap-4 min-h-11 cursor-pointer">
+          <span className="font-medium text-slate-700 dark:text-slate-200">날짜·시간 질문 팝업</span>
+          <input
+            type="checkbox"
+            role="switch"
+            checked={dateTimePopupEnabled}
+            onChange={event => {
+              setDateTimePopupEnabled(event.target.checked);
+              setDateTimePopupEnabledState(event.target.checked);
+            }}
+            className="appearance-none relative shrink-0 w-11 h-6 rounded-full bg-slate-300 dark:bg-slate-600 checked:bg-indigo-600 dark:checked:bg-indigo-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-5 after:h-5 after:rounded-full after:bg-white checked:after:translate-x-5"
+          />
+        </label>
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">홈에서 질문을 표시하고, 닫으면 1시간 동안 숨깁니다.</p>
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">

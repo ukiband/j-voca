@@ -56,7 +56,7 @@ function Practice() {
   if (error) return (
     <div className="text-center py-16 space-y-4">
       <p>단어를 불러오지 못했습니다.</p>
-      <Link to="/lesson-select" className="text-indigo-600 dark:text-indigo-400">복습으로 돌아가기</Link>
+      <Link to="/" className="text-indigo-600 dark:text-indigo-400">홈으로 돌아가기</Link>
     </div>
   );
   if (!words) return <p className="text-center py-16 text-slate-500 dark:text-slate-400" role="status">단어를 불러오는 중...</p>;
@@ -64,7 +64,7 @@ function Practice() {
   if (!session) return (
     <div className="space-y-6">
       <div>
-        <Link to="/lesson-select" className="text-sm text-slate-500 dark:text-slate-400">← 복습</Link>
+        <Link to="/" className="text-sm text-slate-500 dark:text-slate-400">← 홈</Link>
         <h1 className="text-xl font-bold mt-4">동사 활용</h1>
       </div>
       {verbs.length ? <>
@@ -98,7 +98,7 @@ function Practice() {
       <p className="text-slate-500 dark:text-slate-400">{session.initialCount}문제를 모두 연습했습니다.</p>
       <button onClick={start} className="block w-full py-3 rounded-xl bg-indigo-600 text-white">다시 섞어서 연습</button>
       <button onClick={() => dispatch({ type: 'start', session: null })} className="block w-full py-3 rounded-xl border border-slate-200 dark:border-slate-700">형태 다시 선택</button>
-      <Link to="/lesson-select" className="inline-block text-indigo-600 dark:text-indigo-400 text-sm">복습으로 돌아가기</Link>
+      <Link to="/" className="inline-block text-indigo-600 dark:text-indigo-400 text-sm">홈으로 돌아가기</Link>
     </div>
   );
 
@@ -117,7 +117,7 @@ function Practice() {
     <div className="flex-1 min-h-0 flex flex-col">
       <header className="shrink-0 safe-top">
         <div className="flex items-center gap-2 min-h-[72px] pl-1 pr-4">
-          <Link to="/lesson-select" aria-label="동사 활용 닫기" className="w-11 h-11 shrink-0 flex items-center justify-center text-2xl text-slate-500 dark:text-slate-400">×</Link>
+          <Link to="/" aria-label="동사 활용 닫기" className="w-11 h-11 shrink-0 flex items-center justify-center text-2xl text-slate-500 dark:text-slate-400">×</Link>
           <h1 className="flex-1 font-bold text-base">동사 활용</h1>
           <span className="text-sm text-slate-500 dark:text-slate-400">{repeated ? '한 번 더 ' : ''}{number} / {total}</span>
         </div>

@@ -42,7 +42,8 @@ const TENS = ['', '', 'に', 'さん', 'よん', 'ご'];
 function minuteReading(minute) {
   if (minute < 10) return MINUTES[minute];
   const prefix = TENS[Math.floor(minute / 10)];
-  return minute % 10 === 0 ? `${prefix}じゅっぷん` : `${prefix}じゅう${MINUTES[minute % 10]}`;
+  // 교재가 10분 단위를 じっぷん 계열(じっぷん·にじっぷん·さんじっぷん)로 가르치므로 그에 맞춘다
+  return minute % 10 === 0 ? `${prefix}じっぷん` : `${prefix}じゅう${MINUTES[minute % 10]}`;
 }
 
 export function createDateTimeQuestion(date = new Date(), kind = Math.random() < 0.5 ? 'date' : 'time') {
@@ -51,7 +52,6 @@ export function createDateTimeQuestion(date = new Date(), kind = Math.random() <
     const day = date.getDate();
     return {
       question: '今日は何月何日ですか。',
-      questionReading: 'きょうは なんがつ なんにちですか。',
       answer: `今日は${month + 1}月${day}日です。`,
       answerReading: `きょうは ${MONTHS[month]} ${DAYS[day - 1]}です。`,
     };
@@ -63,7 +63,6 @@ export function createDateTimeQuestion(date = new Date(), kind = Math.random() <
   const periodReading = hour < 12 ? 'ごぜん' : 'ごご';
   return {
     question: '今、何時何分ですか。',
-    questionReading: 'いま、なんじ なんぷんですか。',
     answer: `今は${period}${hour % 12}時${minute ? `${minute}分` : ''}です。`,
     answerReading: `いまは ${periodReading} ${HOURS[hour % 12]}${minute ? ` ${minuteReading(minute)}` : ''}です。`,
   };

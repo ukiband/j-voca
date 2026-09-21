@@ -13,7 +13,6 @@ describe('날짜·시간 질문', () => {
   ])('%i월 %i일은 숫자까지 히라가나로 읽는다', (month, day, reading) => {
     const result = createDateTimeQuestion(new Date(2026, month - 1, day, 0, 5), 'date');
     expect(result.question).toBe('今日は何月何日ですか。');
-    expect(result.questionReading).toBe('きょうは なんがつ なんにちですか。');
     expect(result.answer).toBe(`今日は${month}月${day}日です。`);
     expect(result.answerReading).toBe(`きょうは ${reading}です。`);
   });
@@ -24,11 +23,11 @@ describe('날짜·시간 질문', () => {
     [9, 3, '午前9時3分', 'ごぜん くじ さんぷん'], [14, 4, '午後2時4分', 'ごご にじ よんぷん'],
     [16, 6, '午後4時6分', 'ごご よじ ろっぷん'], [17, 7, '午後5時7分', 'ごご ごじ ななふん'],
     [19, 8, '午後7時8分', 'ごご しちじ はっぷん'], [21, 9, '午後9時9分', 'ごご くじ きゅうふん'],
-    [20, 10, '午後8時10分', 'ごご はちじ じゅっぷん'], [22, 30, '午後10時30分', 'ごご じゅうじ さんじゅっぷん'],
+    [20, 10, '午後8時10分', 'ごご はちじ じっぷん'], [22, 30, '午後10時30分', 'ごご じゅうじ さんじっぷん'],
+    [13, 20, '午後1時20分', 'ごご いちじ にじっぷん'], [15, 50, '午後3時50分', 'ごご さんじ ごじっぷん'],
     [23, 59, '午後11時59分', 'ごご じゅういちじ ごじゅうきゅうふん'], [11, 24, '午前11時24分', 'ごぜん じゅういちじ にじゅうよんぷん'],
   ])('%i시 %i분은 午前·午後 12시간제로 쓰고 숫자까지 히라가나로 읽는다', (hour, minute, answer, reading) => {
     const result = createDateTimeQuestion(new Date(2026, 8, 22, hour, minute), 'time');
-    expect(result.questionReading).toBe('いま、なんじ なんぷんですか。');
     expect(result.answer).toBe(`今は${answer}です。`);
     expect(result.answerReading).toBe(`いまは ${reading}です。`);
   });

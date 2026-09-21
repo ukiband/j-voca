@@ -57,10 +57,13 @@ export default function DateTimeQuestion() {
         <div className="min-h-0 overflow-y-auto p-6">
           <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400 mb-4">오늘의 질문</p>
           <h2 id="date-time-question" lang="ja" className="text-xl font-bold jp-text">{question.question}</h2>
-          <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">{question.meaning}</p>
+          <p lang="ja" className="mt-2 text-base text-slate-500 dark:text-slate-400 jp-text">{question.questionReading}</p>
 
           {revealed && (
-            <p ref={answerRef} className="mt-5 pt-5 border-t border-slate-200 dark:border-slate-700 text-xl font-bold text-indigo-600 dark:text-indigo-400 jp-text" aria-live="polite" lang="ja">{question.answer}</p>
+            <div ref={answerRef} className="mt-5 pt-5 border-t border-slate-200 dark:border-slate-700 space-y-2" aria-live="polite" lang="ja">
+              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400 jp-text">{question.answer}</p>
+              <p className="text-base text-slate-500 dark:text-slate-400 jp-text">{question.answerReading}</p>
+            </div>
           )}
         </div>
 

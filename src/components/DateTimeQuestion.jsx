@@ -46,10 +46,7 @@ export default function DateTimeQuestion() {
           <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">{question.meaning}</p>
 
           {revealed && (
-            <div ref={answerRef} className="mt-5 pt-5 border-t border-slate-200 dark:border-slate-700 space-y-2" aria-live="polite" lang="ja">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400 jp-text">{question.answer}</p>
-              <p className="text-base text-slate-500 dark:text-slate-400 jp-text">{question.reading}</p>
-            </div>
+            <p ref={answerRef} className="mt-5 pt-5 border-t border-slate-200 dark:border-slate-700 text-xl font-bold text-indigo-600 dark:text-indigo-400 jp-text" aria-live="polite" lang="ja">{question.answer}</p>
           )}
         </div>
 

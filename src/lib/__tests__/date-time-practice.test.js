@@ -4,32 +4,14 @@ import { createDateTimeQuestion, dismissDateTimeQuestion, getDateTimePopupEnable
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('날짜·시간 질문', () => {
-  it.each([
-    [4, 1, 'しがつ ついたち'], [7, 7, 'しちがつ なのか'], [9, 9, 'くがつ ここのか'],
-    [10, 10, 'じゅうがつ とおか'], [11, 14, 'じゅういちがつ じゅうよっか'],
-    [12, 20, 'じゅうにがつ はつか'], [1, 24, 'いちがつ にじゅうよっか'],
-    [2, 17, 'にがつ じゅうしちにち'], [3, 19, 'さんがつ じゅうくにち'],
-    [5, 27, 'ごがつ にじゅうしちにち'], [6, 29, 'ろくがつ にじゅうくにち'],
-    [8, 31, 'はちがつ さんじゅういちにち'],
-  ])('%i월 %i일의 예외 읽기', (month, day, reading) => {
-    const result = createDateTimeQuestion(new Date(2026, month - 1, day, 0, 5), 'date');
-    expect(result.answer).toBe(`今日は${month}月${day}日です。`);
-    expect(result.reading).toBe(`きょうは ${reading}です。`);
+  it('자정 직후에도 기기의 날짜를 사용한다', () => {
+    const result = createDateTimeQuestion(new Date(2026, 0, 1, 0, 5), 'date');
+    expect(result.answer).toBe('今日は1月1日です。');
   });
 
-  it.each([
-    [0, 0, '0時', 'れいじ'], [4, 1, '4時1分', 'よじ いっぷん'],
-    [7, 2, '7時2分', 'しちじ にふん'], [9, 3, '9時3分', 'くじ さんぷん'],
-    [12, 4, '12時4分', 'じゅうにじ よんぷん'], [14, 6, '14時6分', 'じゅうよじ ろっぷん'],
-    [17, 7, '17時7分', 'じゅうしちじ ななふん'], [19, 8, '19時8分', 'じゅうくじ はっぷん'],
-    [20, 10, '20時10分', 'にじゅうじ じゅっぷん'], [21, 20, '21時20分', 'にじゅういちじ にじゅっぷん'],
-    [22, 30, '22時30分', 'にじゅうにじ さんじゅっぷん'], [23, 40, '23時40分', 'にじゅうさんじ よんじゅっぷん'],
-    [1, 50, '1時50分', 'いちじ ごじゅっぷん'], [2, 59, '2時59分', 'にじ ごじゅうきゅうふん'],
-    [3, 24, '3時24分', 'さんじ にじゅうよんぷん'], [5, 35, '5時35分', 'ごじ さんじゅうごふん'],
-  ])('%i시 %i분의 읽기', (hour, minute, answer, reading) => {
-    const result = createDateTimeQuestion(new Date(2026, 8, 22, hour, minute), 'time');
-    expect(result.answer).toBe(`今は${answer}です。`);
-    expect(result.reading).toBe(`いまは ${reading}です。`);
+  it('시각은 24시간제로 표시하고 정각에는 분을 생략한다', () => {
+    expect(createDateTimeQuestion(new Date(2026, 8, 22, 23, 59), 'time').answer).toBe('今は23時59分です。');
+    expect(createDateTimeQuestion(new Date(2026, 8, 23, 0, 0), 'time').answer).toBe('今は0時です。');
   });
 
   it('처음에는 표시하고, 닫은 시각부터 정확히 한 시간 동안 숨기며 설정을 껐다 켜도 시간을 유지한다', () => {

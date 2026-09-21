@@ -5,6 +5,8 @@ import { hasGithubToken, addWordsToRepo, triggerSentenceWorkflow } from '../lib/
 import { syncWordsFromData, db } from '../lib/db';
 import { createInitialReview } from '../lib/fsrs';
 import { getLatestStep, getChapters, parseLessonNumber } from '../lib/lesson-utils';
+import { editVerbEntry } from '../lib/verb-utils';
+import VerbMetadataFields from './VerbMetadataFields';
 
 export default function WordInput() {
   // 화면 진행 단계. 교재 step과 이름이 겹치지 않도록 stage로 부른다
@@ -74,7 +76,7 @@ export default function WordInput() {
   }
 
   function updateWord(index, field, value) {
-    setWords(prev => prev.map((w, i) => i === index ? { ...w, [field]: value } : w));
+    setWords(prev => prev.map((w, i) => i === index ? editVerbEntry(w, { [field]: value }) : w));
   }
 
   function removeWord(index) {
@@ -225,6 +227,7 @@ export default function WordInput() {
                   &times;
                 </button>
               </div>
+              <VerbMetadataFields word={w} onChange={changes => setWords(prev => prev.map((entry, index) => index === i ? { ...entry, ...changes } : entry))} />
             </div>
           ))}
 

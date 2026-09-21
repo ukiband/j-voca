@@ -6,6 +6,8 @@ import { filterWords } from '../lib/word-utils';
 import { getStep, getSteps, getChapters, getLatestStep, formatLesson } from '../lib/lesson-utils';
 import BrowseModal from './BrowseModal';
 import { useBrowseMode } from '../hooks/useBrowseMode';
+import { editVerbEntry } from '../lib/verb-utils';
+import VerbMetadataFields from './VerbMetadataFields';
 
 export default function WordList() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
@@ -42,7 +44,7 @@ export default function WordList() {
 
   function startEdit(word) {
     setEditingId(word.id);
-    setEditForm({ word: word.word, reading: word.reading, meaning: word.meaning });
+    setEditForm({ word: word.word, reading: word.reading, meaning: word.meaning, pos: word.pos, verbGroup: word.verbGroup, isDictionaryForm: word.isDictionaryForm, potentialAllowed: word.potentialAllowed });
   }
 
   async function saveEdit(id) {
@@ -190,12 +192,12 @@ export default function WordList() {
                 <div className="space-y-2">
                   <input
                     value={editForm.word}
-                    onChange={e => setEditForm(f => ({ ...f, word: e.target.value }))}
+                    onChange={e => setEditForm(f => editVerbEntry(f, { word: e.target.value }))}
                     className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                   />
                   <input
                     value={editForm.reading}
-                    onChange={e => setEditForm(f => ({ ...f, reading: e.target.value }))}
+                    onChange={e => setEditForm(f => editVerbEntry(f, { reading: e.target.value }))}
                     className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                   />
                   <input
@@ -203,6 +205,7 @@ export default function WordList() {
                     onChange={e => setEditForm(f => ({ ...f, meaning: e.target.value }))}
                     className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-sm"
                   />
+                  <VerbMetadataFields word={editForm} onChange={changes => setEditForm(f => ({ ...f, ...changes }))} />
                   <div className="flex gap-2">
                     <button onClick={() => setEditingId(null)} className="text-xs text-slate-400" disabled={saving}>취소</button>
                     <button onClick={() => saveEdit(w.id)} className="text-xs text-indigo-600 dark:text-indigo-400 font-medium" disabled={saving}>

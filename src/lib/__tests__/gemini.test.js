@@ -441,4 +441,23 @@ describe('extractWordsFromImage 모델 체인', () => {
     expect(promptText).toContain('손글씨로 적은 일본어 단어나 문장');
     expect(promptText).toContain('ます형 제시어');
   });
+
+  it('동사 분류를 저장하고 사전형이 아닌 원문을 복원하지 않는다', async () => {
+    const entries = [
+      { word: '帰る', reading: 'かえる', meaning: '돌아가다', pos: '動詞', verbGroup: 1, isDictionaryForm: true, potentialAllowed: true },
+      { word: '行きます', reading: 'いきます', meaning: '갑니다', pos: '동사', verbGroup: 1, isDictionaryForm: true, potentialAllowed: true },
+      { word: '書く', reading: 'かく', meaning: '쓰다', pos: '동사' },
+    ];
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(entries) }] } }] }) });
+    vi.stubGlobal('fetch', fetchMock);
+    const words = await extractWordsFromImage('base64', 'image/jpeg', 2, 3, '', { delay });
+    expect(words).toHaveLength(3);
+    expect(words[0]).toMatchObject({ word: '帰る', verbGroup: 1, isDictionaryForm: true, potentialAllowed: true, step: 2, chapter: 3 });
+    expect(words[1]).toMatchObject({ word: '行きます', reading: 'いきます', isDictionaryForm: false, potentialAllowed: false });
+    expect(words[2]).toMatchObject({ word: '書く', verbGroup: null, isDictionaryForm: false });
+    expect(words.every(w => !Object.hasOwn(w, 'dictionaryForm'))).toBe(true);
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(body.generationConfig.responseJsonSchema.items.properties.verbGroup.enum).toEqual([1, 2, 3, null]);
+    expect(body.contents[0].parts[0].text).toContain('사전형이나 형태별 정답을 추가 생성');
+  });
 });

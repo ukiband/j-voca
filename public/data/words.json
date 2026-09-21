@@ -1,5 +1,5 @@
 {
-  "lastId": 1037,
+  "lastId": 1047,
   "words": [
     {
       "word": "おおい",
@@ -11639,6 +11639,116 @@
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
       "id": 1037
+    },
+    {
+      "word": "遅い",
+      "reading": "おそい",
+      "meaning": "늦다",
+      "pos": "い형용사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1038
+    },
+    {
+      "word": "いないですね",
+      "reading": "いないですね",
+      "meaning": "없네요",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1039
+    },
+    {
+      "word": "ある",
+      "reading": "ある",
+      "meaning": "있다(움직이지 않는 것)",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1040
+    },
+    {
+      "word": "ない",
+      "reading": "ない",
+      "meaning": "없다",
+      "pos": "い형용사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1041
+    },
+    {
+      "word": "いる",
+      "reading": "いる",
+      "meaning": "있다(움직이는 것)",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1042
+    },
+    {
+      "word": "いない",
+      "reading": "いない",
+      "meaning": "없다",
+      "pos": "い형용사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1043
+    },
+    {
+      "word": "風邪をひく",
+      "reading": "かぜをひく",
+      "meaning": "감기에 걸리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1044
+    },
+    {
+      "word": "止まる",
+      "reading": "とまる",
+      "meaning": "멈추다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1045
+    },
+    {
+      "word": "急用",
+      "reading": "きゅうよう",
+      "meaning": "급한 일, 급한 업무",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1046
+    },
+    {
+      "word": "まったく もう",
+      "reading": "まったく もう",
+      "meaning": "정말로, 참으로",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-21",
+      "id": 1047
     }
   ]
 }

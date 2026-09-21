@@ -1,4 +1,5 @@
 import { getStep, isSameLesson, isValidLessonNumber } from './lesson-utils';
+import { editVerbEntry, normalizeVerbMetadata } from './verb-utils';
 
 const REPO_OWNER = 'ukiband';
 const REPO_NAME = 'j-voca';
@@ -31,6 +32,12 @@ function utf8ToBase64(str) {
 // 2. 실패하면 정적 빌드에 포함된 파일 (배포 시점 데이터)
 // 둘 다 실패하면 null 을 돌려 호출 측이 "받지 못함"과 "빈 파일"을 구분할 수 있게 한다.
 async function fetchPublicData(filePath) {
+  if (import.meta.env.DEV) {
+    try {
+      const res = await fetch(import.meta.env.BASE_URL + filePath.replace(/^public\//, ''), { cache: 'no-store' });
+      return res.ok ? await res.json() : null;
+    } catch { return null; }
+  }
   try {
     const rawUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${filePath}?t=${Date.now()}`;
     const res = await fetch(rawUrl);
@@ -131,7 +138,7 @@ export async function addWordsToRepo(newWords) {
 
   let nextId = data.lastId;
   // 저장되는 단어에는 step이 반드시 들어가도록 보장한다 (호출 측이 빠뜨려도 1로 채움)
-  const wordsWithIds = unique.map(w => ({ ...w, step: getStep(w), id: ++nextId }));
+  const wordsWithIds = unique.map(w => normalizeVerbMetadata({ ...w, step: getStep(w), id: ++nextId }));
 
   data.words.push(...wordsWithIds);
   data.lastId = nextId;
@@ -148,7 +155,7 @@ export async function updateWordInRepo(id, changes) {
   const index = data.words.findIndex(w => w.id === id);
   if (index === -1) throw new Error('단어를 찾을 수 없습니다.');
 
-  data.words[index] = { ...data.words[index], ...changes };
+  data.words[index] = normalizeVerbMetadata(editVerbEntry(data.words[index], changes));
 
   await commitFile(data, sha, `단어 수정: ${data.words[index].word}`);
   return data;

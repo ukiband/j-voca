@@ -1099,7 +1099,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-03-19",
-      "id": 100
+      "id": 100,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "ありがとう",
@@ -2133,7 +2136,10 @@
       "chapter": 5,
       "textbook": "일본어수업",
       "createdAt": "2026-03-31",
-      "id": 196
+      "id": 196,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "おめでとうございます",
@@ -4411,7 +4417,10 @@
       "chapter": 6,
       "textbook": "일본어수업",
       "createdAt": "2026-04-22",
-      "id": 375
+      "id": 375,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "いってらっしゃい",
@@ -4422,7 +4431,10 @@
       "chapter": 6,
       "textbook": "일본어수업",
       "createdAt": "2026-04-22",
-      "id": 376
+      "id": 376,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "早い",
@@ -4719,7 +4731,10 @@
       "chapter": 6,
       "textbook": "일본어수업",
       "createdAt": "2026-04-22",
-      "id": 403
+      "id": 403,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "来る",
@@ -4730,7 +4745,10 @@
       "chapter": 6,
       "textbook": "일본어수업",
       "createdAt": "2026-04-22",
-      "id": 404
+      "id": 404,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "〜と",
@@ -6127,7 +6145,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 532
+      "id": 532,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "それから",
@@ -6314,7 +6335,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 550
+      "id": 550,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "夕方",
@@ -6380,7 +6404,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 556
+      "id": 556,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "アルバイト代",
@@ -6402,7 +6429,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 558
+      "id": 558,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "もちろん",
@@ -6446,7 +6476,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 562
+      "id": 562,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "がんばって",
@@ -6457,7 +6490,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 563
+      "id": 563,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "行く",
@@ -6468,7 +6504,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 564
+      "id": 564,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "飲む",
@@ -6479,7 +6518,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 565
+      "id": 565,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "走る",
@@ -6490,7 +6532,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 566
+      "id": 566,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "行きます",
@@ -6501,7 +6546,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 567
+      "id": 567,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "飲みます",
@@ -6512,7 +6560,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 568
+      "id": 568,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "走ります",
@@ -6523,7 +6574,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 569
+      "id": 569,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "ようこそ",
@@ -6545,7 +6599,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 571
+      "id": 571,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "笑います",
@@ -6556,7 +6613,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 572
+      "id": 572,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "読む",
@@ -6567,7 +6627,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 573
+      "id": 573,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "働く",
@@ -6578,7 +6641,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 574
+      "id": 574,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "見る",
@@ -6589,7 +6655,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 575
+      "id": 575,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "食べる",
@@ -6600,7 +6669,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 576
+      "id": 576,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "寝る",
@@ -6611,7 +6683,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 577
+      "id": 577,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "出る",
@@ -6622,7 +6697,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 578
+      "id": 578,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "着る",
@@ -6633,7 +6711,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 579
+      "id": 579,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "借りる",
@@ -6644,7 +6725,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 580
+      "id": 580,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "する",
@@ -6655,7 +6739,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 581
+      "id": 581,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "来る",
@@ -6666,7 +6753,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 582
+      "id": 582,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "散歩する",
@@ -6677,7 +6767,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 583
+      "id": 583,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "運動する",
@@ -6688,7 +6781,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 584
+      "id": 584,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "友達",
@@ -6710,7 +6806,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-03",
-      "id": 586
+      "id": 586,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "~に",
@@ -6809,7 +6908,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 597
+      "id": 597,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "バス",
@@ -6886,7 +6988,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 604
+      "id": 604,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "新聞",
@@ -6908,7 +7013,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 606
+      "id": 606,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "食堂",
@@ -6941,7 +7049,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 609
+      "id": 609,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "します",
@@ -6952,7 +7063,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 610
+      "id": 610,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "しません",
@@ -6963,7 +7077,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 611
+      "id": 611,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "明日",
@@ -7073,7 +7190,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 621
+      "id": 621,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "夜ご飯",
@@ -7128,7 +7248,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 626
+      "id": 626,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "かう",
@@ -7139,7 +7262,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 627
+      "id": 627,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "すう",
@@ -7150,7 +7276,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 628
+      "id": 628,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "とる",
@@ -7161,7 +7290,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 629
+      "id": 629,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "のむ",
@@ -7172,7 +7304,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 630
+      "id": 630,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "よむ",
@@ -7183,7 +7318,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 631
+      "id": 631,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "かえる",
@@ -7194,7 +7332,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 632
+      "id": 632,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "つかう",
@@ -7205,7 +7346,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 633
+      "id": 633,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "はしる",
@@ -7216,7 +7360,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 634
+      "id": 634,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "わらう",
@@ -7227,7 +7374,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 635
+      "id": 635,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "はたらく",
@@ -7238,7 +7388,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 636
+      "id": 636,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "きる",
@@ -7249,7 +7402,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 637
+      "id": 637,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "でる",
@@ -7260,7 +7416,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 638
+      "id": 638,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ねる",
@@ -7271,7 +7430,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 639
+      "id": 639,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "みる",
@@ -7282,7 +7444,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 640
+      "id": 640,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "かりる",
@@ -7293,7 +7458,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 641
+      "id": 641,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "たべる",
@@ -7304,7 +7472,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 642
+      "id": 642,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "くる",
@@ -7315,7 +7486,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 643
+      "id": 643,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "うんどうする",
@@ -7326,7 +7500,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 644
+      "id": 644,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "さんぽする",
@@ -7337,7 +7514,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 645
+      "id": 645,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "〜だい",
@@ -7436,7 +7616,10 @@
       "chapter": 7,
       "textbook": "일본어수업",
       "createdAt": "2026-06-10",
-      "id": 654
+      "id": 654,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "あいさつ",
@@ -7480,7 +7663,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
-      "id": 658
+      "id": 658,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "全然",
@@ -7579,7 +7765,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
-      "id": 667
+      "id": 667,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "見る",
@@ -7590,7 +7779,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
-      "id": 668
+      "id": 668,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "読む",
@@ -7601,7 +7793,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
-      "id": 669
+      "id": 669,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "旅行",
@@ -7634,7 +7829,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
-      "id": 672
+      "id": 672,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "コンサート",
@@ -7667,7 +7865,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-18",
-      "id": 675
+      "id": 675,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "安い",
@@ -7689,7 +7890,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
-      "id": 677
+      "id": 677,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "辞書",
@@ -7733,7 +7937,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
-      "id": 681
+      "id": 681,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "牛乳",
@@ -7788,7 +7995,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
-      "id": 686
+      "id": 686,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "つまらない",
@@ -7810,7 +8020,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
-      "id": 688
+      "id": 688,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "問題",
@@ -7832,7 +8045,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-06-24",
-      "id": 690
+      "id": 690,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "宿題",
@@ -7887,7 +8103,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
-      "id": 695
+      "id": 695,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "借り",
@@ -7898,7 +8117,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
-      "id": 696
+      "id": 696,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "勉強",
@@ -7964,7 +8186,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
-      "id": 702
+      "id": 702,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "やります",
@@ -7975,7 +8200,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
-      "id": 703
+      "id": 703,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "映画",
@@ -8063,7 +8291,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-02",
-      "id": 711
+      "id": 711,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "いいですね",
@@ -8118,7 +8349,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
-      "id": 716
+      "id": 716,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "会う",
@@ -8129,7 +8363,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
-      "id": 717
+      "id": 717,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "持つ",
@@ -8140,7 +8377,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
-      "id": 718
+      "id": 718,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "あう",
@@ -8151,7 +8391,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
-      "id": 719
+      "id": 719,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "泳ぐ",
@@ -8162,7 +8405,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-07",
-      "id": 720
+      "id": 720,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "友達",
@@ -8217,7 +8463,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 725
+      "id": 725,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "およぐ",
@@ -8228,7 +8477,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 726
+      "id": 726,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "あそぶ",
@@ -8239,7 +8491,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 727
+      "id": 727,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "わかる",
@@ -8250,7 +8505,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 728
+      "id": 728,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "てつだう",
@@ -8261,7 +8519,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 729
+      "id": 729,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "おくれる",
@@ -8272,7 +8533,10 @@
       "chapter": 8,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 730
+      "id": 730,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "とおい",
@@ -8602,7 +8866,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 760
+      "id": 760,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "できる",
@@ -8613,7 +8880,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 761
+      "id": 761,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "いろいろ",
@@ -8690,7 +8960,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 768
+      "id": 768,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ビール",
@@ -8723,7 +8996,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 771
+      "id": 771,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "週末",
@@ -8745,7 +9021,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 773
+      "id": 773,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "今朝",
@@ -8767,7 +9046,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 775
+      "id": 775,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "作る",
@@ -8778,7 +9060,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 776
+      "id": 776,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "聞く",
@@ -8789,7 +9074,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-08",
-      "id": 777
+      "id": 777,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "運転",
@@ -8833,7 +9121,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 781
+      "id": 781,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "英語",
@@ -8866,7 +9157,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 784
+      "id": 784,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "昨日",
@@ -8899,7 +9193,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 787
+      "id": 787,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "うける",
@@ -8910,7 +9207,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 788
+      "id": 788,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "夜",
@@ -8943,7 +9243,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 791
+      "id": 791,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "先月",
@@ -8976,7 +9279,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 794
+      "id": 794,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "今日",
@@ -9009,7 +9315,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 797
+      "id": 797,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "薬を飲む",
@@ -9020,7 +9329,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-22",
-      "id": 798
+      "id": 798,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "電話",
@@ -9064,7 +9376,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
-      "id": 802
+      "id": 802,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ノート",
@@ -9097,7 +9412,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
-      "id": 805
+      "id": 805,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "料理",
@@ -9130,7 +9448,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
-      "id": 808
+      "id": 808,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "見る",
@@ -9141,7 +9462,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-07-24",
-      "id": 809
+      "id": 809,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "できる人",
@@ -9262,7 +9586,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 820
+      "id": 820,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ご飯",
@@ -9284,7 +9611,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 822
+      "id": 822,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "話",
@@ -9306,7 +9636,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 824
+      "id": 824,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "お酒",
@@ -9328,7 +9661,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 826
+      "id": 826,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "テレビ",
@@ -9350,7 +9686,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 828
+      "id": 828,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "待ちます",
@@ -9361,7 +9700,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 829
+      "id": 829,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "まつ",
@@ -9372,7 +9714,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 830
+      "id": 830,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "本",
@@ -9394,7 +9739,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 832
+      "id": 832,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "携帯電話",
@@ -9427,7 +9775,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 835
+      "id": 835,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "景色",
@@ -9460,7 +9811,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 838
+      "id": 838,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "ばけものがたり",
@@ -9504,7 +9858,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 842
+      "id": 842,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "ばける",
@@ -9515,7 +9872,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 843
+      "id": 843,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "カフェ",
@@ -9581,7 +9941,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 849
+      "id": 849,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "だす",
@@ -9592,7 +9955,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 850
+      "id": 850,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "なく",
@@ -9603,7 +9969,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 851
+      "id": 851,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ふる",
@@ -9614,7 +9983,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 852
+      "id": 852,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "うたう",
@@ -9625,7 +9997,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 853
+      "id": 853,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "かよう",
@@ -9636,7 +10011,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 854
+      "id": 854,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "つくる",
@@ -9647,7 +10025,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 855
+      "id": 855,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "はなす",
@@ -9658,7 +10039,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 856
+      "id": 856,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "おしえる",
@@ -9669,7 +10053,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 857
+      "id": 857,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "おぼえる",
@@ -9680,7 +10067,10 @@
       "chapter": 9,
       "textbook": "일본어수업",
       "createdAt": "2026-08-07",
-      "id": 858
+      "id": 858,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "けさ",
@@ -10153,7 +10543,10 @@
       "chapter": 10,
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
-      "id": 901
+      "id": 901,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "つくえ",
@@ -10560,7 +10953,10 @@
       "chapter": 10,
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
-      "id": 938
+      "id": 938,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "ない",
@@ -10582,7 +10978,10 @@
       "chapter": 10,
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
-      "id": 940
+      "id": 940,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "いない",
@@ -10659,7 +11058,10 @@
       "chapter": 10,
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
-      "id": 947
+      "id": 947,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "する",
@@ -10670,7 +11072,10 @@
       "chapter": 10,
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
-      "id": 948
+      "id": 948,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "飲み物",
@@ -10714,7 +11119,10 @@
       "chapter": 10,
       "textbook": "일본어수업",
       "createdAt": "2026-08-19",
-      "id": 952
+      "id": 952,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "歌を歌う",
@@ -10725,7 +11133,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-05",
-      "id": 953
+      "id": 953,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ピアノを弾く",
@@ -10736,7 +11147,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-05",
-      "id": 954
+      "id": 954,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "歯を磨く",
@@ -10747,7 +11161,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-05",
-      "id": 955
+      "id": 955,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "サークル",
@@ -10780,7 +11197,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 958
+      "id": 958,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "興味",
@@ -10835,7 +11255,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 964
+      "id": 964,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "打つ",
@@ -10846,7 +11269,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 965
+      "id": 965,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "荷物",
@@ -10868,7 +11294,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 967
+      "id": 967,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "ボール",
@@ -10989,7 +11418,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 978
+      "id": 978,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "娘",
@@ -11077,7 +11509,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 986
+      "id": 986,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "声",
@@ -11099,7 +11534,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 988
+      "id": 988,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "道",
@@ -11121,7 +11559,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 990
+      "id": 990,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "忘れる",
@@ -11132,7 +11573,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-06",
-      "id": 991
+      "id": 991,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "先輩",
@@ -11242,7 +11686,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1001
+      "id": 1001,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "海",
@@ -11275,7 +11722,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1004
+      "id": 1004,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "絵",
@@ -11308,7 +11758,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1007
+      "id": 1007,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "風呂に入る",
@@ -11319,7 +11772,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1008
+      "id": 1008,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "脱ぐ",
@@ -11330,7 +11786,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1009
+      "id": 1009,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "手",
@@ -11352,7 +11811,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1011
+      "id": 1011,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "切符",
@@ -11374,7 +11836,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1013
+      "id": 1013,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "食事を します",
@@ -11385,7 +11850,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1014
+      "id": 1014,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "はんぶん",
@@ -11407,7 +11875,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1016
+      "id": 1016,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "釣る",
@@ -11418,7 +11889,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1017
+      "id": 1017,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "塗る",
@@ -11429,7 +11903,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1018
+      "id": 1018,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "吹く",
@@ -11440,7 +11917,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1019
+      "id": 1019,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "降りる",
@@ -11451,7 +11931,10 @@
       "chapter": 1,
       "textbook": "일본어수업",
       "createdAt": "2026-09-09",
-      "id": 1020
+      "id": 1020,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "船",
@@ -11484,7 +11967,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1023
+      "id": 1023,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "けがはない?",
@@ -11506,7 +11992,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1025
+      "id": 1025,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "傷つける",
@@ -11517,7 +12006,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1026
+      "id": 1026,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "帽子を かぶる",
@@ -11550,7 +12042,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1029
+      "id": 1029,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "レポート",
@@ -11572,7 +12067,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1031
+      "id": 1031,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "自分で",
@@ -11616,7 +12114,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1035
+      "id": 1035,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "提出して",
@@ -11627,7 +12128,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1036
+      "id": 1036,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     },
     {
       "word": "てつだう",
@@ -11638,7 +12142,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1037
+      "id": 1037,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "遅い",
@@ -11671,7 +12178,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1040
+      "id": 1040,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "ない",
@@ -11693,7 +12203,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1042
+      "id": 1042,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "いない",
@@ -11715,7 +12228,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1044
+      "id": 1044,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     },
     {
       "word": "止まる",
@@ -11726,7 +12242,10 @@
       "chapter": 2,
       "textbook": "일본어수업",
       "createdAt": "2026-09-21",
-      "id": 1045
+      "id": 1045,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     },
     {
       "word": "急用",

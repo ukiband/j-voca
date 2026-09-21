@@ -1,5 +1,6 @@
 import { getLocalDateString } from './date-utils';
 import { MODEL_CHAIN, isOverloaded, isQuotaExceeded, shouldTryNextModel, getModelTuning } from './gemini-common.js';
+import { normalizeVerbMetadata } from './verb-utils.js';
 
 // 기존 import 경로를 유지하기 위해 공용 모듈의 것을 다시 내보낸다
 export { MODEL_CHAIN, isOverloaded, isQuotaExceeded };
@@ -55,9 +56,13 @@ const RESPONSE_JSON_SCHEMA = {
       reading: { type: 'string' },
       meaning: { type: 'string' },
       pos: { type: 'string' },
+      // null 을 섞은 enum 은 Gemini 스키마에서 수용이 불확실해 범위 제한으로 대신한다
+      verbGroup: { type: ['integer', 'null'], minimum: 1, maximum: 3 },
+      isDictionaryForm: { type: 'boolean' },
+      potentialAllowed: { type: 'boolean' },
     },
     required: ['word', 'reading', 'meaning', 'pos'],
-    propertyOrdering: ['word', 'reading', 'meaning', 'pos'],
+    propertyOrdering: ['word', 'reading', 'meaning', 'pos', 'verbGroup', 'isDictionaryForm', 'potentialAllowed'],
   },
 };
 
@@ -214,9 +219,18 @@ const PROMPT = `이 일본어 교재 사진에서 단어를 추출해주세요.
 ## 출력 형식
 각 항목의 필드 의미는 다음과 같습니다 (형식은 스키마로 지정되어 있으니 내용에 집중하세요):
 - word: 일본어 단어. 교재에서 메인으로 인쇄된 표기 그대로 (한자 메인이면 한자, 괄호 안 보조 표기와 후리가나는 제외)
-- reading: 히라가나 읽기
+- reading: 한자는 히라가나로 풀고, 가타카나는 원문 그대로 유지한 읽기
 - meaning: 한국어 뜻. 뜻이 여러 개면 "높다, 비싸다" 처럼 쉼표로 구분
 - pos: 품사. 반드시 다음 목록 중 하나를 그대로 사용: 명사, 대명사, 동사, い형용사, な형용사, 부사, 조사, 접속사, 감탄사, 기타. 한자 표기(形容詞 등)나 한글 음차(나형용사, 이형용사)도 쓰지 마세요.
+
+## 동사 분류 (추출 대상이나 원문 표기는 바꾸지 않음)
+- 동사에는 verbGroup, isDictionaryForm, potentialAllowed를 함께 작성하세요. 비동사는 생략합니다.
+- isDictionaryForm: word 자체가 사전형 동사이면 true. 行きます, 書いて, 借り, できない 같은 활용형·어간이나 문장 전체는 false. 문장 전체가 아니라 ピアノを弾く, けがをする 같은 짧은 동사구는 끝 동사가 사전형이면 true입니다.
+- verbGroup: 사전형이면 1(五段), 2(一段), 3(する·来る 및 그 복합동사) 중 정확한 분류. 사전형이 아니거나 확신할 수 없으면 null, isDictionaryForm도 false.
+- る로 끝난다고 모두 2류가 아닙니다. 帰る·走る·入る·切る는 1류, 食べる·見る·着る·借りる는 2류입니다. 읽기만 같고 뜻이 다른 동사를 구분하세요.
+- potentialAllowed: 표준 가능형을 연습하기 적절한 사전형 동사일 때만 true. ある, 分かる, できる, 聞こえる·見える, 자연현상(雨が降る·風が吹く)이나 けがをする·風邪をひく 등은 false. 확신할 수 없으면 false.
+- 사전형이나 형태별 정답을 추가 생성하거나 별도 항목으로 추출하지 마세요. 원문이 行きます이면 word도 行きます로 유지합니다.
+- 예: 書く → verbGroup: 1, isDictionaryForm: true, potentialAllowed: true. 食べる → 2, true, true. する → 3, true, true. ある → 1, true, false. 行きます → null, false, false.
 
 ## 예시
 - 초급 히라가나 교재에 "とけい 시계" → {"word":"とけい","reading":"とけい","meaning":"시계","pos":"명사"}
@@ -241,11 +255,14 @@ function toWordEntries(data, step, chapter, textbook) {
   // 로컬 타임존 기준 날짜를 사용하여 KST 자정~오전 9시에 전날로 처리되는 버그 방지
   const today = getLocalDateString();
 
-  return words.map(w => ({
+  return words.map(w => normalizeVerbMetadata({
     word: w.word,
     reading: w.reading,
     meaning: w.meaning,
     pos: normalizePos(w.pos),
+    verbGroup: w.verbGroup,
+    isDictionaryForm: w.isDictionaryForm,
+    potentialAllowed: w.potentialAllowed,
     // step은 교재 단계. 입력이 비어 있으면 1로 저장한다 (step 누락 = step 1 규칙과 일치)
     step: step || 1,
     chapter: chapter || 0,

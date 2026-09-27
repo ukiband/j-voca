@@ -123,11 +123,11 @@ export function buildCheckPrompt(items) {
 
 ## 검사 기준 (하나라도 명백히 어기면 ok=false)
 1. 문법: 문법이 맞고 원어민이 실제로 쓰는 자연스러운 문장인지 봅니다. 조사, 활용, 자동사/타동사, いる/ある(사람·동물에는 いる, 사물에는 ある), 연어(宿題をする 등), 앞뒤 연결을 확인합니다.
-2. 목표 단어: [[ ]] 안이 목표 단어 자체나 그 활용형인지, 다른 단어나 파생어로 바꾸지 않았는지, 등록된 뜻(meaning)으로 쓰였는지, 등록된 읽기(reading)로 읽히는 쓰임인지 봅니다 (예: 四(よん)을 四月(しがつ)로 쓰면 틀림). 등록 표기(word)가 한자면 강조 부분도 한자로, 가나면 가나로 씁니다.
-3. 강조 범위: [[ ]] 는 목표 단어와 그 활용 어미까지 감쌉니다. 등록 단어가 여러 낱말로 된 표현(帽子を かぶる, 歌を歌う 등)이면 표현 전체를 감쌉니다. 뒤에 붙는 보조 표현(〜ください, 〜はいけません 등)은 [[ ]] 밖에 둡니다.
-4. 읽기 줄: example.reading 이 sentence 의 한자를 문맥에 맞게 정확히 읽었는지 봅니다 (예: 行きます → いきます). 한자 읽기와 띄어쓰기 외의 글자는 sentence 와 같아야 합니다.
-5. 번역: example.meaning 이 sentence 를 정확히 옮겼는지 봅니다. 주체·대상·장소·시제·긍정/부정·요청/서술·존댓말/반말이 원문과 같아야 합니다.
-6. 표기: sentence 에 공백이나 반각 문장부호(? ! ,)가 없어야 합니다.
+2. 목표 단어: [[ ]] 안이 목표 단어 자체나 그 활용형인지, 다른 단어나 파생어로 바꾸지 않았는지, 등록된 뜻(meaning)으로 쓰였는지, 등록된 읽기(reading)로 읽히는 쓰임인지 봅니다 (예: 四(よん)을 四月(しがつ)로 쓰면 틀림). 등록 표기(word)가 한자면 강조 부분도 한자로, 가나면 가나로 씁니다 (예: 遅い 를 [[おそい]] 로, こうはい 를 [[後輩]] 로 쓰면 틀림).
+3. 강조 범위: [[ ]] 는 목표 단어와 그 활용 어미까지 감쌉니다. 등록 단어가 여러 낱말로 된 표현(帽子を かぶる, 歌を歌う 등)이면 표현 전체를 감쌉니다. 뒤에 붙는 보조 표현(〜ください, 〜はいけません 등)은 [[ ]] 밖에 둡니다 (예: 傷つける 는 人の心を[[傷つけて]]はいけません 이 맞고 [[傷つけてはいけません]] 은 틀림).
+4. 읽기 줄: example.reading 이 sentence 의 한자를 문맥에 맞게 정확히 읽었는지 봅니다 (예: 行きます → いきます). 숫자와 조수사의 읽기를 특히 확인합니다 (四つ よっつ, 九時 くじ, 七時 しちじ, 一日 ついたち). 한자 읽기와 띄어쓰기 외의 글자는 sentence 와 같아야 합니다.
+5. 번역: example.meaning 이 sentence 를 정확히 옮겼는지 봅니다. 주체·대상·장소·시제·긍정/부정·요청/서술·존댓말/반말이 원문과 같아야 합니다 (예: 時間がないです 를 "시간이 없다" 로 옮기면 틀림).
+6. 표기: sentence 에 공백이나 반각 문장부호(? ! ,)가 없어야 합니다. 등록 표기에 반각 부호가 있어도 예문에 그대로 옮기면 틀림입니다 (けがはない? 는 [[けがはない？]] 로 씀).
 
 ## 틀림이 아닌 것 (ok=true)
 - 목표 단어를 활용형으로 쓴 것 (てつだう → てつだいます, 飲む → 飲みたいです). 사전형이 아니라는 이유로 틀렸다고 하지 않습니다.
@@ -142,6 +142,7 @@ export function buildCheckPrompt(items) {
 - 틀렸다고 판정하기 전에 어긴 기준을 위 1~6 에서 하나 고를 수 있는지, 그 기준에 비추어 명백히 틀렸는지 확인합니다. 고를 수 없거나 명백하지 않으면 ok=true 입니다.
 - ok=true 면 wordId 와 ok 만 돌려주고 나머지 필드는 생략합니다.
 - ok=false 면 criterion 에 어긴 기준의 이름(문법·목표 단어·강조 범위·읽기 줄·번역·표기 중 하나)을, problem 에 무엇이 왜 틀렸는지 한국어 한 문장을 적고, 고친 예문을 sentence·reading·meaning 세 필드에 모두 적습니다. 틀린 부분만 고치고 나머지는 원래 예문 그대로 옮기며, 고친 예문도 위 검사 기준을 모두 지켜야 합니다.
+- 등록 읽기와 다르게 읽히는 문맥을 고칠 때는 읽기 줄만 바꾸지 말고, 등록 읽기로 실제로 읽히는 문맥으로 문장을 바꿉니다 (九(きゅう): 九時 를 きゅうじ 로 읽히게 고치면 틀림, 九人 きゅうにん 처럼 바꿈). 목표 단어를 다른 단어로 바꾸지 않습니다.
 
 ## 고친 예문의 각 필드
 ${EXAMPLE_FIELD_RULES}
@@ -209,7 +210,7 @@ const defaultDelay = ms => new Promise(resolve => setTimeout(resolve, ms));
 /**
  * 프롬프트 하나로 Gemini 를 호출해 응답 JSON 배열의 객체 항목을 { model, rows } 로 돌려준다. 예문 생성과 검사가 함께 쓴다.
  * MODEL_CHAIN 순서로 시도하며 과부하(503)는 2초 후 1회 재시도, 그래도 실패하거나 404/429/5xx 면 다음 모델로 넘어간다.
- * options.fetchImpl / options.delay 는 테스트용 주입 지점. options.models 는 모델 순서를 바꿔 한 모델만 시험할 때 쓴다(기본 MODEL_CHAIN).
+ * options.fetchImpl / options.delay 는 테스트용 주입 지점. options.models·options.tuning 은 모델 순서나 모델 조정값(thinkingConfig 등)을 바꿔 시험할 때 쓴다(기본 MODEL_CHAIN·getModelTuning).
  */
 async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}) {
   const fetchImpl = options.fetchImpl || fetch;
@@ -221,7 +222,7 @@ async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}
 
   for (const model of options.models || MODEL_CHAIN) {
     const url = `${API_BASE}/${model}:generateContent`;
-    const body = { contents: [{ parts }], generationConfig: buildGenerationConfig(model, responseJsonSchema) };
+    const body = { contents: [{ parts }], generationConfig: { ...buildGenerationConfig(model, responseJsonSchema), ...options.tuning } };
 
     let result = await requestGemini(url, body, apiKey, fetchImpl);
     if (!result.ok && isOverloaded(result.status, result.data?.error?.message || '')) {

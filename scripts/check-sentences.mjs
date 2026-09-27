@@ -1,5 +1,5 @@
 /**
- * 예문 검사·보정 배치. GitHub Actions 가 생성 배치(generate-sentences.mjs) 바로 다음 스텝으로 실행한다.
+ * 예문 검사·보정 배치. GitHub Actions 가 생성 배치(generate-sentences.mjs)의 결과를 커밋한 다음 스텝으로 실행한다.
  * 로컬에서는 GEMINI_API_KEY=... node scripts/check-sentences.mjs [--dry-run] (--dry-run 은 결과만 출력하고 파일을 쓰지 않는다)
  *
  * 생성 배치의 저장 검증(validateSentence)은 표기 대응만 보므로, 형식은 맞아도 문법·단어의 쓰임·한자 읽기·번역이 틀린 예문이 저장된다.
@@ -7,12 +7,13 @@
  *
  * 흐름
  * 1. 대상(selectCheckTargets): 만든 지 7일 안이고 아직 검사하지 않은 예문과, 전에 틀렸다고 판정해 숨긴 예문. 없으면 아무것도 하지 않는다
- * 2. 1차 검사: 10건씩 묶어 검사한다. 통과하면 check 를 ok 로 표시한다. 틀렸다는 판정과 함께 온 수정안은
+ * 2. 1차 검사(최대 6회): 10건씩 묶어 검사한다. 통과하면 check 를 ok 로 표시한다. 틀렸다는 판정과 함께 온 수정안은
  *    형식 검증(validateCheckFix)을 통과하면 재검사 후보로 두고, 통과하지 못하면 원래 예문을 숨긴다
- * 3. 재검사: 후보의 수정안만 모아 같은 방식으로 한 번 더 검사한다. 통과하면 수정안으로 교체하고, 아니면(틀림·응답 누락·요청 상한·API 오류)
- *    원래 예문을 1차 판정 이유로 숨긴다. 재검사까지만 하고 더 반복하지 않는다. 숨긴 예문은 다음 실행에서 다시 대상이 된다
- * 4. 요청은 1차 검사와 재검사를 합쳐 한 실행에 최대 8회. 응답에서 빠졌거나 요청하지 못한 대상은 그대로 두어 다음 실행에서 다시 본다
- * 5. 결과를 제자리에 반영(applyCheckResults)하고, 바뀐 것이 있을 때만 파일을 다시 쓴다
+ * 3. 재검사(최대 2회): 후보의 수정안만 모아 한 번 더 검사한다. 통과하면 수정안으로 교체하고, 아니면(틀림·응답 누락·상한 초과·API 오류)
+ *    원래 예문을 1차 판정 이유로 숨긴다. 재검사까지만 하고 더 반복하지 않는다
+ * 4. 숨긴 예문은 재검사까지 통과한 수정안으로 교체될 때만 바뀐다. 원문이 통과로 판정되거나 다시 틀려도 그대로 둔다(숨김 유지)
+ * 5. 1차 판정을 받지 못한 대상(상한 초과·요청 실패·응답 누락)은 그대로 두어 다음 실행에서 다시 본다
+ * 6. 결과를 제자리에 반영(applyCheckResults)하고, 내용이 바뀌었을 때만 파일을 다시 쓴다
  *
  * 종료 코드: 성공(변경 없음 포함) 0. 대상이 있는데 키가 없거나, 400/401/403 처럼 다시 돌려도 같은 결과인 치명 오류만 1.
  * 쿼터 소진·서버 장애·네트워크 오류는 성공분을 저장하고 0 으로 끝낸다 (남은 대상은 다음 실행이 이어서 검사한다).
@@ -26,8 +27,10 @@ import { getKstDateString } from '../src/lib/date-utils.js';
 import { checkSentences, GeminiRequestError } from './gemini-node.mjs';
 
 const SENTENCES_PER_REQUEST = 10;
-// 생성 배치가 한 실행에 최대 50건(5묶음)을 만들므로, 그 1차 검사 5회에 재검사를 더해도 들어가는 크기로 잡는다
-const MAX_REQUESTS_PER_RUN = 8;
+// 호출 상한을 1차 검사와 재검사에 따로 둔다. 숨긴 예문 재시도로 1차 검사가 상한까지 가도 새 예문의 수정안을 재검사할 몫이 남게 하려는 것이다.
+// 1차 6회는 생성 배치가 한 실행에 만드는 최대 50건(5묶음)에 재시도 1묶음을 더한 크기다
+const MAX_FIRST_REQUESTS = 6;
+const MAX_RECHECK_REQUESTS = 2;
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WORDS_PATH = path.join(root, 'public/data/words.json');
@@ -66,8 +69,10 @@ function exampleFields(example) {
   return [example?.sentence, example?.reading, example?.meaning].map(v => (typeof v === 'string' && v.trim()) || '(없음)');
 }
 
+const outcomeText = detail => (detail.why ? `${detail.outcome} (${detail.why})` : detail.outcome);
+
 /** Actions 실행 화면의 요약에 결과를 남긴다. 로그를 열지 않고도 무엇이 바뀌었는지 볼 수 있게 한다 */
-function writeStepSummary({ today, dryRun, counts, wrong, wordsById }) {
+function writeStepSummary({ today, dryRun, counts, details, wordsById }) {
   const summaryPath = process.env.GITHUB_STEP_SUMMARY;
   if (!summaryPath) return;
   // 셀 안의 | 는 열 구분자로 읽히고 줄바꿈은 표를 끊으므로 바꿔 쓴다
@@ -75,11 +80,11 @@ function writeStepSummary({ today, dryRun, counts, wrong, wordsById }) {
   const exampleCell = example => exampleFields(example).map(cell).join('<br>');
 
   const lines = [`### 예문 검사 ${today}${dryRun ? ' (dry-run, 파일 미반영)' : ''}`, '', counts, ''];
-  if (wrong.length > 0) {
+  if (details.length > 0) {
     lines.push('| 단어 | 문제 | 원래 예문 | 수정 예문 | 처리 |', '|---|---|---|---|---|');
-    for (const w of wrong) {
-      const word = wordsById.get(w.original.wordId);
-      lines.push(`| ${cell(`${word.word}(${word.id})`)} | ${cell(w.problem)} | ${exampleCell(w.original)} | ${exampleCell(w.fix)} | ${cell(w.outcome)} |`);
+    for (const d of details) {
+      const word = wordsById.get(d.original.wordId);
+      lines.push(`| ${cell(`${word.word}(${word.id})`)} | ${cell(d.problem)} | ${exampleCell(d.original)} | ${exampleCell(d.fix)} | ${cell(outcomeText(d))} |`);
     }
     lines.push('');
   }
@@ -110,16 +115,15 @@ async function main() {
   const passed = new Set();
   const fixed = new Map();
   const rejected = new Map();
-  // 틀렸다고 판정된 항목: { original, problem, fix, outcome }. 로그와 Actions 요약에 쓴다
-  const wrong = [];
-  let requestsLeft = MAX_REQUESTS_PER_RUN;
+  const kept = new Set();
+  // 통과 외의 처리 결과: { original, problem, fix, outcome: '교체' | '숨김' | '숨김 유지', why }. 로그와 Actions 요약에 쓴다
+  const details = [];
   let stopped = false;
   let fatalError = null;
 
-  // 1차 검사와 재검사가 요청 상한과 오류 처리를 함께 쓴다. 요청하지 못했거나 응답을 읽지 못하면 null
+  // 요청하지 못했거나(API 오류로 멈춤) 응답을 읽지 못하면 null
   async function requestCheck(label, examples) {
-    if (stopped || requestsLeft === 0) return null;
-    requestsLeft -= 1;
+    if (stopped) return null;
     let result;
     try {
       result = await checkSentences(examples.map(e => toCheckItem(wordsById.get(e.wordId), e)), apiKey);
@@ -148,66 +152,84 @@ async function main() {
     return rows;
   }
 
+  // 숨긴 예문은 applyCheckResults 가 교체만 반영하므로, 통과로 판정되거나 다시 틀려도 기록을 바꾸지 않고 숨김 유지로 센다
+  function keepHidden(original, problem, fix, why) {
+    kept.add(original.wordId);
+    details.push({ original, problem, fix, outcome: '숨김 유지', why });
+  }
+
+  function markWrong(original, { problem, stored, fix, why }) {
+    if (isRejectedByCheck(original)) return keepHidden(original, problem, fix, why);
+    rejected.set(original.wordId, stored);
+    details.push({ original, problem, fix, outcome: '숨김', why });
+  }
+
   const candidates = [];
-  let firstRequested = 0;
-  for (const batch of chunk(targets, SENTENCES_PER_REQUEST)) {
-    if (stopped || requestsLeft === 0) break;
-    firstRequested += batch.length;
+  let judged = 0;
+  for (const batch of chunk(targets, SENTENCES_PER_REQUEST).slice(0, MAX_FIRST_REQUESTS)) {
+    if (stopped) break;
     const rows = await requestCheck('1차 검사', batch);
     if (!rows) continue;
     for (const s of batch) {
       const row = rows.get(s.wordId);
       if (!row) continue;
+      judged += 1;
       if (row.ok) {
-        passed.add(s.wordId);
+        if (isRejectedByCheck(s)) keepHidden(s, s.check.problem, null, '원문 통과 판정은 반영하지 않음');
+        else passed.add(s.wordId);
         continue;
       }
       const problem = problemOf(row);
       const reason = validateCheckFix(s, row);
       if (reason) {
-        rejected.set(s.wordId, `${problem} (수정안 거부: ${reason})`);
-        wrong.push({ original: s, problem, fix: row, outcome: `숨김 (수정안 거부: ${reason})` });
+        const why = `수정안 거부: ${reason}`;
+        markWrong(s, { problem, stored: `${problem} (${why})`, fix: row, why });
       } else {
         const fix = { wordId: s.wordId, sentence: row.sentence.trim(), reading: row.reading.trim(), meaning: row.meaning.trim() };
         candidates.push({ original: s, problem, fix });
       }
     }
   }
-  if (firstRequested < targets.length) {
-    console.log(`요청 상한 또는 API 오류로 ${targets.length - firstRequested}건은 검사하지 못해 다음 실행으로 미룸`);
+  const unjudged = targets.length - judged;
+  if (unjudged > 0) {
+    const overCap = Math.max(0, targets.length - MAX_FIRST_REQUESTS * SENTENCES_PER_REQUEST);
+    console.log(`1차 판정을 받지 못한 ${unjudged}건(요청 상한 초과 ${overCap}건 포함)은 그대로 두어 다음 실행에서 다시 검사`);
   }
 
-  // 수정안이 또 틀릴 수 있어 재검사를 통과한 것만 교체한다. 확인하지 못한 수정안은 버리고 원래 예문을 숨겨, 다음 실행에서 처음부터 다시 검사한다
-  for (const batch of chunk(candidates, SENTENCES_PER_REQUEST)) {
-    const rows = await requestCheck('재검사', batch.map(c => c.fix));
-    for (const c of batch) {
-      const row = rows?.get(c.original.wordId);
+  // 수정안이 또 틀릴 수 있어 재검사를 통과한 것만 교체한다. 대상 순서대로 모이므로 상한에 걸려도 검사 전 예문의 수정안이 먼저 재검사된다
+  const recheckBatches = chunk(candidates, SENTENCES_PER_REQUEST);
+  if (recheckBatches.length > MAX_RECHECK_REQUESTS) {
+    console.log(`재검사 상한 ${MAX_RECHECK_REQUESTS}회 → 수정안 ${candidates.length - MAX_RECHECK_REQUESTS * SENTENCES_PER_REQUEST}건은 재검사하지 못함`);
+  }
+  for (const [index, batch] of recheckBatches.entries()) {
+    const rows = index < MAX_RECHECK_REQUESTS ? await requestCheck('재검사', batch.map(c => c.fix)) : null;
+    for (const { original, problem, fix } of batch) {
+      const row = rows?.get(original.wordId);
       if (row?.ok === true) {
-        fixed.set(c.original.wordId, c.fix);
-        wrong.push({ ...c, outcome: '교체' });
+        fixed.set(original.wordId, fix);
+        details.push({ original, problem, fix, outcome: '교체' });
         continue;
       }
-      rejected.set(c.original.wordId, c.problem);
       const why = row ? `재검사 불통과: ${problemOf(row)}` : rows ? '재검사 응답 누락' : '재검사 못 함';
-      wrong.push({ ...c, outcome: `숨김 (${why})` });
+      markWrong(original, { problem, stored: problem, fix, why });
     }
   }
 
-  wrong.sort((a, b) => targets.indexOf(a.original) - targets.indexOf(b.original));
-  for (const w of wrong) {
-    const word = wordsById.get(w.original.wordId);
-    console.log(`[틀림] ${word.word}(${word.id}): ${w.problem}`);
-    console.log(`  원래: ${exampleFields(w.original).join(' / ')}`);
-    console.log(`  수정: ${exampleFields(w.fix).join(' / ')}`);
-    console.log(`  처리: ${w.outcome}`);
+  details.sort((a, b) => targets.indexOf(a.original) - targets.indexOf(b.original));
+  for (const d of details) {
+    const word = wordsById.get(d.original.wordId);
+    console.log(`[${d.outcome}] ${word.word}(${word.id}): ${d.problem}`);
+    console.log(`  원래: ${exampleFields(d.original).join(' / ')}`);
+    console.log(`  수정: ${exampleFields(d.fix).join(' / ')}`);
+    if (d.why) console.log(`  사유: ${d.why}`);
   }
-  const unprocessed = targets.length - passed.size - fixed.size - rejected.size;
-  const counts = `통과 ${passed.size}건, 교체 ${fixed.size}건, 숨김 ${rejected.size}건, 미처리 ${unprocessed}건`;
+  const unprocessed = targets.length - passed.size - fixed.size - rejected.size - kept.size;
+  const counts = `통과 ${passed.size}건, 교체 ${fixed.size}건, 숨김 ${rejected.size}건, 숨김 유지 ${kept.size}건, 미처리 ${unprocessed}건`;
   console.log(`결과: ${counts}`);
-  writeStepSummary({ today, dryRun, counts, wrong, wordsById });
+  writeStepSummary({ today, dryRun, counts, details, wordsById });
 
   const next = applyCheckResults(sentences, { passed, fixed, rejected }, today);
-  // 같은 날 다시 실행해 숨긴 예문이 같은 이유로 또 숨겨지면 내용이 그대로이므로 판정 개수가 아니라 내용으로 비교한다
+  // 같은 날 다시 실행해도 판정이 같으면 내용이 그대로이므로 판정 개수가 아니라 내용으로 비교한다
   if (JSON.stringify(next) === JSON.stringify(sentences)) {
     console.log('변경 없음. 파일을 쓰지 않습니다.');
   } else if (dryRun) {

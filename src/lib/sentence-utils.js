@@ -10,7 +10,8 @@
  *
  * check 는 검사 배치가 남기는 판정이다.
  * - { date, ok: true }: 검사를 통과했거나, 검사를 통과한 수정안으로 교체한 예문
- * - { date, ok: false, problem }: 틀렸다고 판정됐지만 아직 고치지 못한 예문. 앱에서 숨기고 다음 실행에서 다시 검사한다
+ * - { date, ok: false, problem }: 틀렸다고 판정됐지만 아직 고치지 못한 예문. 앱에서 숨기고 다음 실행에서 다시 검사하되,
+ *   재검사까지 통과한 수정안으로 교체될 때만 바뀐다
  * 생성 배치가 새로 만든 항목에는 check 가 없으므로, 문장이 바뀌면 자동으로 "검사 전"이 된다.
  */
 
@@ -248,15 +249,16 @@ const CHECK_PROBLEM_MAX_LENGTH = 200;
 
 /**
  * 검사 결과를 반영한 새 예문 배열을 돌려준다(입력은 바꾸지 않는다). 단어당 예문이 1건이라는 파일 규칙을 전제로 wordId 로 항목을 찾는다.
- * - passed(Set<wordId>): check 만 통과로 표시한다
  * - fixed(Map<wordId, { sentence, reading, meaning }>): 수정안으로 교체하고 date 를 오늘로 바꾼다.
  *   같은 날 생성 배치가 다시 돌아도(단어 등록 시 실행) 오늘 만든 예문으로 보고 건너뛰어 검증한 문장이 유지된다
+ * - passed(Set<wordId>): check 만 통과로 표시한다
  * - rejected(Map<wordId, problem>): 틀렸다고 표시해 앱에서 숨긴다
+ * 이미 숨긴 예문은 fixed 만 반영하고 passed·rejected 에 있어도 그대로 둔다. 원문 통과로 되살리면 틀린 문장이 우연히 통과할 기회가
+ * 실행마다 쌓이고, 다시 숨길 때마다 check 를 고치면 생성할 단어가 없는 날에도 매일 커밋이 생기기 때문이다.
  * 바뀐 항목을 끝으로 옮기지 않고 제자리에서 바꿔 커밋 diff 를 작게 유지한다.
  */
 export function applyCheckResults(sentences, { passed = new Set(), fixed = new Map(), rejected = new Map() }, today) {
   return sentences.map(s => {
-    if (passed.has(s.wordId)) return { ...s, check: { date: today, ok: true } };
     if (fixed.has(s.wordId)) {
       const fix = fixed.get(s.wordId);
       return {
@@ -269,6 +271,8 @@ export function applyCheckResults(sentences, { passed = new Set(), fixed = new M
         check: { date: today, ok: true },
       };
     }
+    if (isRejectedByCheck(s)) return s;
+    if (passed.has(s.wordId)) return { ...s, check: { date: today, ok: true } };
     if (rejected.has(s.wordId)) {
       const problem = String(rejected.get(s.wordId)).trim().slice(0, CHECK_PROBLEM_MAX_LENGTH);
       return { ...s, check: { date: today, ok: false, problem } };

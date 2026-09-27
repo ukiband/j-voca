@@ -356,12 +356,13 @@ describe('applyCheckResults', () => {
     sentence: `[[x${wordId}]]`, reading: `[[x${wordId}]]`, meaning: `x${wordId}`, ...overrides,
   });
 
-  it('통과·교체·숨김을 제자리에 반영하고, 나머지 항목과 배열 순서는 그대로 둔다', () => {
-    const oldCheck = { date: '2026-09-07', ok: false, problem: '옛 판정' };
-    const sentences = [entry(1), entry(2), entry(3, { check: oldCheck }), entry(4)];
+  const fix = { sentence: ' 新[[x]]。 ', reading: 'しん[[x]]。', meaning: '새 번역 ' };
+
+  it('검사 전 예문에 통과·교체·숨김을 제자리에서 반영하고, 나머지 항목과 배열 순서는 그대로 둔다', () => {
+    const sentences = [entry(1), entry(2), entry(3), entry(4)];
     const out = applyCheckResults(sentences, {
       passed: new Set([3]),
-      fixed: new Map([[1, { sentence: ' 新[[x]]。 ', reading: 'しん[[x]]。', meaning: '새 번역 ' }]]),
+      fixed: new Map([[1, fix]]),
       rejected: new Map([[4, '번역이 반말']]),
     }, today);
 
@@ -374,7 +375,21 @@ describe('applyCheckResults', () => {
     expect(out[1]).toBe(sentences[1]);
     expect(out[2]).toEqual({ ...sentences[2], check: { date: today, ok: true } });
     expect(out[3]).toEqual({ ...sentences[3], check: { date: today, ok: false, problem: '번역이 반말' } });
-    expect(sentences[2].check).toBe(oldCheck);
+    expect(sentences[3]).not.toHaveProperty('check');
+  });
+
+  it('숨긴 예문은 수정안으로 교체할 때만 바꾸고, 통과·숨김 판정을 받아도 check 까지 그대로 둔다', () => {
+    const hidden = { check: { date: '2026-09-01', ok: false, problem: '옛 판정' } };
+    const sentences = [entry(1, hidden), entry(2, hidden), entry(3, hidden)];
+    const out = applyCheckResults(sentences, {
+      passed: new Set([1]),
+      rejected: new Map([[2, '새 판정']]),
+      fixed: new Map([[3, fix]]),
+    }, today);
+
+    expect(out[0]).toBe(sentences[0]);
+    expect(out[1]).toBe(sentences[1]);
+    expect(out[2]).toMatchObject({ date: today, sentence: '新[[x]]。', check: { date: today, ok: true } });
   });
 
   it('숨긴 이유는 200자까지만 남긴다', () => {

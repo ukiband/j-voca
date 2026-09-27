@@ -72,6 +72,22 @@ export function getLatestStep(words) {
   return Math.max(...words.map(getStep));
 }
 
+// 단어 목록의 step 선택값 "모든 step". null 은 이미 "아직 고르지 않음 → 최신 step" 뜻으로 쓰므로 따로 둔다
+export const ALL_STEPS = 'all';
+
+/**
+ * step 선택값을 filterWords 에 넘길 step 으로 바꾼다.
+ * - ALL_STEPS → null (step 제한 없음)
+ * - 단어 목록에 있는 step → 그대로
+ * - null(아직 고르지 않음)이거나 삭제 등으로 사라진 step → 최신 step
+ * step 이 하나로 줄면 전체와 그 step 의 단어가 같고 step 칩 줄도 사라져 전체에서 빠져나올 수 없으므로, ALL_STEPS 도 최신 step 으로 되돌린다.
+ */
+export function resolveStepFilter(selectedStep, words) {
+  const steps = getSteps(words);
+  if (selectedStep === ALL_STEPS && steps.length > 1) return null;
+  return steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
+}
+
 /**
  * 화면 표기용 레슨 라벨을 만든다.
  * - withStep=true  → "Step 2 · Lesson 3" (step 문맥이 없는 곳: 복습 세션 제목, 삭제 확인 문구 등)

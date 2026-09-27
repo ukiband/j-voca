@@ -3,7 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db, syncWordsFromData, deleteReview } from '../lib/db';
 import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
 import { filterWords } from '../lib/word-utils';
-import { getStep, getSteps, getChapters, getLatestStep, formatLesson } from '../lib/lesson-utils';
+import { getStep, getSteps, getChapters, formatLesson, ALL_STEPS, resolveStepFilter } from '../lib/lesson-utils';
 import BrowseModal from './BrowseModal';
 import { useBrowseMode } from '../hooks/useBrowseMode';
 import { editVerbEntry } from '../lib/verb-utils';
@@ -11,7 +11,7 @@ import VerbMetadataFields from './VerbMetadataFields';
 
 export default function WordList() {
   const words = useLiveQuery(() => db.words.toArray(), [], []);
-  // selectedStep이 null이면 "아직 사용자가 고르지 않음" → 최신 step을 기본으로 쓴다.
+  // selectedStep이 null이면 "아직 사용자가 고르지 않음" → 최신 step을 기본으로 쓴다. ALL_STEPS면 모든 step에서 찾는다.
   // 단어 로딩이 비동기라 마운트 시점엔 words가 비어 있으므로, 고정값 대신 렌더 시점에 계산한다.
   const [selectedStep, setSelectedStep] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
@@ -22,13 +22,16 @@ export default function WordList() {
   const browse = useBrowseMode();
 
   const steps = getSteps(words);
-  // 선택한 step이 삭제 등으로 사라졌으면 최신 step으로 되돌린다
-  const currentStep = steps.includes(selectedStep) ? selectedStep : getLatestStep(words);
+  // null이면 모든 step에서 찾는 전체 모드
+  const currentStep = resolveStepFilter(selectedStep, words);
+  const isAllSteps = currentStep == null;
   const chapters = getChapters(words, currentStep);
   // 현재 step의 chapter별 단어 수 { [chapter]: count }. 칩 라벨과 레슨 삭제 개수에 쓴다.
   // 칩마다 filterWords를 돌리면 칩 수 × 단어 수 순회가 되므로 한 번만 순회해 맵으로 만든다.
   const countByChapter = useMemo(() => {
     const map = {};
+    // 전체 step 모드에는 레슨 칩도 레슨 삭제도 없다
+    if (currentStep == null) return map;
     for (const w of words) {
       if (getStep(w) !== currentStep) continue;
       map[w.chapter] = (map[w.chapter] || 0) + 1;
@@ -38,7 +41,8 @@ export default function WordList() {
   const stepWordCount = Object.values(countByChapter).reduce((sum, n) => sum + n, 0);
   // 레슨 삭제는 검색어와 무관하게 레슨 전체를 지우므로, 확인 문구/버튼의 개수도 검색어를 뺀 값을 써야 한다
   const lessonWordCount = selectedChapter !== null ? (countByChapter[selectedChapter] || 0) : 0;
-  const filtered = filterWords(words, currentStep, selectedChapter, searchQuery);
+  // step 없이 chapter만 넘기면 여러 step의 같은 번호 레슨이 섞이므로 전체 step 모드에서는 chapter도 풀어 준다
+  const filtered = filterWords(words, currentStep, isAllSteps ? null : selectedChapter, searchQuery);
 
   const canEdit = hasGithubToken();
 
@@ -73,7 +77,8 @@ export default function WordList() {
   }
 
   async function handleDeleteChapter() {
-    if (selectedChapter === null) return;
+    // 전체 step 모드에서는 레슨을 특정할 수 없고, deleteChapterFromRepo는 지울 단어가 없어도 빈 커밋을 만든다
+    if (isAllSteps || selectedChapter === null) return;
     const label = formatLesson(currentStep, selectedChapter);
     if (!confirm(`${label}의 단어 ${lessonWordCount}개를 모두 삭제하시겠습니까?`)) return;
     setSaving(true);
@@ -115,6 +120,14 @@ export default function WordList() {
       {/* step 칩: step이 하나뿐이면 고를 게 없으므로 숨긴다 */}
       {steps.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-1">
+          <button
+            onClick={() => selectStep(ALL_STEPS)}
+            className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
+              isAllSteps ? 'bg-slate-800 dark:bg-slate-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+            }`}
+          >
+            전체 ({words.length})
+          </button>
           {steps.map(step => (
             <button
               key={step}
@@ -129,7 +142,7 @@ export default function WordList() {
         </div>
       )}
 
-      {chapters.length > 0 && (
+      {!isAllSteps && chapters.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
           <button
             onClick={() => selectChapter(null)}
@@ -172,7 +185,7 @@ export default function WordList() {
 
       <BrowseModal browse={browse} />
 
-      {canEdit && selectedChapter !== null && lessonWordCount > 0 && (
+      {canEdit && !isAllSteps && selectedChapter !== null && lessonWordCount > 0 && (
         <button
           onClick={handleDeleteChapter}
           disabled={saving}
@@ -219,6 +232,10 @@ export default function WordList() {
                     <span className="font-medium text-slate-800 dark:text-slate-100">{w.word}</span>
                     <span className="text-slate-400 text-sm ml-2">{w.reading}</span>
                     <p className="text-sm text-slate-500 dark:text-slate-400">{w.meaning}</p>
+                    {/* 같은 표기의 단어가 여러 레슨에 있어, 모든 step을 섞어 볼 때는 어느 레슨의 단어인지 보여 준다 */}
+                    {isAllSteps && (
+                      <p className="text-xs text-slate-400 mt-0.5">{formatLesson(getStep(w), w.chapter)}</p>
+                    )}
                   </div>
                   {canEdit && (
                     <div className="flex gap-2 text-xs">

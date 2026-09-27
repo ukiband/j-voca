@@ -9,6 +9,8 @@ import {
   getChapters,
   getLatestStep,
   formatLesson,
+  ALL_STEPS,
+  resolveStepFilter,
 } from '../lesson-utils';
 
 const words = [
@@ -125,6 +127,25 @@ describe('getLatestStep', () => {
     expect(getLatestStep([{ chapter: 1 }])).toBe(1);
     expect(getLatestStep([])).toBe(1);
     expect(getLatestStep(null)).toBe(1);
+  });
+});
+
+describe('resolveStepFilter', () => {
+  it('전체 step 이면 null(step 제한 없음)', () => {
+    expect(resolveStepFilter(ALL_STEPS, words)).toBeNull();
+  });
+
+  it('단어 목록에 있는 step 은 그대로', () => {
+    expect(resolveStepFilter(2, words)).toBe(2);
+  });
+
+  it('아직 고르지 않았거나(null) 사라진 step 이면 최신 step', () => {
+    expect(resolveStepFilter(null, words)).toBe(10);
+    expect(resolveStepFilter(3, words)).toBe(10);
+  });
+
+  it('step 이 하나뿐이면 전체 step 도 그 step 으로 되돌린다', () => {
+    expect(resolveStepFilter(ALL_STEPS, [{ step: 2, chapter: 1 }])).toBe(2);
   });
 });
 

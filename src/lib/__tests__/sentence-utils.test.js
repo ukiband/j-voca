@@ -12,6 +12,7 @@ import {
   pruneSentences,
   selectTargets,
   selectCheckTargets,
+  countExpiredRejections,
   validateCheckFix,
   applyCheckResults,
 } from '../sentence-utils';
@@ -299,10 +300,11 @@ describe('selectTargets', () => {
   });
 });
 
-describe('selectCheckTargets', () => {
+describe('selectCheckTargets / countExpiredRejections', () => {
   const today = '2026-09-08';
   const words = [1, 2, 3, 4, 5, 6].map(id => ({ id, word: `w${id}`, reading: `r${id}`, meaning: `m${id}` }));
-  const hidden = { check: { date: '2026-09-07', ok: false, problem: '사물에 いる 를 씀' } };
+  const hiddenOn = date => ({ check: { date, ok: false, problem: '사물에 いる 를 씀' } });
+  const hidden = hiddenOn('2026-09-07');
   const entry = (wordId, date, overrides = {}) => ({
     wordId, date, source: { word: `w${wordId}`, reading: `r${wordId}`, meaning: `m${wordId}` },
     sentence: '[[x]]', reading: '[[x]]', meaning: 'x', ...overrides,
@@ -319,12 +321,23 @@ describe('selectCheckTargets', () => {
   });
 
   it('숨긴 예문은 항목 date 와 상관없이 숨긴 날(check.date)로부터 7일 안일 때만 다시 고른다', () => {
-    const hiddenOn = date => ({ check: { date, ok: false, problem: '사물에 いる 를 씀' } });
     const sentences = [
       entry(1, '2026-07-01', hiddenOn('2026-09-01')),   // 옛 예문이어도 숨긴 지 7일 → 포함
       entry(2, today, hiddenOn('2026-08-31')),          // 숨긴 지 8일 → 제외
+      entry(3, today, hiddenOn('2026/09/07')),          // check.date 형식이 다름 → 제외
     ];
     expect(selectCheckTargets(sentences, words, today).map(s => s.wordId)).toEqual([1]);
+  });
+
+  it('재시도 기간이 지난 숨긴 예문만 세고, 기간 안이거나 단어가 삭제됐거나 source 가 어긋난 예문은 세지 않는다', () => {
+    const oldSource = { source: { word: 'w3', reading: 'r3', meaning: '옛 뜻' } };
+    const sentences = [
+      entry(1, today, hiddenOn('2026-08-31')),                      // 숨긴 지 8일 → 셈
+      entry(2, today, hiddenOn('2026-09-01')),                      // 숨긴 지 7일(재시도 대상) → 빼
+      entry(3, today, { ...hiddenOn('2026-08-01'), ...oldSource }), // source 불일치 → 빼
+      entry(99, today, hiddenOn('2026-08-01')),                     // 삭제된 단어 → 빼
+    ];
+    expect(countExpiredRejections(sentences, words, today)).toBe(1);
   });
 
   it('단어가 삭제됐거나 source 가 현재 단어와 다른 예문은 숨긴 예문이어도 제외한다', () => {

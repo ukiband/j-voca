@@ -6,13 +6,14 @@
  * 그래서 새로 만든 예문을 Gemini 로 한 번 더 검사해, 틀린 것은 고치고 고치지 못하면 앱에서 숨긴다.
  *
  * 흐름
- * 1. 대상(selectCheckTargets): 만든 지 7일 안이고 아직 검사하지 않은 예문과, 숨긴 지 7일 안인 숨긴 예문. 없으면 아무것도 하지 않는다
+ * 1. 대상(selectCheckTargets): 생성일(date)과 오늘의 날짜 차이가 0~7일이고 아직 검사하지 않은 예문과, 숨긴 날(check.date)과의
+ *    날짜 차이가 0~7일인 숨긴 예문. 없으면 아무것도 하지 않는다
  * 2. 1차 검사(최대 6회): 10건씩 묶어 검사한다. 통과하면 check 를 ok 로 표시한다. 틀렸다는 판정과 함께 온 수정안은
  *    형식 검증(validateCheckFix)을 통과하면 재검사 후보로 두고, 통과하지 못하면 원래 예문을 숨긴다
  * 3. 재검사(최대 2회): 후보의 수정안만 모아 한 번 더 검사한다. 통과하면 수정안으로 교체하고, 아니면(틀림·응답 누락·상한 초과·API 오류)
  *    원래 예문을 1차 판정 이유로 숨긴다. 재검사까지만 하고 더 반복하지 않는다
  * 4. 숨긴 예문은 재검사까지 통과한 수정안으로 교체될 때만 바뀐다. 원문이 통과로 판정되거나 다시 틀려도 그대로 둔다(숨김 유지).
- *    숨긴 날로부터 7일 안에 고치지 못하면 숨긴 채로 두고 더 검사하지 않는다
+ *    숨긴 날과의 날짜 차이가 7일을 넘도록 고치지 못하면 숨긴 채로 두고 더 검사하지 않으며, 그런 예문 수는 시작 로그와 Actions 요약에 남긴다
  * 5. 1차 판정을 받지 못한 대상(상한 초과·요청 실패·응답 누락)은 그대로 두어 다음 실행에서 다시 본다
  * 6. 결과를 제자리에 반영(applyCheckResults)하고, 내용이 바뀌었을 때만 파일을 다시 쓴다
  *
@@ -22,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { selectCheckTargets, validateCheckFix, applyCheckResults, isRejectedByCheck } from '../src/lib/sentence-utils.js';
+import { selectCheckTargets, countExpiredRejections, validateCheckFix, applyCheckResults, isRejectedByCheck } from '../src/lib/sentence-utils.js';
 import { verbReading } from '../src/lib/verb-utils.js';
 import { getKstDateString } from '../src/lib/date-utils.js';
 import { checkSentences, GeminiRequestError } from './gemini-node.mjs';
@@ -73,7 +74,7 @@ function exampleFields(example) {
 const outcomeText = detail => (detail.why ? `${detail.outcome} (${detail.why})` : detail.outcome);
 
 /** Actions 실행 화면의 요약에 결과를 남긴다. 로그를 열지 않고도 무엇이 바뀌었는지 볼 수 있게 한다 */
-function writeStepSummary({ today, dryRun, counts, details, wordsById }) {
+function writeStepSummary({ today, dryRun, counts, expiredNote, details, wordsById }) {
   const summaryPath = process.env.GITHUB_STEP_SUMMARY;
   if (!summaryPath) return;
   // 셀 안의 | 는 열 구분자로 읽히고 줄바꿈은 표를 끊으므로 바꿔 쓴다
@@ -81,6 +82,7 @@ function writeStepSummary({ today, dryRun, counts, details, wordsById }) {
   const exampleCell = example => exampleFields(example).map(cell).join('<br>');
 
   const lines = [`### 예문 검사 ${today}${dryRun ? ' (dry-run, 파일 미반영)' : ''}`, '', counts, ''];
+  if (expiredNote) lines.push(expiredNote, '');
   if (details.length > 0) {
     lines.push('| 단어 | 문제 | 원래 예문 | 수정 예문 | 처리 |', '|---|---|---|---|---|');
     for (const d of details) {
@@ -101,12 +103,17 @@ async function main() {
   const sentences = Array.isArray(sentenceData.sentences) ? sentenceData.sentences : [];
 
   const targets = selectCheckTargets(sentences, words, today);
+  // 재시도 기간이 지난 숨긴 예문은 조용히 대상에서 빠지므로, 검사할 예문이 없는 날에도 몇 건인지 남긴다
+  const expired = countExpiredRejections(sentences, words, today);
+  const expiredNote = expired > 0 ? `재시도 기간이 지나 더 검사하지 않는 숨긴 예문 ${expired}건` : null;
   if (targets.length === 0) {
     console.log(`검사할 예문이 없습니다. 오늘(KST): ${today}`);
+    if (expiredNote) console.log(expiredNote);
     return 0;
   }
   const retrying = targets.filter(isRejectedByCheck).length;
   console.log(`검사 대상 ${targets.length}건 (검사 전 ${targets.length - retrying}건, 숨긴 예문 ${retrying}건), 오늘(KST): ${today}`);
+  if (expiredNote) console.log(expiredNote);
   if (!apiKey) {
     console.error('치명 오류: GEMINI_API_KEY 환경 변수가 없습니다.');
     return 1;
@@ -194,7 +201,8 @@ async function main() {
   const unjudged = targets.length - judged;
   if (unjudged > 0) {
     const overCap = Math.max(0, targets.length - MAX_FIRST_REQUESTS * SENTENCES_PER_REQUEST);
-    console.log(`1차 판정을 받지 못한 ${unjudged}건(요청 상한 초과 ${overCap}건 포함)은 그대로 두어 다음 실행에서 다시 검사`);
+    const capNote = overCap > 0 ? `(요청 상한 초과 ${overCap}건 포함)` : '';
+    console.log(`1차 판정을 받지 못한 ${unjudged}건${capNote}은 그대로 두어 다음 실행에서 다시 검사`);
   }
 
   // 수정안이 또 틀릴 수 있어 재검사를 통과한 것만 교체한다. 대상 순서대로 모이므로 상한에 걸려도 검사 전 예문의 수정안이 먼저 재검사된다
@@ -227,10 +235,10 @@ async function main() {
   const unprocessed = targets.length - passed.size - fixed.size - rejected.size - kept.size;
   const counts = `통과 ${passed.size}건, 교체 ${fixed.size}건, 숨김 ${rejected.size}건, 숨김 유지 ${kept.size}건, 미처리 ${unprocessed}건`;
   console.log(`결과: ${counts}`);
-  writeStepSummary({ today, dryRun, counts, details, wordsById });
+  writeStepSummary({ today, dryRun, counts, expiredNote, details, wordsById });
 
   const next = applyCheckResults(sentences, { passed, fixed, rejected }, today);
-  // 같은 날 다시 실행해도 판정이 같으면 내용이 그대로이므로 판정 개수가 아니라 내용으로 비교한다
+  // 숨김 유지·미처리만 있으면 판정을 받았어도 내용이 그대로이므로, 판정 개수가 아니라 내용으로 비교해 쓸데없는 쓰기와 커밋을 막는다
   if (JSON.stringify(next) === JSON.stringify(sentences)) {
     console.log('변경 없음. 파일을 쓰지 않습니다.');
   } else if (dryRun) {

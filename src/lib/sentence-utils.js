@@ -237,6 +237,18 @@ export function selectCheckTargets(sentences, words, today) {
 }
 
 /**
+ * 숨긴 날(check.date)과의 날짜 차이가 RECENT_WORD_DAYS 를 넘어 더 검사하지 않는 숨긴 예문 수. selectCheckTargets 의 재시도 조건과 짝을 이룬다.
+ * 이런 예문은 조용히 대상에서 빠지므로 배치 로그에 따로 알린다. 단어가 삭제됐거나 source 가 어긋난 예문은 이유가 다르므로 세지 않는다.
+ */
+export function countExpiredRejections(sentences, words, today) {
+  const wordsById = new Map(words.map(w => [w.id, w]));
+  const todayDay = toEpochDay(today);
+  return sentences.filter(s =>
+    isRejectedByCheck(s) && matchesSource(s, wordsById.get(s.wordId)) && !isRecentDate(s.check.date, todayDay)
+  ).length;
+}
+
+/**
  * 검사에서 받은 수정안(fix: { sentence, reading, meaning })을 재검사로 넘겨도 되는지 본다. 통과하면 null, 아니면 거부 이유.
  * 저장 규칙은 validateSentence 와 같지만 원래 예문을 existing 으로 넘기지 않는다. 번역만·읽기만 고친 수정안은 문장이 원래와 같아
  * "기존 예문과 같은 문장"으로 막히기 때문이다. 대신 세 필드가 모두 원래와 같으면 고친 것이 없으므로 거부한다.

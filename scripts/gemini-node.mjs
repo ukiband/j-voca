@@ -25,7 +25,10 @@ const RESPONSE_JSON_SCHEMA = {
   },
 };
 
-// 검사 결과 배열. 통과한 항목은 wordId·ok 만 받으면 되므로 나머지(틀린 이유와 고친 예문)는 선택 필드로 둔다
+// 검사 프롬프트의 검사 기준 이름. 틀림 판정에는 이 중 하나를 대게 해, 기준에 없는 이유(사전형이 아님 등)로 멀쩡한 예문을 고치는 오판을 줄인다
+export const CHECK_CRITERIA = ['문법', '목표 단어', '강조 범위', '읽기 줄', '번역', '표기'];
+
+// 검사 결과 배열. 통과한 항목은 wordId·ok 만 받으면 되므로 나머지(어긴 기준, 틀린 이유, 고친 예문)는 선택 필드로 둔다
 const CHECK_RESPONSE_JSON_SCHEMA = {
   type: 'array',
   items: {
@@ -33,15 +36,24 @@ const CHECK_RESPONSE_JSON_SCHEMA = {
     properties: {
       wordId: { type: 'integer' },
       ok: { type: 'boolean' },
+      criterion: { type: 'string', enum: CHECK_CRITERIA },
       problem: { type: 'string' },
       sentence: { type: 'string' },
       reading: { type: 'string' },
       meaning: { type: 'string' },
     },
     required: ['wordId', 'ok'],
-    propertyOrdering: ['wordId', 'ok', 'problem', 'sentence', 'reading', 'meaning'],
+    propertyOrdering: ['wordId', 'ok', 'criterion', 'problem', 'sentence', 'reading', 'meaning'],
   },
 };
+
+/**
+ * 검사 응답 행을 판정으로 쓸 수 있는지. ok 가 boolean 이어야 하고, 틀림 판정이면 어긴 기준(CHECK_CRITERIA)을 대야 한다.
+ * 기준을 대지 못한 틀림 판정은 근거가 없는 것으로 보고 판정을 받지 못한 것과 같이 다룬다(예문을 바꾸지 않고 다음 실행에서 다시 본다).
+ */
+export function isUsableCheckRow(row) {
+  return typeof row?.ok === 'boolean' && (row.ok || CHECK_CRITERIA.includes(row.criterion));
+}
 
 function buildGenerationConfig(model, responseJsonSchema) {
   return {
@@ -109,21 +121,27 @@ export function buildCheckPrompt(items) {
 
   return `당신은 일본어 초급 학습자용 단어장의 예문 검수자입니다. 아래 목록의 항목마다 등록 단어(word·reading·meaning·pos)로 만든 예문(example)이 올바른지 검사하고, 틀렸으면 고친 예문을 함께 돌려주세요.
 
-## 검사 기준 (하나라도 어기면 ok=false)
+## 검사 기준 (하나라도 명백히 어기면 ok=false)
 1. 문법: 문법이 맞고 원어민이 실제로 쓰는 자연스러운 문장인지 봅니다. 조사, 활용, 자동사/타동사, いる/ある(사람·동물에는 いる, 사물에는 ある), 연어(宿題をする 등), 앞뒤 연결을 확인합니다.
 2. 목표 단어: [[ ]] 안이 목표 단어 자체나 그 활용형인지, 다른 단어나 파생어로 바꾸지 않았는지, 등록된 뜻(meaning)으로 쓰였는지, 등록된 읽기(reading)로 읽히는 쓰임인지 봅니다 (예: 四(よん)을 四月(しがつ)로 쓰면 틀림). 등록 표기(word)가 한자면 강조 부분도 한자로, 가나면 가나로 씁니다.
-3. 강조 범위: [[ ]] 는 목표 단어와 그 활용 어미까지만 감쌉니다. 뒤에 붙는 보조 표현(〜ください, 〜はいけません 등)은 [[ ]] 밖에 둡니다.
+3. 강조 범위: [[ ]] 는 목표 단어와 그 활용 어미까지 감쌉니다. 등록 단어가 여러 낱말로 된 표현(帽子を かぶる, 歌を歌う 등)이면 표현 전체를 감쌉니다. 뒤에 붙는 보조 표현(〜ください, 〜はいけません 등)은 [[ ]] 밖에 둡니다.
 4. 읽기 줄: example.reading 이 sentence 의 한자를 문맥에 맞게 정확히 읽었는지 봅니다 (예: 行きます → いきます). 한자 읽기와 띄어쓰기 외의 글자는 sentence 와 같아야 합니다.
 5. 번역: example.meaning 이 sentence 를 정확히 옮겼는지 봅니다. 주체·대상·장소·시제·긍정/부정·요청/서술·존댓말/반말이 원문과 같아야 합니다.
 6. 표기: sentence 에 공백이나 반각 문장부호(? ! ,)가 없어야 합니다.
 
-## 판정 원칙
-- 명백한 오류만 ok=false 로 판정합니다. 맞는 문장을 더 좋은 표현으로 바꾸고 싶다는 이유로 고치지 않습니다.
-- 등록 단어(word·reading·meaning) 자체의 오류는 예문의 잘못으로 보지 않습니다. 예문이 등록된 내용에 맞게 쓰였는지만 판정합니다.
-- 등록 읽기가 히라가나로 적혀 있어도 가타카나 단어는 sentence·reading 모두 가타카나로 쓰는 것이 맞습니다.
+## 틀림이 아닌 것 (ok=true)
+- 목표 단어를 활용형으로 쓴 것 (てつだう → てつだいます, 飲む → 飲みたいです). 사전형이 아니라는 이유로 틀렸다고 하지 않습니다.
+- 등록 표기(word)의 띄어쓰기나 반각 문장부호를 예문에서 붙여 쓰거나 전각으로 쓴 것 (帽子を かぶる → [[帽子をかぶります]], けがはない? → [[けがはない？]]).
+- 전각 문장부호(？ ！ 、 。 「 」). 표기 오류는 반각(? ! ,)뿐입니다.
+- 등록 읽기가 히라가나로 적혀 있어도 가타카나 단어를 sentence·reading 모두 가타카나로 쓴 것.
+- 등록 단어(word·reading·meaning) 자체의 오류. 예문이 등록된 내용에 맞게 쓰였는지만 판정합니다.
+- 문법이 맞고 자연스러운데 더 좋은 표현이 있을 뿐인 것.
+
+## 응답 규칙
 - 항목마다 결과를 하나씩 돌려주고, wordId 는 입력의 wordId 를 그대로 돌려줍니다.
+- 틀렸다고 판정하기 전에 어긴 기준을 위 1~6 에서 하나 고를 수 있는지, 그 기준에 비추어 명백히 틀렸는지 확인합니다. 고를 수 없거나 명백하지 않으면 ok=true 입니다.
 - ok=true 면 wordId 와 ok 만 돌려주고 나머지 필드는 생략합니다.
-- ok=false 면 problem 에 무엇이 왜 틀렸는지 한국어 한 문장으로 적고, 고친 예문을 sentence·reading·meaning 세 필드에 모두 적습니다. 틀린 부분만 고치고 나머지는 원래 예문 그대로 옮깁니다.
+- ok=false 면 criterion 에 어긴 기준의 이름(문법·목표 단어·강조 범위·읽기 줄·번역·표기 중 하나)을, problem 에 무엇이 왜 틀렸는지 한국어 한 문장을 적고, 고친 예문을 sentence·reading·meaning 세 필드에 모두 적습니다. 틀린 부분만 고치고 나머지는 원래 예문 그대로 옮기며, 고친 예문도 위 검사 기준을 모두 지켜야 합니다.
 
 ## 고친 예문의 각 필드
 ${EXAMPLE_FIELD_RULES}
@@ -191,7 +209,7 @@ const defaultDelay = ms => new Promise(resolve => setTimeout(resolve, ms));
 /**
  * 프롬프트 하나로 Gemini 를 호출해 응답 JSON 배열의 객체 항목을 { model, rows } 로 돌려준다. 예문 생성과 검사가 함께 쓴다.
  * MODEL_CHAIN 순서로 시도하며 과부하(503)는 2초 후 1회 재시도, 그래도 실패하거나 404/429/5xx 면 다음 모델로 넘어간다.
- * options.fetchImpl / options.delay 는 테스트용 주입 지점.
+ * options.fetchImpl / options.delay 는 테스트용 주입 지점. options.models 는 모델 순서를 바꿔 한 모델만 시험할 때 쓴다(기본 MODEL_CHAIN).
  */
 async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}) {
   const fetchImpl = options.fetchImpl || fetch;
@@ -201,7 +219,7 @@ async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}
   const parts = [{ text: prompt }];
   let lastFailure = null;
 
-  for (const model of MODEL_CHAIN) {
+  for (const model of options.models || MODEL_CHAIN) {
     const url = `${API_BASE}/${model}:generateContent`;
     const body = { contents: [{ parts }], generationConfig: buildGenerationConfig(model, responseJsonSchema) };
 

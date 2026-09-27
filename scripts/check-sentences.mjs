@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url';
 import { selectCheckTargets, countExpiredRejections, validateCheckFix, applyCheckResults, isRejectedByCheck } from '../src/lib/sentence-utils.js';
 import { verbReading } from '../src/lib/verb-utils.js';
 import { getKstDateString } from '../src/lib/date-utils.js';
-import { checkSentences, GeminiRequestError } from './gemini-node.mjs';
+import { checkSentences, isUsableCheckRow, GeminiRequestError } from './gemini-node.mjs';
 
 const SENTENCES_PER_REQUEST = 10;
 // 호출 상한을 1차 검사와 재검사에 따로 둔다. 숨긴 예문 재시도로 1차 검사가 상한까지 가도 새 예문의 수정안을 재검사할 몫이 남게 하려는 것이다.
@@ -61,9 +61,10 @@ function toCheckItem(word, example) {
   };
 }
 
-// problem 은 필수 필드가 아니라 빠질 수 있다. 숨긴 예문에는 이유가 남아야 나중에 보고 고칠 수 있다
+// problem 은 필수 필드가 아니라 빠질 수 있다. 숨긴 예문에는 이유가 남아야 나중에 보고 고칠 수 있고, 어긴 기준을 앞에 붙여 어떤 종류의 오류인지 바로 보이게 한다
 function problemOf(row) {
-  return typeof row.problem === 'string' && row.problem.trim() ? row.problem.trim() : '이유 없이 틀렸다고 판정됨';
+  const problem = typeof row.problem === 'string' && row.problem.trim() ? row.problem.trim() : '이유 없이 틀렸다고 판정됨';
+  return row.criterion ? `[${row.criterion}] ${problem}` : problem;
 }
 
 // 수정안은 모델 응답 그대로라 필드가 빠져 있을 수 있다
@@ -152,8 +153,8 @@ async function main() {
         console.warn(`  무시 wordId=${row.wordId}: 요청하지 않은 항목`);
         continue;
       }
-      // 판정이 없는 행은 응답에서 빠진 것과 같이 보고, 같은 항목이 두 번 오면 첫 판정만 쓴다
-      if (typeof row.ok !== 'boolean' || rows.has(row.wordId)) continue;
+      // 판정이 없거나 어긴 기준 없이 틀렸다고 한 행은 응답에서 빠진 것과 같이 보고, 같은 항목이 두 번 오면 첫 판정만 쓴다
+      if (!isUsableCheckRow(row) || rows.has(row.wordId)) continue;
       rows.set(row.wordId, row);
     }
     console.log(`[${label}] ${result.model}: 요청 ${examples.length}건 → 판정 ${rows.size}건`);

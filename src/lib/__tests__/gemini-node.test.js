@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { buildPrompt, buildCheckPrompt, generateSentences, checkSentences, GeminiRequestError } from '../../../scripts/gemini-node.mjs';
+import { buildPrompt, buildCheckPrompt, generateSentences, checkSentences, isUsableCheckRow, GeminiRequestError } from '../../../scripts/gemini-node.mjs';
 import { MODEL_CHAIN } from '../gemini-common.js';
 
 const items = [
@@ -123,5 +123,20 @@ describe('gemini-node', () => {
     const body = JSON.parse(fetchImpl.mock.calls[0][1].body);
     expect(body.contents[0].parts[0].text).toBe(buildCheckPrompt(checkItems));
     expect(body.generationConfig.responseJsonSchema.items.required).toEqual(['wordId', 'ok']);
+  });
+
+  it('틀림 판정은 어긴 검사 기준을 댈 때만 판정으로 쓴다', () => {
+    expect(isUsableCheckRow({ wordId: 1, ok: true })).toBe(true);
+    expect(isUsableCheckRow({ wordId: 1, ok: false, criterion: '번역' })).toBe(true);
+    // 첫 실제 실행에서 "사전형이 아님"처럼 기준에 없는 이유로 멀쩡한 예문을 고친 오판을 막는다
+    expect(isUsableCheckRow({ wordId: 1, ok: false })).toBe(false);
+    expect(isUsableCheckRow({ wordId: 1, ok: false, criterion: '사전형 아님' })).toBe(false);
+    expect(isUsableCheckRow({ wordId: 1, ok: 'false', criterion: '번역' })).toBe(false);
+  });
+
+  it('모델 순서를 넘기면 그 모델로만 요청한다', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(errorResponse(503, 'overloaded'));
+    await expect(checkSentences(checkItems, 'key', { fetchImpl, delay: noDelay, models: ['gemini-3.8-flash'] })).rejects.toMatchObject({ fatal: false });
+    expect(fetchImpl.mock.calls.map(c => c[0])).toEqual(Array(2).fill(expect.stringContaining('/gemini-3.8-flash:generateContent')));
   });
 });

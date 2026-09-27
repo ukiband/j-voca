@@ -308,15 +308,23 @@ describe('selectCheckTargets', () => {
     sentence: '[[x]]', reading: '[[x]]', meaning: 'x', ...overrides,
   });
 
-  it('최근 7일 안에 만든 검사 전 예문과, 날짜와 상관없이 숨긴 예문을 고른다', () => {
+  it('최근 7일 안에 만든 검사 전 예문을 고르고, 통과한 예문과 기간이 지났거나 날짜 형식이 다른 예문은 뺀다', () => {
     const sentences = [
       entry(1, '2026-09-01'),                                   // 7일 전 → 포함
       entry(2, '2026-08-31'),                                   // 8일 전(고정된 옛 예문) → 제외
       entry(3, today, { check: { date: today, ok: true } }),    // 통과 → 제외
-      entry(4, '2026-07-01', hidden),                           // 숨김 → 날짜와 상관없이 포함
       entry(5, '2026/09/07'),                                   // 날짜 형식이 다름 → 제외
     ];
-    expect(selectCheckTargets(sentences, words, today).map(s => s.wordId)).toEqual([1, 4]);
+    expect(selectCheckTargets(sentences, words, today).map(s => s.wordId)).toEqual([1]);
+  });
+
+  it('숨긴 예문은 항목 date 와 상관없이 숨긴 날(check.date)로부터 7일 안일 때만 다시 고른다', () => {
+    const hiddenOn = date => ({ check: { date, ok: false, problem: '사물에 いる 를 씀' } });
+    const sentences = [
+      entry(1, '2026-07-01', hiddenOn('2026-09-01')),   // 옛 예문이어도 숨긴 지 7일 → 포함
+      entry(2, today, hiddenOn('2026-08-31')),          // 숨긴 지 8일 → 제외
+    ];
+    expect(selectCheckTargets(sentences, words, today).map(s => s.wordId)).toEqual([1]);
   });
 
   it('단어가 삭제됐거나 source 가 현재 단어와 다른 예문은 숨긴 예문이어도 제외한다', () => {

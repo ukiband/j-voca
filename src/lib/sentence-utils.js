@@ -10,12 +10,13 @@
  *
  * check 는 검사 배치가 남기는 판정이다.
  * - { date, ok: true }: 검사를 통과했거나, 검사를 통과한 수정안으로 교체한 예문
- * - { date, ok: false, problem }: 틀렸다고 판정됐지만 아직 고치지 못한 예문. 앱에서 숨기고 다음 실행에서 다시 검사하되,
- *   재검사까지 통과한 수정안으로 교체될 때만 바뀐다
+ * - { date, ok: false, problem }: 틀렸다고 판정됐지만 아직 고치지 못한 예문. 앱에서 숨기고, 숨긴 날(date)로부터 RECENT_WORD_DAYS 동안
+ *   다시 검사한다. 재검사까지 통과한 수정안으로 교체될 때만 바뀌고, 그 기간이 지나면 숨긴 채로 두고 더 검사하지 않는다
  * 생성 배치가 새로 만든 항목에는 check 가 없으므로, 문장이 바뀌면 자동으로 "검사 전"이 된다.
  */
 
-// 단어 등록일(createdAt)로부터 이 일수 안에 있는 단어만 예문을 새로 만든다. 지금 배우는 단어에만 호출을 쓰기 위한 것이다
+// 단어 등록일(createdAt)로부터 이 일수 안에 있는 단어만 예문을 새로 만든다. 지금 배우는 단어에만 호출을 쓰기 위한 것이다.
+// 검사 배치도 같은 기간을 쓴다(만든 지 이 일수 안인 예문을 검사하고, 숨긴 예문은 숨긴 지 이 일수 안에만 다시 시도)
 export const RECENT_WORD_DAYS = 7;
 
 // 앱이 예문 파일을 다시 받는 최소 간격. 배치는 하루 1회 돌고 단어 등록 직후에도 한 번 도니, 그보다 잦게 받을 이유가 없다
@@ -212,7 +213,9 @@ export function selectTargets(recentWords, byWord, today) {
 /**
  * 검사 배치가 검사할 예문을 고른다. today 는 KST 'YYYY-MM-DD'.
  * - check 가 없고 date 가 오늘로부터 RECENT_WORD_DAYS 안인 예문: 새로 만든 예문만 검사하고, 고정된 옛 예문과 date 형식이 이상한 예문은 뺀다
- * - 숨긴 예문(check.ok === false): 고칠 때까지 숨겨 두므로 날짜와 상관없이 다시 본다
+ * - 숨긴 예문(check.ok === false): 항목 date 와 상관없이 숨긴 날(check.date)로부터 RECENT_WORD_DAYS 안일 때만 다시 본다.
+ *   모델이 원문을 맞다고 보는 예문은 수정안을 받을 수 없어 끝없이 재시도하게 되므로, 호출과 요약 표 소음을 기간으로 제한한다.
+ *   숨김을 유지할 때는 check 를 바꾸지 않으므로 check.date 가 처음 숨긴 날이다. 형식이 이상한 check.date 는 뺀다
  * - 단어가 삭제됐거나 source 가 현재 단어와 다른 예문은 뺀다. 화면에서 이미 숨겨지고, 최근 단어라면 생성 배치가 다시 만든다
  * 요청 상한에 걸리면 뒤쪽이 다음 실행으로 밀리므로 지금 화면에 보이는 검사 전 예문을 앞에, 숨긴 예문을 뒤에 둔다(각각 wordId 순).
  */
@@ -223,8 +226,11 @@ export function selectCheckTargets(sentences, words, today) {
   const rejected = [];
   for (const s of sentences) {
     if (!matchesSource(s, wordsById.get(s.wordId))) continue;
-    if (isRejectedByCheck(s)) rejected.push(s);
-    else if (!s.check && isRecentDate(s.date, todayDay)) unchecked.push(s);
+    if (isRejectedByCheck(s)) {
+      if (isRecentDate(s.check.date, todayDay)) rejected.push(s);
+    } else if (!s.check && isRecentDate(s.date, todayDay)) {
+      unchecked.push(s);
+    }
   }
   const byWordId = (a, b) => a.wordId - b.wordId;
   return [...unchecked.sort(byWordId), ...rejected.sort(byWordId)];

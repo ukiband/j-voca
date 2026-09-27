@@ -30,13 +30,19 @@ iPhone의 Safari 또는 Android의 Chrome에서 **홈 화면에 추가**하면 �
 
 ## 예문 생성과 갱신
 
-예문은 [GitHub Actions 워크플로](.github/workflows/generate-sentences.yml)가 Gemini로 생성하고, 앱은 저장된 예문을 받아 표시합니다.
+예문은 [GitHub Actions 워크플로](.github/workflows/generate-sentences.yml)가 Gemini로 생성·검사하고, 앱은 저장된 예문을 받아 표시합니다.
 
 - **정기 생성**: 매일 한국 시간 오전 7시에 실행하도록 설정되어 있습니다. 등록일(`createdAt`)과 오늘의 날짜 차이가 0~7일인 단어가 대상입니다.
 - **신규 등록**: 앱에서 새 단어를 저장하면 배치 실행을 요청합니다. PAT에 Actions 쓰기 권한이 없거나 요청에 실패하면 정기 실행에서 처리합니다.
 - **교체 주기**: 단어당 예문은 1건을 유지하며, 대상 단어의 예문을 하루 한 번 새 문장으로 교체합니다. 현재 단어 내용과 일치하는 예문을 같은 날 이미 생성했다면 건너뛰고, 등록 후 7일이 지나면 마지막 예문을 유지합니다.
 - **생성 한도**: 한 번 실행할 때 10단어씩 최대 5묶음(50단어)을 처리합니다. 한도를 넘긴 단어는 다음 실행으로 넘깁니다. 생성에 실패한 경우 단어 내용과 일치하는 기존 예문은 유지합니다.
-- **읽기 검증**: 한자·숫자의 읽기와 띄어쓰기를 제외하면 원문의 가타카나·히라가나·문장부호·강조 위치가 유지되어야 저장합니다. 숫자와 조수사의 읽기(예: `300円 → さんびゃくえん`)는 허용합니다. 이 검사는 표기 대응을 확인하며, 한자의 실제 발음·문법·번역의 정확성까지 판정하지는 않습니다.
+- **읽기 검증**: 한자·숫자의 읽기와 띄어쓰기를 제외하면 원문의 가타카나·히라가나·문장부호·강조 위치가 유지되어야 저장합니다. 숫자와 조수사의 읽기(예: `300円 → さんびゃくえん`)는 허용합니다. 이 검사는 표기 대응만 확인하며, 한자의 실제 발음·문법·번역의 정확성은 이어지는 예문 검사에서 확인합니다.
+- **예문 검사**: 생성 직후 같은 워크플로에서 검사 배치가 실행됩니다. 최근 7일 안에 생성했고 아직 검사하지 않은 예문과, 이전 검사에서 숨긴 예문이 대상입니다. 등록 후 7일이 지나 고정된 예문은 다시 검사하지 않습니다.
+- **검사 항목**: 문법과 자연스러움(조사·활용·いる/ある 등), 목표 단어의 쓰임(등록한 뜻·읽기, 강조 범위), 읽기 문장의 한자 읽기, 번역의 정확성(시제·긍정/부정·존댓말/반말 등), 원문의 공백·반각 문장부호를 확인합니다.
+- **보정·재검사**: 틀렸다고 판정한 예문은 함께 받은 수정안이 저장 규칙(읽기 검증 포함)을 통과하면 한 번 더 검사하고, 재검사를 통과하면 수정안으로 교체합니다.
+- **숨김과 재시도**: 수정안이 저장 규칙이나 재검사를 통과하지 못하면 원래 예문을 앱에서 숨기고 다음 실행에서 다시 검사합니다. 응답에서 빠진 예문은 검사 전 상태로 두어 다음 실행에서 검사합니다.
+- **검사 한도**: 10건씩 묶어 요청하며, 한 번 실행할 때 1차 검사와 재검사를 합쳐 최대 8회 요청합니다. 한도를 넘긴 예문은 다음 실행으로 넘기고, 한도 때문에 재검사하지 못한 수정안은 버리고 원래 예문을 숨깁니다.
+- **로컬 실행**: `GEMINI_API_KEY=... node scripts/check-sentences.mjs`로 검사 배치를 실행합니다. `--dry-run`을 붙이면 판정과 처리 결과만 출력하고 `sentences.json`은 바꾸지 않습니다.
 - **앱 반영**: 앱 시작, 화면 복귀, 복습 진입 시 예문을 다시 받습니다. 시작 시 강제 갱신을 제외하면 마지막 성공 이후 최소 10분 간격을 둡니다. 진행 중인 복습 세션은 처음 읽은 예문을 유지하며, 새로 받은 예문은 다음 복습부터 표시합니다.
 
 ### 단어를 수정했을 때
@@ -50,7 +56,7 @@ iPhone의 Safari 또는 Android의 Chrome에서 **홈 화면에 추가**하면 �
 | 데이터 | 저장 위치와 역할 |
 |---|---|
 | [words.json](public/data/words.json) | 단어의 현재 값. ID, 표기, 읽기, 뜻, 품사, Step·레슨, 교재, 등록일 등을 저장 |
-| [sentences.json](public/data/sentences.json) | `wordId`로 단어와 연결. 생성일, 생성 당시 단어 값(`source`), 예문·읽기·번역을 저장 |
+| [sentences.json](public/data/sentences.json) | `wordId`로 단어와 연결. 생성일, 생성 당시 단어 값(`source`), 예문·읽기·번역, 검사 결과(`check`: 판정일·통과 여부·숨긴 이유)를 저장 |
 | IndexedDB (`words`, `sentences`) | 브라우저에서 열람·오프라인 학습에 사용하는 단어·예문 사본 |
 | IndexedDB (`reviews`, `reviewLogs`) | 해당 브라우저의 FSRS 복습 상태와 평가 이력 |
 
@@ -64,7 +70,7 @@ iPhone의 Safari 또는 Android의 Chrome에서 **홈 화면에 추가**하면 �
 |---|---|---|
 | [Gemini API 키](https://aistudio.google.com/apikey) | 교재 사진에서 단어 추출 | 앱의 설정 > Gemini API |
 | [GitHub PAT (Fine-grained)](https://github.com/settings/personal-access-tokens/new) | 단어 저장·수정·삭제, 신규 등록 후 예문 배치 실행 요청 | 앱의 설정 > GitHub |
-| `GEMINI_API_KEY` | GitHub Actions에서 예문 생성 | 저장소의 Settings > Secrets and variables > Actions에 repository secret으로 등록 |
+| `GEMINI_API_KEY` | GitHub Actions에서 예문 생성·검사 | 저장소의 Settings > Secrets and variables > Actions에 repository secret으로 등록 |
 
 GitHub PAT는 대상 저장소의 **Contents: Read and write** 권한이 필요합니다. 신규 단어 저장 직후 예문 생성을 요청하려면 **Actions: Read and write** 권한도 부여합니다. 앱에 입력한 Gemini 키와 PAT는 해당 브라우저의 로컬 저장소에 저장되며, 예문 배치는 별도로 설정한 repository secret을 사용합니다.
 
@@ -75,7 +81,7 @@ GitHub PAT는 대상 저장소의 **Contents: Read and write** 권한이 필요�
 | Frontend | React 19, React Router 7, Tailwind CSS 4, Vite 6 |
 | 데이터 | IndexedDB (Dexie 4), 정적 JSON, GitHub Contents API |
 | 복습 알고리즘 | FSRS (ts-fsrs 5) |
-| AI | Gemini API — 사진 추출·예문 생성, 일부 오류 시 모델 자동 대체 |
+| AI | Gemini API — 사진 추출·예문 생성·예문 검사, 일부 오류 시 모델 자동 대체 |
 | 음성·오프라인 | Web Speech API, Service Worker, Web App Manifest |
 | 배포·배치 | GitHub Pages, GitHub Actions |
 | 테스트 | Vitest 4 |
@@ -103,7 +109,7 @@ npm run test:watch
 
 테스트는 FSRS 복습 계산, Step·레슨 및 단어 필터링, Gemini 응답 처리, 예문 유효성, 동사 활용 규칙·출제 큐, 실제 JSON 데이터의 정합성 등을 검증합니다.
 
-예문 배치를 로컬에서 실행하려면 `GEMINI_API_KEY` 환경 변수를 설정한 뒤 실행합니다. 생성 대상은 정기 배치와 같고, 결과는 로컬 `public/data/sentences.json`에 저장됩니다.
+예문 생성 배치를 로컬에서 실행하려면 `GEMINI_API_KEY` 환경 변수를 설정한 뒤 실행합니다. 생성 대상은 정기 배치와 같고, 결과는 로컬 `public/data/sentences.json`에 저장됩니다.
 
 ```bash
 node scripts/generate-sentences.mjs

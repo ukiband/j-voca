@@ -1,12 +1,17 @@
 /**
  * 예문(sentences.json 항목)을 다루는 순수 함수 모음.
- * 브라우저(FlashCard/ReviewSession)와 Node 배치(scripts/generate-sentences.mjs)가 함께 import 하므로
+ * 브라우저(FlashCard/ReviewSession)와 Node 배치(scripts/generate-sentences.mjs, scripts/check-sentences.mjs)가 함께 import 하므로
  * DOM·Dexie·import.meta.env 같은 환경 의존 코드를 넣지 않는다.
  *
  * 예문 한 건의 형태:
- * { wordId, date: 'YYYY-MM-DD', source: { word, reading, meaning }, sentence, reading, meaning }
+ * { wordId, date: 'YYYY-MM-DD', source: { word, reading, meaning }, sentence, reading, meaning, check? }
  * 단어당 예문은 1건만 둔다. 단어를 등록한 뒤 일주일 동안은 배치가 매일 새 문장으로 교체하고, 그 뒤로는 마지막 문장을 그대로 둔다.
  * sentence/reading 안의 [[ ]] 는 목표 단어(활용형)를 표시하는 표식이다.
+ *
+ * check 는 검사 배치가 남기는 판정이다.
+ * - { date, ok: true }: 검사를 통과했거나, 검사를 통과한 수정안으로 교체한 예문
+ * - { date, ok: false, problem }: 틀렸다고 판정됐지만 아직 고치지 못한 예문. 앱에서 숨기고 다음 실행에서 다시 검사한다
+ * 생성 배치가 새로 만든 항목에는 check 가 없으므로, 문장이 바뀌면 자동으로 "검사 전"이 된다.
  */
 
 // 단어 등록일(createdAt)로부터 이 일수 안에 있는 단어만 예문을 새로 만든다. 지금 배우는 단어에만 호출을 쓰기 위한 것이다
@@ -96,16 +101,31 @@ export function matchesSource(sentence, word) {
   return src.word === word.word && src.reading === word.reading && src.meaning === word.meaning;
 }
 
-/** 한 단어의 예문 목록에서 현재 단어 데이터와 맞는 것만 남긴다. 단어가 없으면(삭제됨) 빈 배열 */
+/** 검사 배치가 틀렸다고 판정했고 아직 고치지 못해 숨긴 예문인지 */
+export function isRejectedByCheck(sentence) {
+  return sentence?.check?.ok === false;
+}
+
+/**
+ * 한 단어의 예문 목록에서 화면에 보여 줄 것만 남긴다. 단어가 없으면(삭제됨) 빈 배열.
+ * source 가 현재 단어와 맞아야 하고, 검사에서 틀렸다고 판정한 예문은 뺀다. 아직 검사하지 않은 예문은 보여 준다.
+ */
 export function filterUsableSentences(sentences, word) {
   if (!word || !Array.isArray(sentences)) return [];
-  return sentences.filter(s => s.wordId === word.id && matchesSource(s, word));
+  return sentences.filter(s => s.wordId === word.id && matchesSource(s, word) && !isRejectedByCheck(s));
 }
 
 /** 'YYYY-MM-DD' 를 1970-01-01 기준 일수로 바꾼다. 날짜별 순환의 인덱스 계산용 */
 function toEpochDay(dateStr) {
   const [y, m, d] = dateStr.split('-').map(Number);
   return Math.floor(Date.UTC(y, m - 1, d) / 86400000);
+}
+
+/** dateStr('YYYY-MM-DD')이 오늘(todayDay, epoch-day)로부터 0~RECENT_WORD_DAYS 일 안인지. 형식이 다르거나 미래 날짜면 false */
+function isRecentDate(dateStr, todayDay) {
+  if (typeof dateStr !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+  const age = todayDay - toEpochDay(dateStr);
+  return age >= 0 && age <= RECENT_WORD_DAYS;
 }
 
 /**
@@ -161,11 +181,7 @@ export function validateSentence(candidate, existing = []) {
 export function getRecentWords(words, today) {
   const todayDay = toEpochDay(today);
   return words
-    .filter(w => {
-      if (typeof w.createdAt !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(w.createdAt)) return false;
-      const age = todayDay - toEpochDay(w.createdAt);
-      return age >= 0 && age <= RECENT_WORD_DAYS;
-    })
+    .filter(w => isRecentDate(w.createdAt, todayDay))
     .sort((a, b) => a.id - b.id);
 }
 
@@ -190,4 +206,73 @@ export function pruneSentences(sentences, words, activeWordIds) {
  */
 export function selectTargets(recentWords, byWord, today) {
   return recentWords.filter(w => latestSentence(byWord.get(w.id))?.date !== today);
+}
+
+/**
+ * 검사 배치가 검사할 예문을 고른다. today 는 KST 'YYYY-MM-DD'.
+ * - check 가 없고 date 가 오늘로부터 RECENT_WORD_DAYS 안인 예문: 새로 만든 예문만 검사하고, 고정된 옛 예문과 date 형식이 이상한 예문은 뺀다
+ * - 숨긴 예문(check.ok === false): 고칠 때까지 숨겨 두므로 날짜와 상관없이 다시 본다
+ * - 단어가 삭제됐거나 source 가 현재 단어와 다른 예문은 뺀다. 화면에서 이미 숨겨지고, 최근 단어라면 생성 배치가 다시 만든다
+ * 요청 상한에 걸리면 뒤쪽이 다음 실행으로 밀리므로 지금 화면에 보이는 검사 전 예문을 앞에, 숨긴 예문을 뒤에 둔다(각각 wordId 순).
+ */
+export function selectCheckTargets(sentences, words, today) {
+  const wordsById = new Map(words.map(w => [w.id, w]));
+  const todayDay = toEpochDay(today);
+  const unchecked = [];
+  const rejected = [];
+  for (const s of sentences) {
+    if (!matchesSource(s, wordsById.get(s.wordId))) continue;
+    if (isRejectedByCheck(s)) rejected.push(s);
+    else if (!s.check && isRecentDate(s.date, todayDay)) unchecked.push(s);
+  }
+  const byWordId = (a, b) => a.wordId - b.wordId;
+  return [...unchecked.sort(byWordId), ...rejected.sort(byWordId)];
+}
+
+/**
+ * 검사에서 받은 수정안(fix: { sentence, reading, meaning })을 재검사로 넘겨도 되는지 본다. 통과하면 null, 아니면 거부 이유.
+ * 저장 규칙은 validateSentence 와 같지만 원래 예문을 existing 으로 넘기지 않는다. 번역만·읽기만 고친 수정안은 문장이 원래와 같아
+ * "기존 예문과 같은 문장"으로 막히기 때문이다. 대신 세 필드가 모두 원래와 같으면 고친 것이 없으므로 거부한다.
+ */
+export function validateCheckFix(original, fix) {
+  const reason = validateSentence(fix);
+  if (reason) return reason;
+  const unchanged = ['sentence', 'reading', 'meaning'].every(key =>
+    fix[key].trim() === (typeof original?.[key] === 'string' ? original[key].trim() : '')
+  );
+  return unchanged ? '원래 예문과 같음' : null;
+}
+
+// problem 은 앱이 읽지 않는 기록용이다. 모델이 긴 설명을 돌려줘도 파일이 불어나지 않게 자른다
+const CHECK_PROBLEM_MAX_LENGTH = 200;
+
+/**
+ * 검사 결과를 반영한 새 예문 배열을 돌려준다(입력은 바꾸지 않는다). 단어당 예문이 1건이라는 파일 규칙을 전제로 wordId 로 항목을 찾는다.
+ * - passed(Set<wordId>): check 만 통과로 표시한다
+ * - fixed(Map<wordId, { sentence, reading, meaning }>): 수정안으로 교체하고 date 를 오늘로 바꾼다.
+ *   같은 날 생성 배치가 다시 돌아도(단어 등록 시 실행) 오늘 만든 예문으로 보고 건너뛰어 검증한 문장이 유지된다
+ * - rejected(Map<wordId, problem>): 틀렸다고 표시해 앱에서 숨긴다
+ * 바뀐 항목을 끝으로 옮기지 않고 제자리에서 바꿔 커밋 diff 를 작게 유지한다.
+ */
+export function applyCheckResults(sentences, { passed = new Set(), fixed = new Map(), rejected = new Map() }, today) {
+  return sentences.map(s => {
+    if (passed.has(s.wordId)) return { ...s, check: { date: today, ok: true } };
+    if (fixed.has(s.wordId)) {
+      const fix = fixed.get(s.wordId);
+      return {
+        wordId: s.wordId,
+        date: today,
+        source: s.source,
+        sentence: fix.sentence.trim(),
+        reading: fix.reading.trim(),
+        meaning: fix.meaning.trim(),
+        check: { date: today, ok: true },
+      };
+    }
+    if (rejected.has(s.wordId)) {
+      const problem = String(rejected.get(s.wordId)).trim().slice(0, CHECK_PROBLEM_MAX_LENGTH);
+      return { ...s, check: { date: today, ok: false, problem } };
+    }
+    return s;
+  });
 }

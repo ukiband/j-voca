@@ -11,6 +11,9 @@ import {
   SENTENCE_REFRESH_MIN_MS,
   pruneSentences,
   selectTargets,
+  selectCheckTargets,
+  validateCheckFix,
+  applyCheckResults,
 } from '../sentence-utils';
 
 const word = { id: 953, word: '歌を歌う', reading: 'うたをうたう', meaning: '노래를 부르다' };
@@ -88,6 +91,15 @@ describe('matchesSource / filterUsableSentences', () => {
   it('단어가 없거나(삭제됨) 입력이 배열이 아니면 빈 배열', () => {
     expect(filterUsableSentences([makeSentence('2026-09-01')], null)).toEqual([]);
     expect(filterUsableSentences(undefined, word)).toEqual([]);
+  });
+
+  it('검사에서 틀렸다고 판정해 숨긴 예문은 제외하고, 통과했거나 검사 전인 예문은 남긴다', () => {
+    const rows = [
+      makeSentence('2026-09-01', { check: { date: '2026-09-02', ok: false, problem: '번역이 반말' } }),
+      makeSentence('2026-09-02', { check: { date: '2026-09-02', ok: true } }),
+      makeSentence('2026-09-03'),
+    ];
+    expect(filterUsableSentences(rows, word).map(s => s.date)).toEqual(['2026-09-02', '2026-09-03']);
   });
 });
 
@@ -284,6 +296,90 @@ describe('selectTargets', () => {
   it('여러 건이 남아 있으면 가장 최근 날짜로 판단한다', () => {
     const byWord = new Map([[1, [{ date: '2026-08-01' }, { date: today }]]]);
     expect(selectTargets([{ id: 1 }], byWord, today)).toEqual([]);
+  });
+});
+
+describe('selectCheckTargets', () => {
+  const today = '2026-09-08';
+  const words = [1, 2, 3, 4, 5, 6].map(id => ({ id, word: `w${id}`, reading: `r${id}`, meaning: `m${id}` }));
+  const hidden = { check: { date: '2026-09-07', ok: false, problem: '사물에 いる 를 씀' } };
+  const entry = (wordId, date, overrides = {}) => ({
+    wordId, date, source: { word: `w${wordId}`, reading: `r${wordId}`, meaning: `m${wordId}` },
+    sentence: '[[x]]', reading: '[[x]]', meaning: 'x', ...overrides,
+  });
+
+  it('최근 7일 안에 만든 검사 전 예문과, 날짜와 상관없이 숨긴 예문을 고른다', () => {
+    const sentences = [
+      entry(1, '2026-09-01'),                                   // 7일 전 → 포함
+      entry(2, '2026-08-31'),                                   // 8일 전(고정된 옛 예문) → 제외
+      entry(3, today, { check: { date: today, ok: true } }),    // 통과 → 제외
+      entry(4, '2026-07-01', hidden),                           // 숨김 → 날짜와 상관없이 포함
+      entry(5, '2026/09/07'),                                   // 날짜 형식이 다름 → 제외
+    ];
+    expect(selectCheckTargets(sentences, words, today).map(s => s.wordId)).toEqual([1, 4]);
+  });
+
+  it('단어가 삭제됐거나 source 가 현재 단어와 다른 예문은 숨긴 예문이어도 제외한다', () => {
+    const oldSource = id => ({ source: { word: `w${id}`, reading: `r${id}`, meaning: '옛 뜻' } });
+    const sentences = [entry(99, today), entry(1, today, oldSource(1)), entry(2, today, { ...hidden, ...oldSource(2) })];
+    expect(selectCheckTargets(sentences, words, today)).toEqual([]);
+  });
+
+  it('검사 전 예문을 먼저, 숨긴 예문을 나중에 두고 각각 wordId 순으로 정렬한다', () => {
+    const sentences = [entry(6, today, hidden), entry(5, today), entry(2, today, hidden), entry(3, today)];
+    expect(selectCheckTargets(sentences, words, today).map(s => s.wordId)).toEqual([3, 5, 2, 6]);
+  });
+});
+
+describe('validateCheckFix', () => {
+  const original = { sentence: '学校へ[[行きます]]。', reading: 'がっこうへ [[ときます]]。', meaning: '학교에 가.' };
+
+  it('문장은 그대로 두고 읽기만 또는 번역만 고친 수정안도 통과한다', () => {
+    expect(validateCheckFix(original, { ...original, reading: 'がっこうへ [[いきます]]。' })).toBeNull();
+    expect(validateCheckFix(original, { ...original, meaning: '학교에 갑니다.' })).toBeNull();
+  });
+
+  it('세 필드가 앞뒤 공백을 빼면 모두 원래와 같으면 거부한다', () => {
+    expect(validateCheckFix(original, { ...original, meaning: ` ${original.meaning} ` })).toMatch(/같음/);
+  });
+
+  it('저장 규칙(validateSentence)에 어긋나는 수정안은 거부한다', () => {
+    expect(validateCheckFix(original, { ...original, reading: 'がっこうへ [[行きます]]。' })).toMatch(/한자/);
+    expect(validateCheckFix(original, { meaning: '학교에 갑니다.' })).toMatch(/sentence/);
+  });
+});
+
+describe('applyCheckResults', () => {
+  const today = '2026-09-08';
+  const entry = (wordId, overrides = {}) => ({
+    wordId, date: '2026-09-07', source: { word: `w${wordId}`, reading: `r${wordId}`, meaning: `m${wordId}` },
+    sentence: `[[x${wordId}]]`, reading: `[[x${wordId}]]`, meaning: `x${wordId}`, ...overrides,
+  });
+
+  it('통과·교체·숨김을 제자리에 반영하고, 나머지 항목과 배열 순서는 그대로 둔다', () => {
+    const oldCheck = { date: '2026-09-07', ok: false, problem: '옛 판정' };
+    const sentences = [entry(1), entry(2), entry(3, { check: oldCheck }), entry(4)];
+    const out = applyCheckResults(sentences, {
+      passed: new Set([3]),
+      fixed: new Map([[1, { sentence: ' 新[[x]]。 ', reading: 'しん[[x]]。', meaning: '새 번역 ' }]]),
+      rejected: new Map([[4, '번역이 반말']]),
+    }, today);
+
+    expect(out.map(s => s.wordId)).toEqual([1, 2, 3, 4]);
+    expect(out[0]).toEqual({
+      wordId: 1, date: today, source: sentences[0].source,
+      sentence: '新[[x]]。', reading: 'しん[[x]]。', meaning: '새 번역',
+      check: { date: today, ok: true },
+    });
+    expect(out[1]).toBe(sentences[1]);
+    expect(out[2]).toEqual({ ...sentences[2], check: { date: today, ok: true } });
+    expect(out[3]).toEqual({ ...sentences[3], check: { date: today, ok: false, problem: '번역이 반말' } });
+    expect(sentences[2].check).toBe(oldCheck);
+  });
+
+  it('숨긴 이유는 200자까지만 남긴다', () => {
+    const out = applyCheckResults([entry(1)], { rejected: new Map([[1, 'あ'.repeat(300)]]) }, today);
+    expect(out[0].check.problem).toHaveLength(200);
   });
 });
 

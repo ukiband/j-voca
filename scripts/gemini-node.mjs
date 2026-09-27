@@ -1,5 +1,5 @@
 /**
- * GitHub Actions(Node)에서 쓰는 Gemini 예문 생성 호출.
+ * GitHub Actions(Node)에서 쓰는 Gemini 예문 생성·검사 호출.
  * 브라우저용 src/lib/gemini.js 는 localStorage 에서 키를 읽고 사진 추출 프롬프트를 쓰므로 import 하지 않고,
  * 모델 순서와 대체 판정은 src/lib/gemini-common.js 를 공유한다.
  */
@@ -25,14 +25,37 @@ const RESPONSE_JSON_SCHEMA = {
   },
 };
 
-function buildGenerationConfig(model) {
+// 검사 결과 배열. 통과한 항목은 wordId·ok 만 받으면 되므로 나머지(틀린 이유와 고친 예문)는 선택 필드로 둔다
+const CHECK_RESPONSE_JSON_SCHEMA = {
+  type: 'array',
+  items: {
+    type: 'object',
+    properties: {
+      wordId: { type: 'integer' },
+      ok: { type: 'boolean' },
+      problem: { type: 'string' },
+      sentence: { type: 'string' },
+      reading: { type: 'string' },
+      meaning: { type: 'string' },
+    },
+    required: ['wordId', 'ok'],
+    propertyOrdering: ['wordId', 'ok', 'problem', 'sentence', 'reading', 'meaning'],
+  },
+};
+
+function buildGenerationConfig(model, responseJsonSchema) {
   return {
     responseMimeType: 'application/json',
-    responseJsonSchema: RESPONSE_JSON_SCHEMA,
+    responseJsonSchema,
     maxOutputTokens: 8192,
     ...getModelTuning(model),
   };
 }
+
+// 예문 세 필드의 작성 규칙. 검사에서 고친 예문도 생성한 예문과 같은 저장 규칙(validateSentence)을 통과해야 하므로 두 프롬프트가 함께 쓴다
+const EXAMPLE_FIELD_RULES = `- sentence: 교재 표기처럼 한자를 섞어 쓴 원문. 목표 단어가 쓰인 부분(활용형 포함)을 [[ ]] 로 정확히 한 번 감쌉니다.
+- reading: sentence에서 한자를 히라가나로 풀어 쓴 아래쪽 읽기 문장. 원문의 히라가나·가타카나·장음(ー)·문장부호는 그대로 유지합니다. 가타카나를 히라가나로 바꾸지 않습니다 (ピアノ → ピアノ, コーヒー → コーヒー). 조사 は・へ・を도 발음대로 わ・え・お로 바꾸지 않습니다. 숫자와 조수사는 문맥에 맞는 읽기를 적어도 됩니다 (300円 → さんびゃくえん). 한자는 한 글자도 남기지 않습니다. 어절 단위로 띄어 쓸 수 있으며, sentence와 정확히 같은 부분을 [[ ]] 로 한 번 감쌉니다. 단어·조사·어미를 추가하거나 빼거나 바꾸지 않습니다.
+- meaning: sentence 전체에 정확히 대응하는 자연스러운 한국어 번역. 주체·대상·장소·시제·긍정/부정·요청/서술을 바꾸거나 원문에 없는 내용을 덧붙이지 않습니다. sentence와 reading에는 한국어를 넣지 않습니다.`;
 
 /**
  * 예문 생성 프롬프트. items 는 [{ wordId, word, reading, meaning, pos, existing: [문장 문자열...] }].
@@ -55,9 +78,7 @@ export function buildPrompt(items) {
 
 ## 각 필드
 - wordId: 입력의 wordId 를 그대로 돌려줍니다.
-- sentence: 교재 표기처럼 한자를 섞어 쓴 원문. 목표 단어가 쓰인 부분(활용형 포함)을 [[ ]] 로 정확히 한 번 감쌉니다.
-- reading: sentence에서 한자를 히라가나로 풀어 쓴 아래쪽 읽기 문장. 원문의 히라가나·가타카나·장음(ー)·문장부호는 그대로 유지합니다. 가타카나를 히라가나로 바꾸지 않습니다 (ピアノ → ピアノ, コーヒー → コーヒー). 조사 は・へ・を도 발음대로 わ・え・お로 바꾸지 않습니다. 숫자와 조수사는 문맥에 맞는 읽기를 적어도 됩니다 (300円 → さんびゃくえん). 한자는 한 글자도 남기지 않습니다. 어절 단위로 띄어 쓸 수 있으며, sentence와 정확히 같은 부분을 [[ ]] 로 한 번 감쌉니다. 단어·조사·어미를 추가하거나 빼거나 바꾸지 않습니다.
-- meaning: sentence 전체에 정확히 대응하는 자연스러운 한국어 번역. 주체·대상·장소·시제·긍정/부정·요청/서술을 바꾸거나 원문에 없는 내용을 덧붙이지 않습니다. sentence와 reading에는 한국어를 넣지 않습니다.
+${EXAMPLE_FIELD_RULES}
 
 ## 출력 전 점검
 - 각 문장의 문법, 목표 단어의 쓰임, 입력의 뜻과 읽기, 한국어 번역을 다시 확인합니다.
@@ -70,6 +91,44 @@ export function buildPrompt(items) {
 출력: {"wordId":100001,"sentence":"妹はピアノを[[弾きます]]。","reading":"いもうとは ピアノを [[ひきます]]。","meaning":"여동생은 피아노를 칩니다."}
 
 ## 단어 목록 (한 줄에 하나)
+${list}`;
+}
+
+/**
+ * 예문 검사 프롬프트. items 는 [{ wordId, word, reading, meaning, pos, example: { sentence, reading, meaning } }].
+ * 생성 때의 저장 검증(validateSentence)은 표기 대응만 보므로 문법·단어의 쓰임·한자 읽기·번역 오류는 여기서 잡는다.
+ * 틀린 예문은 고친 예문을 같은 응답으로 받아, 판정과 보정을 호출 한 번에 끝낸다.
+ */
+export function buildCheckPrompt(items) {
+  const list = items.map(({ wordId, word, reading, meaning, pos, example }) =>
+    JSON.stringify({
+      wordId, word, reading, meaning, pos: pos || '',
+      example: { sentence: example.sentence, reading: example.reading, meaning: example.meaning },
+    })
+  ).join('\n');
+
+  return `당신은 일본어 초급 학습자용 단어장의 예문 검수자입니다. 아래 목록의 항목마다 등록 단어(word·reading·meaning·pos)로 만든 예문(example)이 올바른지 검사하고, 틀렸으면 고친 예문을 함께 돌려주세요.
+
+## 검사 기준 (하나라도 어기면 ok=false)
+1. 문법: 문법이 맞고 원어민이 실제로 쓰는 자연스러운 문장인지 봅니다. 조사, 활용, 자동사/타동사, いる/ある(사람·동물에는 いる, 사물에는 ある), 연어(宿題をする 등), 앞뒤 연결을 확인합니다.
+2. 목표 단어: [[ ]] 안이 목표 단어 자체나 그 활용형인지, 다른 단어나 파생어로 바꾸지 않았는지, 등록된 뜻(meaning)으로 쓰였는지, 등록된 읽기(reading)로 읽히는 쓰임인지 봅니다 (예: 四(よん)을 四月(しがつ)로 쓰면 틀림). 등록 표기(word)가 한자면 강조 부분도 한자로, 가나면 가나로 씁니다.
+3. 강조 범위: [[ ]] 는 목표 단어와 그 활용 어미까지만 감쌉니다. 뒤에 붙는 보조 표현(〜ください, 〜はいけません 등)은 [[ ]] 밖에 둡니다.
+4. 읽기 줄: example.reading 이 sentence 의 한자를 문맥에 맞게 정확히 읽었는지 봅니다 (예: 行きます → いきます). 한자 읽기와 띄어쓰기 외의 글자는 sentence 와 같아야 합니다.
+5. 번역: example.meaning 이 sentence 를 정확히 옮겼는지 봅니다. 주체·대상·장소·시제·긍정/부정·요청/서술·존댓말/반말이 원문과 같아야 합니다.
+6. 표기: sentence 에 공백이나 반각 문장부호(? ! ,)가 없어야 합니다.
+
+## 판정 원칙
+- 명백한 오류만 ok=false 로 판정합니다. 맞는 문장을 더 좋은 표현으로 바꾸고 싶다는 이유로 고치지 않습니다.
+- 등록 단어(word·reading·meaning) 자체의 오류는 예문의 잘못으로 보지 않습니다. 예문이 등록된 내용에 맞게 쓰였는지만 판정합니다.
+- 등록 읽기가 히라가나로 적혀 있어도 가타카나 단어는 sentence·reading 모두 가타카나로 쓰는 것이 맞습니다.
+- 항목마다 결과를 하나씩 돌려주고, wordId 는 입력의 wordId 를 그대로 돌려줍니다.
+- ok=true 면 wordId 와 ok 만 돌려주고 나머지 필드는 생략합니다.
+- ok=false 면 problem 에 무엇이 왜 틀렸는지 한국어 한 문장으로 적고, 고친 예문을 sentence·reading·meaning 세 필드에 모두 적습니다. 틀린 부분만 고치고 나머지는 원래 예문 그대로 옮깁니다.
+
+## 고친 예문의 각 필드
+${EXAMPLE_FIELD_RULES}
+
+## 검사할 예문 (한 줄에 하나)
 ${list}`;
 }
 
@@ -130,21 +189,21 @@ async function requestGemini(url, body, apiKey, fetchImpl) {
 const defaultDelay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /**
- * 단어 묶음 하나로 Gemini 를 호출해 [{ wordId, sentence, reading, meaning }] 를 돌려준다.
+ * 프롬프트 하나로 Gemini 를 호출해 응답 JSON 배열의 객체 항목을 { model, rows } 로 돌려준다. 예문 생성과 검사가 함께 쓴다.
  * MODEL_CHAIN 순서로 시도하며 과부하(503)는 2초 후 1회 재시도, 그래도 실패하거나 404/429/5xx 면 다음 모델로 넘어간다.
  * options.fetchImpl / options.delay 는 테스트용 주입 지점.
  */
-export async function generateSentences(items, apiKey, options = {}) {
+async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}) {
   const fetchImpl = options.fetchImpl || fetch;
   const delay = options.delay || defaultDelay;
   if (!apiKey) throw new GeminiRequestError('GEMINI_API_KEY 가 없습니다.', { fatal: true });
 
-  const parts = [{ text: buildPrompt(items) }];
+  const parts = [{ text: prompt }];
   let lastFailure = null;
 
   for (const model of MODEL_CHAIN) {
     const url = `${API_BASE}/${model}:generateContent`;
-    const body = { contents: [{ parts }], generationConfig: buildGenerationConfig(model) };
+    const body = { contents: [{ parts }], generationConfig: buildGenerationConfig(model, responseJsonSchema) };
 
     let result = await requestGemini(url, body, apiKey, fetchImpl);
     if (!result.ok && isOverloaded(result.status, result.data?.error?.message || '')) {
@@ -168,7 +227,7 @@ export async function generateSentences(items, apiKey, options = {}) {
       lastFailure = { status: result.status, msg, model };
       continue;
     }
-    // 모델을 바꿔도 같은 실패는 조용히 넘기면 매일 초록인데 아무것도 생성되지 않는 상태를 알 수 없으므로 fatal 로 끝낸다
+    // 모델을 바꿔도 같은 실패는 조용히 넘기면 매일 초록인데 아무것도 생성·검사되지 않는 상태를 알 수 없으므로 fatal 로 끝낸다
     const keyProblem = result.status === 401 || result.status === 403 || /api[ _]?key/i.test(msg);
     throw new GeminiRequestError(
       `${model} ${result.status}: ${msg || '요청 실패'}${keyProblem ? ' (API 키를 확인하세요)' : ''}`,
@@ -180,4 +239,17 @@ export async function generateSentences(items, apiKey, options = {}) {
     `모든 모델 실패 (마지막: ${lastFailure?.model} ${lastFailure?.status} ${lastFailure?.msg?.slice(0, 120) || ''})`,
     { status: lastFailure?.status, model: lastFailure?.model }
   );
+}
+
+/** 단어 묶음 하나로 예문을 만들어 { model, rows: [{ wordId, sentence, reading, meaning }] } 를 돌려준다. 모델 대체·재시도는 requestJsonArray 참고 */
+export async function generateSentences(items, apiKey, options = {}) {
+  return requestJsonArray(buildPrompt(items), RESPONSE_JSON_SCHEMA, apiKey, options);
+}
+
+/**
+ * 예문 묶음 하나를 검사해 { model, rows: [{ wordId, ok, problem?, sentence?, reading?, meaning? }] } 를 돌려준다.
+ * ok 가 false 인 행의 sentence·reading·meaning 은 고친 예문이다. 모델 대체·재시도는 requestJsonArray 참고.
+ */
+export async function checkSentences(items, apiKey, options = {}) {
+  return requestJsonArray(buildCheckPrompt(items), CHECK_RESPONSE_JSON_SCHEMA, apiKey, options);
 }

@@ -1,9 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
-import { buildPrompt, generateSentences, GeminiRequestError } from '../../../scripts/gemini-node.mjs';
+import { buildPrompt, buildCheckPrompt, generateSentences, checkSentences, GeminiRequestError } from '../../../scripts/gemini-node.mjs';
 import { MODEL_CHAIN } from '../gemini-common.js';
 
 const items = [
   { wordId: 953, word: '歌を歌う', reading: 'うたをうたう', meaning: '노래를 부르다', pos: '동사', existing: ['友だちと[[歌を歌います]]。'] },
+];
+
+const checkItems = [
+  {
+    wordId: 1041, word: 'ない', reading: 'ない', meaning: '없다', pos: '형용사',
+    example: { sentence: '時間が[[ない]]です。', reading: 'じかんが [[ない]]です。', meaning: '시간이 없다.' },
+  },
 ];
 
 function okResponse(rows) {
@@ -98,5 +105,23 @@ describe('gemini-node', () => {
     });
     const result = await generateSentences(items, 'key', { fetchImpl, delay: noDelay });
     expect(result.rows).toEqual([{ wordId: 953, sentence: 'a', reading: 'b', meaning: 'c' }]);
+  });
+
+  it('검사 프롬프트에 단어 정보와 검사할 예문이 들어간다', () => {
+    const prompt = buildCheckPrompt(checkItems);
+    expect(prompt).toContain('"wordId":1041');
+    expect(prompt).toContain('"word":"ない"');
+    expect(prompt).toContain('時間が[[ない]]です。');
+    expect(prompt).toContain('시간이 없다.');
+  });
+
+  it('검사 요청은 검사 프롬프트와 판정 스키마를 보내고 판정 행을 돌려준다', async () => {
+    const rows = [{ wordId: 1041, ok: false, problem: '존댓말 문장을 반말로 옮겼다', sentence: '時間が[[ない]]です。', reading: 'じかんが [[ない]]です。', meaning: '시간이 없어요.' }];
+    const fetchImpl = vi.fn().mockResolvedValue(okResponse(rows));
+    const result = await checkSentences(checkItems, 'key', { fetchImpl, delay: noDelay });
+    expect(result.rows).toEqual(rows);
+    const body = JSON.parse(fetchImpl.mock.calls[0][1].body);
+    expect(body.contents[0].parts[0].text).toBe(buildCheckPrompt(checkItems));
+    expect(body.generationConfig.responseJsonSchema.items.required).toEqual(['wordId', 'ok']);
   });
 });

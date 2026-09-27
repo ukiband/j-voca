@@ -56,4 +56,13 @@ describe('public/data/sentences.json', () => {
     expect(over).toEqual([]);
   });
 
+  it('check 가 있으면 date 는 YYYY-MM-DD, ok 는 boolean 이고, 숨긴 항목(ok: false)에는 problem 이 있다', () => {
+    const bad = data.sentences.filter(s => {
+      if (s.check === undefined) return false;
+      const { date, ok, problem } = s.check || {};
+      return !DATE_RE.test(date) || typeof ok !== 'boolean' || (!ok && !(typeof problem === 'string' && problem.trim()));
+    });
+    expect(bad.map(s => s.wordId)).toEqual([]);
+  });
+
 });

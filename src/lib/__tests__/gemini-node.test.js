@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { buildPrompt, buildCheckPrompt, generateSentences, checkSentences, isUsableCheckRow, GeminiRequestError } from '../../../scripts/gemini-node.mjs';
-import { MODEL_CHAIN } from '../gemini-common.js';
+import { MODEL_CHAIN, getModelTuning } from '../gemini-common.js';
 
 const items = [
   { wordId: 953, word: '歌を歌う', reading: 'うたをうたう', meaning: '노래를 부르다', pos: '동사', existing: ['友だちと[[歌を歌います]]。'] },
@@ -45,6 +45,8 @@ describe('gemini-node', () => {
     // 키는 URL 이 아니라 헤더로 보낸다
     expect(fetchImpl.mock.calls[0][0]).not.toContain('key=');
     expect(fetchImpl.mock.calls[0][1].headers['x-goog-api-key']).toBe('key');
+    // 생성 요청은 검사용 조정값이 아니라 모델 기본 조정값을 쓴다
+    expect(JSON.parse(fetchImpl.mock.calls[0][1].body).generationConfig).toMatchObject(getModelTuning(MODEL_CHAIN[0]));
   });
 
   it('503 은 같은 모델로 1회 재시도하고, 그래도 실패하면 429/404 를 건너 다음 모델로 넘어간다', async () => {
@@ -134,13 +136,14 @@ describe('gemini-node', () => {
     expect(isUsableCheckRow({ wordId: 1, ok: 'false', criterion: '번역' })).toBe(false);
   });
 
-  it('검사 요청은 Gemini 3 계열에 사고 수준 HIGH 를 보내고, thinkingLevel 이 없는 2.5 계열에는 기존 조정값을 보낸다', async () => {
+  it('검사 요청은 평가한 3.5-flash-lite 에만 사고 수준 HIGH 를 보내고, 대체 모델에는 기본 조정값을 보낸다', async () => {
     const fetchImpl = vi.fn().mockResolvedValue(errorResponse(503, 'overloaded'));
     await expect(checkSentences(checkItems, 'key', { fetchImpl, delay: noDelay })).rejects.toMatchObject({ fatal: false });
     const configs = Object.fromEntries(fetchImpl.mock.calls.map(([url, init]) => [url.match(/models\/([^:]+)/)[1], JSON.parse(init.body).generationConfig]));
     expect(configs['gemini-3.5-flash-lite'].thinkingConfig).toEqual({ thinkingLevel: 'HIGH' });
-    expect(configs['gemini-3.8-flash'].thinkingConfig).toEqual({ thinkingLevel: 'HIGH' });
-    expect(configs['gemini-2.5-flash']).toMatchObject({ temperature: 0.1 });
+    for (const model of MODEL_CHAIN.filter(m => m !== 'gemini-3.5-flash-lite')) {
+      expect(configs[model]).toMatchObject(getModelTuning(model));
+    }
     expect(configs['gemini-2.5-flash'].thinkingConfig).toBeUndefined();
   });
 

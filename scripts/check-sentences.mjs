@@ -129,6 +129,8 @@ async function main() {
   const details = [];
   let stopped = false;
   let fatalError = null;
+  // 기준 없이 틀렸다고 해 버린 항목. 재검사에서 이렇게 버린 수정안을 응답 누락과 구분해 기록한다
+  const droppedForNoCriterion = new Set();
 
   // 요청하지 못했거나(API 오류로 멈춤) 응답을 읽지 못하면 null
   async function requestCheck(label, examples) {
@@ -148,16 +150,25 @@ async function main() {
     }
     const requested = new Set(examples.map(e => e.wordId));
     const rows = new Map();
+    let noCriterion = 0;
     for (const row of result.rows) {
       if (!requested.has(row.wordId)) {
         console.warn(`  무시 wordId=${row.wordId}: 요청하지 않은 항목`);
         continue;
       }
       // 판정이 없거나 어긴 기준 없이 틀렸다고 한 행은 응답에서 빠진 것과 같이 보고, 같은 항목이 두 번 오면 첫 판정만 쓴다
-      if (!isUsableCheckRow(row) || rows.has(row.wordId)) continue;
+      if (!isUsableCheckRow(row)) {
+        // 모델이 criterion 을 제대로 채우는지 지켜볼 수 있게, 응답 누락과 구분해 따로 센다
+        if (row.ok === false) {
+          noCriterion += 1;
+          droppedForNoCriterion.add(row.wordId);
+        }
+        continue;
+      }
+      if (rows.has(row.wordId)) continue;
       rows.set(row.wordId, row);
     }
-    console.log(`[${label}] ${result.model}: 요청 ${examples.length}건 → 판정 ${rows.size}건`);
+    console.log(`[${label}] ${result.model}: 요청 ${examples.length}건 → 판정 ${rows.size}건${noCriterion ? ` (기준 없는 틀림 판정 ${noCriterion}건 무시)` : ''}`);
     return rows;
   }
 
@@ -220,7 +231,7 @@ async function main() {
         details.push({ original, problem, fix, outcome: '교체' });
         continue;
       }
-      const why = row ? `재검사 불통과: ${problemOf(row)}` : rows ? '재검사 응답 누락' : '재검사 못 함';
+      const why = row ? `재검사 불통과: ${problemOf(row)}` : droppedForNoCriterion.has(original.wordId) ? '재검사 판정에 기준 없음' : rows ? '재검사 응답 누락' : '재검사 못 함';
       markWrong(original, { problem, stored: problem, fix, why });
     }
   }

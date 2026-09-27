@@ -55,13 +55,20 @@ export function isUsableCheckRow(row) {
   return typeof row?.ok === 'boolean' && (row.ok || CHECK_CRITERIA.includes(row.criterion));
 }
 
-function buildGenerationConfig(model, responseJsonSchema) {
+function buildGenerationConfig(responseJsonSchema, tuning) {
   return {
     responseMimeType: 'application/json',
     responseJsonSchema,
     maxOutputTokens: 8192,
-    ...getModelTuning(model),
+    ...tuning,
   };
+}
+
+// 검사는 판정이 틀리면 멀쩡한 예문을 바꾸거나 숨기므로 생성보다 정확도가 중요해 Gemini 3 계열의 사고 수준을 HIGH 로 올린다.
+// 실측(맞는 예문 66건·틀린 예문 17건, 3.5-flash-lite): MEDIUM 은 오판 0·검출 15·교체 9, HIGH 는 오판 0·검출 17·교체 15 였다.
+// 요청당 수십 초로 느려지지만 하루 몇 번뿐이다. 2.5 계열은 thinkingLevel 을 지원하지 않으므로 기존 조정값을 그대로 쓴다
+function getCheckTuning(model) {
+  return model.startsWith('gemini-3') ? { thinkingConfig: { thinkingLevel: 'HIGH' } } : getModelTuning(model);
 }
 
 // 예문 세 필드의 작성 규칙. 검사에서 고친 예문도 생성한 예문과 같은 저장 규칙(validateSentence)을 통과해야 하므로 두 프롬프트가 함께 쓴다
@@ -210,7 +217,8 @@ const defaultDelay = ms => new Promise(resolve => setTimeout(resolve, ms));
 /**
  * 프롬프트 하나로 Gemini 를 호출해 응답 JSON 배열의 객체 항목을 { model, rows } 로 돌려준다. 예문 생성과 검사가 함께 쓴다.
  * MODEL_CHAIN 순서로 시도하며 과부하(503)는 2초 후 1회 재시도, 그래도 실패하거나 404/429/5xx 면 다음 모델로 넘어간다.
- * options.fetchImpl / options.delay 는 테스트용 주입 지점. options.models·options.tuning 은 모델 순서나 모델 조정값(thinkingConfig 등)을 바꿔 시험할 때 쓴다(기본 MODEL_CHAIN·getModelTuning).
+ * options.tuning 은 모델 이름을 받아 모델 조정값(thinkingConfig 등)을 돌려주는 함수다(기본 getModelTuning).
+ * options.fetchImpl / options.delay 는 테스트용 주입 지점이고, options.models 는 모델 순서를 바꿔 한 모델만 시험할 때 쓴다(기본 MODEL_CHAIN).
  */
 async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}) {
   const fetchImpl = options.fetchImpl || fetch;
@@ -222,7 +230,7 @@ async function requestJsonArray(prompt, responseJsonSchema, apiKey, options = {}
 
   for (const model of options.models || MODEL_CHAIN) {
     const url = `${API_BASE}/${model}:generateContent`;
-    const body = { contents: [{ parts }], generationConfig: { ...buildGenerationConfig(model, responseJsonSchema), ...options.tuning } };
+    const body = { contents: [{ parts }], generationConfig: buildGenerationConfig(responseJsonSchema, (options.tuning || getModelTuning)(model)) };
 
     let result = await requestGemini(url, body, apiKey, fetchImpl);
     if (!result.ok && isOverloaded(result.status, result.data?.error?.message || '')) {
@@ -266,9 +274,10 @@ export async function generateSentences(items, apiKey, options = {}) {
 }
 
 /**
- * 예문 묶음 하나를 검사해 { model, rows: [{ wordId, ok, problem?, sentence?, reading?, meaning? }] } 를 돌려준다.
- * ok 가 false 인 행의 sentence·reading·meaning 은 고친 예문이다. 모델 대체·재시도는 requestJsonArray 참고.
+ * 예문 묶음 하나를 검사해 { model, rows: [{ wordId, ok, criterion?, problem?, sentence?, reading?, meaning? }] } 를 돌려준다.
+ * ok 가 false 인 행의 sentence·reading·meaning 은 고친 예문이고, 판정으로 쓸 수 있는 행인지는 isUsableCheckRow 로 본다.
+ * 사고 수준은 getCheckTuning, 모델 대체·재시도는 requestJsonArray 참고.
  */
 export async function checkSentences(items, apiKey, options = {}) {
-  return requestJsonArray(buildCheckPrompt(items), CHECK_RESPONSE_JSON_SCHEMA, apiKey, options);
+  return requestJsonArray(buildCheckPrompt(items), CHECK_RESPONSE_JSON_SCHEMA, apiKey, { ...options, tuning: options.tuning || getCheckTuning });
 }

@@ -134,6 +134,16 @@ describe('gemini-node', () => {
     expect(isUsableCheckRow({ wordId: 1, ok: 'false', criterion: '번역' })).toBe(false);
   });
 
+  it('검사 요청은 Gemini 3 계열에 사고 수준 HIGH 를 보내고, thinkingLevel 이 없는 2.5 계열에는 기존 조정값을 보낸다', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(errorResponse(503, 'overloaded'));
+    await expect(checkSentences(checkItems, 'key', { fetchImpl, delay: noDelay })).rejects.toMatchObject({ fatal: false });
+    const configs = Object.fromEntries(fetchImpl.mock.calls.map(([url, init]) => [url.match(/models\/([^:]+)/)[1], JSON.parse(init.body).generationConfig]));
+    expect(configs['gemini-3.5-flash-lite'].thinkingConfig).toEqual({ thinkingLevel: 'HIGH' });
+    expect(configs['gemini-3.8-flash'].thinkingConfig).toEqual({ thinkingLevel: 'HIGH' });
+    expect(configs['gemini-2.5-flash']).toMatchObject({ temperature: 0.1 });
+    expect(configs['gemini-2.5-flash'].thinkingConfig).toBeUndefined();
+  });
+
   it('모델 순서를 넘기면 그 모델로만 요청한다', async () => {
     const fetchImpl = vi.fn().mockResolvedValue(errorResponse(503, 'overloaded'));
     await expect(checkSentences(checkItems, 'key', { fetchImpl, delay: noDelay, models: ['gemini-3.8-flash'] })).rejects.toMatchObject({ fatal: false });

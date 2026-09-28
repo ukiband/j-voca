@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createDateTimeQuestion, dismissDateTimeQuestion, getDateTimePopupEnabled, setDateTimePopupEnabled, shouldShowDateTimeQuestion } from '../date-time-practice';
+import { createDateTimeQuestion, createDateTimeQuestions, dismissDateTimeQuestion, getDateTimePopupEnabled, setDateTimePopupEnabled, shouldShowDateTimeQuestion } from '../date-time-practice';
 
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
@@ -18,7 +18,8 @@ describe('날짜·시간 질문', () => {
   });
 
   it.each([
-    [0, 0, '午前0時', 'ごぜん れいじ'], [12, 0, '午後0時', 'ごご れいじ'],
+    [0, 0, '午前12時', 'ごぜん じゅうにじ'], [12, 0, '午後12時', 'ごご じゅうにじ'],
+    [0, 30, '午前12時30分', 'ごぜん じゅうにじ さんじっぷん'], [12, 5, '午後12時5分', 'ごご じゅうにじ ごふん'],
     [4, 1, '午前4時1分', 'ごぜん よじ いっぷん'], [7, 2, '午前7時2分', 'ごぜん しちじ にふん'],
     [9, 3, '午前9時3分', 'ごぜん くじ さんぷん'], [14, 4, '午後2時4分', 'ごご にじ よんぷん'],
     [16, 6, '午後4時6分', 'ごご よじ ろっぷん'], [17, 7, '午後5時7分', 'ごご ごじ ななふん'],
@@ -30,6 +31,13 @@ describe('날짜·시간 질문', () => {
     const result = createDateTimeQuestion(new Date(2026, 8, 22, hour, minute), 'time');
     expect(result.answer).toBe(`今は${answer}です。`);
     expect(result.answerReading).toBe(`いまは ${reading}です。`);
+  });
+
+  it('홈 팝업용 질문은 같은 시각을 기준으로 날짜, 시간 순서로 두 건을 만든다', () => {
+    const questions = createDateTimeQuestions(new Date(2026, 8, 28, 0, 5));
+    expect(questions.map(q => q.question)).toEqual(['今日は何月何日ですか。', '今、何時何分ですか。']);
+    expect(questions[0]).toMatchObject({ answer: '今日は9月28日です。', answerReading: 'きょうは くがつ にじゅうはちにちです。' });
+    expect(questions[1]).toMatchObject({ answer: '今は午前12時5分です。', answerReading: 'いまは ごぜん じゅうにじ ごふんです。' });
   });
 
   it('처음에는 표시하고, 닫은 시각부터 정확히 한 시간 동안 숨기며 설정을 껐다 켜도 시간을 유지한다', () => {

@@ -1,5 +1,3 @@
-import { compareLessonDesc } from './lesson-utils.js';
-
 export const VERB_FORMS = [
   { id: 'te', label: 'て형', example: '書く → 書いて' },
   { id: 'nai', label: 'ない형', example: '書く → 書かない' },
@@ -132,18 +130,9 @@ export function conjugateVerb(word, form) {
   };
 }
 
+// 등록 항목마다 한 번씩 낸다. 같은 동사가 여러 레슨에 있으면 레슨마다 나온다(복습이 항목마다 따로 도는 것과 같은 기준).
 export function getPracticeVerbs(words) {
-  const unique = new Map();
-  // 연습은 최근 레슨의 동사부터 내므로 최근 레슨 순으로 정렬해 두고 훑는다. 그러면 Map 삽입 순서가 최근 레슨 순이 되고,
-  // 여러 레슨에 다시 나온 동사는 먼저 만난 항목(가장 최근 레슨 것)이 남아 최근 레슨 블록에서 출제된다.
-  for (const word of [...words].sort(compareLessonDesc)) {
-    if (!isPracticeVerb(word)) continue;
-    const key = JSON.stringify([textOf(word.word).replace(/\s/g, ''), verbReading(word).replace(/\s/g, ''), word.verbGroup]);
-    const previous = unique.get(key);
-    // 중복 항목의 가능형 적합성이 다르면 보수적으로 해당 형태만 제외한다.
-    unique.set(key, previous ? { ...previous, potentialAllowed: previous.potentialAllowed === true && word.potentialAllowed === true } : word);
-  }
-  return [...unique.values()];
+  return words.filter(isPracticeVerb);
 }
 
 export function buildVerbQuestions(words, forms) {

@@ -1,6 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
 import { VERB_FORMS, conjugateVerb, editVerbEntry, getPracticeVerbs, buildVerbQuestions } from '../verb-utils';
-import { startVerbPractice, verbPracticeReducer } from '../verb-practice';
+import { orderByRecentLesson, startVerbPractice, verbPracticeReducer } from '../verb-practice';
+import { getStep } from '../lesson-utils';
+
+afterEach(() => vi.restoreAllMocks());
 
 const verb = (word, reading, verbGroup = 1, extra = {}) => ({ id: 1, word, reading, pos: '동사', verbGroup, isDictionaryForm: true, potentialAllowed: true, ...extra });
 
@@ -82,7 +85,8 @@ describe('동사 대상 검증과 저장', () => {
 });
 
 describe('출제 조합과 세션', () => {
-  const words = [verb('書く', 'かく', 1, { step: 1 }), verb('食べる', 'たべる', 2, { id: 2, step: 2 }), verb('ある', 'ある', 1, { id: 3, potentialAllowed: false })];
+  // 書く 1-7, 食べる 2-1, ある 1-10(step 없음 → 1)
+  const words = [verb('書く', 'かく', 1, { step: 1, chapter: 7 }), verb('食べる', 'たべる', 2, { id: 2, step: 2, chapter: 1 }), verb('ある', 'ある', 1, { id: 3, chapter: 10, potentialAllowed: false })];
 
   it('모든 Step과 선택한 형태의 유효한 조합을 빠짐없이 출제한다', () => {
     for (let mask = 0; mask < 16; mask++) {
@@ -99,6 +103,29 @@ describe('출제 조합과 세션', () => {
     const conflicting = [...words, { ...words[0], id: 99, potentialAllowed: false }];
     expect(buildVerbQuestions(conflicting, ['te'])).toHaveLength(3);
     expect(buildVerbQuestions(conflicting, ['potential'])).toHaveLength(1);
+  });
+
+  it('여러 레슨에 있는 동사는 가장 최근 레슨 항목이 남고, 가능형 적합성은 오래된 항목까지 보아 보수적으로 합친다', () => {
+    const recent = { ...words[0], id: 99, step: 3, chapter: 1 };
+    // 최근 레슨 순: 3-1 書く(99), 2-1 食べる, 1-10 ある. 1-7 書く(1)는 99 에 합쳐진다
+    const verbs = getPracticeVerbs([...words, recent]);
+    expect(verbs.map(v => v.id)).toEqual([99, 2, 3]);
+    expect(verbs[0].potentialAllowed).toBe(true);
+    const conflicting = getPracticeVerbs([{ ...words[0], potentialAllowed: false }, ...words.slice(1), recent]);
+    expect(conflicting[0]).toMatchObject({ id: 99, potentialAllowed: false });
+  });
+
+  it('최근 레슨 블록부터 내고 같은 레슨 안에서만 섞는다', () => {
+    const list = [...words, { ...words[0], id: 99, step: 3, chapter: 1 }, verb('読む', 'よむ', 1, { id: 4, step: 1, chapter: 10 })];
+    const lesson = q => `${getStep(q.word)}-${q.word.chapter}`;
+    const id = q => `${q.word.id}:${q.form}`;
+    const { queue } = startVerbPractice(list, ['te', 'ta']);
+    expect(queue.map(lesson)).toEqual(['3-1', '3-1', '2-1', '2-1', '1-10', '1-10', '1-10', '1-10']);
+    expect(new Set(queue.slice(4).map(id))).toEqual(new Set(['3:te', '3:ta', '4:te', '4:ta']));
+    // Math.random 이 늘 0 이면 Fisher-Yates 는 배열을 한 칸 왼쪽으로 돌린다. 이를 이용해 블록마다 따로 섞이는지 결정적으로 확인한다.
+    vi.spyOn(Math, 'random').mockReturnValue(0);
+    expect(orderByRecentLesson(buildVerbQuestions(list, ['te', 'ta'])).map(id))
+      .toEqual(['99:ta', '99:te', '2:ta', '2:te', '3:ta', '4:te', '4:ta', '3:te']);
   });
 
   it('한 번 더는 큐 끝에 들어가고 다음 문제는 항상 앞면부터다', () => {

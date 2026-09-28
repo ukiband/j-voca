@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   getStep,
   lessonKey,
+  compareLessonDesc,
   isSameLesson,
   isValidLessonNumber,
   parseLessonNumber,
@@ -35,6 +36,23 @@ describe('getStep', () => {
 describe('lessonKey', () => {
   it('(step, chapter)를 문자열 키로 만든다', () => {
     expect(lessonKey(2, 3)).toBe('2-3');
+  });
+});
+
+describe('compareLessonDesc', () => {
+  it('step 내림차순, 같은 step 은 chapter 내림차순으로 최근 레슨이 앞에 온다', () => {
+    // 10-1, 2-2, 2-1, 1-10, 1-3, 1-2(step 없음) 순
+    expect([...words].sort(compareLessonDesc).map(w => w.id)).toEqual([6, 5, 4, 2, 3, 1]);
+  });
+
+  it('chapter 가 없는 단어는 같은 step 의 맨 뒤로 가고, 같은 레슨끼리는 원래 순서를 유지한다', () => {
+    const list = [
+      { id: 1, step: 2, chapter: 3 },
+      { id: 2, step: 2 },
+      { id: 3, step: 2, chapter: 3 },
+      { id: 4, step: 2, chapter: 5 },
+    ];
+    expect([...list].sort(compareLessonDesc).map(w => w.id)).toEqual([4, 1, 3, 2]);
   });
 });
 

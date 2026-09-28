@@ -99,11 +99,7 @@ describe('출제 조합과 세션', () => {
     expect(buildVerbQuestions(words, ['te', 'te', 'invalid'])).toHaveLength(3);
   });
 
-  it('같은 동사가 여러 레슨에 등록되어 있으면 항목마다 한 번씩 낸다', () => {
-    expect(buildVerbQuestions([...words, { ...words[0], id: 99, step: 3, chapter: 1 }], ['te'])).toHaveLength(4);
-  });
-
-  it('최근 레슨 블록부터 내고 같은 레슨 안에서만 섞는다', () => {
+  it('최근 레슨 블록부터 내고 같은 레슨 안에서만 섞으며, 여러 레슨에 등록된 동사는 레슨마다 낸다', () => {
     const list = [...words, { ...words[0], id: 99, step: 3, chapter: 1 }, verb('読む', 'よむ', 1, { id: 4, step: 1, chapter: 10 })];
     const { queue } = startVerbPractice(list, ['te', 'ta']);
     expect(queue.map(q => `${getStep(q.word)}-${q.word.chapter}`)).toEqual(['3-1', '3-1', '2-1', '2-1', '1-10', '1-10', '1-10', '1-10', '1-7', '1-7']);

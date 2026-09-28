@@ -62,7 +62,8 @@ export default function DateTimeQuestion() {
             <div key={item.question} className={index ? 'mt-5 pt-5 border-t border-slate-200 dark:border-slate-700' : ''}>
               <h2 lang="ja" className="text-xl font-bold jp-text">{item.question}</h2>
               {revealed && (
-                <div ref={index === 0 ? answerRef : undefined} className="mt-3 space-y-1" aria-live="polite" lang="ja">
+                // 정답을 펼치면 화면 밖으로 밀릴 수 있는 쪽은 아래쪽 정답이라 마지막 정답 블록을 기준으로 스크롤한다. block: 'nearest' 라 이미 보이면 움직이지 않는다.
+                <div ref={index === questions.length - 1 ? answerRef : undefined} className="mt-3 space-y-1" aria-live="polite" lang="ja">
                   <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400 jp-text">{item.answer}</p>
                   <p className="text-base text-slate-500 dark:text-slate-400 jp-text">{item.answerReading}</p>
                 </div>

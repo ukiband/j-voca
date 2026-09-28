@@ -22,9 +22,7 @@ export function lessonKey(step, chapter) {
 
 /**
  * 최근 레슨이 앞에 오도록 단어 둘을 비교한다(sort 비교 함수용).
- * step 내림차순, 같은 step 안에서는 chapter 내림차순. step 이 없으면 1로 본다(getStep 규칙).
  * chapter 가 없는 단어는 0 으로 보아 같은 step 의 맨 뒤(가장 오래된 쪽)에 둔다.
- * Array.prototype.sort 는 안정 정렬이라, 같은 레슨의 단어끼리는 원래 순서(등록 순)가 그대로 남는다.
  */
 export function compareLessonDesc(a, b) {
   return (getStep(b) - getStep(a)) || ((b?.chapter ?? 0) - (a?.chapter ?? 0));

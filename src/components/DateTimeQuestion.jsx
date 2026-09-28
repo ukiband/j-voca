@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import { createDateTimeQuestions, dismissDateTimeQuestion, shouldShowDateTimeQuestion } from '../lib/date-time-practice';
 
 export default function DateTimeQuestion() {
-  // 날짜 질문, 시간 질문 순서의 배열. 숨김 상태면 null.
   const [questions, setQuestions] = useState(() => shouldShowDateTimeQuestion() ? createDateTimeQuestions() : null);
   const [revealed, setRevealed] = useState(false);
   const dialogRef = useRef(null);
@@ -58,11 +57,10 @@ export default function DateTimeQuestion() {
         <div className="min-h-0 overflow-y-auto p-6">
           <p id="date-time-question-title" className="text-xs font-medium text-indigo-600 dark:text-indigo-400 mb-4">오늘의 질문</p>
           {questions.map((item, index) => (
-            // 질문마다 블록 하나. 정답을 펼치면 각 질문 바로 아래에 정답·읽기가 붙고, 두 번째 블록부터는 구분선으로 나눈다.
             <div key={item.question} className={index ? 'mt-5 pt-5 border-t border-slate-200 dark:border-slate-700' : ''}>
               <h2 lang="ja" className="text-xl font-bold jp-text">{item.question}</h2>
               {revealed && (
-                // 정답을 펼치면 화면 밖으로 밀릴 수 있는 쪽은 아래쪽 정답이라 마지막 정답 블록을 기준으로 스크롤한다. block: 'nearest' 라 이미 보이면 움직이지 않는다.
+                // 화면 밖으로 밀릴 수 있는 쪽은 아래쪽 정답이라 마지막 정답 블록을 스크롤 기준으로 삼는다.
                 <div ref={index === questions.length - 1 ? answerRef : undefined} className="mt-3 space-y-1" aria-live="polite" lang="ja">
                   <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400 jp-text">{item.answer}</p>
                   <p className="text-base text-slate-500 dark:text-slate-400 jp-text">{item.answerReading}</p>

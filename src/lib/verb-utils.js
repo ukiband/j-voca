@@ -130,7 +130,7 @@ export function conjugateVerb(word, form) {
   };
 }
 
-// 등록 항목마다 한 번씩 낸다. 같은 동사가 여러 레슨에 있으면 레슨마다 나온다(복습이 항목마다 따로 도는 것과 같은 기준).
+// 같은 동사가 여러 레슨에 있어도 합치지 않고 항목마다 낸다(복습과 같은 기준).
 export function getPracticeVerbs(words) {
   return words.filter(isPracticeVerb);
 }

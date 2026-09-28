@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { VERB_FORMS, conjugateVerb, editVerbEntry, buildVerbQuestions } from '../verb-utils';
 import { startVerbPractice, verbPracticeReducer } from '../verb-practice';
-import { getStep } from '../lesson-utils';
 
 // 셔플을 뒤집기로 바꿔 두면 "레슨 블록 안에서만 섞였는지"를 결정적으로 확인할 수 있다. 이 파일의 다른 테스트는 셔플 순서를 보지 않는다.
 vi.mock('../shuffle.js', () => ({ shuffle: arr => [...arr].reverse() }));
@@ -86,7 +85,6 @@ describe('동사 대상 검증과 저장', () => {
 });
 
 describe('출제 조합과 세션', () => {
-  // 書く 1-7, 食べる 2-1, ある 1-10(step 없음 → 1)
   const words = [verb('書く', 'かく', 1, { step: 1, chapter: 7 }), verb('食べる', 'たべる', 2, { id: 2, step: 2, chapter: 1 }), verb('ある', 'ある', 1, { id: 3, chapter: 10, potentialAllowed: false })];
 
   it('모든 Step과 선택한 형태의 유효한 조합을 빠짐없이 출제한다', () => {
@@ -101,10 +99,9 @@ describe('출제 조합과 세션', () => {
 
   it('최근 레슨 블록부터 내고 같은 레슨 안에서만 섞으며, 여러 레슨에 등록된 동사는 레슨마다 낸다', () => {
     const list = [...words, { ...words[0], id: 99, step: 3, chapter: 1 }, verb('読む', 'よむ', 1, { id: 4, step: 1, chapter: 10 })];
-    const { queue } = startVerbPractice(list, ['te', 'ta']);
-    expect(queue.map(q => `${getStep(q.word)}-${q.word.chapter}`)).toEqual(['3-1', '3-1', '2-1', '2-1', '1-10', '1-10', '1-10', '1-10', '1-7', '1-7']);
-    // 셔플이 뒤집기이므로 블록 안에서만 순서가 뒤집혀야 한다. 큐 전체를 섞었다면 1-7 의 1:ta 가 맨 앞에 온다.
-    expect(queue.map(q => `${q.word.id}:${q.form}`)).toEqual(['99:ta', '99:te', '2:ta', '2:te', '4:ta', '4:te', '3:ta', '3:te', '1:ta', '1:te']);
+    // 셔플이 뒤집기이므로 레슨 블록(3-1 → 2-1 → 1-10 → 1-7) 안에서만 순서가 뒤집혀야 한다. 큐 전체를 섞었다면 1-7 의 1:ta 가 맨 앞에 온다.
+    expect(startVerbPractice(list, ['te', 'ta']).queue.map(q => `${q.word.id}:${q.form}`))
+      .toEqual(['99:ta', '99:te', '2:ta', '2:te', '4:ta', '4:te', '3:ta', '3:te', '1:ta', '1:te']);
   });
 
   it('한 번 더는 큐 끝에 들어가고 다음 문제는 항상 앞면부터다', () => {

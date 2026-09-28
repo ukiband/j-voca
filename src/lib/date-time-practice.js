@@ -35,7 +35,6 @@ const DAYS = [
   'にじゅういちにち', 'にじゅうににち', 'にじゅうさんにち', 'にじゅうよっか', 'にじゅうごにち',
   'にじゅうろくにち', 'にじゅうしちにち', 'にじゅうはちにち', 'にじゅうくにち', 'さんじゅうにち', 'さんじゅういちにち',
 ];
-// 12시간제라 1시~12시만 읽는다. 인덱스 0 이 1시.
 const HOURS = ['いちじ', 'にじ', 'さんじ', 'よじ', 'ごじ', 'ろくじ', 'しちじ', 'はちじ', 'くじ', 'じゅうじ', 'じゅういちじ', 'じゅうにじ'];
 const MINUTES = ['', 'いっぷん', 'にふん', 'さんぷん', 'よんぷん', 'ごふん', 'ろっぷん', 'ななふん', 'はっぷん', 'きゅうふん'];
 const TENS = ['', '', 'に', 'さん', 'よん', 'ご'];
@@ -57,12 +56,11 @@ export function createDateTimeQuestion(date, kind) {
       answerReading: `きょうは ${MONTHS[month]} ${DAYS[day - 1]}です。`,
     };
   }
-  // 회화에서 쓰는 12시간제. 자정·정오는 0時가 아니라 午前12時·午後12時로 적는다(오전 12시·오후 12시 표현에 맞춤).
+  // 회화에서 쓰는 12시간제. 자정·정오는 0時 대신 午前12時·午後12時로 적는다.
   const hour = date.getHours();
   const minute = date.getMinutes();
   const period = hour < 12 ? '午前' : '午後';
   const periodReading = hour < 12 ? 'ごぜん' : 'ごご';
-  // 0시·12시는 hour % 12 가 0 이 되므로 12 로 바꿔 준다
   const hour12 = hour % 12 || 12;
   return {
     question: '今、何時何分ですか。',
@@ -71,7 +69,7 @@ export function createDateTimeQuestion(date, kind) {
   };
 }
 
-// 홈 팝업은 날짜·시간 질문을 함께 낸다. 두 질문이 서로 다른 시각을 보지 않도록 date 스냅샷 하나로 만든다.
+// 두 질문이 서로 다른 시각을 보지 않도록 같은 date 로 만든다.
 export function createDateTimeQuestions(date = new Date()) {
   return [createDateTimeQuestion(date, 'date'), createDateTimeQuestion(date, 'time')];
 }

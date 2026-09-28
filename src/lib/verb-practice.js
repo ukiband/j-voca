@@ -7,9 +7,8 @@ export function selectedVerbForms(value) {
   return selected.length ? selected : ['te'];
 }
 
-// 최근 step·lesson 의 문제부터 내되 같은 lesson 안에서는 순서를 섞는다.
-// 최근 레슨 순으로 정렬해 같은 레슨의 문제를 붙여 놓은 뒤 레슨 묶음 안에서만 섞는다. 묶는 기준도 정렬과 같은 비교(compareLessonDesc)를 써서
-// 정렬에서 같은 레슨으로 본 문제가 다른 묶음으로 갈라지지 않게 한다.
+// 최근 레슨 블록부터 내고 블록 안에서만 섞는다.
+// 묶는 기준을 정렬과 같은 비교로 두어, 정렬에서 같은 레슨으로 본 문제가 다른 묶음으로 갈라지지 않게 한다.
 export function orderByRecentLesson(questions) {
   const groups = [];
   for (const question of [...questions].sort((a, b) => compareLessonDesc(a.word, b.word))) {

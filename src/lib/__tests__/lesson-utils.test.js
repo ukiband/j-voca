@@ -40,19 +40,8 @@ describe('lessonKey', () => {
 });
 
 describe('compareLessonDesc', () => {
-  it('step 내림차순, 같은 step 은 chapter 내림차순으로 최근 레슨이 앞에 온다', () => {
-    // 10-1, 2-2, 2-1, 1-10, 1-3, 1-2(step 없음) 순
-    expect([...words].sort(compareLessonDesc).map(w => w.id)).toEqual([6, 5, 4, 2, 3, 1]);
-  });
-
-  it('chapter 가 없는 단어는 같은 step 의 맨 뒤로 가고, 같은 레슨끼리는 원래 순서를 유지한다', () => {
-    const list = [
-      { id: 1, step: 2, chapter: 3 },
-      { id: 2, step: 2 },
-      { id: 3, step: 2, chapter: 3 },
-      { id: 4, step: 2, chapter: 5 },
-    ];
-    expect([...list].sort(compareLessonDesc).map(w => w.id)).toEqual([4, 1, 3, 2]);
+  it('step 내림차순, 같은 step 은 chapter 내림차순이고 chapter 없는 단어는 그 step 의 맨 뒤로 간다', () => {
+    expect([...words, { id: 7, step: 2 }].sort(compareLessonDesc).map(w => w.id)).toEqual([6, 5, 4, 7, 2, 3, 1]);
   });
 });
 

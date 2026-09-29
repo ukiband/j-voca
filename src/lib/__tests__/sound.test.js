@@ -24,7 +24,6 @@ function stubAudioContext(state) {
     createOscillator: vi.fn(() => node()),
     createGain: vi.fn(() => node()),
   };
-  // 화살표 함수는 new 로 부를 수 없으므로 function 키워드로 만든다.
   const Ctor = vi.fn(function () { return ctx; });
   vi.stubGlobal('AudioContext', Ctor);
   return { ctx, Ctor };
@@ -45,7 +44,6 @@ describe('효과음', () => {
     expect(Ctor).toHaveBeenCalledTimes(1);
     expect(ctx.resume).toHaveBeenCalledTimes(2);
     expect(ctx.createOscillator).toHaveBeenCalled();
-    // 저장 뒤 제스처 밖에서 불릴 때 이미 켜진 컨텍스트를 다시 재개하지 않는다.
     ctx.state = 'running';
     playNextSound();
     expect(ctx.resume).toHaveBeenCalledTimes(2);

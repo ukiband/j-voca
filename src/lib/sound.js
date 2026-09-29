@@ -3,7 +3,6 @@ let context = null;
 
 // iOS 는 사용자가 누른 순간 안에서만 AudioContext 를 만들거나 재개할 수 있으므로 탭 핸들러에서 동기적으로 불러야 한다.
 // 백그라운드 복귀·전화 뒤에는 suspended/interrupted 상태가 되므로 running 이 아니면 다시 재개한다.
-// 지원하지 않는 브라우저면 null 을 돌려주고, 효과음 실패가 학습 진행을 막지 않게 예외는 삼킨다.
 export function prepareSound() {
   try {
     const AudioContext = globalThis.AudioContext ?? globalThis.webkitAudioContext;
@@ -18,7 +17,7 @@ export function prepareSound() {
 
 const VOLUME = 0.15;
 
-// 종소리처럼 서서히 줄어드는 음 하나. 기본음에 한 옥타브 위 배음을 약하게 섞어 종 느낌을 낸다.
+// 기본음에 한 옥타브 위 배음을 약하게 섞어 종소리 느낌을 낸다.
 // exponentialRamp 는 0 으로 갈 수 없으므로 0.0001 을 바닥값으로 쓴다.
 function chime(ctx, frequency, at, duration) {
   const envelope = ctx.createGain();

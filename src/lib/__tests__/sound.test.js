@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 // sound.js 는 만든 AudioContext 를 모듈 변수에 캐시하므로, 테스트마다 모듈을 새로 읽어 그 캐시를 비운다.
 afterEach(() => { vi.unstubAllGlobals(); vi.resetModules(); });
 
-// connect 는 실제 Web Audio 처럼 받은 노드를 돌려줘야 osc.connect(gain).connect(envelope) 체인이 된다.
+// connect 는 실제 Web Audio 처럼 받은 노드를 돌려줘야 osc.connect(gain).connect(ctx.destination) 체인이 된다.
 function node() {
   return {
     connect: vi.fn(target => target),
@@ -11,7 +11,7 @@ function node() {
     stop: vi.fn(),
     type: 'sine',
     frequency: { value: 0 },
-    gain: { value: 0, setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() },
+    gain: { setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() },
   };
 }
 

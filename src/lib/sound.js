@@ -37,6 +37,7 @@ function strike(ctx, frequency, at) {
     gain.gain.exponentialRampToValueAtTime(0.0001, at + decay);
     osc.connect(gain).connect(ctx.destination);
     osc.start(at);
+    // 게인이 바닥값에 닿은 뒤에 멈춰야 끊기는 소리가 안 난다.
     osc.stop(at + decay + 0.02);
   }
 }
@@ -45,6 +46,7 @@ export function playNextSound() {
   const ctx = prepareSound();
   if (!ctx) return;
   try {
+    // 오디오 스레드 기준으로 이미 지난 시각에 예약되어 첫 음의 어택이 잘리지 않도록 20ms 앞을 잡는다.
     const start = ctx.currentTime + 0.02;
     for (const [frequency, offset] of NOTES) strike(ctx, frequency, start + offset);
   } catch {}

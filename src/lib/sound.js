@@ -7,7 +7,11 @@ export function prepareSound() {
   try {
     const AudioContext = globalThis.AudioContext ?? globalThis.webkitAudioContext;
     if (!AudioContext) return null;
-    context ??= new AudioContext();
+    if (!context) {
+      // 스포티파이처럼 무음 스위치와 상관없이 음량 버튼으로만 조절되게 한다(iOS 17+). 대신 다른 앱의 음악은 멈춘다.
+      try { navigator.audioSession.type = 'playback'; } catch {}
+      context = new AudioContext();
+    }
     if (context.state !== 'running') context.resume().catch(() => {});
     return context;
   } catch {
@@ -16,34 +20,32 @@ export function prepareSound() {
 }
 
 const VOLUME = 0.15;
+// 금속 막대(글로켄슈필)의 비정수 배음 [배율, 세기, 감쇠 시간(초)]. 윗배음이 먼저 사라져 종을 친 느낌이 난다.
+const PARTIALS = [[1, 1, 0.5], [2.76, 0.4, 0.16], [5.4, 0.18, 0.07]];
+// 도·미·솔·도(C5→C6)를 빠르게 올라가는 아르페지오 [주파수(Hz), 시작 시점(초)]
+const NOTES = [[523.25, 0], [659.25, 0.06], [784, 0.12], [1046.5, 0.18]];
 
-// 기본음에 한 옥타브 위 배음을 약하게 섞어 종소리 느낌을 낸다.
-// exponentialRamp 는 0 으로 갈 수 없으므로 0.0001 을 바닥값으로 쓴다.
-function chime(ctx, frequency, at, duration) {
-  const envelope = ctx.createGain();
-  envelope.gain.setValueAtTime(0.0001, at);
-  envelope.gain.exponentialRampToValueAtTime(VOLUME, at + 0.01);
-  envelope.gain.exponentialRampToValueAtTime(0.0001, at + duration);
-  envelope.connect(ctx.destination);
-  for (const [ratio, level] of [[1, 1], [2, 0.25]]) {
+// 배음마다 오실레이터 하나. exponentialRamp 는 0 으로 갈 수 없으므로 0.0001 을 바닥값으로 쓴다.
+function strike(ctx, frequency, at) {
+  for (const [ratio, level, decay] of PARTIALS) {
     const osc = ctx.createOscillator();
     osc.type = 'sine';
     osc.frequency.value = frequency * ratio;
-    const partial = ctx.createGain();
-    partial.gain.value = level;
-    osc.connect(partial).connect(envelope);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.exponentialRampToValueAtTime(VOLUME * level, at + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + decay);
+    osc.connect(gain).connect(ctx.destination);
     osc.start(at);
-    osc.stop(at + duration);
+    osc.stop(at + decay + 0.02);
   }
 }
 
-// 다음 문제로 넘어갈 때 내는 '띵동'. 미(E5) 뒤에 도(C5)를 조금 겹쳐 낸다.
 export function playNextSound() {
   const ctx = prepareSound();
   if (!ctx) return;
   try {
-    const now = ctx.currentTime;
-    chime(ctx, 659.25, now, 0.45);
-    chime(ctx, 523.25, now + 0.18, 0.55);
+    const start = ctx.currentTime + 0.02;
+    for (const [frequency, offset] of NOTES) strike(ctx, frequency, start + offset);
   } catch {}
 }

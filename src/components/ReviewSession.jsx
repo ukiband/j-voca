@@ -6,6 +6,7 @@ import { getDueWords } from '../lib/review-utils';
 import { formatLesson, parseLessonNumber } from '../lib/lesson-utils';
 import { filterUsableSentences, pickSentence } from '../lib/sentence-utils';
 import { getKstDateString } from '../lib/date-utils';
+import { playNextSound, prepareSound } from '../lib/sound';
 import { useImmersive } from '../hooks/useImmersive';
 import { refreshSentences } from '../lib/sentence-sync';
 import FlashCard from './FlashCard';
@@ -112,6 +113,8 @@ export default function ReviewSession() {
 
   async function handleGrade(grade) {
     if (!currentWord || saving) return;
+    // iOS 는 누른 순간 안에서만 오디오를 켤 수 있어서 저장을 기다리기 전에 준비해 둔다
+    prepareSound();
     setSaving(true);
 
     try {
@@ -135,6 +138,8 @@ export default function ReviewSession() {
       return;
     }
 
+    // 저장이 실패하면 카드가 안 넘어가므로 성공한 뒤에만 소리를 낸다
+    playNextSound();
     setSaveError(null);
     setSaving(false);
     setResults(prev => ({ ...prev, [grade]: prev[grade] + 1 }));

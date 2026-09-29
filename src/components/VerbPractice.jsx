@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { db } from '../lib/db';
 import { buildVerbQuestions, getPracticeVerbs, VERB_FORMS, verbReading } from '../lib/verb-utils';
 import { selectedVerbForms, startVerbPractice, verbPracticeReducer } from '../lib/verb-practice';
+import { playNextSound } from '../lib/sound';
 import { useImmersive } from '../hooks/useImmersive';
 
 const FORMS_KEY = 'verb-practice-forms';
@@ -37,7 +38,7 @@ function Practice() {
   const current = session?.queue[session.index];
   useImmersive(!!current);
 
-  // 뒤집기 버튼과 다음 버튼의 위치가 같으므로 연속 탭이 답을 건너뛰지 않게 한다.
+  // 뒤집기와 다음은 버튼도 본문도 같은 자리이므로 연속 탭이 답을 건너뛰지 않게 한다.
   useEffect(() => {
     setReady(false);
     if (!session?.flipped) return;
@@ -95,22 +96,24 @@ function Practice() {
     <div className="text-center py-16 space-y-5">
       <p className="text-4xl" aria-hidden="true">✓</p>
       <h1 className="text-xl font-bold">동사 활용 연습 완료</h1>
-      <p className="text-slate-500 dark:text-slate-400">{session.initialCount}문제를 모두 연습했습니다.</p>
+      <p className="text-slate-500 dark:text-slate-400">{session.queue.length}문제를 모두 연습했습니다.</p>
       <button onClick={start} className="block w-full py-3 rounded-xl bg-indigo-600 text-white">다시 섞어서 연습</button>
       <button onClick={() => dispatch({ type: 'start', session: null })} className="block w-full py-3 rounded-xl border border-slate-200 dark:border-slate-700">형태 다시 선택</button>
       <Link to="/" className="inline-block text-indigo-600 dark:text-indigo-400 text-sm">홈으로 돌아가기</Link>
     </div>
   );
 
-  const repeated = session.index >= session.initialCount;
-  const number = repeated ? session.index - session.initialCount + 1 : session.index + 1;
-  const total = repeated ? session.queue.length - session.initialCount : session.initialCount;
+  const number = session.index + 1;
+  const total = session.queue.length;
   const { word, answer, label } = current;
 
-  function advance(type) {
+  // 뒤집은 직후의 연타를 무시하는 ready 확인을 지난 뒤에만 소리를 낸다.
+  // iOS 에서 오디오를 켜려면 탭 핸들러 안에서 동기적으로 재생해야 하므로 리듀서나 effect 로 옮기지 않는다.
+  function next() {
     if (!ready) return;
     setReady(false);
-    dispatch({ type });
+    playNextSound();
+    dispatch({ type: 'next' });
   }
 
   return (
@@ -119,11 +122,12 @@ function Practice() {
         <div className="flex items-center gap-2 min-h-[72px] pl-1 pr-4">
           <Link to="/" aria-label="동사 활용 닫기" className="w-11 h-11 shrink-0 flex items-center justify-center text-2xl text-slate-500 dark:text-slate-400">×</Link>
           <h1 className="flex-1 font-bold text-base">동사 활용</h1>
-          <span className="text-sm text-slate-500 dark:text-slate-400">{repeated ? '한 번 더 ' : ''}{number} / {total}</span>
+          <span className="text-sm text-slate-500 dark:text-slate-400">{number} / {total}</span>
         </div>
         <div className="h-[3px] bg-slate-200 dark:bg-slate-700"><div className="h-full bg-indigo-500" style={{ width: `${number / total * 100}%` }} /></div>
       </header>
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-6 py-6 flex flex-col">
+      {/* 앞면은 본문 전체가 뒤집기 버튼이라 그 클릭이 여기까지 올라오므로, 정답 화면일 때만 본문 탭을 다음으로 잇는다. */}
+      <div ref={scrollRef} onClick={session.flipped ? next : undefined} className="flex-1 min-h-0 overflow-y-auto px-6 py-6 flex flex-col">
         <p className="text-center text-sm font-medium text-indigo-600 dark:text-indigo-400">{label}으로 바꿔 보세요.</p>
         {!session.flipped ? (
           <button onClick={() => dispatch({ type: 'flip' })} className="flex-1 py-8 text-center" aria-label={`${word.word}, 정답 확인`}>
@@ -142,10 +146,7 @@ function Practice() {
       </div>
       <footer className="shrink-0 px-4 pt-3 safe-bottom-min border-t border-slate-200 dark:border-slate-700">
         {!session.flipped ? <button onClick={() => dispatch({ type: 'flip' })} className="w-full py-4 bg-indigo-600 text-white rounded-xl font-medium">뒤집기</button> : (
-          <div className="flex gap-3">
-            <button onClick={() => advance('again')} disabled={!ready} className="flex-1 py-4 rounded-xl bg-slate-200 dark:bg-slate-700 font-medium disabled:opacity-40">한 번 더</button>
-            <button onClick={() => advance('next')} disabled={!ready} className="flex-1 py-4 rounded-xl bg-indigo-600 text-white font-medium disabled:opacity-40">다음</button>
-          </div>
+          <button onClick={next} disabled={!ready} className="w-full py-4 bg-indigo-600 text-white rounded-xl font-medium disabled:opacity-40">다음</button>
         )}
       </footer>
     </div>

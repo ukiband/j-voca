@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { db } from '../lib/db';
 import { buildVerbQuestions, getPracticeVerbs, VERB_FORMS, verbReading } from '../lib/verb-utils';
 import { selectedVerbForms, startVerbPractice, verbPracticeReducer } from '../lib/verb-practice';
+import { playNextSound } from '../lib/sound';
 import { useImmersive } from '../hooks/useImmersive';
 
 const FORMS_KEY = 'verb-practice-forms';
@@ -106,10 +107,12 @@ function Practice() {
   const total = session.queue.length;
   const { word, answer, label } = current;
 
-  // 뒤집은 직후의 연타를 무시하는 ready 확인을 지난 뒤에만 다음으로 넘어간다.
+  // 뒤집은 직후의 연타를 무시하는 ready 확인을 지난 뒤에만 소리를 낸다.
+  // iOS 에서 오디오를 켜려면 탭 핸들러 안에서 동기적으로 재생해야 하므로 리듀서나 effect 로 옮기지 않는다.
   function next() {
     if (!ready) return;
     setReady(false);
+    playNextSound();
     dispatch({ type: 'next' });
   }
 

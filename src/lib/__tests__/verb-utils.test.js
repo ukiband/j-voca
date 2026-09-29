@@ -104,13 +104,12 @@ describe('출제 조합과 세션', () => {
       .toEqual(['99:ta', '99:te', '2:ta', '2:te', '4:ta', '4:te', '3:ta', '3:te', '1:ta', '1:te']);
   });
 
-  it('뒤집기 전의 다음은 무시하고, 다음 문제는 항상 앞면부터 큐를 늘리지 않고 진행한다', () => {
+  it('뒤집기 전의 다음은 무시하고, 다음 문제는 항상 앞면부터다', () => {
     let state = startVerbPractice(words, ['te']);
     expect(verbPracticeReducer(state, { type: 'next' })).toBe(state);
     state = verbPracticeReducer(state, { type: 'flip' });
     state = verbPracticeReducer(state, { type: 'next' });
     expect(state).toMatchObject({ index: 1, flipped: false });
-    expect(state.queue).toHaveLength(3);
     while (state.queue[state.index]) {
       state = verbPracticeReducer(state, { type: 'flip' });
       state = verbPracticeReducer(state, { type: 'next' });

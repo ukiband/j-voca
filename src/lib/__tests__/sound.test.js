@@ -37,13 +37,17 @@ describe('효과음', () => {
     expect(() => playNextSound()).not.toThrow();
   });
 
-  it('컨텍스트는 한 번만 만들어 재사용하고 멈춰 있으면 재개한다', async () => {
+  it('컨텍스트는 한 번만 만들어 재사용하고, 멈춰 있을 때만 재개한다', async () => {
     const { ctx, Ctor } = stubAudioContext('suspended');
     const { playNextSound } = await import('../sound.js');
     playNextSound();
     playNextSound();
     expect(Ctor).toHaveBeenCalledTimes(1);
-    expect(ctx.resume).toHaveBeenCalled();
+    expect(ctx.resume).toHaveBeenCalledTimes(2);
     expect(ctx.createOscillator).toHaveBeenCalled();
+    // 저장 뒤 제스처 밖에서 불릴 때 이미 켜진 컨텍스트를 다시 재개하지 않는다.
+    ctx.state = 'running';
+    playNextSound();
+    expect(ctx.resume).toHaveBeenCalledTimes(2);
   });
 });

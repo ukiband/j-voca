@@ -1,5 +1,5 @@
 {
-  "lastId": 1073,
+  "lastId": 1080,
   "words": [
     {
       "word": "おおい",
@@ -12629,6 +12629,89 @@
       "verbGroup": 3,
       "isDictionaryForm": true,
       "potentialAllowed": true
+    },
+    {
+      "word": "掃除",
+      "reading": "そうじ",
+      "meaning": "청소",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1074
+    },
+    {
+      "word": "洗濯",
+      "reading": "せんたく",
+      "meaning": "세탁, 빨래",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1075
+    },
+    {
+      "word": "顔",
+      "reading": "かお",
+      "meaning": "얼굴",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1076
+    },
+    {
+      "word": "沖縄",
+      "reading": "おきなわ",
+      "meaning": "오키나와",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1077
+    },
+    {
+      "word": "終わる",
+      "reading": "おわる",
+      "meaning": "끝나다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1078,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "始まる",
+      "reading": "はじまる",
+      "meaning": "시작하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1079,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
+    },
+    {
+      "word": "して(から)",
+      "reading": "して(から)",
+      "meaning": "~하고 나서 (라고 생각해도 된다)",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1080
     }
   ]
 }

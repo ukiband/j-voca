@@ -1,5 +1,5 @@
 {
-  "lastId": 1069,
+  "lastId": 1073,
   "words": [
     {
       "word": "おおい",
@@ -12571,6 +12571,62 @@
       "createdAt": "2026-09-30",
       "id": 1069,
       "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "利用する",
+      "reading": "りようする",
+      "meaning": "이용하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1070,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "研究する",
+      "reading": "けんきゅうする",
+      "meaning": "연구하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1071,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "準備する",
+      "reading": "じゅんびする",
+      "meaning": "준비하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1072,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "出席する",
+      "reading": "しゅっせきする",
+      "meaning": "출석하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1073,
+      "verbGroup": 3,
       "isDictionaryForm": true,
       "potentialAllowed": true
     }

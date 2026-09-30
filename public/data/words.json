@@ -1,5 +1,5 @@
 {
-  "lastId": 1063,
+  "lastId": 1069,
   "words": [
     {
       "word": "おおい",
@@ -12487,6 +12487,90 @@
       "createdAt": "2026-09-30",
       "id": 1063,
       "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "着る",
+      "reading": "きる",
+      "meaning": "입다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1064,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "生きる",
+      "reading": "いきる",
+      "meaning": "살다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1065,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "集める",
+      "reading": "あつめる",
+      "meaning": "모다, 수집하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1066,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "建てる",
+      "reading": "たてる",
+      "meaning": "짓다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1067,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "降りる",
+      "reading": "おりる",
+      "meaning": "내리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1068,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "閉める",
+      "reading": "しめる",
+      "meaning": "닫다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-09-30",
+      "id": 1069,
+      "verbGroup": 2,
       "isDictionaryForm": true,
       "potentialAllowed": true
     }

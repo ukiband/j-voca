@@ -12804,6 +12804,78 @@
         "date": "2026-09-30",
         "ok": true
       }
+    },
+    {
+      "wordId": 1064,
+      "date": "2026-09-30",
+      "source": {
+        "word": "着る",
+        "reading": "きる",
+        "meaning": "입다"
+      },
+      "sentence": "新しいシャツを[[着ます]]。",
+      "reading": "あたらしい シャツを [[きます]]。",
+      "meaning": "새 셔츠를 입습니다."
+    },
+    {
+      "wordId": 1065,
+      "date": "2026-09-30",
+      "source": {
+        "word": "生きる",
+        "reading": "いきる",
+        "meaning": "살다"
+      },
+      "sentence": "元気に[[生きます]]。",
+      "reading": "げんきに [[いきます]]。",
+      "meaning": "건강하게 삽니다."
+    },
+    {
+      "wordId": 1066,
+      "date": "2026-09-30",
+      "source": {
+        "word": "集める",
+        "reading": "あつめる",
+        "meaning": "모다, 수집하다"
+      },
+      "sentence": "切手を[[集めます]]。",
+      "reading": "きってを [[あつめます]]。",
+      "meaning": "우표를 모읍니다."
+    },
+    {
+      "wordId": 1067,
+      "date": "2026-09-30",
+      "source": {
+        "word": "建てる",
+        "reading": "たてる",
+        "meaning": "짓다"
+      },
+      "sentence": "家を[[建てます]]。",
+      "reading": "いえを [[たてます]]。",
+      "meaning": "집을 짓습니다."
+    },
+    {
+      "wordId": 1068,
+      "date": "2026-09-30",
+      "source": {
+        "word": "降りる",
+        "reading": "おりる",
+        "meaning": "내리다"
+      },
+      "sentence": "電車を[[降ります]]。",
+      "reading": "でんしゃを [[おります]]。",
+      "meaning": "전철에서 내립니다."
+    },
+    {
+      "wordId": 1069,
+      "date": "2026-09-30",
+      "source": {
+        "word": "閉める",
+        "reading": "しめる",
+        "meaning": "닫다"
+      },
+      "sentence": "窓を[[閉めます]]。",
+      "reading": "まどを [[しめます]]。",
+      "meaning": "창문을 닫습니다."
     }
   ]
 }

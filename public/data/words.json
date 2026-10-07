@@ -1,5 +1,5 @@
 {
-  "lastId": 1081,
+  "lastId": 1087,
   "words": [
     {
       "word": "おおい",
@@ -12723,6 +12723,81 @@
       "textbook": "일본어수업",
       "createdAt": "2026-10-07",
       "id": 1081
+    },
+    {
+      "word": "夜遅く",
+      "reading": "よるおそく",
+      "meaning": "밤늦게",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-07",
+      "id": 1082
+    },
+    {
+      "word": "寝坊をする",
+      "reading": "ねぼうをする",
+      "meaning": "늦잠을 자다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-07",
+      "id": 1083,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "お金",
+      "reading": "おかね",
+      "meaning": "돈",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-07",
+      "id": 1084
+    },
+    {
+      "word": "疲れる",
+      "reading": "つかれる",
+      "meaning": "지치다, 피곤하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-07",
+      "id": 1085,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "おそい",
+      "reading": "おそい",
+      "meaning": "늦은",
+      "pos": "い형용사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-07",
+      "id": 1086
+    },
+    {
+      "word": "つかれた",
+      "reading": "つかれた",
+      "meaning": "지쳤다,피곤하다(과거형을 현재형으로 쓴다)",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-07",
+      "id": 1087,
+      "verbGroup": null,
+      "isDictionaryForm": false,
+      "potentialAllowed": false
     }
   ]
 }

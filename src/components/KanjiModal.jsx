@@ -1,9 +1,12 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { formatKanjiReading, loadKanji } from '../lib/kanji';
 import { playKanjiStrokes } from '../lib/kanji-animation';
+import { getKanjiIllustration, getKanjiIllustrationsEnabled, subscribeToKanjiIllustrations } from '../lib/kanji-illustrations';
 
 export default function KanjiModal({ character, onClose }) {
+  const illustrationsEnabled = useSyncExternalStore(subscribeToKanjiIllustrations, getKanjiIllustrationsEnabled);
+  const illustration = illustrationsEnabled ? getKanjiIllustration(character) : null;
   const dialogRef = useRef(null);
   const svgRef = useRef(null);
   const closeRef = useRef(null);
@@ -100,6 +103,17 @@ export default function KanjiModal({ character, onClose }) {
         // 따라 그리다가 영역 밖에서 손을 떼어도 닫기 클릭으로 이어지지 않게 한다.
         onPointerDown={event => event.currentTarget.setPointerCapture(event.pointerId)}
       >
+        {data && illustration && (
+          <img
+            key={character}
+            className="kanji-illustration"
+            src={illustration.src}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            onError={event => { event.currentTarget.style.visibility = 'hidden'; }}
+          />
+        )}
         {data ? (
           <svg ref={svgRef} viewBox="0 0 109 109" className="kanji-drawing" role="img" aria-label={`${character}, 총 ${data.strokes.length}획`}>
             <g className="kanji-guides" fill="none" stroke="currentColor" strokeWidth="0.25" strokeDasharray="1.4 1.5">

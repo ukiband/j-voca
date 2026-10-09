@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useSyncExternalStore } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { db } from '../lib/db';
 import { getDueCount } from '../lib/review-utils';
 import DateTimeQuestion from './DateTimeQuestion';
+import { checkForUpdate, getHasUpdate, subscribeToUpdate } from '../lib/app-update';
 
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
@@ -26,13 +27,9 @@ export default function Dashboard() {
   // 마운트 시마다 DB에서 최신 데이터를 직접 읽음
   useEffect(() => { loadData(); }, [loadData]);
 
-  // 새 버전 감지 — version.json과 로컬 빌드 시각 비교
-  const [hasUpdate, setHasUpdate] = useState(() => !!window.__HAS_UPDATE__);
-  useEffect(() => {
-    const handler = () => setHasUpdate(true);
-    window.addEventListener('version-updated', handler);
-    return () => window.removeEventListener('version-updated', handler);
-  }, []);
+  // 홈 진입 시에도 확인하며, 홈이 열리기 전에 감지한 업데이트도 놓치지 않는다.
+  const hasUpdate = useSyncExternalStore(subscribeToUpdate, getHasUpdate);
+  useEffect(() => { checkForUpdate(); }, [location.key]);
 
   const [showInstall, setShowInstall] = useState(() => !isStandalone() && !sessionStorage.getItem('hide-install'));
 

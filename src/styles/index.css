@@ -60,8 +60,9 @@ body {
 
 .kanji-trigger:hover { background: rgb(129 140 248 / 15%); }
 
-/* Keep nested browse-modal scroll locks independent when a route unmounts. */
-html:has(dialog.kanji-modal[open]) { overflow: hidden; }
+/* Nested dialogs keep their scroll locks until the final dialog closes. */
+html:has(dialog.kanji-modal[open], dialog.listening-modal[open]) { overflow: hidden; }
+.listening-modal::backdrop { background: rgb(2 6 23 / 70%); }
 
 .kanji-modal {
   --kanji-ink: #1e293b;

@@ -4,8 +4,8 @@ import { db, syncWordsFromData, deleteReview } from '../lib/db';
 import { hasGithubToken, updateWordInRepo, deleteWordFromRepo, deleteChapterFromRepo } from '../lib/github';
 import { filterWords } from '../lib/word-utils';
 import { getStep, getSteps, getChapters, formatLesson, ALL_STEPS, resolveStepFilter } from '../lib/lesson-utils';
-import BrowseModal from './BrowseModal';
-import { useBrowseMode } from '../hooks/useBrowseMode';
+import ListeningModal from './ListeningModal';
+import { useListeningMode } from '../hooks/useListeningMode';
 import { editVerbEntry } from '../lib/verb-utils';
 import VerbMetadataFields from './VerbMetadataFields';
 
@@ -19,7 +19,7 @@ export default function WordList() {
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [saving, setSaving] = useState(false);
-  const browse = useBrowseMode();
+  const listening = useListeningMode();
 
   const steps = getSteps(words);
   // null이면 모든 step에서 찾는 전체 모드
@@ -95,13 +95,13 @@ export default function WordList() {
 
   function selectChapter(ch) {
     setSelectedChapter(ch);
-    browse.close();
+    listening.close();
   }
 
   function selectStep(step) {
     setSelectedStep(step);
     setSelectedChapter(null);
-    browse.close();
+    listening.close();
   }
 
   return (
@@ -168,14 +168,14 @@ export default function WordList() {
 
       {filtered.length > 0 && (
         <button
-          onClick={() => browse.openWithListening(filtered)}
+          onClick={() => listening.open(filtered)}
           className="w-full py-2 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-xl text-sm text-emerald-600 dark:text-emerald-400 font-medium"
         >
           듣기 모드 ({filtered.length}개)
         </button>
       )}
 
-      <BrowseModal browse={browse} />
+      {listening.isOpen && <ListeningModal player={listening} />}
 
       {canEdit && !isAllSteps && selectedChapter !== null && lessonWordCount > 0 && (
         <button

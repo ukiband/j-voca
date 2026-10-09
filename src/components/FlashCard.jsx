@@ -14,15 +14,14 @@ function HighlightedText({ text, onSelect }) {
 }
 
 /**
- * 복습·열람 공용 카드. 뒤집힘 상태(flipped)와 뒤집기 동작(onFlip)은 부모가 소유하는 제어 컴포넌트다.
+ * 복습 카드. 뒤집힘 상태(flipped)와 뒤집기 동작(onFlip)은 부모가 소유하는 제어 컴포넌트다.
  * 평가·이전·다음 버튼은 부모의 하단 고정 영역이 담당하므로 여기서는 내용만 그린다.
  * 회전 애니메이션은 두지 않는다. 뒷면 높이가 내용에 따라 달라지면 회전 도중 하단 버튼이 흔들려 보이기 때문이다.
  */
-export default function FlashCard({ word, sentence, reverse, flipped, onFlip, onKanjiOpen }) {
+export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) {
   const [selected, setSelected] = useState(null);
   const cardKey = `${word.id}:${word.word}`;
   function selectKanji(character) {
-    onKanjiOpen?.();
     setSelected({ character, cardKey });
   }
   if (!flipped) {

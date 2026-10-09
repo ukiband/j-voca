@@ -8,7 +8,7 @@
 - Vite 6 + Tailwind CSS 4
 - IndexedDB (Dexie 4) — words, reviews, reviewLogs 테이블
 - ts-fsrs 5 — 간격 반복 복습 알고리즘
-- Web Speech API — 일본어 TTS
+- Web Speech API — 일본어·한국어 TTS
 - PWA (Service Worker + manifest)
 - GitHub Pages 배포
 
@@ -17,7 +17,7 @@
 ```
 src/
 ├── components/    # React 컴포넌트 (Dashboard, ReviewSession, FlashCard 등)
-├── hooks/         # useBrowseMode 등
+├── hooks/         # useListeningMode 등
 ├── lib/           # db.js, fsrs.js, review-utils.js, lesson-utils.js(step/chapter 헬퍼) 등 유틸리티
 │   └── __tests__/ # Vitest 테스트
 ├── styles/        # Tailwind CSS
@@ -55,3 +55,4 @@ npm run test       # Vitest 테스트
 - version.json 폴링으로 앱 업데이트 감지
 - 효과음(복습 평가·동사 활용 '다음')은 오디오 파일 없이 `src/lib/sound.js`가 Web Audio 오실레이터로 만든다. iOS 는 사용자 탭 안에서만 AudioContext 를 만들거나 재개할 수 있으므로 `prepareSound()`를 탭 핸들러에서 동기적으로 부르고, 비동기 저장 뒤에는 `playNextSound()`만 부른다. 오디오 세션은 `playback`으로 두어 iOS 무음 스위치와 상관없이 음량 버튼으로만 조절된다(iOS 17+, 그 이하는 무음 스위치를 따름. 다른 앱 음악은 멈춤)
 - base path: `/j-voca/`
+- 듣기는 `useListeningMode`와 `ListeningModal`이 담당하며 복습용 `FlashCard`와 분리한다. `listening.js`가 발음 완료 → 생각할 시간 → 선택적 반대 언어 정답 → 다음 단어 순서를 관리한다. 세션 종료 시 타이머와 음성 콜백을 취소해 이전 재생이 새 세션에 끼어들지 않게 한다. 첫 `speak()`는 사용자 탭 안에서 동기 호출하고, 이후는 `onend` 체인으로 연결한다. 설정은 `listening-settings`에 저장한다.

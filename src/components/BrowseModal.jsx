@@ -59,7 +59,7 @@ export default function BrowseModal({ browse }) {
         </div>
 
         <div ref={scrollRef} className="flex-1 min-h-[40dvh] overflow-y-auto flex flex-col px-4 py-2">
-          <FlashCard key={word.id} word={word} sentence={sentence} flipped={flipped} onFlip={() => setFlipped(true)} />
+          <FlashCard key={word.id} word={word} sentence={sentence} flipped={flipped} onFlip={() => setFlipped(true)} onKanjiOpen={browse.stopListening} />
         </div>
 
         <div className="shrink-0 flex gap-2 px-4 pt-2 border-t border-slate-200 dark:border-slate-700 safe-bottom-min">

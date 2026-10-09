@@ -94,7 +94,12 @@ export default function KanjiModal({ character, onClose }) {
         </div>
       </header>
 
-      <div className="kanji-canvas">
+      <div
+        className="kanji-canvas"
+        onClick={event => event.stopPropagation()}
+        // 따라 그리다가 영역 밖에서 손을 떼어도 닫기 클릭으로 이어지지 않게 한다.
+        onPointerDown={event => event.currentTarget.setPointerCapture(event.pointerId)}
+      >
         {data ? (
           <svg ref={svgRef} viewBox="0 0 109 109" className="kanji-drawing" role="img" aria-label={`${character}, 총 ${data.strokes.length}획`}>
             <g className="kanji-guides" fill="none" stroke="currentColor" strokeWidth="0.25" strokeDasharray="1.4 1.5">

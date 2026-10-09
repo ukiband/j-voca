@@ -253,7 +253,7 @@ export default function ReviewSession() {
       )}
 
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto flex flex-col px-5 py-4">
-        <FlashCard word={currentWord} sentence={sentence} reverse={reverse} flipped={flipped} onFlip={handleFlip} />
+        <FlashCard key={currentIndex} word={currentWord} sentence={sentence} reverse={reverse} flipped={flipped} onFlip={handleFlip} />
       </div>
 
       <footer className="shrink-0 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 pt-2 safe-bottom-min">

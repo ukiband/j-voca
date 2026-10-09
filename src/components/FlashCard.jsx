@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { speak } from '../lib/speech';
 import { parseHighlight } from '../lib/sentence-utils';
+import KanjiText from './KanjiText';
+import KanjiModal from './KanjiModal';
 
 /** [[ ]] 로 표시된 목표 단어 부분만 굵게·남색으로 그린다 */
-function HighlightedText({ text }) {
+function HighlightedText({ text, onSelect }) {
   return parseHighlight(text).map((seg, i) =>
     seg.highlight
-      ? <span key={i} className="font-bold text-indigo-700 dark:text-indigo-300">{seg.text}</span>
-      : <span key={i}>{seg.text}</span>
+      ? <span key={i} className="font-bold text-indigo-700 dark:text-indigo-300">{onSelect ? <KanjiText text={seg.text} onSelect={onSelect} /> : seg.text}</span>
+      : <span key={i}>{onSelect ? <KanjiText text={seg.text} onSelect={onSelect} /> : seg.text}</span>
   );
 }
 
@@ -15,7 +18,13 @@ function HighlightedText({ text }) {
  * 평가·이전·다음 버튼은 부모의 하단 고정 영역이 담당하므로 여기서는 내용만 그린다.
  * 회전 애니메이션은 두지 않는다. 뒷면 높이가 내용에 따라 달라지면 회전 도중 하단 버튼이 흔들려 보이기 때문이다.
  */
-export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) {
+export default function FlashCard({ word, sentence, reverse, flipped, onFlip, onKanjiOpen }) {
+  const [selected, setSelected] = useState(null);
+  const cardKey = `${word.id}:${word.word}`;
+  function selectKanji(character) {
+    onKanjiOpen?.();
+    setSelected({ character, cardKey });
+  }
   if (!flipped) {
     // 앞면: 단어(역방향이면 뜻) 하나만 본문 가운데에 크게. flex-1 로 본문 영역을 꽉 채우므로 본문 어디를 탭해도 뒤집힌다
     return (
@@ -30,7 +39,7 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) 
   return (
     <div className="flex-1 flex flex-col text-left">
       <div className="flex items-center gap-1">
-        <p className="text-[1.65rem] font-bold text-slate-800 dark:text-slate-100 jp-text">{word.word}</p>
+        <p className="text-[1.65rem] font-bold text-slate-800 dark:text-slate-100 jp-text"><KanjiText text={word.word} onSelect={selectKanji} /></p>
         <button
           onClick={(e) => { e.stopPropagation(); speak(word.word); }}
           className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors"
@@ -54,10 +63,13 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) 
       {/* 예문이 없는 카드는 구분선도 빈 공간도 두지 않는다. 하단 버튼 위치는 부모가 고정하므로 여기 높이는 자유롭다 */}
       {sentence && (
         <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 space-y-1">
-          <p className="text-[1.4rem] leading-[1.6] text-slate-800 dark:text-slate-100 jp-text"><HighlightedText text={sentence.sentence} /></p>
+          <p className="text-[1.4rem] leading-[1.6] text-slate-800 dark:text-slate-100 jp-text"><HighlightedText text={sentence.sentence} onSelect={selectKanji} /></p>
           <p className="text-[1.4rem] leading-[1.6] text-slate-500 dark:text-slate-400 jp-text"><HighlightedText text={sentence.reading} /></p>
           <p className="text-[1rem] text-slate-600 dark:text-slate-300 pt-1">{sentence.meaning}</p>
         </div>
+      )}
+      {selected?.cardKey === cardKey && (
+        <KanjiModal key={selected.character} character={selected.character} onClose={() => setSelected(null)} />
       )}
     </div>
   );

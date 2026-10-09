@@ -255,6 +255,12 @@ export default function Settings() {
         <MessageBox section="reset" />
       </div>
 
+      <p className="text-center text-xs text-slate-500 dark:text-slate-400">
+        <ExtLink href={`${import.meta.env.BASE_URL}data/kanji/NOTICE.txt`}>한자 데이터 출처 및 라이선스</ExtLink>
+        {' · '}<ExtLink href="https://kanjivg.tagaini.net/">KanjiVG</ExtLink>
+        {' · '}<ExtLink href="https://www.edrdg.org/wiki/index.php/KANJIDIC_Project">KANJIDIC2</ExtLink>
+      </p>
+
       <p className="text-center text-xs text-slate-300 dark:text-slate-500">
         최근 업데이트: {(() => {
           const d = new Date(__BUILD_TIME__);

@@ -170,8 +170,6 @@ dialog.listening-modal.is-touch-locked {
 .kanji-modal-actions .kanji-replay { color: var(--kanji-active); }
 .kanji-modal-actions svg { width: 17px; height: 17px; }
 .kanji-canvas {
-  position: relative;
-  isolation: isolate;
   flex: 1;
   min-height: 80px;
   display: flex;
@@ -185,18 +183,7 @@ dialog.listening-modal.is-touch-locked {
   user-select: none;
   -webkit-touch-callout: none;
 }
-.kanji-illustration {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.2;
-  pointer-events: none;
-  user-select: none;
-}
-[data-theme="dark"] .kanji-illustration { opacity: 0.28; }
-.kanji-drawing { position: relative; width: 100%; height: 100%; }
+.kanji-drawing { width: 100%; height: 100%; }
 .kanji-guides { color: var(--kanji-muted); opacity: 0.2; }
 .kanji-outline { color: var(--kanji-ghost); }
 .kanji-pen { fill: var(--kanji-active); stroke: var(--kanji-surface); stroke-width: 0.4; }

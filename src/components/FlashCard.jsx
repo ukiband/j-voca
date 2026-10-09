@@ -17,14 +17,12 @@ function HighlightedText({ text, onSelect }) {
  * 복습·열람 공용 카드. 뒤집힘 상태(flipped)와 뒤집기 동작(onFlip)은 부모가 소유하는 제어 컴포넌트다.
  * 평가·이전·다음 버튼은 부모의 하단 고정 영역이 담당하므로 여기서는 내용만 그린다.
  * 회전 애니메이션은 두지 않는다. 뒷면 높이가 내용에 따라 달라지면 회전 도중 하단 버튼이 흔들려 보이기 때문이다.
+ * 한자 학습은 복습 화면에서만 enableKanji로 켠다. 열람 카드는 일반 텍스트를 유지한다.
  */
-export default function FlashCard({ word, sentence, reverse, flipped, onFlip, onKanjiOpen }) {
+export default function FlashCard({ word, sentence, reverse, flipped, onFlip, enableKanji = false }) {
   const [selected, setSelected] = useState(null);
   const cardKey = `${word.id}:${word.word}`;
-  function selectKanji(character) {
-    onKanjiOpen?.();
-    setSelected({ character, cardKey });
-  }
+  const selectKanji = enableKanji ? character => setSelected({ character, cardKey }) : undefined;
   if (!flipped) {
     // 앞면: 단어(역방향이면 뜻) 하나만 본문 가운데에 크게. flex-1 로 본문 영역을 꽉 채우므로 본문 어디를 탭해도 뒤집힌다
     return (
@@ -39,7 +37,7 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip, on
   return (
     <div className="flex-1 flex flex-col text-left">
       <div className="flex items-center gap-1">
-        <p className="text-[1.65rem] font-bold text-slate-800 dark:text-slate-100 jp-text"><KanjiText text={word.word} onSelect={selectKanji} /></p>
+        <p className="text-[1.65rem] font-bold text-slate-800 dark:text-slate-100 jp-text">{selectKanji ? <KanjiText text={word.word} onSelect={selectKanji} /> : word.word}</p>
         <button
           onClick={(e) => { e.stopPropagation(); speak(word.word); }}
           className="w-11 h-11 shrink-0 flex items-center justify-center text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors"
@@ -68,7 +66,7 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip, on
           <p className="text-[1rem] text-slate-600 dark:text-slate-300 pt-1">{sentence.meaning}</p>
         </div>
       )}
-      {selected?.cardKey === cardKey && (
+      {enableKanji && selected?.cardKey === cardKey && (
         <KanjiModal key={selected.character} character={selected.character} onClose={() => setSelected(null)} />
       )}
     </div>

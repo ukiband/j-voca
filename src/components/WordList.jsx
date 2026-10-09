@@ -167,20 +167,12 @@ export default function WordList() {
       )}
 
       {filtered.length > 0 && (
-        <div className="flex gap-2">
-          <button
-            onClick={() => browse.open(filtered)}
-            className="flex-1 py-2 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 rounded-xl text-sm text-indigo-600 dark:text-indigo-400 font-medium"
-          >
-            플래시카드 ({filtered.length}개)
-          </button>
-          <button
-            onClick={() => browse.openWithListening(filtered)}
-            className="flex-1 py-2 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-xl text-sm text-emerald-600 dark:text-emerald-400 font-medium"
-          >
-            듣기 모드
-          </button>
-        </div>
+        <button
+          onClick={() => browse.openWithListening(filtered)}
+          className="w-full py-2 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-xl text-sm text-emerald-600 dark:text-emerald-400 font-medium"
+        >
+          듣기 모드 ({filtered.length}개)
+        </button>
       )}
 
       <BrowseModal browse={browse} />

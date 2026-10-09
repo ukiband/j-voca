@@ -5,19 +5,17 @@ import { filterUsableSentences, pickSentence } from '../lib/sentence-utils';
 import { getKstDateString } from '../lib/date-utils';
 
 /**
- * 단어 열람 바텀시트. 상단(순번·듣기·닫기)과 하단(이전·다음)은 고정하고 가운데 카드만 스크롤한다.
+ * 듣기 바텀시트. 상단(순번·듣기·닫기)과 하단(이전·다음)은 고정하고 가운데 내용만 스크롤한다.
  * 예문이 들어가면 작은 화면에서 내용이 넘치는데, 예전처럼 모달 전체를 가운데 정렬하면 닫기·이동 버튼이 화면 밖으로 밀리기 때문이다.
  * 듣기 모드는 단어만 읽고 3초 간격으로 다음 단어로 넘어간다. 예문 길이는 그 간격에 영향을 주지 않는다.
  */
 export default function BrowseModal({ browse }) {
-  const [flipped, setFlipped] = useState(false);
   const [sentence, setSentence] = useState(null);
   const scrollRef = useRef(null);
   const word = browse.currentWord;
 
-  // 이전/다음 또는 듣기 모드로 단어가 바뀌면 앞면으로 돌리고 스크롤을 맨 위로 되돌린다
+  // 단어가 바뀌면 스크롤을 맨 위로 되돌린다. 듣기 화면은 뒤집기 없이 내용을 표시한다.
   useEffect(() => {
-    setFlipped(false);
     scrollRef.current?.scrollTo(0, 0);
   }, [browse.browseIndex]);
 
@@ -59,7 +57,7 @@ export default function BrowseModal({ browse }) {
         </div>
 
         <div ref={scrollRef} className="flex-1 min-h-[40dvh] overflow-y-auto flex flex-col px-4 py-2">
-          <FlashCard key={word.id} word={word} sentence={sentence} flipped={flipped} onFlip={() => setFlipped(true)} onKanjiOpen={browse.stopListening} />
+          <FlashCard key={word.id} word={word} sentence={sentence} flipped onKanjiOpen={browse.stopListening} />
         </div>
 
         <div className="shrink-0 flex gap-2 px-4 pt-2 border-t border-slate-200 dark:border-slate-700 safe-bottom-min">

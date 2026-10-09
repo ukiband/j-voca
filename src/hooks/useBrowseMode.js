@@ -61,11 +61,6 @@ export function useBrowseMode() {
     playWord(startIdx);
   }, [stopListening]);
 
-  function open(words) {
-    setBrowseQueue(shuffle(words));
-    setBrowseIndex(0);
-  }
-
   function openWithListening(words) {
     const q = shuffle(words);
     setBrowseQueue(q);
@@ -106,7 +101,6 @@ export function useBrowseMode() {
     browseIndex,
     browseQueue,
     listening,
-    open,
     openWithListening,
     close,
     prev: browseIndex > 0 ? prev : null,

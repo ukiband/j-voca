@@ -64,6 +64,56 @@ body {
 html:has(dialog.kanji-modal[open], dialog.listening-modal[open]) { overflow: hidden; }
 .listening-modal::backdrop { background: rgb(2 6 23 / 70%); }
 
+dialog.listening-modal.is-touch-locked {
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  color: #94a3b8;
+  overflow: hidden;
+}
+.listening-screen-lock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: max(32px, env(safe-area-inset-top, 0px)) 24px max(40px, env(safe-area-inset-bottom, 0px));
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  -webkit-touch-callout: none;
+}
+.listening-unlock {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 360px;
+  min-height: 60px;
+  margin-top: 32px;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  background: #0f172a;
+  font-size: 14px;
+  touch-action: none;
+}
+.listening-unlock-progress {
+  position: absolute;
+  inset: 0;
+  background: #334155;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.listening-unlock.is-holding .listening-unlock-progress {
+  transform: scaleX(1);
+  transition: transform var(--hold-duration) linear;
+}
+
 .kanji-modal {
   --kanji-ink: #1e293b;
   --kanji-active: #7c3aed;

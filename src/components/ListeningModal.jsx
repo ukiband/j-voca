@@ -2,13 +2,19 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import KanjiText from './KanjiText';
 import KanjiModal from './KanjiModal';
+import ListeningScreenLock from './ListeningScreenLock';
 
 export default function ListeningModal({ player }) {
   const dialogRef = useRef(null);
   const startRef = useRef(null);
+  const lockRef = useRef(null);
+  const wasLockedRef = useRef(false);
+  const ignoreClicksUntilRef = useRef(0);
   const headingId = useId();
+  const lockHeadingId = useId();
   const timeId = useId();
   const [selectedKanji, setSelectedKanji] = useState(null);
+  const [locked, setLocked] = useState(false);
   const { settings, currentWord: word } = player;
   const japaneseFirst = settings.language === 'ja';
   const answerLanguage = japaneseFirst ? '한국어' : '일본어';
@@ -23,6 +29,19 @@ export default function ListeningModal({ player }) {
       if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
     };
   }, []);
+
+  useEffect(() => {
+    if (!locked && wasLockedRef.current) {
+      (lockRef.current?.disabled ? startRef.current : lockRef.current)?.focus({ preventScroll: true });
+    }
+    wasLockedRef.current = locked;
+  }, [locked]);
+
+  function unlock() {
+    // Ignore the click following pointerup; it must not reach the restored controls.
+    ignoreClicksUntilRef.current = Date.now() + 300;
+    setLocked(false);
+  }
 
   function selectKanji(character) {
     player.stop();
@@ -43,15 +62,25 @@ export default function ListeningModal({ player }) {
   }[player.phase];
 
   return createPortal(<>
-    <dialog ref={dialogRef} aria-labelledby={headingId}
-      className="listening-modal m-auto w-[calc(100%-24px)] max-w-lg max-h-[calc(100dvh-24px)] overflow-y-auto rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-0 text-slate-800 dark:text-slate-100"
-      onCancel={event => { event.preventDefault(); player.close(); }}
-      onClick={event => { if (event.target === event.currentTarget) player.close(); }}>
-      <div className="p-5 safe-bottom-min">
+    <dialog ref={dialogRef} aria-labelledby={locked ? lockHeadingId : headingId}
+      className={`listening-modal ${locked ? 'is-touch-locked' : ''} m-auto w-[calc(100%-24px)] max-w-lg max-h-[calc(100dvh-24px)] overflow-y-auto rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-0 text-slate-800 dark:text-slate-100`}
+      onCancel={event => { event.preventDefault(); if (locked) unlock(); else player.close(); }}
+      onClickCapture={event => {
+        if (Date.now() < ignoreClicksUntilRef.current) { event.preventDefault(); event.stopPropagation(); }
+      }}
+      onClick={event => { if (!locked && event.target === event.currentTarget) player.close(); }}>
+      <div hidden={locked} inert={locked} className="p-5 safe-bottom-min">
         <header className="flex items-center justify-between gap-2 mb-4">
           <h2 id={headingId} className="text-lg font-bold">듣기 학습</h2>
           <div className="flex items-center gap-2">
             <span className="text-sm text-slate-500 dark:text-slate-400 tabular-nums">{player.index + 1} / {player.queue.length}</span>
+            <button ref={lockRef} type="button" onClick={() => setLocked(true)} disabled={!player.playing}
+              className="flex h-11 w-11 shrink-0 items-center justify-center text-slate-500 dark:text-slate-400 disabled:opacity-30" aria-label="화면 잠금" title="화면 잠금">
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="11" rx="3" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
+            </button>
             <button type="button" onClick={player.close} className="min-h-11 px-2 text-sm text-slate-500 dark:text-slate-400" aria-label="듣기 닫기">닫기</button>
           </div>
         </header>
@@ -105,6 +134,7 @@ export default function ListeningModal({ player }) {
           <button type="button" onClick={player.next ?? undefined} disabled={!player.next} className="min-h-12 rounded-xl border border-slate-200 dark:border-slate-600 text-sm disabled:opacity-30">다음</button>
         </div>
       </div>
+      {locked && <ListeningScreenLock headingId={lockHeadingId} index={player.index} count={player.queue.length} status={status} onUnlock={unlock} />}
     </dialog>
     {selectedKanji && <KanjiModal character={selectedKanji} onClose={() => setSelectedKanji(null)} />}
   </>, document.body);

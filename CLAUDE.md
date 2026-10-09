@@ -18,10 +18,10 @@
 src/
 ├── components/    # React 컴포넌트 (Dashboard, ReviewSession, FlashCard 등)
 ├── hooks/         # useListeningMode 등
-├── lib/           # db.js, fsrs.js, review-utils.js, lesson-utils.js(step/chapter 헬퍼) 등 유틸리티
+├── lib/           # db.js, fsrs.js, app-update.js, review-utils.js, lesson-utils.js 등 유틸리티
 │   └── __tests__/ # Vitest 테스트
 ├── styles/        # Tailwind CSS
-├── main.jsx       # 엔트리 + 버전 체크
+├── main.jsx       # 엔트리 + 업데이트 감지 시작
 └── App.jsx        # 라우팅 + Lazy loading
 public/
 ├── data/words.json  # 단어 데이터 (정적 파일)
@@ -41,6 +41,7 @@ npm run test       # Vitest 테스트
 
 - 기능 개발은 `feature/{기능요약}` 브랜치에서 진행하고, 빌드/테스트/리뷰 통과 후 **PR 없이 main에 직접 머지**한다 (개인 앱이므로 리뷰어 승인 절차 불필요)
 - main push 시 GitHub Pages 배포가 자동 실행된다
+- 기능 추가·보완 후에는 `README.md`와 `CLAUDE.md`의 수정 필요성을 각각 검토한다. 사용법·사용자에게 보이는 동작·운영 안내가 달라지면 README를, 코드 구조·핵심 구현 원칙·개발 시 지켜야 할 제약이 달라지면 CLAUDE를 갱신한다. 이미 정확한 문서는 그대로 두고, 완료 보고에서 각 문서의 반영 여부를 알린다.
 
 ## 주요 패턴
 
@@ -52,7 +53,9 @@ npm run test       # Vitest 테스트
 - Gemini 모델은 사용자가 고르지 않고 `gemini.js`의 MODEL_CHAIN 순서(3.5-flash-lite → 3.8-flash → 2.5-flash)로 503/404/429 시 자동 대체. 프롬프트는 교재 하단 '단어' 칸 항목과 손글씨(단어·문장, 손글씨 뜻이 붙은 인쇄 표현)만 추출하도록 설계. 예문·회화문의 인쇄 단어는 제외
 - 예문은 words.json 과 분리된 `public/data/sentences.json`(Dexie `sentences` 테이블, PK `[wordId+date]`)에 두고 앱은 읽기만 한다. `.github/workflows/generate-sentences.yml`이 매일 KST 07시에 `scripts/generate-sentences.mjs`로 등록일(createdAt)이 최근 7일 안인 단어의 예문을 Gemini 로 새로 만들어 교체해 커밋한다. 단어당 예문은 1건이고, 등록 후 7일이 지난 단어는 건드리지 않는다. 실패하면 기존 문장 유지. 생성 결과를 커밋·푸시한 뒤 같은 job 에서 `scripts/check-sentences.mjs`가 검사 전 예문(`date`와 오늘의 날짜 차이 0~7일)과 숨긴 예문(`check.date`와 오늘의 날짜 차이 0~7일)을 Gemini 로 검사해, 틀리면 수정안을 재검사한 뒤 교체하고 못 고치면 숨겨 따로 커밋한다(검사가 실패해도 생성 결과는 남는다). 검사 요청은 평가를 거친 3.5-flash-lite 에만 `thinkingLevel: HIGH`를 쓰고(대체 모델은 기본 조정값), 틀림 판정은 어긴 기준(`criterion`)을 댄 행만 반영한다(`isUsableCheckRow`). 판정은 항목의 `check`(`{ date, ok: true }` 또는 `{ date, ok: false, problem }`)에 남긴다. `ok: false` 인 예문은 `filterUsableSentences`가 화면에서 뺀다. 숨긴 예문은 재검사까지 통과한 수정안으로 교체될 때만 바뀌고(`applyCheckResults`), `check.date`와 오늘의 날짜 차이가 7일을 넘으면 더 검사하지 않는다. 앱은 시작·화면 복귀·복습 진입 시 `sentence-sync.js`로 예문 파일을 조용히 다시 받고(10분 간격 제한), 단어 저장 직후에는 `triggerSentenceWorkflow()`로 배치를 즉시 실행한다(PAT 에 Actions 쓰기 권한 필요)
 - 예문의 목표 단어 강조는 문자열 검색이 아니라 생성 시 `sentence`·`reading` 양쪽에 넣은 `[[ ]]` 표식을 `parseHighlight()`로 풀어 그린다. 후리가나는 쓰지 않고 가나 읽기 줄을 따로 둔다. 순수 함수는 `src/lib/sentence-utils.js`(브라우저·Node 공용)
-- version.json 폴링으로 앱 업데이트 감지
+- 앱 업데이트 감지는 `src/lib/app-update.js`가 `version.json`의 `build`와 실행 중인 `__BUILD_TIME__`을 비교한다. `main.jsx`에서 앱 시작·화면 복귀(`visibilitychange`, `pageshow`, `focus`)·네트워크 복구(`online`) 시 확인을 연결하고, `Dashboard`는 홈 진입 시 추가로 확인한다. **주기적인 확인 타이머는 사용하지 않는다.** 개발 모드와 화면이 숨겨진 동안은 확인하지 않으며, 진행 중인 요청은 공유하고 10초가 지나면 취소해 다음 확인을 막지 않게 한다.
+- 업데이트 감지 결과는 모듈에 보관하고 `Dashboard`가 `useSyncExternalStore`로 구독해 홈을 열기 전에 감지한 결과도 표시한다. 배포 버전이 실행 중인 버전과 다를 때만 홈의 **지금 업데이트** 버튼을 표시한다. 이미 최신 버전으로 실행됐으면 버튼이 없는 것이 정상이다.
 - 효과음(복습 평가·동사 활용 '다음')은 오디오 파일 없이 `src/lib/sound.js`가 Web Audio 오실레이터로 만든다. iOS 는 사용자 탭 안에서만 AudioContext 를 만들거나 재개할 수 있으므로 `prepareSound()`를 탭 핸들러에서 동기적으로 부르고, 비동기 저장 뒤에는 `playNextSound()`만 부른다. 오디오 세션은 `playback`으로 두어 iOS 무음 스위치와 상관없이 음량 버튼으로만 조절된다(iOS 17+, 그 이하는 무음 스위치를 따름. 다른 앱 음악은 멈춤)
 - base path: `/j-voca/`
 - 듣기는 `useListeningMode`와 `ListeningModal`이 담당하며 복습용 `FlashCard`와 분리한다. `listening.js`가 발음 완료 → 생각할 시간 → 선택적 반대 언어 정답 → 다음 단어 순서를 관리한다. 세션 종료 시 타이머와 음성 콜백을 취소해 이전 재생이 새 세션에 끼어들지 않게 한다. 첫 `speak()`는 사용자 탭 안에서 동기 호출하고, 이후는 `onend` 체인으로 연결한다. 설정은 `listening-settings`에 저장한다.
+- 듣기 터치 잠금은 `ListeningModal`과 `ListeningScreenLock`의 화면 상태로만 관리하고 재생 세션을 멈추거나 다시 만들지 않는다. 잠금 중 일반 조작 영역은 `hidden`·`inert`로 막는다. 해제는 버튼을 2초간 누른 뒤 손을 뗄 때 처리하며, 이어지는 클릭도 차단해 아래 버튼이 눌리지 않게 한다. 재생 완료·오류가 나도 사용자가 해제할 때까지 잠금을 유지한다. 화면 꺼짐 방지는 재생 중 지원 기기에서만 시도하며, 휴대폰 자체 잠금이나 백그라운드 연속 재생을 보장하는 기능은 아니다.

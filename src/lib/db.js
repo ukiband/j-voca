@@ -8,6 +8,7 @@ function createDb() {
 
   d.version(3).stores({
     words: 'id, chapter, textbook, createdAt',
+    // wordId: 일본어는 숫자 ID, 한자는 kanji:step:chapter:字. 기존 백업 형식으로 함께 저장한다.
     reviews: 'wordId, due, last_review, state',
     reviewLogs: '++id, wordId, review_date, grade',
   });

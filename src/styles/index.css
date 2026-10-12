@@ -114,7 +114,7 @@ dialog.listening-modal.is-touch-locked {
   transition: transform var(--hold-duration) linear;
 }
 
-.kanji-modal {
+.kanji-modal, .kanji-review {
   --kanji-ink: #1e293b;
   --kanji-active: #7c3aed;
   --kanji-muted: #64748b;
@@ -122,6 +122,8 @@ dialog.listening-modal.is-touch-locked {
   --kanji-ghost: #e2e8f0;
   --kanji-surface: #f8fafc;
   --kanji-control: #e2e8f0;
+}
+.kanji-modal {
   position: fixed;
   inset: 0;
   width: calc(100% - 12px);
@@ -140,7 +142,7 @@ dialog.listening-modal.is-touch-locked {
 
 .kanji-modal[open] { display: flex; flex-direction: column; }
 .kanji-modal::backdrop { background: rgb(2 6 23 / 75%); }
-[data-theme="dark"] .kanji-modal {
+[data-theme="dark"] .kanji-modal, [data-theme="dark"] .kanji-review {
   --kanji-ink: #f1f5f9;
   --kanji-active: #a69aff;
   --kanji-muted: #94a3b8;
@@ -151,9 +153,9 @@ dialog.listening-modal.is-touch-locked {
 }
 
 .kanji-modal-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; }
-.kanji-modal-header h2 { font-size: clamp(15px, 4vw, 20px); font-weight: 700; white-space: nowrap; }
+.kanji-modal-header h1, .kanji-modal-header h2 { font-size: clamp(15px, 4vw, 20px); font-weight: 700; white-space: nowrap; }
 .kanji-modal-actions { display: flex; align-items: center; gap: 6px; }
-.kanji-modal-actions button {
+.kanji-modal-actions button, .kanji-review-close {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -198,6 +200,16 @@ dialog.listening-modal.is-touch-locked {
 .kanji-readings dt { font-size: 12px; color: var(--kanji-muted); flex-shrink: 0; }
 .kanji-readings dd { overflow-wrap: anywhere; }
 .kanji-attribution { flex-shrink: 0; font-size: 11px; margin-top: 14px; color: var(--kanji-muted); }
+
+.kanji-review { background: var(--kanji-surface); color: var(--kanji-ink); }
+.kanji-review-header { padding: max(12px, env(safe-area-inset-top, 0px)) 16px 0; }
+.kanji-review-context { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 12px 0 10px; color: var(--kanji-muted); font-size: 0.75rem; }
+.kanji-review-context > span:last-child { flex-shrink: 0; }
+.kanji-review-body .kanji-canvas { flex: 0 0 auto; height: clamp(140px, 32dvh, 300px); margin: 0 0 14px; }
+.kanji-review-body .kanji-details { max-height: none; overflow: visible; }
+.kanji-review-body .kanji-readings { display: grid; gap: 7px; }
+.kanji-review-front { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; padding: 24px 0; font-size: min(42vw, 170px); font-weight: 600; }
+.kanji-review-meaning { font-size: 2rem; overflow-wrap: anywhere; }
 @media (max-height: 480px) {
   .kanji-modal { padding-top: 8px; padding-bottom: 8px; }
   .kanji-details { padding-top: 6px; }

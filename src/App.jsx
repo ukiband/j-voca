@@ -102,6 +102,8 @@ export default function App() {
             <Route path="/words" element={<WordList />} />
             <Route path="/lesson-select" element={<LessonSelect />} />
             <Route path="/review" element={<ReviewSession />} />
+            <Route path="/kanji" element={<LessonSelect kind="kanji" />} />
+            <Route path="/kanji/review" element={<ReviewSession kind="kanji" />} />
             <Route path="/verb-practice" element={<VerbPractice />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

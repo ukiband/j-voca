@@ -1,6 +1,23 @@
 import { db } from './db';
 import { isDue } from './fsrs';
 import { getStep, lessonKey, isSameLesson } from './lesson-utils';
+import { buildKanjiItems, getKanjiReviews } from './kanji-review';
+import { shuffle } from './shuffle';
+
+export async function loadReviewData(kind = 'words') {
+  const [words, reviews] = await Promise.all([db.words.toArray(), db.reviews.toArray()]);
+  if (kind === 'kanji') {
+    const items = buildKanjiItems(words);
+    return { items, reviews: getKanjiReviews(items, reviews) };
+  }
+  return { items: words, reviews };
+}
+
+export function orderReviewItems(items, order) {
+  return order === 'sequential'
+    ? [...items].sort((a, b) => (a.position ?? a.id) - (b.position ?? b.id))
+    : shuffle(items);
+}
 
 /**
  * 복습 대상 단어를 반환한다.
@@ -8,12 +25,13 @@ import { getStep, lessonKey, isSameLesson } from './lesson-utils';
  * step이 null이면 1로 간주한다 (step 도입 전 URL/데이터 호환).
  */
 export async function getDueWords(step, chapter, tag) {
-  const allReviews = await db.reviews.toArray();
-  const dueReviews = allReviews.filter(r => isDue(r));
-  if (dueReviews.length === 0) return [];
+  return getDueItems('words', step, chapter, tag);
+}
 
-  const wordIds = dueReviews.map(r => r.wordId);
-  const words = await db.words.where('id').anyOf(wordIds).toArray();
+export async function getDueItems(kind, step, chapter, tag) {
+  const { items, reviews } = await loadReviewData(kind);
+  const dueIds = new Set(reviews.filter(isDue).map(review => review.wordId));
+  const words = items.filter(item => dueIds.has(item.id));
 
   if (chapter != null) {
     const targetStep = step ?? 1;

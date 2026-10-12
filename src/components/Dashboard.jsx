@@ -95,6 +95,16 @@ export default function Dashboard() {
         </div>
       </Link>
 
+      <Link to="/kanji" className="block rounded-2xl p-4 border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/50">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="font-bold text-indigo-700 dark:text-indigo-300">한자 복습</p>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Step·Lesson별 한자 학습</p>
+          </div>
+          <span className="text-xl text-indigo-500" aria-hidden="true">→</span>
+        </div>
+      </Link>
+
       {words.length === 0 && (
         <div className="text-center py-12 text-slate-400">
           <p className="text-lg mb-2">아직 단어가 없습니다</p>

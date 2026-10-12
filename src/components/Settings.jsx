@@ -203,7 +203,7 @@ export default function Settings() {
       <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
         <h2 className="font-medium text-slate-700 dark:text-slate-200">학습 기록 백업</h2>
         <p className="text-xs text-slate-400">
-          복습 기록은 브라우저에 저장됩니다. 정기적으로 백업하세요.
+          일본어·한자 복습 기록은 브라우저에 저장됩니다. 정기적으로 백업하세요.
         </p>
         <button
           onClick={handleExport}

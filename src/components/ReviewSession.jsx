@@ -302,7 +302,8 @@ function Session({ kind }) {
             </>}
           </div>
         ) : flipped ? (
-          <KanjiContent key={currentIndex} character={currentWord.kanjiId} data={kanji.data} status={kanji.status} replay={replay} />
+          <KanjiContent key={currentIndex} character={currentWord.kanjiId} data={kanji.data} status={kanji.status} replay={replay}
+            context={currentWord} sourceWords={currentWord.sourceWords} />
         ) : (
           <button type="button" onClick={handleFlip} className={`kanji-review-front ${reverse ? 'kanji-review-meaning' : ''}`} aria-label={`${reverse ? kanji.data.meaningsKo[0] : currentWord.kanjiId}, 정답 확인`}>
             <span lang={reverse ? 'ko' : 'ja'}>{reverse ? kanji.data.meaningsKo[0] : currentWord.kanjiId}</span>

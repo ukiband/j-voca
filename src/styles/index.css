@@ -199,7 +199,19 @@ dialog.listening-modal.is-touch-locked {
 .kanji-readings div { display: flex; align-items: baseline; gap: 9px; min-width: 0; }
 .kanji-readings dt { font-size: 12px; color: var(--kanji-muted); flex-shrink: 0; }
 .kanji-readings dd { overflow-wrap: anywhere; }
-.kanji-attribution { flex-shrink: 0; font-size: 11px; margin-top: 14px; color: var(--kanji-muted); }
+.kanji-study { margin-top: 14px; }
+.kanji-study h4 { font-size: 0.75rem; color: var(--kanji-muted); }
+.kanji-study > .kanji-readings { color: var(--kanji-active); font-weight: 600; }
+.kanji-source-words { list-style: none; padding: 0; margin: 12px 0 0; }
+.kanji-source-words li { padding: 9px 0; border-top: 1px solid var(--kanji-line); overflow-wrap: anywhere; }
+.kanji-source-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; font-weight: 600; }
+.kanji-source-badge { color: var(--kanji-active); font-size: 0.7rem; white-space: nowrap; }
+.kanji-source-reading { color: var(--kanji-active); margin-top: 2px; }
+.kanji-source-meaning, .kanji-reading-note { color: var(--kanji-muted); font-size: 0.75rem; margin-top: 3px; }
+.kanji-dictionary { margin-top: 10px; border-top: 1px solid var(--kanji-line); }
+.kanji-dictionary summary { padding: 12px 0; min-height: 44px; color: var(--kanji-muted); font-size: 0.8rem; cursor: pointer; }
+.kanji-dictionary .kanji-readings { margin: 0 0 10px; }
+.kanji-modal .kanji-details { max-height: 46%; }
 
 .kanji-review { background: var(--kanji-surface); color: var(--kanji-ink); }
 .kanji-review-header { padding: max(12px, env(safe-area-inset-top, 0px)) 16px 0; }
@@ -213,5 +225,4 @@ dialog.listening-modal.is-touch-locked {
 @media (max-height: 480px) {
   .kanji-modal { padding-top: 8px; padding-bottom: 8px; }
   .kanji-details { padding-top: 6px; }
-  .kanji-attribution { margin-top: 6px; }
 }

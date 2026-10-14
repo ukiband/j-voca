@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { speak } from '../lib/speech';
-import { parseHighlight } from '../lib/sentence-utils';
+import { parseHighlight, stripHighlight } from '../lib/sentence-utils';
 import KanjiText from './KanjiText';
 import KanjiModal from './KanjiModal';
 
 /** [[ ]] 로 표시된 목표 단어 부분만 굵게·남색으로 그린다 */
 function HighlightedText({ text, onSelect }) {
-  return parseHighlight(text).map((seg, i) =>
-    seg.highlight
-      ? <span key={i} className="font-bold text-indigo-700 dark:text-indigo-300">{onSelect ? <KanjiText text={seg.text} onSelect={onSelect} /> : seg.text}</span>
-      : <span key={i}>{onSelect ? <KanjiText text={seg.text} onSelect={onSelect} /> : seg.text}</span>
-  );
+  let offset = 0;
+  return parseHighlight(text).map((seg, i) => {
+    const start = offset;
+    offset += [...seg.text].length;
+    return <span key={i} className={seg.highlight ? 'font-bold text-indigo-700 dark:text-indigo-300' : undefined}>
+      {onSelect ? <KanjiText text={seg.text} onSelect={(character, index) => onSelect(character, start + index)} /> : seg.text}
+    </span>;
+  });
 }
 
 /**
@@ -21,8 +24,11 @@ function HighlightedText({ text, onSelect }) {
 export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) {
   const [selected, setSelected] = useState(null);
   const cardKey = `${word.id}:${word.word}`;
-  function selectKanji(character) {
-    setSelected({ character, cardKey });
+  function selectKanji(character, characterIndex, fromSentence = false) {
+    const source = fromSentence
+      ? { word: stripHighlight(sentence.sentence), reading: stripHighlight(sentence.reading), meaning: sentence.meaning, characterIndex }
+      : { ...word, characterIndex };
+    setSelected({ character, cardKey, source, fromSentence });
   }
   if (!flipped) {
     // 앞면: 단어(역방향이면 뜻) 하나만 본문 가운데에 크게. flex-1 로 본문 영역을 꽉 채우므로 본문 어디를 탭해도 뒤집힌다
@@ -62,13 +68,14 @@ export default function FlashCard({ word, sentence, reverse, flipped, onFlip }) 
       {/* 예문이 없는 카드는 구분선도 빈 공간도 두지 않는다. 하단 버튼 위치는 부모가 고정하므로 여기 높이는 자유롭다 */}
       {sentence && (
         <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 space-y-1">
-          <p className="text-[1.4rem] leading-[1.6] text-slate-800 dark:text-slate-100 jp-text"><HighlightedText text={sentence.sentence} onSelect={selectKanji} /></p>
+          <p className="text-[1.4rem] leading-[1.6] text-slate-800 dark:text-slate-100 jp-text"><HighlightedText text={sentence.sentence} onSelect={(character, index) => selectKanji(character, index, true)} /></p>
           <p className="text-[1.4rem] leading-[1.6] text-slate-500 dark:text-slate-400 jp-text"><HighlightedText text={sentence.reading} /></p>
           <p className="text-[1rem] text-slate-600 dark:text-slate-300 pt-1">{sentence.meaning}</p>
         </div>
       )}
       {selected?.cardKey === cardKey && (
-        <KanjiModal key={selected.character} character={selected.character} onClose={() => setSelected(null)} />
+        <KanjiModal key={selected.character} character={selected.character} contextWord={word} currentSource={selected.source}
+          sourceLabel={selected.fromSentence ? '현재 예문' : '현재 단어'} onClose={() => setSelected(null)} />
       )}
     </div>
   );

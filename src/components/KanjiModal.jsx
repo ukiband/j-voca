@@ -1,15 +1,24 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from '../lib/db';
+import { isValidLessonNumber } from '../lib/lesson-utils';
 import { useKanjiData } from '../hooks/useKanjiData';
 import KanjiContent, { KanjiReplayButton } from './KanjiContent';
 
-export default function KanjiModal({ character, onClose }) {
+export default function KanjiModal({ character, contextWord, currentSource = contextWord, sourceLabel, onClose }) {
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const headingId = useId();
   const descriptionId = useId();
   const { data, status, retry } = useKanjiData(character);
   const [replay, setReplay] = useState(0);
+  const chapter = contextWord?.chapter;
+  const sourceWords = useLiveQuery(async () => {
+    if (!isValidLessonNumber(chapter)) return [];
+    try { return await db.words.where('chapter').equals(chapter).toArray(); }
+    catch { return []; } // 현재 단어는 DB 조회가 실패해도 표시한다.
+  }, [chapter]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -54,7 +63,8 @@ export default function KanjiModal({ character, onClose }) {
         </div>
       </header>
 
-      <KanjiContent key={character} character={character} data={data} status={status} replay={replay} descriptionId={descriptionId} />
+      <KanjiContent key={character} character={character} data={data} status={status} replay={replay} descriptionId={descriptionId}
+        context={contextWord} currentSource={currentSource} sourceLabel={sourceLabel} sourceWords={sourceWords} sourcesLoading={!sourceWords} />
     </dialog>,
     document.body,
   );

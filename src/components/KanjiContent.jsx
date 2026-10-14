@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { formatKanjiReading } from '../lib/kanji';
 import { playKanjiStrokes } from '../lib/kanji-animation';
+import KanjiReadings from './KanjiReadings';
 
 export function KanjiReplayButton({ onClick, disabled }) {
   return <button type="button" className="kanji-replay" onClick={onClick} aria-label="획순 다시 보기" disabled={disabled}>
@@ -9,7 +9,7 @@ export function KanjiReplayButton({ onClick, disabled }) {
   </button>;
 }
 
-export default function KanjiContent({ character, data, status, replay = 0, descriptionId }) {
+export default function KanjiContent({ character, data, status, replay = 0, descriptionId, sourceWords, context, currentSource, sourceLabel, sourcesLoading }) {
   const svgRef = useRef(null);
   const [stroke, setStroke] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -62,13 +62,10 @@ export default function KanjiContent({ character, data, status, replay = 0, desc
         </div>
         {!data.meaningsKo.length && <p className="kanji-secondary-meaning">뜻 (영어)</p>}
         {data.meaningsKo.length > 1 && <p className="kanji-secondary-meaning">{data.meaningsKo.slice(1).join(' · ')}</p>}
-        <dl className="kanji-readings">
-          {data.kun.length > 0 && <div><dt>훈독</dt><dd lang="ja">{data.kun.slice(0, 3).map(formatKanjiReading).join(' · ')}</dd></div>}
-          {data.on.length > 0 && <div><dt>음독</dt><dd lang="ja">{data.on.slice(0, 3).join(' · ')}</dd></div>}
-        </dl>
+        <KanjiReadings character={character} data={data} sourceWords={sourceWords} context={context}
+          currentSource={currentSource} sourceLabel={sourceLabel} sourcesLoading={sourcesLoading} />
       </>}
     </div>
-    <p className="kanji-attribution">획순 KanjiVG · 뜻·읽기 KANJIDIC2 / libhangul</p>
     <span className="sr-only" role="status">{finished ? `${character}의 획순 재생이 끝났습니다.` : ''}</span>
   </>;
 }

@@ -43,9 +43,9 @@ export default function ListeningModal({ player }) {
     setLocked(false);
   }
 
-  function selectKanji(character) {
+  function selectKanji(character, characterIndex) {
     player.stop();
-    setSelectedKanji(character);
+    setSelectedKanji({ character, source: { ...word, characterIndex } });
   }
 
   function japaneseWord() {
@@ -136,6 +136,7 @@ export default function ListeningModal({ player }) {
       </div>
       {locked && <ListeningScreenLock headingId={lockHeadingId} index={player.index} count={player.queue.length} status={status} onUnlock={unlock} />}
     </dialog>
-    {selectedKanji && <KanjiModal character={selectedKanji} onClose={() => setSelectedKanji(null)} />}
+    {selectedKanji && <KanjiModal character={selectedKanji.character} contextWord={selectedKanji.source}
+      onClose={() => setSelectedKanji(null)} />}
   </>, document.body);
 }

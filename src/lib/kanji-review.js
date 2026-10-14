@@ -13,10 +13,11 @@ export function buildKanjiItems(words) {
     const step = getStep(word);
     const chapter = word.chapter;
     if (!isValidLessonNumber(step) || !isValidLessonNumber(chapter)) continue;
-    for (const kanjiId of word.word ?? '') {
+    for (const kanjiId of new Set(word.word ?? '')) {
       if (!isKanji(kanjiId)) continue;
       const id = kanjiReviewId(step, chapter, kanjiId);
-      if (!items.has(id)) items.set(id, { id, kanjiId, step, chapter, position: items.size });
+      if (!items.has(id)) items.set(id, { id, kanjiId, step, chapter, position: items.size, sourceWords: [] });
+      items.get(id).sourceWords.push(word);
     }
   }
   return [...items.values()];

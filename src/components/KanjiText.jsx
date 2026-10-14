@@ -11,7 +11,7 @@ export default function KanjiText({ text, onSelect }) {
       aria-haspopup="dialog"
       onClick={event => {
         event.stopPropagation();
-        onSelect(character);
+        onSelect(character, index);
       }}
     >{character}</button>
   ) : character);

@@ -18,7 +18,8 @@ describe('레슨별 한자 학습 대상', () => {
     ];
     const items = buildKanjiItems(words);
     expect(items.map(item => item.kanjiId)).toEqual(['食', '事', '人']);
-    expect(items[0]).toEqual({ id: 'kanji:1:1:食', kanjiId: '食', step: 1, chapter: 1, position: 0 });
+    expect(items[0]).toEqual({ id: 'kanji:1:1:食', kanjiId: '食', step: 1, chapter: 1, position: 0, sourceWords: [words[1], words[0]] });
+    expect(items[2].sourceWords).toEqual([words[2]]);
     expect(words.map(word => word.id)).toEqual([2, 1, 3]);
   });
 
@@ -86,6 +87,8 @@ describe('공유 복습 엔진의 학습 종류 분리', () => {
     expect((await getDueItems('kanji', 1, 2)).map(item => item.id)).toEqual(['kanji:1:2:食']);
     expect((await getDueItems('kanji', 2, 1)).map(item => item.id)).toEqual(['kanji:2:1:食']);
     const kanji = await loadReviewData('kanji');
+    expect(kanji.items.find(item => item.id === 'kanji:1:2:食').sourceWords).toEqual([words[1]]);
+    expect(kanji.items.find(item => item.id === 'kanji:2:1:食').sourceWords).toEqual([words[2]]);
     expect(getDueCountByLesson(kanji.items, kanji.reviews)).toEqual({
       '1-1': { step: 1, chapter: 1, total: 1, reconfirm: 0 },
       '1-2': { step: 1, chapter: 2, total: 1, reconfirm: 0 },

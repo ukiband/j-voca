@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { formatKanjiReading } from '../lib/kanji';
 import { getKanjiSourceWords, readingKey } from '../lib/kanji-readings';
-import { formatLesson, getStep } from '../lib/lesson-utils';
 import { useKanjiReadings } from '../hooks/useKanjiReadings';
 
 const EMPTY_WORDS = [];
@@ -19,7 +18,6 @@ export default function KanjiReadings({ character, data, sourceWords = EMPTY_WOR
   const other = Object.fromEntries(['kun', 'on'].map(kind => [kind, data[kind].filter(reading => !study[kind].includes(readingKey(reading)))]));
   const loading = sourcesLoading || study.loading;
   return <section className="kanji-study">
-    <h4>{context?.chapter ? `${formatLesson(getStep(context), context.chapter)} · 학습 읽기` : '학습 읽기'}</h4>
     <Readings kun={study.kun} on={study.on} />
     {loading && <p className="kanji-reading-note" role="status">학습 읽기를 확인하는 중…</p>}
     {!loading && words.length === 0 && <p className="kanji-reading-note">이 레슨에 등록된 학습 단어가 없어요.</p>}

@@ -199,8 +199,6 @@ dialog.listening-modal.is-touch-locked {
 .kanji-readings div { display: flex; align-items: baseline; gap: 9px; min-width: 0; }
 .kanji-readings dt { font-size: 12px; color: var(--kanji-muted); flex-shrink: 0; }
 .kanji-readings dd { overflow-wrap: anywhere; }
-.kanji-study { margin-top: 14px; }
-.kanji-study h4 { font-size: 0.75rem; color: var(--kanji-muted); }
 .kanji-study > .kanji-readings { color: var(--kanji-active); font-weight: 600; }
 .kanji-source-words { list-style: none; padding: 0; margin: 12px 0 0; }
 .kanji-source-words li { padding: 9px 0; border-top: 1px solid var(--kanji-line); overflow-wrap: anywhere; }

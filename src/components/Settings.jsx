@@ -5,6 +5,7 @@ import { getGithubToken, setGithubToken, hasGithubToken, resetWordsInRepo } from
 import { exportData, importReviews, clearAllReviews, clearAllData, ensureReviewsExist } from '../lib/db';
 import { THEME_OPTIONS, getThemePreference, setThemePreference, subscribeToTheme } from '../lib/theme';
 import { getDateTimePopupEnabled, setDateTimePopupEnabled } from '../lib/date-time-practice';
+import { KANJI_DRAW_SPEEDS, loadKanjiDrawingSettings, saveKanjiDrawingSettings } from '../lib/kanji-settings';
 
 const FONT_SIZES = [
   { id: 'base', label: '보통' },
@@ -27,6 +28,7 @@ function ExtLink({ href, children }) {
 export default function Settings() {
   const theme = useSyncExternalStore(subscribeToTheme, getThemePreference);
   const [dateTimePopupEnabled, setDateTimePopupEnabledState] = useState(getDateTimePopupEnabled);
+  const [kanjiDrawing, setKanjiDrawing] = useState(loadKanjiDrawingSettings);
   const [apiKey, setApiKeyState] = useState(getApiKey());
   const [githubToken, setGithubTokenState] = useState(getGithubToken());
   const [fontSize, setFontSizeState] = useState(localStorage.getItem('font-size') || 'base');
@@ -36,6 +38,10 @@ export default function Settings() {
     setFontSizeState(size);
     localStorage.setItem('font-size', size);
     document.documentElement.className = `font-${size}`;
+  }
+
+  function changeKanjiDrawing(patch) {
+    setKanjiDrawing(saveKanjiDrawingSettings({ ...kanjiDrawing, ...patch }));
   }
 
   function showMessage(msg, section = '') {
@@ -136,6 +142,31 @@ export default function Settings() {
         </label>
         <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">홈에서 질문을 표시하고, 닫으면 1시간 동안 숨깁니다.</p>
       </div>
+
+      <section className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3" aria-labelledby="kanji-drawing-heading">
+        <h2 id="kanji-drawing-heading" className="font-medium text-slate-700 dark:text-slate-200">한자 그리기</h2>
+        <label className="flex items-center justify-between gap-4 min-h-11 cursor-pointer">
+          <span className="text-sm text-slate-700 dark:text-slate-200">자동 그리기</span>
+          <input type="checkbox" role="switch" checked={kanjiDrawing.autoDraw}
+            onChange={event => changeKanjiDrawing({ autoDraw: event.target.checked })}
+            className="appearance-none relative shrink-0 w-11 h-6 rounded-full bg-slate-300 dark:bg-slate-600 checked:bg-indigo-600 dark:checked:bg-indigo-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-5 after:h-5 after:rounded-full after:bg-white checked:after:translate-x-5" />
+        </label>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          켜면 한자 카드를 뒤집거나 팝업을 열 때 획순을 한 번 그립니다. 끄면 완성된 한자를 바로 보여주며, 다시 보기로 재생할 수 있어요.
+        </p>
+        <fieldset className="space-y-2">
+          <legend className="text-sm text-slate-700 dark:text-slate-200">그리기 속도</legend>
+          <div className="grid grid-cols-3 gap-2">
+            {KANJI_DRAW_SPEEDS.map(option => <label key={option.id} className="cursor-pointer">
+              <input type="radio" name="kanji-drawing-speed" value={option.id}
+                checked={kanjiDrawing.speed === option.id} onChange={() => changeKanjiDrawing({ speed: option.id })}
+                className="peer sr-only" />
+              <span className="flex min-h-11 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-300 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-indigo-400">{option.label}</span>
+            </label>)}
+          </div>
+        </fieldset>
+        <p className="text-xs text-slate-500 dark:text-slate-400">속도는 다시 보기에도 적용됩니다.</p>
+      </section>
 
       <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-700/70 space-y-3">
         <h2 className="font-medium text-slate-700 dark:text-slate-200">Gemini API</h2>

@@ -1,29 +1,43 @@
+import { kanjiDrawingTimeScale } from './kanji-settings';
+
 const LEAD_MS = 300;
 const DRAW_MS = 650;
 const GAP_MS = 210;
 
-export function strokeAnimationDuration(count) {
-  return count > 0 ? LEAD_MS + (count - 1) * (DRAW_MS + GAP_MS) + DRAW_MS : 0;
+export function strokeAnimationDuration(count, speed = 'medium') {
+  return count > 0 ? (LEAD_MS + (count - 1) * (DRAW_MS + GAP_MS) + DRAW_MS) * kanjiDrawingTimeScale(speed) : 0;
 }
 
-export function strokeAnimationFrame(elapsed, count) {
+export function strokeAnimationFrame(elapsed, count, speed = 'medium') {
+  const finished = elapsed >= strokeAnimationDuration(count, speed);
+  const drawingTime = elapsed / kanjiDrawingTimeScale(speed);
   const progress = Array.from({ length: count }, (_, index) =>
-    Math.min(1, Math.max(0, (elapsed - LEAD_MS - index * (DRAW_MS + GAP_MS)) / DRAW_MS)));
+    finished ? 1 : Math.min(1, Math.max(0, (drawingTime - LEAD_MS - index * (DRAW_MS + GAP_MS)) / DRAW_MS)));
   return {
     progress,
     current: progress.filter(value => value > 0).length,
-    finished: elapsed >= strokeAnimationDuration(count),
+    finished,
   };
 }
 
-/** Plays once. The returned cleanup cancels frames and visibility listeners. */
-export function playKanjiStrokes({ paths, pen, onProgress, onComplete }) {
+export function playKanjiStrokes({ paths, pen, onProgress, onComplete, animate = true, speed = 'medium' }) {
+  if (!animate) {
+    paths.forEach(path => {
+      path.style.strokeDashoffset = '0';
+      path.style.visibility = 'visible';
+      path.style.stroke = 'var(--kanji-ink)';
+    });
+    pen.setAttribute('visibility', 'hidden');
+    onProgress(paths.length);
+    return () => {};
+  }
+  const duration = strokeAnimationDuration(paths.length, speed);
   const lengths = paths.map(path => path.getTotalLength());
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0, elapsed = 0, previousTime = null, lastCount = -1, disposed = false;
 
   function paint() {
-    const state = strokeAnimationFrame(elapsed, paths.length);
+    const state = strokeAnimationFrame(elapsed, paths.length, speed);
     let active = -1;
     paths.forEach((path, index) => {
       const progress = state.progress[index];
@@ -48,7 +62,7 @@ export function playKanjiStrokes({ paths, pen, onProgress, onComplete }) {
 
   function tick(now) {
     if (disposed || document.hidden) return;
-    if (previousTime !== null) elapsed = Math.min(strokeAnimationDuration(paths.length), elapsed + Math.min(now - previousTime, 80));
+    if (previousTime !== null) elapsed = Math.min(duration, elapsed + Math.min(now - previousTime, 80));
     previousTime = now;
     if (paint()) {
       frame = 0;
@@ -60,7 +74,7 @@ export function playKanjiStrokes({ paths, pen, onProgress, onComplete }) {
     cancelAnimationFrame(frame);
     frame = 0;
     previousTime = null;
-    if (!document.hidden && !disposed && elapsed < strokeAnimationDuration(paths.length)) frame = requestAnimationFrame(tick);
+    if (!document.hidden && !disposed && elapsed < duration) frame = requestAnimationFrame(tick);
   }
 
   paint();

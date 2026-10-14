@@ -1,5 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { playKanjiStrokes } from '../lib/kanji-animation';
+import { loadKanjiDrawingSettings } from '../lib/kanji-settings';
 import KanjiReadings from './KanjiReadings';
 
 export function KanjiReplayButton({ onClick, disabled }) {
@@ -13,6 +14,8 @@ export default function KanjiContent({ character, data, status, replay = 0, desc
   const svgRef = useRef(null);
   const [stroke, setStroke] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [drawing] = useState(loadKanjiDrawingSettings);
+  const replayAtMount = useRef(replay);
 
   useLayoutEffect(() => {
     if (!data) return;
@@ -22,7 +25,7 @@ export default function KanjiContent({ character, data, status, replay = 0, desc
     svg.setAttribute('viewBox', `${box.x - padding} ${box.y - padding} ${box.width + padding * 2} ${box.height + padding * 2}`);
   }, [data]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!data) return;
     setFinished(false);
     return playKanjiStrokes({
@@ -30,8 +33,10 @@ export default function KanjiContent({ character, data, status, replay = 0, desc
       pen: svgRef.current.querySelector('[data-kanji-pen]'),
       onProgress: setStroke,
       onComplete: () => setFinished(true),
+      animate: drawing.autoDraw || replay !== replayAtMount.current,
+      speed: drawing.speed,
     });
-  }, [data, replay]);
+  }, [data, replay, drawing]);
 
   return <>
     <div className="kanji-canvas" onClick={event => event.stopPropagation()}

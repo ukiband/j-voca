@@ -1,5 +1,5 @@
 {
-  "lastId": 1087,
+  "lastId": 1089,
   "words": [
     {
       "word": "おおい",
@@ -12759,6 +12759,28 @@
       "verbGroup": null,
       "isDictionaryForm": false,
       "potentialAllowed": false
+    },
+    {
+      "word": "さいごに",
+      "reading": "さいごに",
+      "meaning": "마지막에, 마지막으로",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-21",
+      "id": 1088
+    },
+    {
+      "word": "さいしょに",
+      "reading": "さいしょに",
+      "meaning": "처음에, 처음으로",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-21",
+      "id": 1089
     }
   ]
 }

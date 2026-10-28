@@ -1,5 +1,5 @@
 {
-  "lastId": 1103,
+  "lastId": 1104,
   "words": [
     {
       "word": "おおい",
@@ -12890,6 +12890,17 @@
       "textbook": "일본어수업",
       "createdAt": "2026-10-28",
       "id": 1103
+    },
+    {
+      "word": "一回",
+      "reading": "いっかい",
+      "meaning": "한번 더",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1104
     }
   ]
 }

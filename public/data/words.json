@@ -1,5 +1,5 @@
 {
-  "lastId": 1091,
+  "lastId": 1099,
   "words": [
     {
       "word": "おおい",
@@ -12734,6 +12734,112 @@
       "textbook": "일본어수업",
       "createdAt": "2026-10-28",
       "id": 1091
+    },
+    {
+      "word": "貸す",
+      "reading": "かす",
+      "meaning": "빌려주다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1092,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "質問",
+      "reading": "しつもん",
+      "meaning": "질문",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1093
+    },
+    {
+      "word": "答える",
+      "reading": "こたえる",
+      "meaning": "대답하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1094,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "気を付ける",
+      "reading": "きをつける",
+      "meaning": "조심하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1095,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
+    },
+    {
+      "word": "来年",
+      "reading": "らいねん",
+      "meaning": "내년",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1096
+    },
+    {
+      "word": "安心する",
+      "reading": "あんしんする",
+      "meaning": "안심하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1097,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "かす",
+      "reading": "かす",
+      "meaning": "빌려주다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1098,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "かりる",
+      "reading": "かりる",
+      "meaning": "빌리다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1099,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 1089,
+  "lastId": 1091,
   "words": [
     {
       "word": "おおい",
@@ -12709,6 +12709,31 @@
       "textbook": "일본어수업",
       "createdAt": "2026-10-21",
       "id": 1089
+    },
+    {
+      "word": "困る",
+      "reading": "こまる",
+      "meaning": "난처하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1090,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "時間",
+      "reading": "じかん",
+      "meaning": "시간",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1091
     }
   ]
 }

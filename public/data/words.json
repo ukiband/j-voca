@@ -1,5 +1,5 @@
 {
-  "lastId": 1104,
+  "lastId": 1105,
   "words": [
     {
       "word": "おおい",
@@ -12901,6 +12901,20 @@
       "textbook": "일본어수업",
       "createdAt": "2026-10-28",
       "id": 1104
+    },
+    {
+      "word": "着く",
+      "reading": "つく",
+      "meaning": "닿다, 도착하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 2,
+      "textbook": "일본어수업",
+      "createdAt": "2026-10-28",
+      "id": 1105,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     }
   ]
 }

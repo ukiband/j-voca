@@ -1,5 +1,5 @@
 {
-  "lastId": 1111,
+  "lastId": 1117,
   "words": [
     {
       "word": "おおい",
@@ -12993,6 +12993,81 @@
       "verbGroup": 1,
       "isDictionaryForm": true,
       "potentialAllowed": false
+    },
+    {
+      "word": "車を止める",
+      "reading": "くるまをとめる",
+      "meaning": "차를 세우다, 주차하다",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1112
+    },
+    {
+      "word": "物を盗む",
+      "reading": "ものをぬすむ",
+      "meaning": "물건을 훔치다",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1113
+    },
+    {
+      "word": "スカートをはく",
+      "reading": "スカートをはく",
+      "meaning": "치마를 입다",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1114
+    },
+    {
+      "word": "きる",
+      "reading": "きる",
+      "meaning": "(상의를) 입다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1115,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "はく",
+      "reading": "はく",
+      "meaning": "(하의를) 입다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1116,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "はく",
+      "reading": "はく",
+      "meaning": "(신발을) 신다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1117,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "lastId": 1109,
+  "lastId": 1111,
   "words": [
     {
       "word": "おおい",
@@ -12965,6 +12965,34 @@
       "verbGroup": 2,
       "isDictionaryForm": true,
       "potentialAllowed": true
+    },
+    {
+      "word": "とめる",
+      "reading": "とめる",
+      "meaning": "멈추다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1110,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "とまる",
+      "reading": "とまる",
+      "meaning": "멈추다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1111,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
     }
   ]
 }

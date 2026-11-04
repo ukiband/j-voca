@@ -1,5 +1,5 @@
 {
-  "lastId": 1117,
+  "lastId": 1125,
   "words": [
     {
       "word": "おおい",
@@ -13068,6 +13068,100 @@
       "verbGroup": 1,
       "isDictionaryForm": true,
       "potentialAllowed": true
+    },
+    {
+      "word": "お客さん",
+      "reading": "おきゃくさん",
+      "meaning": "손님",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1118
+    },
+    {
+      "word": "店長",
+      "reading": "てんちょう",
+      "meaning": "점장님",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1119
+    },
+    {
+      "word": "昼ご飯",
+      "reading": "ひるごはん",
+      "meaning": "점심",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1120
+    },
+    {
+      "word": "休憩する",
+      "reading": "きゅうけいする",
+      "meaning": "쉬다 (도중에 쉬는 느낌)",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1121,
+      "verbGroup": 3,
+      "isDictionaryForm": true,
+      "potentialAllowed": false
+    },
+    {
+      "word": "作り方",
+      "reading": "つくりかた",
+      "meaning": "만드는 법",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1122
+    },
+    {
+      "word": "簡単だ",
+      "reading": "かんたんだ",
+      "meaning": "간단하다",
+      "pos": "な형용사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1123
+    },
+    {
+      "word": "やすむ",
+      "reading": "やすむ",
+      "meaning": "쉬다 (완전히 끝나고 쉬는 느낌)",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1124,
+      "verbGroup": 1,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "仕事",
+      "reading": "しごと",
+      "meaning": "일",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-04",
+      "id": 1125
     }
   ]
 }

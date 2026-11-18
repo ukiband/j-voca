@@ -1,5 +1,5 @@
 {
-  "lastId": 1174,
+  "lastId": 1182,
   "words": [
     {
       "word": "おおい",
@@ -13764,6 +13764,100 @@
       "textbook": "일본어수업",
       "createdAt": "2026-11-18",
       "id": 1174
+    },
+    {
+      "word": "止める",
+      "reading": "とめる",
+      "meaning": "멈추다, 주차하다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1175,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
+    },
+    {
+      "word": "鉛筆",
+      "reading": "えんぴつ",
+      "meaning": "연필",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1176
+    },
+    {
+      "word": "席",
+      "reading": "せき",
+      "meaning": "자리",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1177
+    },
+    {
+      "word": "エアコンをつける",
+      "reading": "エアコンをつける",
+      "meaning": "에어컨을 켜다",
+      "pos": "기타",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1178
+    },
+    {
+      "word": "また",
+      "reading": "また",
+      "meaning": "또, 다시",
+      "pos": "부사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1179
+    },
+    {
+      "word": "鉛筆",
+      "reading": "えんぴつ",
+      "meaning": "연필",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1180
+    },
+    {
+      "word": "席",
+      "reading": "せき",
+      "meaning": "자리",
+      "pos": "명사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1181
+    },
+    {
+      "word": "つける",
+      "reading": "つける",
+      "meaning": "(전기기구를) 켜다",
+      "pos": "동사",
+      "step": 2,
+      "chapter": 3,
+      "textbook": "일본어수업",
+      "createdAt": "2026-11-19",
+      "id": 1182,
+      "verbGroup": 2,
+      "isDictionaryForm": true,
+      "potentialAllowed": true
     }
   ]
 }

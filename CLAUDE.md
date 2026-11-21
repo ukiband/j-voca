@@ -37,6 +37,8 @@ npm run build      # 프로덕션 빌드
 npm run test       # Vitest 테스트
 ```
 
+린트 명령은 따로 없다. 변경은 `npm run build`와 `npm run test`로 검증한다.
+
 ## 개발 워크플로우
 
 - 기능 개발은 `feature/{기능요약}` 브랜치에서 진행하고, 빌드/테스트/리뷰 통과 후 **PR 없이 main에 직접 머지**한다 (개인 앱이므로 리뷰어 승인 절차 불필요)

@@ -13750,150 +13750,6 @@
       }
     },
     {
-      "wordId": 1126,
-      "date": "2026-11-20",
-      "source": {
-        "word": "とまる",
-        "reading": "とまる",
-        "meaning": "멈추다, 서다"
-      },
-      "sentence": "車が道で[[とまります]]。",
-      "reading": "くるまが みちで [[とまります]]。",
-      "meaning": "차가 길에서 멈춥니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1127,
-      "date": "2026-11-20",
-      "source": {
-        "word": "とる",
-        "reading": "とる",
-        "meaning": "잡다, 취하다"
-      },
-      "sentence": "魚を[[とります]]。",
-      "reading": "さかなを [[とります]]。",
-      "meaning": "생선을 잡습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1128,
-      "date": "2026-11-20",
-      "source": {
-        "word": "なおす",
-        "reading": "なおす",
-        "meaning": "고치다, 바로잡다"
-      },
-      "sentence": "自転車を[[なおします]]。",
-      "reading": "じてんしゃを [[なおします]]。",
-      "meaning": "자전거를 고칩니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1129,
-      "date": "2026-11-20",
-      "source": {
-        "word": "はらう",
-        "reading": "はらう",
-        "meaning": "지불하다, 떨치다"
-      },
-      "sentence": "お金を[[はらいます]]。",
-      "reading": "おかねを [[はらいます]]。",
-      "meaning": "돈을 지불합니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1130,
-      "date": "2026-11-20",
-      "source": {
-        "word": "ふとる",
-        "reading": "ふとる",
-        "meaning": "살찌다"
-      },
-      "sentence": "去年より[[ふとりました]]。",
-      "reading": "きょねんより [[ふとりました]]。",
-      "meaning": "작년보다 살쪘습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1131,
-      "date": "2026-11-20",
-      "source": {
-        "word": "まつ",
-        "reading": "まつ",
-        "meaning": "기다리다"
-      },
-      "sentence": "駅で[[まちます]]。",
-      "reading": "えきで [[まちます]]。",
-      "meaning": "역에서 기다립니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1132,
-      "date": "2026-11-20",
-      "source": {
-        "word": "やすむ",
-        "reading": "やすむ",
-        "meaning": "쉬다, 결석하다"
-      },
-      "sentence": "今日は[[やすみます]]。",
-      "reading": "きょうは [[やすみます]]。",
-      "meaning": "오늘은 쉽니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1133,
-      "date": "2026-11-20",
-      "source": {
-        "word": "あける",
-        "reading": "あける",
-        "meaning": "열다"
-      },
-      "sentence": "窓を[[あけます]]。",
-      "reading": "まどを [[あけます]]。",
-      "meaning": "창문을 엽니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1134,
-      "date": "2026-11-20",
-      "source": {
-        "word": "いきる",
-        "reading": "いきる",
-        "meaning": "살다, 생존하다"
-      },
-      "sentence": "ここで[[いきています]]。",
-      "reading": "ここで [[いきています]]。",
-      "meaning": "여기서 살아가고 있습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
       "wordId": 1135,
       "date": "2026-11-20",
       "source": {
@@ -13926,438 +13782,6 @@
       }
     },
     {
-      "wordId": 1137,
-      "date": "2026-11-20",
-      "source": {
-        "word": "たてる",
-        "reading": "たてる",
-        "meaning": "세우다, 짓다"
-      },
-      "sentence": "ここに家を[[たてます]]。",
-      "reading": "ここに いえを [[たてます]]。",
-      "meaning": "여기에 집을 짓습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1138,
-      "date": "2026-11-20",
-      "source": {
-        "word": "つかれる",
-        "reading": "つかれる",
-        "meaning": "지치다, 피곤하다"
-      },
-      "sentence": "運動して[[つかれました]]。",
-      "reading": "うんどうして [[つかれました]]。",
-      "meaning": "운동해서 지쳤습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1139,
-      "date": "2026-11-20",
-      "source": {
-        "word": "でかける",
-        "reading": "でかける",
-        "meaning": "외출하다, 나가다"
-      },
-      "sentence": "今から[[でかけます]]。",
-      "reading": "いまから [[でかけます]]。",
-      "meaning": "지금 외출합니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1140,
-      "date": "2026-11-20",
-      "source": {
-        "word": "あんしんする",
-        "reading": "あんしんする",
-        "meaning": "안심하다"
-      },
-      "sentence": "話を聞いて[[あんしんしました]]。",
-      "reading": "はなしを きいて [[あんしんしました]]。",
-      "meaning": "이야기를 듣고 안심했습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1141,
-      "date": "2026-11-20",
-      "source": {
-        "word": "けんきゅうする",
-        "reading": "けんきゅうする",
-        "meaning": "연구하다"
-      },
-      "sentence": "歴史を[[けんきゅうしています]]。",
-      "reading": "れきしを [[けんきゅうしています]]。",
-      "meaning": "역사를 연구하고 있습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1142,
-      "date": "2026-11-20",
-      "source": {
-        "word": "くうこう",
-        "reading": "くうこう",
-        "meaning": "공항"
-      },
-      "sentence": "[[くうこう]]へ行きます。",
-      "reading": "[[くうこう]]へ いきます。",
-      "meaning": "공항에 갑니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1143,
-      "date": "2026-11-20",
-      "source": {
-        "word": "ざっし",
-        "reading": "ざっし",
-        "meaning": "잡지"
-      },
-      "sentence": "この[[ざっし]]はおもしろいです。",
-      "reading": "この [[ざっし]]は おもしろいです。",
-      "meaning": "이 잡지는 재미있습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1144,
-      "date": "2026-11-20",
-      "source": {
-        "word": "じかん",
-        "reading": "じかん",
-        "meaning": "시간"
-      },
-      "sentence": "[[じかん]]が足りません。",
-      "reading": "[[じかん]]が たりません。",
-      "meaning": "시간이 부족합니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1145,
-      "date": "2026-11-20",
-      "source": {
-        "word": "しつもん",
-        "reading": "しつもん",
-        "meaning": "질문"
-      },
-      "sentence": "先生に[[しつもん]]をします。",
-      "reading": "せんせいに [[しつもん]]を します。",
-      "meaning": "선생님에게 질문을 합니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1146,
-      "date": "2026-11-20",
-      "source": {
-        "word": "ちかてつ",
-        "reading": "ちかてつ",
-        "meaning": "지하철"
-      },
-      "sentence": "[[ちかてつ]]で学校へ行きます。",
-      "reading": "[[ちかてつ]]で がっこうへ いきます。",
-      "meaning": "지하철로 학교에 갑니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1147,
-      "date": "2026-11-20",
-      "source": {
-        "word": "パジャマ",
-        "reading": "パジャマ",
-        "meaning": "파자마, 잠옷"
-      },
-      "sentence": "新しい[[パジャマ]]を買いました。",
-      "reading": "あたらしい [[パジャマ]]を かいました。",
-      "meaning": "새 파자마를 샀습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1148,
-      "date": "2026-11-20",
-      "source": {
-        "word": "ぼうし",
-        "reading": "ぼうし",
-        "meaning": "모자"
-      },
-      "sentence": "黒い[[ぼうし]]をかぶります。",
-      "reading": "くろい [[ぼうし]]を かぶります。",
-      "meaning": "검은색 모자를 씁니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1149,
-      "date": "2026-11-20",
-      "source": {
-        "word": "らいねん",
-        "reading": "らいねん",
-        "meaning": "내년"
-      },
-      "sentence": "[[らいねん]]日本へ留学します。",
-      "reading": "[[らいねん]] にほんへ りゅうがくします。",
-      "meaning": "내년에 일본으로 유학합니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1150,
-      "date": "2026-11-20",
-      "source": {
-        "word": "かぜを ひ",
-        "reading": "かぜを ひ",
-        "meaning": "감기에 걸리다"
-      },
-      "sentence": "冬に[[かぜを ひきます]]。",
-      "reading": "ふゆに [[かぜを ひきます]]。",
-      "meaning": "겨울에 감기에 걸립니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1151,
-      "date": "2026-11-20",
-      "source": {
-        "word": "きを つけ",
-        "reading": "きを つけ",
-        "meaning": "주의하다, 조심하다"
-      },
-      "sentence": "車に[[気を つけて]]ください。",
-      "reading": "くるまに [[きを つけて]]ください。",
-      "meaning": "차를 조심하세요.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1152,
-      "date": "2026-11-20",
-      "source": {
-        "word": "けがを す",
-        "reading": "けがを す",
-        "meaning": "다치다"
-      },
-      "sentence": "足に[[けがを します]]。",
-      "reading": "あしに [[けがを します]]。",
-      "meaning": "다리에 부상을 입습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1153,
-      "date": "2026-11-20",
-      "source": {
-        "word": "ねぼうを す",
-        "reading": "ねぼうを す",
-        "meaning": "늦잠을 자다"
-      },
-      "sentence": "朝[[ねぼうを します]]。",
-      "reading": "あさ [[ねぼうを します]]。",
-      "meaning": "아침에 늦잠을 잡니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1154,
-      "date": "2026-11-20",
-      "source": {
-        "word": "とり肉",
-        "reading": "とりにく",
-        "meaning": "닭고기"
-      },
-      "sentence": "[[とり肉]]のスープを作ります。",
-      "reading": "[[とりにく]]の スープを つくります。",
-      "meaning": "닭고기 스프를 만듭니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1155,
-      "date": "2026-11-20",
-      "source": {
-        "word": "さっそく",
-        "reading": "さっそく",
-        "meaning": "당장, 바로"
-      },
-      "sentence": "[[さっそく]]食べてみます。",
-      "reading": "[[さっそく]] たべてみます。",
-      "meaning": "당장 먹어봅니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1156,
-      "date": "2026-11-20",
-      "source": {
-        "word": "まず",
-        "reading": "まず",
-        "meaning": "우선"
-      },
-      "sentence": "[[まず]]、お茶を飲みます。",
-      "reading": "[[まず]]、おちゃを のみます。",
-      "meaning": "우선, 차를 마십니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1157,
-      "date": "2026-11-20",
-      "source": {
-        "word": "塩",
-        "reading": "しお",
-        "meaning": "소금"
-      },
-      "sentence": "スープに[[塩]]を入れます。",
-      "reading": "スープに [[しお]]を いれます。",
-      "meaning": "스프에 소금을 넣습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1158,
-      "date": "2026-11-20",
-      "source": {
-        "word": "もう",
-        "reading": "もう",
-        "meaning": "더, 이미, 벌써"
-      },
-      "sentence": "[[もう]]宿題をしました。",
-      "reading": "[[もう]] しゅくだいを しました。",
-      "meaning": "벌써 숙제를 했습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1159,
-      "date": "2026-11-20",
-      "source": {
-        "word": "すみませんが",
-        "reading": "すみませんが",
-        "meaning": "죄송하지만, 미안하지만"
-      },
-      "sentence": "[[すみませんが]]、写真を撮ってください。",
-      "reading": "[[すみませんが]]、しゃしんを とってください。",
-      "meaning": "죄송하지만, 사진을 찍어 주세요.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1160,
-      "date": "2026-11-20",
-      "source": {
-        "word": "入る",
-        "reading": "はいる",
-        "meaning": "들어가다"
-      },
-      "sentence": "部屋に[[入ります]]。",
-      "reading": "へやに [[はいります]]。",
-      "meaning": "방에 들어갑니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1161,
-      "date": "2026-11-20",
-      "source": {
-        "word": "入れる",
-        "reading": "いれる",
-        "meaning": "넣다"
-      },
-      "sentence": "かばんに本を[[入れます]]。",
-      "reading": "かばんに ほんを [[いれます]]。",
-      "meaning": "가방에 책을 넣습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1162,
-      "date": "2026-11-20",
-      "source": {
-        "word": "卵",
-        "reading": "たまご",
-        "meaning": "계란"
-      },
-      "sentence": "朝ご飯に[[卵]]を食べます。",
-      "reading": "あさごはんに [[たまご]]を たべます。",
-      "meaning": "아침밥으로 달걀을 먹습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
-      "wordId": 1163,
-      "date": "2026-11-20",
-      "source": {
-        "word": "大きく",
-        "reading": "おおきく",
-        "meaning": "크게"
-      },
-      "sentence": "口を[[大きく]]開けてください。",
-      "reading": "くちを [[おおきく]] あけてください。",
-      "meaning": "입을 크게 벌려 주세요.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
-    },
-    {
       "wordId": 1164,
       "date": "2026-11-20",
       "source": {
@@ -14374,180 +13798,568 @@
       }
     },
     {
+      "wordId": 1126,
+      "date": "2026-11-21",
+      "source": {
+        "word": "とまる",
+        "reading": "とまる",
+        "meaning": "멈추다, 서다"
+      },
+      "sentence": "バスが[[とまります]]。",
+      "reading": "バスが [[とまります]]。",
+      "meaning": "버스가 멈춥니다."
+    },
+    {
+      "wordId": 1127,
+      "date": "2026-11-21",
+      "source": {
+        "word": "とる",
+        "reading": "とる",
+        "meaning": "잡다, 취하다"
+      },
+      "sentence": "写真を[[とります]]。",
+      "reading": "しゃしんを [[とります]]。",
+      "meaning": "사진을 찍습니다."
+    },
+    {
+      "wordId": 1128,
+      "date": "2026-11-21",
+      "source": {
+        "word": "なおす",
+        "reading": "なおす",
+        "meaning": "고치다, 바로잡다"
+      },
+      "sentence": "時計を[[なおします]]。",
+      "reading": "とけいを [[なおします]]。",
+      "meaning": "시계를 고칩니다."
+    },
+    {
+      "wordId": 1129,
+      "date": "2026-11-21",
+      "source": {
+        "word": "はらう",
+        "reading": "はらう",
+        "meaning": "지불하다, 떨치다"
+      },
+      "sentence": "デパートで[[はらいます]]。",
+      "reading": "デパートで [[はらいます]]。",
+      "meaning": "백화점에서 지불합니다."
+    },
+    {
+      "wordId": 1130,
+      "date": "2026-11-21",
+      "source": {
+        "word": "ふとる",
+        "reading": "ふとる",
+        "meaning": "살찌다"
+      },
+      "sentence": "最近[[ふとりました]]。",
+      "reading": "さいきん [[ふとりました]]。",
+      "meaning": "최근 살이 쪘습니다."
+    },
+    {
+      "wordId": 1131,
+      "date": "2026-11-21",
+      "source": {
+        "word": "まつ",
+        "reading": "まつ",
+        "meaning": "기다리다"
+      },
+      "sentence": "ここで[[まつ]]。",
+      "reading": "ここで [[まつ]]。",
+      "meaning": "여기서 기다린다."
+    },
+    {
+      "wordId": 1132,
+      "date": "2026-11-21",
+      "source": {
+        "word": "やすむ",
+        "reading": "やすむ",
+        "meaning": "쉬다, 결석하다"
+      },
+      "sentence": "明日[[やすみます]]。",
+      "reading": "あした [[やすみます]]。",
+      "meaning": "내일 쉽니다."
+    },
+    {
+      "wordId": 1133,
+      "date": "2026-11-21",
+      "source": {
+        "word": "あける",
+        "reading": "あける",
+        "meaning": "열다"
+      },
+      "sentence": "ドアを[[あけます]]。",
+      "reading": "ドアを [[あけます]]。",
+      "meaning": "문을 엽니다."
+    },
+    {
+      "wordId": 1134,
+      "date": "2026-11-21",
+      "source": {
+        "word": "いきる",
+        "reading": "いきる",
+        "meaning": "살다, 생존하다"
+      },
+      "sentence": "元気に[[いきています]]。",
+      "reading": "げんきに [[いきています]]。",
+      "meaning": "건강하게 살아가고 있습니다."
+    },
+    {
+      "wordId": 1137,
+      "date": "2026-11-21",
+      "source": {
+        "word": "たてる",
+        "reading": "たてる",
+        "meaning": "세우다, 짓다"
+      },
+      "sentence": "計画を[[たてます]]。",
+      "reading": "けいかくを [[たてます]]。",
+      "meaning": "계획을 세웁니다."
+    },
+    {
+      "wordId": 1138,
+      "date": "2026-11-21",
+      "source": {
+        "word": "つかれる",
+        "reading": "つかれる",
+        "meaning": "지치다, 피곤하다"
+      },
+      "sentence": "仕事が多くて[[つかれます]]。",
+      "reading": "しごとが おおくて [[つかれます]]。",
+      "meaning": "일이 많아서 지칩니다."
+    },
+    {
+      "wordId": 1139,
+      "date": "2026-11-21",
+      "source": {
+        "word": "でかける",
+        "reading": "でかける",
+        "meaning": "외출하다, 나가다"
+      },
+      "sentence": "友だちと[[でかけます]]。",
+      "reading": "ともだちと [[でかけます]]。",
+      "meaning": "친구와 외출합니다."
+    },
+    {
+      "wordId": 1140,
+      "date": "2026-11-21",
+      "source": {
+        "word": "あんしんする",
+        "reading": "あんしんする",
+        "meaning": "안심하다"
+      },
+      "sentence": "無事に着いて[[あんしんしました]]。",
+      "reading": "ぶじに ついて [[あんしんしました]]。",
+      "meaning": "무사히 도착해서 안심했습니다."
+    },
+    {
+      "wordId": 1141,
+      "date": "2026-11-21",
+      "source": {
+        "word": "けんきゅうする",
+        "reading": "けんきゅうする",
+        "meaning": "연구하다"
+      },
+      "sentence": "日本語を[[けんきゅうします]]。",
+      "reading": "にほんごを [[けんきゅうします]]。",
+      "meaning": "일본어를 연구합니다."
+    },
+    {
+      "wordId": 1142,
+      "date": "2026-11-21",
+      "source": {
+        "word": "くうこう",
+        "reading": "くうこう",
+        "meaning": "공항"
+      },
+      "sentence": "[[くうこう]]で友だちを待ちます。",
+      "reading": "[[くうこう]]で ともだちを まちます。",
+      "meaning": "공항에서 친구를 기다립니다."
+    },
+    {
+      "wordId": 1143,
+      "date": "2026-11-21",
+      "source": {
+        "word": "ざっし",
+        "reading": "ざっし",
+        "meaning": "잡지"
+      },
+      "sentence": "[[ざっし]]を読みます。",
+      "reading": "[[ざっし]]を よみます。",
+      "meaning": "잡지를 읽습니다."
+    },
+    {
+      "wordId": 1144,
+      "date": "2026-11-21",
+      "source": {
+        "word": "じかん",
+        "reading": "じかん",
+        "meaning": "시간"
+      },
+      "sentence": "[[じかん]]がありません。",
+      "reading": "[[じかん]]が ありません。",
+      "meaning": "시간이 없습니다."
+    },
+    {
+      "wordId": 1145,
+      "date": "2026-11-21",
+      "source": {
+        "word": "しつもん",
+        "reading": "しつもん",
+        "meaning": "질문"
+      },
+      "sentence": "[[しつもん]]に答えます。",
+      "reading": "[[しつもん]]に こたえます。",
+      "meaning": "질문에 대답합니다."
+    },
+    {
+      "wordId": 1146,
+      "date": "2026-11-21",
+      "source": {
+        "word": "ちかてつ",
+        "reading": "ちかてつ",
+        "meaning": "지하철"
+      },
+      "sentence": "[[ちかてつ]]に乗ります。",
+      "reading": "[[ちかてつ]]に のります。",
+      "meaning": "지하철을 타요."
+    },
+    {
+      "wordId": 1147,
+      "date": "2026-11-21",
+      "source": {
+        "word": "パジャマ",
+        "reading": "パジャマ",
+        "meaning": "파자마, 잠옷"
+      },
+      "sentence": "かわいい[[パジャマ]]を着ます。",
+      "reading": "かわいい [[パジャマ]]を きます。",
+      "meaning": "귀여운 파자마를 입습니다."
+    },
+    {
+      "wordId": 1148,
+      "date": "2026-11-21",
+      "source": {
+        "word": "ぼうし",
+        "reading": "ぼうし",
+        "meaning": "모자"
+      },
+      "sentence": "赤い[[帽子]]をかぶります。",
+      "reading": "あかい [[ぼうし]]を かぶります。",
+      "meaning": "빨간 모자를 씁니다."
+    },
+    {
+      "wordId": 1149,
+      "date": "2026-11-21",
+      "source": {
+        "word": "らいねん",
+        "reading": "らいねん",
+        "meaning": "내년"
+      },
+      "sentence": "[[来年]]韓国へ行きます。",
+      "reading": "[[らいねん]] かんこくへ いきます。",
+      "meaning": "내년에 한국에 갑니다."
+    },
+    {
+      "wordId": 1150,
+      "date": "2026-11-21",
+      "source": {
+        "word": "かぜを ひ",
+        "reading": "かぜを ひ",
+        "meaning": "감기에 걸리다"
+      },
+      "sentence": "[[かぜを ひいて]]寝ます。",
+      "reading": "[[かぜを ひいて]] ねます。",
+      "meaning": "감기에 걸려서 자요."
+    },
+    {
+      "wordId": 1151,
+      "date": "2026-11-21",
+      "source": {
+        "word": "きを つけ",
+        "reading": "きを つけ",
+        "meaning": "주의하다, 조심하다"
+      },
+      "sentence": "道に[[気をつけて]]歩きます。",
+      "reading": "みちに [[きを つけて]] あるきます。",
+      "meaning": "길을 조심해서 걸어요."
+    },
+    {
+      "wordId": 1152,
+      "date": "2026-11-21",
+      "source": {
+        "word": "けがを す",
+        "reading": "けがを す",
+        "meaning": "다치다"
+      },
+      "sentence": "手が[[けがを します]]。",
+      "reading": "てが [[けがを します]]。",
+      "meaning": "손을 다칩니다."
+    },
+    {
+      "wordId": 1153,
+      "date": "2026-11-21",
+      "source": {
+        "word": "ねぼうを す",
+        "reading": "ねぼうを す",
+        "meaning": "늦잠을 자다"
+      },
+      "sentence": "今日[[ねぼうを します]]。",
+      "reading": "きょう [[ねぼうを します]]。",
+      "meaning": "오늘 늦잠을 잡니다."
+    },
+    {
+      "wordId": 1154,
+      "date": "2026-11-21",
+      "source": {
+        "word": "とり肉",
+        "reading": "とりにく",
+        "meaning": "닭고기"
+      },
+      "sentence": "[[とり肉]]を焼きます。",
+      "reading": "[[とりにく]]を やきます。",
+      "meaning": "닭고기를 구워요."
+    },
+    {
+      "wordId": 1155,
+      "date": "2026-11-21",
+      "source": {
+        "word": "さっそく",
+        "reading": "さっそく",
+        "meaning": "당장, 바로"
+      },
+      "sentence": "[[さっそく]]読みます。",
+      "reading": "[[さっそく]] よみます。",
+      "meaning": "당장 읽습니다."
+    },
+    {
+      "wordId": 1156,
+      "date": "2026-11-21",
+      "source": {
+        "word": "まず",
+        "reading": "まず",
+        "meaning": "우선"
+      },
+      "sentence": "[[まず]]、手を洗います。",
+      "reading": "[[まず]]、てを あらいます。",
+      "meaning": "우선, 손을 씻습니다."
+    },
+    {
+      "wordId": 1157,
+      "date": "2026-11-21",
+      "source": {
+        "word": "塩",
+        "reading": "しお",
+        "meaning": "소금"
+      },
+      "sentence": "料理に[[塩]]を加えましょう。",
+      "reading": "りょうりに [[しお]]を くわえましょう。",
+      "meaning": "요리에 소금을 넣읍시다."
+    },
+    {
+      "wordId": 1158,
+      "date": "2026-11-21",
+      "source": {
+        "word": "もう",
+        "reading": "もう",
+        "meaning": "더, 이미, 벌써"
+      },
+      "sentence": "[[もう]]時間がありません。",
+      "reading": "[[もう]] じかんが ありません。",
+      "meaning": "벌써 시간이 없습니다."
+    },
+    {
+      "wordId": 1159,
+      "date": "2026-11-21",
+      "source": {
+        "word": "すみませんが",
+        "reading": "すみませんが",
+        "meaning": "죄송하지만, 미안하지만"
+      },
+      "sentence": "[[すみませんが]]、道を教えてください。",
+      "reading": "[[すみませんが]]、みちを おしえて ください。",
+      "meaning": "죄송하지만, 길을 가르쳐 주세요."
+    },
+    {
+      "wordId": 1160,
+      "date": "2026-11-21",
+      "source": {
+        "word": "入る",
+        "reading": "はいる",
+        "meaning": "들어가다"
+      },
+      "sentence": "電車に[[入ります]]。",
+      "reading": "でんしゃに [[はいります]]。",
+      "meaning": "전철에 들어갑니다."
+    },
+    {
+      "wordId": 1161,
+      "date": "2026-11-21",
+      "source": {
+        "word": "入れる",
+        "reading": "いれる",
+        "meaning": "넣다"
+      },
+      "sentence": "箱にプレゼントを[[入れます]]。",
+      "reading": "はこに プレゼントを [[いれます]]。",
+      "meaning": "상자에 선물을 넣습니다."
+    },
+    {
+      "wordId": 1162,
+      "date": "2026-11-21",
+      "source": {
+        "word": "卵",
+        "reading": "たまご",
+        "meaning": "계란"
+      },
+      "sentence": "新鮮な[[卵]]を買います。",
+      "reading": "しんせんな [[たまご]]を かいます。",
+      "meaning": "신선한 달걀을 삽니다."
+    },
+    {
+      "wordId": 1163,
+      "date": "2026-11-21",
+      "source": {
+        "word": "大きく",
+        "reading": "おおきく",
+        "meaning": "크게"
+      },
+      "sentence": "字を[[大きく]]書きます。",
+      "reading": "じを [[おおきく]] かきます。",
+      "meaning": "글자를 크게 씁니다."
+    },
+    {
       "wordId": 1165,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "おいしく",
         "reading": "おいしく",
         "meaning": "맛있고, 맛있어서"
       },
-      "sentence": "魚を[[おいしく]]焼きます。",
-      "reading": "さかなを [[おいしく]] やきます。",
-      "meaning": "생선을 맛있게 굽습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "野菜を[[おいしく]]食べました。",
+      "reading": "やさいを [[おいしく]] たべました。",
+      "meaning": "채소를 맛있게 먹었습니다."
     },
     {
       "wordId": 1166,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "一人で",
         "reading": "ひとりで",
         "meaning": "혼자서"
       },
-      "sentence": "[[一人で]]ごはんを食べます。",
-      "reading": "[[ひとりで]]ごはんを たべます。",
-      "meaning": "혼자서 밥을 먹습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "[[一人で]]映画を見ます。",
+      "reading": "[[ひとりで]] えいがを みます。",
+      "meaning": "혼자서 영화를 봅니다."
     },
     {
       "wordId": 1167,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "全部",
         "reading": "ぜんぶ",
         "meaning": "전부"
       },
-      "sentence": "[[全部]]読みました。",
-      "reading": "[[ぜんぶ]] よみました。",
-      "meaning": "전부 읽었습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "宿題を[[全部]]やりました。",
+      "reading": "しゅくだいを [[ぜんぶ]] やりました。",
+      "meaning": "숙제를 전부 했습니다."
     },
     {
       "wordId": 1168,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "しまいました",
         "reading": "しまいました",
         "meaning": "버렸습니다"
       },
-      "sentence": "古い服を捨てて[[しまいました]]。",
-      "reading": "ふるい ふくを すてて [[しまいました]]。",
-      "meaning": "헌 옷을 버려 버렸습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "大切な鍵をなくして[[しまいました]]。",
+      "reading": "たいせつな かぎを なくして [[しまいました]]。",
+      "meaning": "소중한 열쇠를 잃어버렸습니다."
     },
     {
       "wordId": 1169,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "いける",
         "reading": "いける",
         "meaning": "할 수 있다"
       },
-      "sentence": "この仕事は明日まで[[いける]]。",
-      "reading": "この しごとは あしたまで [[いける]]。",
-      "meaning": "이 일은 내일까지 할 수 있다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "この問題は私にも[[いける]]。",
+      "reading": "この もんだいは わたしにも [[いける]]。",
+      "meaning": "이 문제는 나도 할 수 있다."
     },
     {
       "wordId": 1170,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "いけない",
         "reading": "いけない",
         "meaning": "안 된다"
       },
-      "sentence": "ここで写真を撮っては[[いけない]]。",
-      "reading": "ここで しゃしんを とっては [[いけない]]。",
-      "meaning": "여기서 사진을 찍으면 안 된다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "廊下を走っては[[いけない]]。",
+      "reading": "ろうかを はしっては [[いけない]]。",
+      "meaning": "복도를 뛰면 안 된다."
     },
     {
       "wordId": 1171,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "こんな",
         "reading": "こんな",
         "meaning": "이런"
       },
-      "sentence": "[[こんな]]本が読みたかった。",
-      "reading": "[[こんな]] ほんが よみたかった。",
-      "meaning": "이런 책이 읽고 싶었다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "[[こんな]]においしい料理は初めてです。",
+      "reading": "[[こんな]]に おいしい りょりは はじめてです。",
+      "meaning": "이런 맛있는 요리는 처음입니다."
     },
     {
       "wordId": 1172,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "そんな",
         "reading": "そんな",
         "meaning": "그런"
       },
-      "sentence": "[[そんな]]話は聞いていません。",
-      "reading": "[[そんな]] はなしは きいていません。",
-      "meaning": "그런 이야기는 듣지 않았습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "[[そんな]]ことはありません。",
+      "reading": "[[そんな]] ことは ありません。",
+      "meaning": "그런 일은 없습니다."
     },
     {
       "wordId": 1173,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "あんな",
         "reading": "あんな",
         "meaning": "저런"
       },
-      "sentence": "[[あんな]]ところに行ってはいけません。",
-      "reading": "[[あんな]] ところに いってはいけません。",
-      "meaning": "저런 곳에 가면 안 됩니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "[[あんな]]高い山に登ります。",
+      "reading": "[[あんな]] たかい やまに のぼります。",
+      "meaning": "저런 높은 산에 오릅니다."
     },
     {
       "wordId": 1174,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "どんな",
         "reading": "どんな",
         "meaning": "어떤"
       },
-      "sentence": "[[どんな]]スポーツが好きですか。",
-      "reading": "[[どんな]] スポーツが すきですか。",
-      "meaning": "어떤 스포츠를 좋아합니까?",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "[[どんな]]音楽が好きですか。",
+      "reading": "[[どんな]] おんがくが すきですか。",
+      "meaning": "어떤 음악을 좋아합니까?"
     },
     {
       "wordId": 1175,
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "source": {
         "word": "止める",
         "reading": "とめる",
         "meaning": "멈추다, 주차하다"
       },
-      "sentence": "車を[[止めました]]。",
-      "reading": "くるまを [[とめました]]。",
-      "meaning": "차를 멈췄습니다.",
-      "check": {
-        "date": "2026-11-20",
-        "ok": true
-      }
+      "sentence": "自転車を[[止めます]]。",
+      "reading": "じてんしゃを [[とめます]]。",
+      "meaning": "자전거를 멈춥니다."
     }
   ]
 }
